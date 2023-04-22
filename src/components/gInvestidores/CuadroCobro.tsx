@@ -2,9 +2,9 @@ import React from "react";
 import { format } from "../coinFormater";
 
 interface cuadroCobroProps {
-  balanceOfAt: string | null;
-  payAt: string | null;
-  totalSupplyAt: string | null;
+  balanceOfAt: number | undefined;
+  payAt: number | undefined;
+  totalSupplyAt: number | undefined;
   currentSnap: number;
 }
 const CuadroCobro: React.FC<cuadroCobroProps> = ({
@@ -20,12 +20,9 @@ const CuadroCobro: React.FC<cuadroCobroProps> = ({
       <div className="transparente">
         <p>13/04/2023 - {currentSnap}</p>
         <p className="aCobrar">
-          BTC a cobrar:{" "}
-          {parseFloat(format(payAt)) *
-            (parseFloat(format(balanceOfAt)) /
-              parseFloat(format(totalSupplyAt)))}
+          BTC a cobrar: {(payAt * balanceOfAt) / totalSupplyAt}
         </p>
-        <p>Distribucion: {format(payAt)}</p>
+        <p>Distribucion: {payAt}</p>
       </div>
 
       <button>Cobrar</button>
