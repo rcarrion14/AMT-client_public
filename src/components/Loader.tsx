@@ -9,6 +9,7 @@ import { amtLoaders } from "../store/features/amt/amtSlice";
 import { liqAmtLoaders } from "../store/features/liqAmt/liqAmtSlice";
 import { masterLoaders } from "../store/features/master/masterSlice";
 import { generalLoadVaultAmt } from "../store/features/vaultAmt/vaultAmtSlice";
+import { generalLoadVaultBtcb } from "../store/features/vaultBtcb/vaultBtcbSlice";
 
 const Loader = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -27,6 +28,7 @@ const Loader = () => {
         liqAmtLoaders.generalLoadLiqAmt(dispatch);
         masterLoaders.generalLoad(dispatch, 234); //change to dynamic current
         generalLoadVaultAmt(dispatch);
+        generalLoadVaultBtcb(dispatch);
         await delay(1000);
         generalLoadBtcb(dispatch);
         generalLoadUsdt(dispatch);
@@ -36,6 +38,7 @@ const Loader = () => {
         masterLoaders.generalLoad(dispatch, 234); //change to dynamic current
         generalLoadVaultAmt(dispatch);
         amtLoaders.loaderWithSnapshots(dispatch, 234);
+        generalLoadVaultBtcb(dispatch);
       }
       load();
     }

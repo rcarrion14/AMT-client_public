@@ -1,6 +1,11 @@
 import { connectWallet } from "../store/features/wallet/walletSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../store/store";
+<<<<<<< HEAD
+=======
+import { generalLoadBtcb } from "../store/features/btcb/btcbSlice";
+import { amtLoaders } from "../store/features/amt/amtSlice";
+>>>>>>> main
 
 const BotonMetamask = () => {
   const dispatch = useDispatch<AppDispatch>();

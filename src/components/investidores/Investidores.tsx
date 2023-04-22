@@ -1,17 +1,35 @@
+<<<<<<< HEAD
 import React, { useEffect, useRef, useState } from "react";
 import BotonBlanco from "../marketplace/BotonBlanco";
 
 import { CSSTransition } from "react-transition-group";
 import Staking from "./Staking";
+=======
+import React, { useEffect, useRef, useState, ReactElement } from "react";
+import BotonBlanco from "../marketplace/BotonBlanco";
+
+import { CSSTransition } from "react-transition-group";
+import Staking from "./staking/Staking";
+>>>>>>> main
 import StakingAmt from "./StakingAmt";
 import Liquidez from "./Liquidez";
 import Rendimientos from "./Rendimientos";
 
 const Investidores = () => {
+<<<<<<< HEAD
   const pages = ["staking", "stakingAmt", "liquidez", "rendimiento"];
 
   const [activePage, setActivePage] = useState(null);
   const [activeInfo, setActiveInfo] = useState(null);
+=======
+  interface jsxPagesInterface {
+    [key: string]: ReactElement<any, any>;
+  }
+  const pages = ["staking", "stakingAmt", "liquidez", "rendimiento"];
+
+  const [activePage, setActivePage] = useState("");
+  const [activeInfo, setActiveInfo] = useState(false);
+>>>>>>> main
 
   const saibaMais = <u onClick={() => setActiveInfo(true)}>Saiba maís</u>;
   const info = (
@@ -45,7 +63,11 @@ const Investidores = () => {
     </div>
   );
 
+<<<<<<< HEAD
   const jsxPages = {
+=======
+  const jsxPages: jsxPagesInterface = {
+>>>>>>> main
     staking: <Staking setActivePage={setActivePage} />,
     stakingAmt: <StakingAmt setActivePage={setActivePage} />,
     liquidez: <Liquidez setActivePage={setActivePage} />,

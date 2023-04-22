@@ -28,7 +28,7 @@ function App() {
         <div className="containerLengueta">
           {activePage == "home" ? <Home setActivePage={setActivePage} /> : null}
           {activePage == "marketplace" ? <Marketplace /> : null}
-          {/*activePage == "investidores" ? <Investidores /> : null*/}
+          {activePage == "investidores" ? <Investidores /> : null}
           {activePage == "gInvestidores" ? <GInvestidores /> : null}
         </div>
         <NavBar setActivePage={setActivePage} activePage={activePage} />
