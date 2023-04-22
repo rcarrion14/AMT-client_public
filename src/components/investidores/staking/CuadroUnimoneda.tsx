@@ -16,6 +16,7 @@ interface CuadroUnimonedaInterface {
 
 const CuadroUnimoneda = ({}) => {
   console.log("testNewBranchoroc console.log");
+  console.log("console log abajo de mi console.log");
   const dispatch = useDispatch<AppDispatch>();
   const balanceAmt = useSelector(
     (state: typeof RootState) => state.amt.balance
