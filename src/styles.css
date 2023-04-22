@@ -1,0 +1,415 @@
+* {
+  font-family: "Poppins";
+}
+
+body {
+  background-color: #e9e9e9;
+}
+
+div {
+  background-color: inherit;
+}
+
+h1 {
+  margin: 15px 20px 20px 20px;
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+h2 {
+  margin: 0 0 0 0px;
+  font-size: 0.9rem;
+
+  font-weight: bold;
+}
+
+p {
+  color: #a9a9a9;
+  font-size: 0.8rem;
+  background-color: inherit;
+}
+ul {
+  margin: 0.3rem;
+}
+ul:before {
+  content: "- ";
+}
+
+button {
+  background-color: #00ddff;
+  border: none;
+  border-radius: 25px;
+  width: 40vw;
+  height: 35px;
+  font-size: 75%;
+  font-weight: bold;
+  box-shadow: -4px 6px 4px -1px rgba(0, 0, 0, 0.3);
+  padding: 0;
+  margin: 15px;
+}
+
+u {
+  color: #00bfdc;
+}
+
+.containerBanner {
+  height: 120px;
+  background-color: #34383e;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.containerBanner > img {
+  width: 150px;
+}
+
+.containerLengueta {
+  padding: 40px 30px 85px 30px;
+  top: -15px;
+  position: relative;
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+}
+
+.containerVideo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.video {
+  border: none;
+  width: 90vw;
+  border-radius: 15px;
+}
+
+.containerSlide {
+  padding: 25px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  box-sizing: border-box;
+  height: 90vh;
+  overflow: scroll;
+}
+
+.textoConexion {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  margin-top: 20px;
+  margin-right: 40px;
+  margin-left: 40px;
+}
+
+.botonBlanco {
+  display: grid;
+  grid-template-rows: auto auto;
+  grid-template-columns: auto auto;
+  justify-content: space-between;
+  align-items: center;
+  margin: 15px 0 15px 0;
+  background-color: white;
+  border-radius: 15px;
+  padding: 10px 25px 10px 25px;
+}
+
+.botonBlanco > p {
+  margin: 4px 0 4px 0px;
+  grid-column: 1;
+  grid-row: 2;
+}
+.botonBlanco > h2 {
+  margin: 4px 0 4px 0px;
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.botonBlanco > img {
+  grid-column: 2;
+  grid-row: 1/3;
+  width: 40px;
+  background-color: inherit;
+}
+
+.navBar {
+  display: flex;
+  justify-content: space-evenly;
+  background-color: white;
+  height: 8vh;
+  align-items: center;
+  position: fixed;
+  bottom: 0px;
+  width: 100vw;
+  height: 10vh;
+}
+.navBar > img {
+  width: 30px;
+  background-color: rgba(255, 255, 255, 0);
+}
+
+.navBar > button {
+  border-style: none;
+  background-color: #ffffff00;
+}
+
+.activeIcon {
+  filter: invert(74%) sepia(66%) saturate(3525%) hue-rotate(145deg)
+    brightness(102%) contrast(108%);
+  background: center;
+}
+
+.navBar_top {
+  display: flex;
+  align-content: center;
+  align-items: center;
+}
+
+.navBar_top > img {
+  width: 40px;
+}
+
+.cuadroCompra {
+  background-color: white;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0px 10px 0px;
+  border-radius: 15px;
+  align-items: center;
+}
+
+.cuadroCompra > img {
+  width: 30px;
+}
+
+.inputCompra {
+  background-color: inherit;
+  border: none;
+  outline: none;
+  caret-color: #00bfdc;
+  text-align: right;
+  font-size: 1.2rem;
+  width: 70%;
+}
+
+.inputCompra:focus-visible {
+  border: none;
+  background-color: inherit;
+}
+
+.saldo {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.containerSaldos {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.containerSaldos > div {
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  background-color: #e6e6e6;
+  border-radius: 15px;
+  padding: 5px 12px 5px 12px;
+
+  width: 40%;
+  align-items: center;
+}
+
+.containerSaldos > div > div {
+  color: #a9a9a9;
+  font-size: 0.8rem;
+  background-color: inherit;
+}
+
+.pancake {
+  border: 0;
+  margin: 0 auto;
+  margin-bottom: 0.5rem;
+  display: block;
+  border-radius: 10px;
+  max-width: 960px;
+  min-width: 300px;
+}
+
+.containterSelector {
+  background-color: white;
+
+  border-radius: 15px;
+
+  position: relative;
+  top: -55vh;
+
+  width: 100%;
+  box-sizing: border-box;
+  padding: 15px;
+}
+
+.moneda {
+  margin: 0 20px 0 20px;
+  padding: 20px 0 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: white;
+}
+
+.disabledContainer {
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+.iconChecked {
+  width: 30px;
+}
+
+.moneda > div {
+  text-align: center;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.monedaSelected {
+  font-weight: bold;
+}
+
+.close {
+  width: 15px;
+  padding: 10px;
+  opacity: 0.5;
+}
+
+.containerClose {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.verde {
+  background-color: #00ff57;
+}
+
+/*
+turquesa: #00DDFF
+oscuro:
+iconos: #9C9EA1
+
+*/
+
+.flexBox {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.btnLarge {
+  font-size: 75%;
+  font-weight: bold;
+  width: 100%;
+  margin: 0;
+  margin: 15px 0 15px 0;
+}
+
+.btnTransp {
+  background-color: white;
+  border-style: solid;
+  border-color: #00bfdc;
+  border-width: 2px;
+}
+
+.cuadroCobro {
+  display: flex;
+  background-color: white;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 15px;
+  padding: 5px 10px 5px 10px;
+}
+
+.cuadroCobro > img {
+  width: 25px;
+  height: fit-content;
+}
+
+.cuadroCobro > button {
+  margin: 0;
+}
+
+.cuadroCobro > div > p {
+  margin: 0.25rem;
+}
+
+.cuadroCobro > button {
+  width: 30%;
+}
+
+.aCobrar {
+  font-weight: bold;
+  color: #00bfdc;
+}
+
+.transparente {
+  background-color: #ffffff00;
+}
+
+/* ------------------- */
+/* ------------------- */
+
+.slideIzquierda-enter-active {
+  position: fixed;
+  right: -100vw;
+  left: 100vw;
+  -webkit-transform: translateX(-100%);
+  transform: translateX(-100%);
+  transition: transform 800ms linear;
+}
+
+.slideIzquierda-exit-active {
+  -webkit-transform: translateX(100%);
+  transform: translateX(100%);
+  transition: transform 800ms linear;
+}
+
+/*/*/
+
+.fade-exit-active {
+  transform: translateY(100%);
+  opacity: 0;
+  scale: 0.7;
+  transition: transform 500ms ease-in, opacity 500ms linear, scale 500ms linear;
+}
+
+.fade-enter {
+  position: fixed;
+  top: 205px;
+  opacity: 0;
+  width: -webkit-fill-available;
+}
+
+.fade-enter-active {
+  transform: translateY(-100px);
+  opacity: 1;
+  transition: opacity 400ms linear, transform 400ms linear;
+}
+
+.animacionSelector-exit-active {
+  -webkit-transform: translateX(100%);
+  transform: translateX(100%);
+  transition: transform 700ms linear;
+}
+
+.animacionSelector-enter {
+  transform: translateX(100vw);
+}
+
+.animacionSelector-enter-active {
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
+  transition: transform 700ms linear;
+}
+/**********************/
