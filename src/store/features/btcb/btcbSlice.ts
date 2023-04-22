@@ -4,25 +4,26 @@ import contractAddresses from "../../../contracts/contractAddresses";
 import abiBtcb from "../../../contracts/abis/btcb.json";
 import { getStaticState } from "../../store";
 import { AppDispatch } from "../../store";
+import { formatter } from "../formatter";
 
 export interface btcbState {
-  contract: any | null;
-  balance: string | null;
-  allowanceMarketVault: string | null;
-  allowanceVaultAmt: string | null;
-  allowanceVaultBtcb: string | null;
-  allowanceVaultBtcbLiq: string | null;
-  allowanceMaster: string | null;
+  contract: any | undefined;
+  balance: number | undefined;
+  allowanceMarketVault: number | undefined;
+  allowanceVaultAmt: number | undefined;
+  allowanceVaultBtcb: number | undefined;
+  allowanceVaultBtcbLiq: number | undefined;
+  allowanceMaster: number | undefined;
 }
 
 const initialState: btcbState = {
-  contract: null,
-  balance: null,
-  allowanceMarketVault: null,
-  allowanceVaultAmt: null,
-  allowanceVaultBtcb: null,
-  allowanceVaultBtcbLiq: null,
-  allowanceMaster: null,
+  contract: undefined,
+  balance: undefined,
+  allowanceMarketVault: undefined,
+  allowanceVaultAmt: undefined,
+  allowanceVaultBtcb: undefined,
+  allowanceVaultBtcbLiq: undefined,
+  allowanceMaster: undefined,
 };
 
 export const createContract = createAsyncThunk(
@@ -36,7 +37,7 @@ export const createContract = createAsyncThunk(
         signer
       );
       return { newContract };
-    } else return null;
+    } else return undefined;
   }
 );
 
@@ -46,10 +47,10 @@ export const getBalance = createAsyncThunk("btcb/getBalance", async () => {
   const address = staticState.wallet.address;
   if (contract) {
     console.log("Getting balance for: " + address);
-    const newBalance = (await contract.balanceOf(address)).toString();
+    const newBalance = formatter(await contract.balanceOf(address));
     console.log(newBalance);
     return { newBalance };
-  } else return null;
+  } else return undefined;
 });
 
 export const getAllowanceMarketVault = createAsyncThunk(
@@ -60,11 +61,11 @@ export const getAllowanceMarketVault = createAsyncThunk(
     const address = staticState.wallet.address;
 
     if (contract) {
-      const newAllowance = (
+      const newAllowance = formatter(
         await contract.allowance(address, contractAddresses.MarketVault)
-      ).toString();
+      );
       return { newAllowance };
-    } else return null;
+    } else return undefined;
   }
 );
 
@@ -76,11 +77,11 @@ export const getAllowanceVaultAmt = createAsyncThunk(
     const address = staticState.wallet.address;
 
     if (contract) {
-      const newAllowance = (
+      const newAllowance = formatter(
         await contract.allowance(address, contractAddresses.VaultAmt)
-      ).toString();
+      );
       return { newAllowance };
-    } else return null;
+    } else return undefined;
   }
 );
 
@@ -92,11 +93,11 @@ export const getAllowanceVaultBtcb = createAsyncThunk(
     const address = staticState.wallet.address;
 
     if (contract) {
-      const newAllowance = (
+      const newAllowance = formatter(
         await contract.allowance(address, contractAddresses.VaultBtcb)
-      ).toString();
+      );
       return { newAllowance };
-    } else return null;
+    } else return undefined;
   }
 );
 
@@ -108,11 +109,11 @@ export const getAllowanceVaultBtcbLiq = createAsyncThunk(
     const address = staticState.wallet.address;
 
     if (contract) {
-      const newAllowance = (
+      const newAllowance = formatter(
         await contract.allowance(address, contractAddresses.VaultBtcbLiq)
-      ).toString();
+      );
       return { newAllowance };
-    } else return null;
+    } else return undefined;
   }
 );
 export const getAllowanceMaster = createAsyncThunk(
@@ -123,11 +124,11 @@ export const getAllowanceMaster = createAsyncThunk(
     const address = staticState.wallet.address;
 
     if (contract) {
-      const newAllowance = (
+      const newAllowance = formatter(
         await contract.allowance(address, contractAddresses.Master)
-      ).toString();
+      );
       return { newAllowance };
-    } else return null;
+    } else return undefined;
   }
 );
 
@@ -144,37 +145,37 @@ const btcbSlice = createSlice({
         state.balance = action.payload?.newBalance;
       })
       .addCase(getBalance.pending, (state) => {
-        state.balance = "requesting";
+        state.balance = undefined;
       })
       .addCase(getAllowanceMarketVault.fulfilled, (state, action) => {
         state.allowanceMarketVault = action.payload?.newAllowance;
       })
       .addCase(getAllowanceMarketVault.pending, (state) => {
-        state.allowanceMarketVault = "requesting";
+        state.allowanceMarketVault = undefined;
       })
       .addCase(getAllowanceVaultAmt.fulfilled, (state, action) => {
         state.allowanceVaultAmt = action.payload?.newAllowance;
       })
       .addCase(getAllowanceVaultAmt.pending, (state) => {
-        state.allowanceVaultAmt = "requesting";
+        state.allowanceVaultAmt = undefined;
       })
       .addCase(getAllowanceVaultBtcb.fulfilled, (state, action) => {
         state.allowanceVaultBtcb = action.payload?.newAllowance;
       })
       .addCase(getAllowanceVaultBtcb.pending, (state) => {
-        state.allowanceVaultBtcb = "requesting";
+        state.allowanceVaultBtcb = undefined;
       })
       .addCase(getAllowanceVaultBtcbLiq.fulfilled, (state, action) => {
         state.allowanceVaultBtcbLiq = action.payload?.newAllowance;
       })
       .addCase(getAllowanceVaultBtcbLiq.pending, (state) => {
-        state.allowanceVaultBtcbLiq = "requesting";
+        state.allowanceVaultBtcbLiq = undefined;
       })
       .addCase(getAllowanceMaster.fulfilled, (state, action) => {
         state.allowanceMaster = action.payload?.newAllowance;
       })
       .addCase(getAllowanceMaster.pending, (state) => {
-        state.allowanceMaster = "requesting";
+        state.allowanceMaster = undefined;
       });
   },
 });

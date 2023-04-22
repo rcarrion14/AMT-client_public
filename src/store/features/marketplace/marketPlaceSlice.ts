@@ -4,16 +4,17 @@ import contractAddresses from "../../../contracts/contractAddresses";
 import abiCamboriu from "../../../contracts/abis/camboriu.json";
 import { getStaticState } from "../../store";
 import { AppDispatch } from "../../store";
+import { formatter } from "../formatter";
 
 export interface marketPlaceState {
-  contract: any | null;
-  amtEnVenta: string | null;
-  precioVenta: string | undefined; //Change to null on prod
+  contract: any | undefined;
+  amtEnVenta: number | undefined;
+  precioVenta: number | undefined; //Change to null on prod
 }
 
 const initialState: marketPlaceState = {
-  contract: null,
-  amtEnVenta: null,
+  contract: undefined,
+  amtEnVenta: undefined,
   precioVenta: undefined, //Change to null on prod
 };
 
@@ -28,7 +29,7 @@ export const createContract = createAsyncThunk(
         signer
       );
       return { newContract };
-    } else return null;
+    } else return undefined;
   }
 );
 
@@ -40,8 +41,7 @@ export const getAmtEnVenta = createAsyncThunk(
     const address = contractAddresses.Camboriu;
     if (contract) {
       console.log("Getting amtEnVenta");
-      const newBalance = (await contract.balanceOf(address)).toString();
-      console.log(newBalance);
+      const newBalance = formatter(await contract.balanceOf(address));
       return { newBalance };
     } else return null;
   }
@@ -54,9 +54,8 @@ export const getPrecioVenta = createAsyncThunk(
     const contract = staticState.amt.contract;
     const address = contractAddresses.Camboriu;
     if (contract) {
-      console.log("Getting amtEnVenta");
       //const newPrecioVenta = (await contract.precioVenta()).toString(); //Change when new marketplace is deployed
-      const newPrecioVenta = (1).toString();
+      const newPrecioVenta = 1;
       return { newPrecioVenta };
     } else return null;
   }

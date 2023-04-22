@@ -4,17 +4,18 @@ import contractAddresses from "../../../contracts/contractAddresses";
 import abiVaultAmt from "../../../contracts/abis/vaultAmt.json";
 import { getStaticState } from "../../store";
 import { AppDispatch } from "../../store";
+import { formatter } from "../formatter";
 
 interface vaultAmtState {
-  contract: any | null;
-  balanceAmt: string | null;
-  balanceUserAmt: string | null;
+  contract: any | undefined;
+  balanceAmt: number | undefined;
+  balanceUserAmt: number | undefined;
 }
 
 const initialState: vaultAmtState = {
   contract: null,
-  balanceAmt: null,
-  balanceUserAmt: null,
+  balanceAmt: undefined,
+  balanceUserAmt: undefined,
 };
 
 export const createContract = createAsyncThunk(
@@ -37,7 +38,7 @@ export const getBalanceAmt = createAsyncThunk(
   async () => {
     const contract = getStaticState().vaultAmt.contract;
     if (contract) {
-      const newBalance = await contract.amtStacked();
+      const newBalance = formatter(await contract.amtStacked());
       return { newBalance };
     }
   }
@@ -49,7 +50,7 @@ export const getBalanceUserAmt = createAsyncThunk(
     const contract = getStaticState().vaultAmt.contract;
     const address = getStaticState().wallet.address;
     if (contract) {
-      const newBalance = await contract.addressAmt(address);
+      const newBalance = formatter(await contract.addressAmt(address));
       return { newBalance };
     }
   }
@@ -68,13 +69,13 @@ const vaultAmtSlice = createSlice({
         state.balanceAmt = action.payload?.newBalance;
       })
       .addCase(getBalanceAmt.pending, (state, action) => {
-        state.balanceAmt = "requesting";
+        state.balanceAmt = undefined;
       })
       .addCase(getBalanceUserAmt.fulfilled, (state, action) => {
         state.balanceUserAmt = action.payload?.newBalance;
       })
       .addCase(getBalanceUserAmt.pending, (state) => {
-        state.balanceUserAmt = "requesting";
+        state.balanceUserAmt = undefined;
       });
   },
 });

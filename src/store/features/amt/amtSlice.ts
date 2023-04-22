@@ -4,70 +4,71 @@ import contractAddresses from "../../../contracts/contractAddresses";
 import abiAmt from "../../../contracts/abis/amt.json";
 import { getStaticState } from "../../store";
 import { AppDispatch } from "../../store";
+import { formatter } from "../formatter";
 
 export interface amtState {
-  contract: any | null;
-  balance: string | null;
-  allowanceMarketVault: string | null;
-  allowanceVaultAmt: string | null;
-  allowanceVaultBtcb: string | null;
-  allowanceVaultBtcbLiq: string | null;
-  allowanceMaster: string | null;
-  currentSnapshot: string | null;
-  balanceOfPool: string | null;
-  totalSupply: string | null;
+  contract: any | undefined;
+  balance: number | undefined;
+  allowanceMarketVault: number | undefined;
+  allowanceVaultAmt: number | undefined;
+  allowanceVaultBtcb: number | undefined;
+  allowanceVaultBtcbLiq: number | undefined;
+  allowanceMaster: number | undefined;
+  currentSnapshot: number | undefined;
+  balanceOfPool: number | undefined;
+  totalSupply: number | undefined;
 
-  balanceOfMarket: string | null;
+  balanceOfMarket: number | undefined;
 
-  balanceOfAt1: string | null;
-  balanceOfAt2: string | null;
-  balanceOfAt3: string | null;
-  balanceOfAt4: string | null;
-  balanceOfAt5: string | null;
+  balanceOfAt1: number | undefined;
+  balanceOfAt2: number | undefined;
+  balanceOfAt3: number | undefined;
+  balanceOfAt4: number | undefined;
+  balanceOfAt5: number | undefined;
 
-  totalSupplyAt1: string | null;
-  totalSupplyAt2: string | null;
-  totalSupplyAt3: string | null;
-  totalSupplyAt4: string | null;
-  totalSupplyAt5: string | null;
+  totalSupplyAt1: number | undefined;
+  totalSupplyAt2: number | undefined;
+  totalSupplyAt3: number | undefined;
+  totalSupplyAt4: number | undefined;
+  totalSupplyAt5: number | undefined;
 
-  balanceOfPoolAt1: string | null;
-  balanceOfPoolAt2: string | null;
-  balanceOfPoolAt3: string | null;
-  balanceOfPoolAt4: string | null;
-  balanceOfPoolAt5: string | null;
+  balanceOfPoolAt1: number | undefined;
+  balanceOfPoolAt2: number | undefined;
+  balanceOfPoolAt3: number | undefined;
+  balanceOfPoolAt4: number | undefined;
+  balanceOfPoolAt5: number | undefined;
 }
 
 const initialState: amtState = {
-  contract: null,
-  balance: null,
-  allowanceMarketVault: null,
-  allowanceVaultAmt: null,
-  allowanceVaultBtcb: null,
-  allowanceVaultBtcbLiq: null,
-  allowanceMaster: null,
-  currentSnapshot: null,
-  balanceOfPool: null,
-  totalSupply: null,
+  contract: undefined,
+  balance: undefined,
+  allowanceMarketVault: undefined,
+  allowanceVaultAmt: undefined,
+  allowanceVaultBtcb: undefined,
+  allowanceVaultBtcbLiq: undefined,
+  allowanceMaster: undefined,
+  currentSnapshot: undefined,
+  balanceOfPool: undefined,
+  totalSupply: undefined,
 
-  balanceOfMarket: null,
-  balanceOfAt1: null,
-  balanceOfAt2: null,
-  balanceOfAt3: null,
-  balanceOfAt4: null,
-  balanceOfAt5: null,
+  balanceOfMarket: undefined,
+  balanceOfAt1: undefined,
+  balanceOfAt2: undefined,
+  balanceOfAt3: undefined,
+  balanceOfAt4: undefined,
+  balanceOfAt5: undefined,
 
-  totalSupplyAt1: null,
-  totalSupplyAt2: null,
-  totalSupplyAt3: null,
-  totalSupplyAt4: null,
-  totalSupplyAt5: null,
+  totalSupplyAt1: undefined,
+  totalSupplyAt2: undefined,
+  totalSupplyAt3: undefined,
+  totalSupplyAt4: undefined,
+  totalSupplyAt5: undefined,
 
-  balanceOfPoolAt1: null,
-  balanceOfPoolAt2: null,
-  balanceOfPoolAt3: null,
-  balanceOfPoolAt4: null,
-  balanceOfPoolAt5: null,
+  balanceOfPoolAt1: undefined,
+  balanceOfPoolAt2: undefined,
+  balanceOfPoolAt3: undefined,
+  balanceOfPoolAt4: undefined,
+  balanceOfPoolAt5: undefined,
 };
 
 export const createContract = createAsyncThunk(
@@ -90,11 +91,10 @@ export const getAmtbalance = createAsyncThunk("amt/getAmtbalance", async () => {
   const contract = staticState.amt.contract;
   const address = staticState.wallet.address;
   if (contract) {
-    console.log("Getting balance for: " + address);
-    const newBalance = (await contract.balanceOf(address)).toString();
+    const newBalance = formatter(await contract.balanceOf(address));
     console.log(newBalance);
     return { newBalance };
-  } else return null;
+  } else return undefined;
 });
 export const getAllowanceMarketVault = createAsyncThunk(
   "amt/getAllowanceMarketVault",
@@ -104,11 +104,11 @@ export const getAllowanceMarketVault = createAsyncThunk(
     const address = staticState.wallet.address;
 
     if (contract) {
-      const newAllowance = (
+      const newAllowance = formatter(
         await contract.allowance(address, contractAddresses.MarketVault)
-      ).toString();
+      );
       return { newAllowance };
-    } else return null;
+    } else return undefined;
   }
 );
 
@@ -120,11 +120,11 @@ export const getAllowanceVaultAmt = createAsyncThunk(
     const address = staticState.wallet.address;
 
     if (contract) {
-      const newAllowance = (
+      const newAllowance = formatter(
         await contract.allowance(address, contractAddresses.VaultAmt)
-      ).toString();
+      );
       return { newAllowance };
-    } else return null;
+    } else return undefined;
   }
 );
 
@@ -136,11 +136,11 @@ export const getAllowanceVaultBtcb = createAsyncThunk(
     const address = staticState.wallet.address;
 
     if (contract) {
-      const newAllowance = (
+      const newAllowance = formatter(
         await contract.allowance(address, contractAddresses.VaultBtcb)
-      ).toString();
+      );
       return { newAllowance };
-    } else return null;
+    } else return undefined;
   }
 );
 
@@ -152,11 +152,11 @@ export const getAllowanceVaultBtcbLiq = createAsyncThunk(
     const address = staticState.wallet.address;
 
     if (contract) {
-      const newAllowance = (
+      const newAllowance = formatter(
         await contract.allowance(address, contractAddresses.VaultBtcbLiq)
-      ).toString();
+      );
       return { newAllowance };
-    } else return null;
+    } else return undefined;
   }
 );
 export const getAllowanceMaster = createAsyncThunk(
@@ -167,11 +167,11 @@ export const getAllowanceMaster = createAsyncThunk(
     const address = staticState.wallet.address;
 
     if (contract) {
-      const newAllowance = (
+      const newAllowance = formatter(
         await contract.allowance(address, contractAddresses.Master)
-      ).toString();
+      );
       return { newAllowance };
-    } else return null;
+    } else return undefined;
   }
 );
 
@@ -182,11 +182,11 @@ export const getCurrentSnapshotId = createAsyncThunk(
     const contract = staticState.amt.contract;
 
     if (contract) {
-      const newCurrentSnapshotId = (
+      const newCurrentSnapshotId = formatter(
         await contract.getCurrentSnapshotId()
-      ).toString();
+      );
       return { newCurrentSnapshotId };
-    } else return null;
+    } else return undefined;
   }
 );
 
@@ -197,9 +197,9 @@ export const getTotalSupply = createAsyncThunk(
     const contract = staticState.amt.contract;
 
     if (contract) {
-      const newTotalSupply = (await contract.totalSupply()).toString();
+      const newTotalSupply = formatter(await contract.totalSupply());
       return { newTotalSupply };
-    } else return null;
+    } else return undefined;
   }
 );
 
@@ -210,11 +210,11 @@ export const getBalanceOfPool = createAsyncThunk(
     const contract = staticState.amt.contract;
 
     if (contract) {
-      const newBalanceOfPool = (
+      const newBalanceOfPool = formatter(
         await contract.balanceOf(contractAddresses.LiqPool)
-      ).toString();
+      );
       return { newBalanceOfPool };
-    } else return null;
+    } else return undefined;
   }
 );
 
@@ -226,21 +226,21 @@ export const getBalanceOfAt = createAsyncThunk(
     const address = staticState.wallet.address;
 
     if (contract) {
-      const balanceOfAt1 = (
+      const balanceOfAt1 = formatter(
         await contract.balanceOfAt(address, snapshot)
-      ).toString();
-      const balanceOfAt2 = (
+      );
+      const balanceOfAt2 = formatter(
         await contract.balanceOfAt(address, snapshot - 1)
-      ).toString();
-      const balanceOfAt3 = (
+      );
+      const balanceOfAt3 = formatter(
         await contract.balanceOfAt(address, snapshot - 2)
-      ).toString();
-      const balanceOfAt4 = (
+      );
+      const balanceOfAt4 = formatter(
         await contract.balanceOfAt(address, snapshot - 3)
-      ).toString();
-      const balanceOfAt5 = (
+      );
+      const balanceOfAt5 = formatter(
         await contract.balanceOfAt(address, snapshot - 4)
-      ).toString();
+      );
 
       return {
         balanceOfAt1,
@@ -249,7 +249,7 @@ export const getBalanceOfAt = createAsyncThunk(
         balanceOfAt4,
         balanceOfAt5,
       };
-    } else return null;
+    } else return undefined;
   }
 );
 
@@ -260,21 +260,19 @@ export const getTotalSupplyAt = createAsyncThunk(
     const contract = staticState.amt.contract;
 
     if (contract) {
-      const totalSupplyAt1 = (
-        await contract.totalSupplyAt(snapshot)
-      ).toString();
-      const totalSupplyAt2 = (
+      const totalSupplyAt1 = formatter(await contract.totalSupplyAt(snapshot));
+      const totalSupplyAt2 = formatter(
         await contract.totalSupplyAt(snapshot - 1)
-      ).toString();
-      const totalSupplyAt3 = (
+      );
+      const totalSupplyAt3 = formatter(
         await contract.totalSupplyAt(snapshot - 2)
-      ).toString();
-      const totalSupplyAt4 = (
+      );
+      const totalSupplyAt4 = formatter(
         await contract.totalSupplyAt(snapshot - 3)
-      ).toString();
-      const totalSupplyAt5 = (
+      );
+      const totalSupplyAt5 = formatter(
         await contract.totalSupplyAt(snapshot - 4)
-      ).toString();
+      );
 
       return {
         totalSupplyAt1,
@@ -283,7 +281,7 @@ export const getTotalSupplyAt = createAsyncThunk(
         totalSupplyAt4,
         totalSupplyAt5,
       };
-    } else return null;
+    } else return undefined;
   }
 );
 
@@ -295,21 +293,21 @@ export const getBalanceOfPoolAt = createAsyncThunk(
     const address = contractAddresses.LiqPool;
 
     if (contract) {
-      const balanceOfAt1 = (
+      const balanceOfAt1 = formatter(
         await contract.balanceOfAt(address, snapshot)
-      ).toString();
-      const balanceOfAt2 = (
+      );
+      const balanceOfAt2 = formatter(
         await contract.balanceOfAt(address, snapshot - 1)
-      ).toString();
-      const balanceOfAt3 = (
+      );
+      const balanceOfAt3 = formatter(
         await contract.balanceOfAt(address, snapshot - 2)
-      ).toString();
-      const balanceOfAt4 = (
+      );
+      const balanceOfAt4 = formatter(
         await contract.balanceOfAt(address, snapshot - 3)
-      ).toString();
-      const balanceOfAt5 = (
+      );
+      const balanceOfAt5 = formatter(
         await contract.balanceOfAt(address, snapshot - 4)
-      ).toString();
+      );
 
       return {
         balanceOfAt1,
@@ -318,7 +316,7 @@ export const getBalanceOfPoolAt = createAsyncThunk(
         balanceOfAt4,
         balanceOfAt5,
       };
-    } else return null;
+    } else return undefined;
   }
 );
 
@@ -335,55 +333,55 @@ const amtSlice = createSlice({
         state.balance = action.payload?.newBalance;
       })
       .addCase(getAmtbalance.pending, (state) => {
-        state.balance = "requesting";
+        state.balance = undefined;
       })
       .addCase(getAllowanceMarketVault.fulfilled, (state, action) => {
         state.allowanceMarketVault = action.payload?.newAllowance;
       })
       .addCase(getAllowanceMarketVault.pending, (state) => {
-        state.allowanceMarketVault = "requesting";
+        state.allowanceMarketVault = undefined;
       })
       .addCase(getAllowanceVaultAmt.fulfilled, (state, action) => {
         state.allowanceVaultAmt = action.payload?.newAllowance;
       })
       .addCase(getAllowanceVaultAmt.pending, (state) => {
-        state.allowanceVaultAmt = "requesting";
+        state.allowanceVaultAmt = undefined;
       })
       .addCase(getAllowanceVaultBtcb.fulfilled, (state, action) => {
         state.allowanceVaultBtcb = action.payload?.newAllowance;
       })
       .addCase(getAllowanceVaultBtcb.pending, (state) => {
-        state.allowanceVaultBtcb = "requesting";
+        state.allowanceVaultBtcb = undefined;
       })
       .addCase(getAllowanceVaultBtcbLiq.fulfilled, (state, action) => {
         state.allowanceVaultBtcbLiq = action.payload?.newAllowance;
       })
       .addCase(getAllowanceVaultBtcbLiq.pending, (state) => {
-        state.allowanceVaultBtcbLiq = "requesting";
+        state.allowanceVaultBtcbLiq = undefined;
       })
       .addCase(getAllowanceMaster.fulfilled, (state, action) => {
         state.allowanceMaster = action.payload?.newAllowance;
       })
       .addCase(getAllowanceMaster.pending, (state) => {
-        state.allowanceMaster = "requesting";
+        state.allowanceMaster = undefined;
       })
       .addCase(getCurrentSnapshotId.fulfilled, (state, action) => {
         state.currentSnapshot = action.payload?.newCurrentSnapshotId;
       })
       .addCase(getCurrentSnapshotId.pending, (state) => {
-        state.currentSnapshot = "requesting";
+        state.currentSnapshot = undefined;
       })
       .addCase(getTotalSupply.fulfilled, (state, action) => {
         state.totalSupply = action.payload?.newTotalSupply;
       })
       .addCase(getTotalSupply.pending, (state) => {
-        state.totalSupply = "requesting";
+        state.totalSupply = undefined;
       })
       .addCase(getBalanceOfPool.fulfilled, (state, action) => {
         state.balanceOfPool = action.payload?.newBalanceOfPool;
       })
       .addCase(getBalanceOfPool.pending, (state) => {
-        state.balanceOfPool = "requesting";
+        state.balanceOfPool = undefined;
       })
       .addCase(getBalanceOfAt.fulfilled, (state, action) => {
         state.balanceOfAt1 = action.payload?.balanceOfAt1;
@@ -393,11 +391,11 @@ const amtSlice = createSlice({
         state.balanceOfAt5 = action.payload?.balanceOfAt5;
       })
       .addCase(getBalanceOfAt.pending, (state) => {
-        state.balanceOfAt1 = "requesting";
-        state.balanceOfAt2 = "requesting";
-        state.balanceOfAt3 = "requesting";
-        state.balanceOfAt4 = "requesting";
-        state.balanceOfAt5 = "requesting";
+        state.balanceOfAt1 = undefined;
+        state.balanceOfAt2 = undefined;
+        state.balanceOfAt3 = undefined;
+        state.balanceOfAt4 = undefined;
+        state.balanceOfAt5 = undefined;
       })
       .addCase(getTotalSupplyAt.fulfilled, (state, action) => {
         state.totalSupplyAt1 = action.payload?.totalSupplyAt1;
@@ -407,11 +405,11 @@ const amtSlice = createSlice({
         state.totalSupplyAt5 = action.payload?.totalSupplyAt5;
       })
       .addCase(getTotalSupplyAt.pending, (state) => {
-        state.totalSupplyAt1 = "requesting";
-        state.totalSupplyAt2 = "requesting";
-        state.totalSupplyAt3 = "requesting";
-        state.totalSupplyAt4 = "requesting";
-        state.totalSupplyAt5 = "requesting";
+        state.totalSupplyAt1 = undefined;
+        state.totalSupplyAt2 = undefined;
+        state.totalSupplyAt3 = undefined;
+        state.totalSupplyAt4 = undefined;
+        state.totalSupplyAt5 = undefined;
       })
       .addCase(getBalanceOfPoolAt.fulfilled, (state, action) => {
         state.balanceOfPoolAt1 = action.payload?.balanceOfAt1;

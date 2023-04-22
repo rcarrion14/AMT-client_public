@@ -4,19 +4,20 @@ import contractAddresses from "../../../contracts/contractAddresses";
 import abiVaultBtcb from "../../../contracts/abis/vaultBtcb.json";
 import { getStaticState } from "../../store";
 import { AppDispatch } from "../../store";
+import { formatter } from "../formatter";
 
 interface vaultBtcbState {
   contract: any | null;
-  balanceAmt: string | null;
-  balanceUserAmt: string | null;
-  balanceUserBtcb: string | null;
+  balanceAmt: number | undefined;
+  balanceUserAmt: number | undefined;
+  balanceUserBtcb: number | undefined;
 }
 
 const initialState: vaultBtcbState = {
   contract: null,
-  balanceAmt: null,
-  balanceUserAmt: null,
-  balanceUserBtcb: null,
+  balanceAmt: undefined,
+  balanceUserAmt: undefined,
+  balanceUserBtcb: undefined,
 };
 
 export const createContract = createAsyncThunk(
@@ -39,7 +40,7 @@ export const getBalanceAmt = createAsyncThunk(
   async () => {
     const contract = getStaticState().vaultBtcb.contract;
     if (contract) {
-      const newBalance = await contract.amtStacked();
+      const newBalance = formatter(await contract.amtStacked());
       return { newBalance };
     }
   }
@@ -53,7 +54,7 @@ export const getBalanceUserAmt = createAsyncThunk(
     if (contract) {
       console.log(contract);
 
-      const newBalance = await contract.addressAmt(address);
+      const newBalance = formatter(await contract.addressAmt(address));
       return { newBalance };
     }
   }
@@ -67,12 +68,13 @@ export const getBalanceUserBtcb = createAsyncThunk(
 
     if (contract) {
       const shares = await contract.addressShares(address);
-      console.log(contract);
 
       let newBalance;
       shares == 0
-        ? (newBalance = ethers.utils.parseEther("0"))
-        : (newBalance = await contract.btcToWithdrawl(address, shares));
+        ? (newBalance = 0)
+        : (newBalance = formatter(
+            await contract.btcToWithdrawl(address, shares)
+          ));
       return { newBalance };
     }
   }
@@ -91,19 +93,19 @@ const vaultBtcbSlice = createSlice({
         state.balanceAmt = action.payload?.newBalance;
       })
       .addCase(getBalanceAmt.pending, (state, action) => {
-        state.balanceAmt = "requesting";
+        state.balanceAmt = undefined;
       })
       .addCase(getBalanceUserAmt.fulfilled, (state, action) => {
         state.balanceUserAmt = action.payload?.newBalance;
       })
       .addCase(getBalanceUserAmt.pending, (state) => {
-        state.balanceUserAmt = "requesting";
+        state.balanceUserAmt = undefined;
       }) //
       .addCase(getBalanceUserBtcb.fulfilled, (state, action) => {
         state.balanceUserBtcb = action.payload?.newBalance;
       })
       .addCase(getBalanceUserBtcb.pending, (state, action) => {
-        state.balanceUserBtcb = "requesting";
+        state.balanceUserBtcb = undefined;
       });
   },
 });
