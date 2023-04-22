@@ -1,9 +1,5 @@
 import React from "react";
-<<<<<<< HEAD
-import CuadroUnimoneda from "../CuadroUnimoneda";
-=======
 import CuadroUnimoneda from "./staking/CuadroUnimoneda";
->>>>>>> main
 
 const StakingAmt = ({ setActivePage }) => {
   return (

@@ -8,19 +8,13 @@ import { AppDispatch } from "../../store";
 export interface marketPlaceState {
   contract: any | null;
   amtEnVenta: string | null;
-<<<<<<< HEAD
   precioVenta: string | undefined; //Change to null on prod
-=======
->>>>>>> main
 }
 
 const initialState: marketPlaceState = {
   contract: null,
   amtEnVenta: null,
-<<<<<<< HEAD
   precioVenta: undefined, //Change to null on prod
-=======
->>>>>>> main
 };
 
 export const createContract = createAsyncThunk(
@@ -53,7 +47,6 @@ export const getAmtEnVenta = createAsyncThunk(
   }
 );
 
-<<<<<<< HEAD
 export const getPrecioVenta = createAsyncThunk(
   "marketplace/getPrecioVenta",
   async () => {
@@ -69,8 +62,6 @@ export const getPrecioVenta = createAsyncThunk(
   }
 );
 
-=======
->>>>>>> main
 const marketPlaceSlice = createSlice({
   name: "marketPlace",
   initialState,
@@ -82,12 +73,9 @@ const marketPlaceSlice = createSlice({
       })
       .addCase(getAmtEnVenta.fulfilled, (state, action) => {
         state.amtEnVenta = action.payload?.newBalance;
-<<<<<<< HEAD
       })
       .addCase(getPrecioVenta.fulfilled, (state, action) => {
         state.precioVenta = action.payload?.newPrecioVenta;
-=======
->>>>>>> main
       });
   },
 });
@@ -95,10 +83,7 @@ const marketPlaceSlice = createSlice({
 export const generalLoadMarketPlace = (dispatch: AppDispatch) => {
   dispatch(createContract());
   dispatch(getAmtEnVenta());
-<<<<<<< HEAD
   dispatch(getPrecioVenta());
-=======
->>>>>>> main
 };
 export const marketPlaceActions = marketPlaceSlice.actions;
 export default marketPlaceSlice.reducer;
