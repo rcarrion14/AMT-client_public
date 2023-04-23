@@ -1,4 +1,4 @@
-import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import btcbReducer from "./features/btcb/btcbSlice";
 
 import walletReducer from "./features/wallet/walletSlice";
@@ -10,9 +10,6 @@ import marketPlaceReducer from "./features/marketplace/marketPlaceSlice";
 import vaultAmtReducer from "./features/vaultAmt/vaultAmtSlice";
 import vaultBtcbReducer from "./features/vaultBtcb/vaultBtcbSlice";
 
-const customizedMiddleware = getDefaultMiddleware({
-  serializableCheck: false,
-});
 const store = configureStore({
   reducer: {
     wallet: walletReducer,
@@ -24,8 +21,9 @@ const store = configureStore({
     vaultAmt: vaultAmtReducer,
     vaultBtcb: vaultBtcbReducer,
     btcb: btcbReducer,
-    //middleware: customizedMiddleware as any,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({ serializableCheck: false }),
 });
 
 export type AppDispatch = typeof store.dispatch;
