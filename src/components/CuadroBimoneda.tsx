@@ -8,7 +8,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../store/store";
 import { marketPlaceOperations } from "../store/features/marketplace/marketPlaceOperations";
 import { usdtOperations } from "../store/features/usdt/usdtOperations";
-import { format } from "./coinFormater";
 
 //import opBlock from "../components/context/OperacionesBlockChain"; // P: Por que hice esto?  -  R: Ni idea
 
@@ -72,7 +71,7 @@ const CuadroBimoneda = () => {
       <div id="primeraSeccion">
         <div className="saldo">
           <h2>Vocé paga</h2>
-          <p>Saldo: {format(balanceUsdt)}</p>
+          <p>Saldo: {balanceUsdt}</p>
         </div>
         <div className="cuadroCompra">
           <img
@@ -95,7 +94,7 @@ const CuadroBimoneda = () => {
       <div id="segundaSeccion">
         <div className="saldo">
           <h2>Vocé recebe</h2>
-          <p>Saldo: {format(balanceAmt)}</p>
+          <p>Saldo: {balanceAmt}</p>
         </div>
         <div className="cuadroCompra">
           <img src="coinAutomining.png" alt="" />
@@ -113,7 +112,7 @@ const CuadroBimoneda = () => {
       <div className="containerSaldos">
         <div>
           <h2>AMT a venda:</h2>
-          <div>{format(balanceTienda)}</div>
+          <div>{balanceTienda}</div>
         </div>
         <div>
           <h2>Preco do AMT:</h2>

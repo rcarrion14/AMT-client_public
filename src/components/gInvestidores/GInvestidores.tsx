@@ -10,7 +10,9 @@ const GInvestidores = () => {
   const currentSnapshot = useSelector(
     (state: typeof RootState) => state.amt.currentSnapshot
   );
-  const [readingSnapshot, setReadingSnapshot] = useState<string | null>(null); //Datos del componente
+  const [readingSnapshot, setReadingSnapshot] = useState<number | undefined>(
+    undefined
+  ); //Datos del componente
   useEffect(() => {
     setReadingSnapshot(currentSnapshot);
   }, []);
@@ -79,54 +81,48 @@ const GInvestidores = () => {
         balanceOfAt={balanceOfAt1}
         payAt={pays1}
         totalSupplyAt={TotalSupplyAt1}
-        currentSnap={readingSnapshot ? parseInt(readingSnapshot) : 0}
+        currentSnap={readingSnapshot ? readingSnapshot : 0}
       />
       <CuadroCobro
         balanceOfAt={balanceOfAt2}
         payAt={pays2}
         totalSupplyAt={TotalSupplyAt2}
-        currentSnap={readingSnapshot ? parseInt(readingSnapshot) - 1 : 0}
+        currentSnap={readingSnapshot ? readingSnapshot - 1 : 0}
       />
       <CuadroCobro
         balanceOfAt={balanceOfAt3}
         payAt={pays3}
         totalSupplyAt={TotalSupplyAt3}
-        currentSnap={readingSnapshot ? parseInt(readingSnapshot) - 2 : 0}
+        currentSnap={readingSnapshot ? readingSnapshot - 2 : 0}
       />
       <CuadroCobro
         balanceOfAt={balanceOfAt4}
         payAt={pays4}
         totalSupplyAt={TotalSupplyAt4}
-        currentSnap={readingSnapshot ? parseInt(readingSnapshot) - 3 : 0}
+        currentSnap={readingSnapshot ? readingSnapshot - 3 : 0}
       />
       <CuadroCobro
         balanceOfAt={balanceOfAt5}
         payAt={pays5}
         totalSupplyAt={TotalSupplyAt5}
-        currentSnap={readingSnapshot ? parseInt(readingSnapshot) - 4 : 0}
+        currentSnap={readingSnapshot ? readingSnapshot - 4 : 0}
       />
 
       {/* Arrow button */}
       <button
         onClick={() => {
-          setReadingSnapshot((parseInt(readingSnapshot) + 5).toString());
-          amtLoaders.loaderWithSnapshots(
-            dispatch,
-            parseInt(readingSnapshot) + 5
-          );
-          masterLoaders.generalLoad(dispatch, parseInt(readingSnapshot) + 5);
+          setReadingSnapshot(readingSnapshot + 5);
+          amtLoaders.loaderWithSnapshots(dispatch, readingSnapshot + 5);
+          masterLoaders.generalLoad(dispatch, readingSnapshot + 5);
         }}
       >
         {"<="}{" "}
       </button>
       <button
         onClick={() => {
-          setReadingSnapshot((parseInt(readingSnapshot) - 5).toString());
-          amtLoaders.loaderWithSnapshots(
-            dispatch,
-            parseInt(readingSnapshot) - 5
-          );
-          masterLoaders.generalLoad(dispatch, parseInt(readingSnapshot) - 5);
+          setReadingSnapshot(readingSnapshot - 5);
+          amtLoaders.loaderWithSnapshots(dispatch, readingSnapshot - 5);
+          masterLoaders.generalLoad(dispatch, readingSnapshot - 5);
         }}
       >
         {"=>"}{" "}

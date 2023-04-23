@@ -5,9 +5,9 @@ import { format, formatAllowances } from "./coinFormater";
 import { ethers } from "ethers";
 
 interface BotonOperacionProps {
-  balanceTienda: string | null;
-  balanceUsdt: string | null;
-  allowanceUsdt: string | null;
+  balanceTienda: number | undefined;
+  balanceUsdt: number | undefined;
+  allowanceUsdt: number | undefined;
   input: string;
   operacionAprobar: Function;
   operacionBuy: Function;
@@ -26,13 +26,13 @@ const BotonOperacion: React.FC<BotonOperacionProps> = ({
       //Disabling the button conditions
       disabled={
         //parseInt(format(balanceTienda)) < parseInt(input) ||
-        parseInt(format(balanceUsdt)) < parseInt(input) || input == ""
+        balanceUsdt < parseInt(input) || input == ""
       }
       // onClick operations based on conditions
       onClick={() => {
         console.log(allowanceUsdt);
         if (allowanceUsdt) {
-          parseInt(formatAllowances(allowanceUsdt)) > parseInt(input)
+          allowanceUsdt > parseInt(input)
             ? operacionBuy(dispatch, input)
             : operacionAprobar(dispatch);
         }
@@ -41,11 +41,11 @@ const BotonOperacion: React.FC<BotonOperacionProps> = ({
     >
       {
         //Posible texts of button based on conditions
-        parseInt(format(balanceTienda)) < parseInt(input)
+        balanceTienda < parseInt(input)
           ? "No hay tantos amt en venta"
-          : parseInt(format(balanceUsdt)) < parseInt(input)
+          : balanceUsdt < parseInt(input)
           ? "Balance insuficiente"
-          : parseInt(input) > parseInt(formatAllowances(allowanceUsdt))
+          : parseInt(input) > allowanceUsdt
           ? "Approve"
           : "buy"
       }
