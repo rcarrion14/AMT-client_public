@@ -1,6 +1,7 @@
 import React from "react";
 import CuadroBimoneda from "../../CuadroBimoneda";
 import { textoLiquidez } from "../../../textos";
+import CuadroProveerLiquidez from "./CuadroProveerLiquidez";
 
 interface LiquidezInterface {
   setActivePage: React.Dispatch<React.SetStateAction<string>>;
@@ -14,7 +15,7 @@ const Liquidez: React.FC<LiquidezInterface> = ({ setActivePage }) => {
         <h1>Investimentos</h1>
       </div>
       {textoLiquidez("por")}
-      <CuadroBimoneda />
+      <CuadroProveerLiquidez />
     </div>
   );
 };
