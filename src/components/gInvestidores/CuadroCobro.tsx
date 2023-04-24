@@ -6,12 +6,16 @@ interface cuadroCobroProps {
   payAt: number | undefined;
   totalSupplyAt: number | undefined;
   currentSnap: number;
+  alreadyCharged: boolean;
+  charge: Function;
 }
 const CuadroCobro: React.FC<cuadroCobroProps> = ({
   balanceOfAt,
   payAt,
   totalSupplyAt,
   currentSnap,
+  alreadyCharged,
+  charge,
 }) => {
   return (
     <div className="cuadroCobro">
@@ -25,7 +29,9 @@ const CuadroCobro: React.FC<cuadroCobroProps> = ({
         <p>Distribucion: {payAt}</p>
       </div>
 
-      <button>Cobrar</button>
+      <button onClick={charge} disabled={alreadyCharged || balanceOfAt == 0}>
+        {alreadyCharged ? "ya cobrado" : "cobrar"}
+      </button>
     </div>
   );
 };

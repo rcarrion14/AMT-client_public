@@ -182,7 +182,7 @@ export const getCurrentSnapshotId = createAsyncThunk(
     const contract = staticState.amt.contract;
 
     if (contract) {
-      const newCurrentSnapshotId = formatter(
+      const newCurrentSnapshotId = parseInt(
         await contract.getCurrentSnapshotId()
       );
       return { newCurrentSnapshotId };

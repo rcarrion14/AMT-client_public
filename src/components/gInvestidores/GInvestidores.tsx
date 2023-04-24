@@ -5,6 +5,7 @@ import { AppDispatch, RootState } from "../../store/store";
 import { amtLoaders } from "../../store/features/amt/amtSlice";
 import { masterLoaders } from "../../store/features/master/masterSlice";
 import { useState } from "react";
+import { masterOperations } from "../../store/features/master/masterOperations";
 const GInvestidores = () => {
   const dispatch = useDispatch<AppDispatch>();
   const currentSnapshot = useSelector(
@@ -58,6 +59,22 @@ const GInvestidores = () => {
     (state: typeof RootState) => state.amt.totalSupplyAt5
   );
 
+  const alreadyCharged1 = useSelector(
+    (state: typeof RootState) => state.master.alreadyCharged1
+  );
+  const alreadyCharged2 = useSelector(
+    (state: typeof RootState) => state.master.alreadyCharged2
+  );
+  const alreadyCharged3 = useSelector(
+    (state: typeof RootState) => state.master.alreadyCharged3
+  );
+  const alreadyCharged4 = useSelector(
+    (state: typeof RootState) => state.master.alreadyCharged4
+  );
+  const alreadyCharged5 = useSelector(
+    (state: typeof RootState) => state.master.alreadyCharged5
+  );
+
   return (
     <>
       <h1>Grandes investidores</h1>
@@ -82,30 +99,80 @@ const GInvestidores = () => {
         payAt={pays1}
         totalSupplyAt={TotalSupplyAt1}
         currentSnap={readingSnapshot ? readingSnapshot : 0}
+        alreadyCharged={alreadyCharged1}
+        charge={() => {
+          readingSnapshot
+            ? masterOperations.charge(
+                dispatch,
+                readingSnapshot,
+                readingSnapshot
+              )
+            : console.log("notloaded");
+        }}
       />
       <CuadroCobro
         balanceOfAt={balanceOfAt2}
         payAt={pays2}
         totalSupplyAt={TotalSupplyAt2}
         currentSnap={readingSnapshot ? readingSnapshot - 1 : 0}
+        alreadyCharged={alreadyCharged2}
+        charge={() => {
+          readingSnapshot
+            ? masterOperations.charge(
+                dispatch,
+                readingSnapshot - 1,
+                readingSnapshot
+              )
+            : console.log("notloaded");
+        }}
       />
       <CuadroCobro
         balanceOfAt={balanceOfAt3}
         payAt={pays3}
         totalSupplyAt={TotalSupplyAt3}
         currentSnap={readingSnapshot ? readingSnapshot - 2 : 0}
+        alreadyCharged={alreadyCharged3}
+        charge={() => {
+          readingSnapshot
+            ? masterOperations.charge(
+                dispatch,
+                readingSnapshot - 2,
+                readingSnapshot
+              )
+            : console.log("notloaded");
+        }}
       />
       <CuadroCobro
         balanceOfAt={balanceOfAt4}
         payAt={pays4}
         totalSupplyAt={TotalSupplyAt4}
         currentSnap={readingSnapshot ? readingSnapshot - 3 : 0}
+        alreadyCharged={alreadyCharged4}
+        charge={() => {
+          readingSnapshot
+            ? masterOperations.charge(
+                dispatch,
+                readingSnapshot - 3,
+                readingSnapshot
+              )
+            : console.log("notloaded");
+        }}
       />
       <CuadroCobro
         balanceOfAt={balanceOfAt5}
         payAt={pays5}
         totalSupplyAt={TotalSupplyAt5}
         currentSnap={readingSnapshot ? readingSnapshot - 4 : 0}
+        alreadyCharged={alreadyCharged5}
+        charge={() => {
+          readingSnapshot
+            ? masterOperations.charge(
+                dispatch,
+                readingSnapshot - 4,
+                readingSnapshot
+              )
+            : console.log("notloaded");
+        }}
       />
 
       {/* Arrow button */}
