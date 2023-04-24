@@ -14,6 +14,7 @@ export interface btcbState {
   allowanceVaultBtcb: number | undefined;
   allowanceVaultBtcbLiq: number | undefined;
   allowanceMaster: number | undefined;
+  balanceOfPool: number | undefined;
 }
 
 const initialState: btcbState = {
@@ -24,6 +25,7 @@ const initialState: btcbState = {
   allowanceVaultBtcb: undefined,
   allowanceVaultBtcbLiq: undefined,
   allowanceMaster: undefined,
+  balanceOfPool: undefined,
 };
 
 export const createContract = createAsyncThunk(
@@ -46,12 +48,23 @@ export const getBalance = createAsyncThunk("btcb/getBalance", async () => {
   const contract = staticState.btcb.contract;
   const address = staticState.wallet.address;
   if (contract) {
-    console.log("Getting balance for: " + address);
     const newBalance = formatter(await contract.balanceOf(address));
-    console.log(newBalance);
     return { newBalance };
   } else return undefined;
 });
+
+export const getBalanceOfPool = createAsyncThunk(
+  "btcb/getBalanceOfPool",
+  async () => {
+    const staticState = getStaticState();
+    const contract = staticState.btcb.contract;
+    const address = contractAddresses.LiqPool;
+    if (contract) {
+      const newBalance = formatter(await contract.balanceOf(address));
+      return { newBalance };
+    } else return undefined;
+  }
+);
 
 export const getAllowanceMarketVault = createAsyncThunk(
   "btcb/getAllowanceMarketVault",
@@ -176,6 +189,12 @@ const btcbSlice = createSlice({
       })
       .addCase(getAllowanceMaster.pending, (state) => {
         state.allowanceMaster = undefined;
+      })
+      .addCase(getBalanceOfPool.fulfilled, (state, action) => {
+        state.balanceOfPool = action.payload?.newBalance;
+      })
+      .addCase(getBalanceOfPool.pending, (state) => {
+        state.balanceOfPool = undefined;
       });
   },
 });
@@ -189,4 +208,5 @@ export const generalLoadBtcb = (dispatch: AppDispatch) => {
   dispatch(getAllowanceVaultAmt());
   dispatch(getAllowanceVaultBtcb());
   dispatch(getAllowanceVaultBtcbLiq());
+  dispatch(getBalanceOfPool());
 };
