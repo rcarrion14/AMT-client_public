@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { BotonMetamask } from "./BotonMetamask";
 import BotonBlanco from "./marketplace/BotonBlanco";
+import { textosExtra, textoBotonesBlancos } from "../textos";
 
 interface HomeProps {
   setActivePage: React.Dispatch<React.SetStateAction<string>>;
@@ -8,7 +9,7 @@ interface HomeProps {
 const Home: React.FC<HomeProps> = ({ setActivePage }) => {
   return (
     <>
-      <h1> Bem-vindo!</h1>
+      <h1> {textosExtra.por.bienvenido}</h1>
       <div className="containerVideo">
         <iframe
           className="video"
@@ -19,28 +20,28 @@ const Home: React.FC<HomeProps> = ({ setActivePage }) => {
         ></iframe>
       </div>
       <p className="textoConexion">
-        Para navegar pelo site, conecte a sua Metamask, clickando no botao
-        abaixo
+        {textosExtra.por.textoConexion}
+        h
         <BotonMetamask />
       </p>
 
       <BotonBlanco
-        titulo={"Market"}
-        descripcion={"Compre e venda AMT!"}
+        titulo={textoBotonesBlancos.por.market.titulo}
+        descripcion={textoBotonesBlancos.por.market.descripcion}
         activador={"marketplace"}
         setActivePage={setActivePage}
         image={"icon_marketplace.png"}
       />
       <BotonBlanco
-        titulo={"Investimentos"}
-        descripcion={"Faca seus AMT reinderem mais!"}
+        titulo={textoBotonesBlancos.por.investimentos.titulo}
+        descripcion={textoBotonesBlancos.por.investimentos.descripcion}
         activador={"investidores"}
         setActivePage={setActivePage}
         image={"icon_invest.png"}
       />
       <BotonBlanco
-        titulo={"Grandes investidores"}
-        descripcion={"Consulte a distribucao de lucros."}
+        titulo={textoBotonesBlancos.por.gInvestidores.titulo}
+        descripcion={textoBotonesBlancos.por.gInvestidores.descripcion}
         activador={"gInvestidores"}
         setActivePage={setActivePage}
         image={"icon_grandesInvest.png"}

@@ -1,4 +1,5 @@
 import React from "react";
+import { textoPix } from "../../textos";
 
 const Pix = ({ setActivePage }) => {
   return (
@@ -8,20 +9,7 @@ const Pix = ({ setActivePage }) => {
         <h1>Marketplace</h1>
       </div>
       <div className="container">
-        <h1>Compra e venda com pix</h1>
-        <p>
-          O nosso time está trabalhando para disponibilizar essa funcionalidade
-          de forma automática aqui no site, bem como a compra recorrente com
-          carta-o de crédito.
-        </p>
-        <p>
-          Enquanto isso, você pode nos chamar no WhatsApp ou no Telegram para
-          comprar ou vender criptos com PIX.
-        </p>
-        <p>
-          O atendimento de nosso time é em horário comercial, de segunda a
-          sexta-feira, das 9 hs. ás 18 hs.
-        </p>
+        {textoPix("por")}
         <div className="flexBox">
           <button className="verde">WhatsApp</button>
           <button>Telegram</button>
