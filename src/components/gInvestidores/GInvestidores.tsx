@@ -177,6 +177,7 @@ const GInvestidores = () => {
 
       {/* Arrow button */}
       <button
+        disabled={readingSnapshot + 5 > currentSnapshot}
         onClick={() => {
           setReadingSnapshot(readingSnapshot + 5);
           amtLoaders.loaderWithSnapshots(dispatch, readingSnapshot + 5);
@@ -186,6 +187,7 @@ const GInvestidores = () => {
         {"<="}{" "}
       </button>
       <button
+        disabled={readingSnapshot - 5 < 0}
         onClick={() => {
           setReadingSnapshot(readingSnapshot - 5);
           amtLoaders.loaderWithSnapshots(dispatch, readingSnapshot - 5);
