@@ -1,0 +1,30 @@
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner {
+  animation: spinner 0.8s linear infinite;
+}
+
+.spinner-path {
+  stroke-dasharray: 1, 150;
+  stroke-dashoffset: 0;
+  animation: spinner-path 1.5s ease-in-out infinite;
+}
+
+@keyframes spinner-path {
+  0% {
+    stroke-dasharray: 1, 150;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -35;
+  }
+  100% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -124;
+  }
+}
