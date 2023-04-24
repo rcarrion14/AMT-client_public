@@ -1,12 +1,9 @@
 import React from "react";
 import { format } from "../coinFormater";
-<<<<<<< HEAD
 import { snapToDateMapp } from "./snapshotDateMapper";
 import Spinner from "../Spinner";
-=======
 import { textosExtra } from "../../textos";
 
->>>>>>> remotes/origin/traduccionYstaking
 interface cuadroCobroProps {
   balanceOfAt: number | undefined;
   payAt: number | undefined;
@@ -35,7 +32,6 @@ const CuadroCobro: React.FC<cuadroCobroProps> = ({
       <img className="activeIcon" src="arrow-down.png" alt="" />
 
       <div className="transparente">
-<<<<<<< HEAD
         {allValuesDefined ? (
           <>
             {" "}
@@ -62,18 +58,6 @@ const CuadroCobro: React.FC<cuadroCobroProps> = ({
           </>
         )}
       </button>
-=======
-        <p>13/04/2023 - {currentSnap}</p>
-        <p className="aCobrar">
-          {textosExtra.por.btcACobrar} {(payAt * balanceOfAt) / totalSupplyAt}
-        </p>
-        <p>
-          {textosExtra.por.distribucion} {payAt}
-        </p>
-      </div>
-
-      <button>{textosExtra.por.cobrar}</button>
->>>>>>> remotes/origin/traduccionYstaking
     </div>
   );
 };
