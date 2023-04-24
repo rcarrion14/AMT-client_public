@@ -12,9 +12,6 @@ import GInvestidores from "./components/gInvestidores/GInvestidores";
 import NavBar from "./components/NavBar";
 import store from "./store/store";
 
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../src/store/store";
-import { generalLoadBtcb } from "./store/features/btcb/btcbSlice";
 import Loader from "./components/Loader";
 function App() {
   const pages = ["home", "marketplace", "investidores", "gInvestidores"];
@@ -32,7 +29,6 @@ function App() {
           {activePage == "gInvestidores" ? <GInvestidores /> : null}
         </div>
         <NavBar setActivePage={setActivePage} activePage={activePage} />
-        {/*<div className="containerSlide"><TradingViewWidget /> </div>*/}
       </Provider>
     </>
   );

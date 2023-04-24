@@ -1,34 +1,64 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-const SelectorMoneda = ({
+interface SelectorMonedaInterface {
+  monedaActive: React.Dispatch<React.SetStateAction<string>>;
+  setmonedaActive: React.Dispatch<React.SetStateAction<string>>;
+  setSelector: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const SelectorMoneda: React.FC<SelectorMonedaInterface> = ({
   setmonedaActive,
-  dataMonedas,
   monedaActive,
   setSelector,
 }) => {
-  const monedas = Object.keys(dataMonedas);
+  const [dataMonedas, setDataMonedas] = useState(undefined);
 
-  const icon = (
+  useEffect(() => {
+    async function fetchData() {
+      let response = await fetch("https://api.1inch.io/v5.0/56/tokens");
+      let data = await response.json();
+      setDataMonedas(data);
+    }
+    fetchData();
+  }, []);
+
+  const checkedIcon = (
     <img src="check.png" className="activeIcon iconChecked" alt="" />
   );
 
-  const list = monedas.map((moneda) => {
-    return (
-      <div className="moneda">
-        <div className={moneda == monedaActive ? "monedaSelected" : null}>
-          <img
-            onClick={() => {
-              setSelector(false);
-              setmonedaActive(moneda);
-            }}
-            src={dataMonedas[moneda]}
-          />
-          {moneda}
-        </div>
-        {moneda == monedaActive ? icon : null}
-      </div>
-    );
-  });
+  const htmlListGenerator = () => {
+    if (dataMonedas) {
+      const addrKeys = Object.keys(dataMonedas["tokens"]);
+      const htmlList = addrKeys.map((addr) => {
+        return (
+          <div className="moneda">
+            <div
+              className={
+                dataMonedas["tokens"][addr]["symbol"] == monedaActive.symbol
+                  ? "monedaSelected"
+                  : null
+              }
+            >
+              <img
+                className="imgDex"
+                onClick={() => {
+                  setmonedaActive(dataMonedas["tokens"][addr]);
+                  setSelector(false);
+                  console.log(dataMonedas["tokens"][addr]);
+                }}
+                src={dataMonedas["tokens"][addr]["logoURI"]}
+              />
+              {dataMonedas["tokens"][addr]["symbol"]}
+            </div>
+            {dataMonedas["tokens"][addr]["symbol"] == monedaActive.symbol
+              ? checkedIcon
+              : null}
+          </div>
+        );
+      });
+      return htmlList;
+    }
+  };
 
   return (
     <div className="containterSelector">
@@ -43,7 +73,7 @@ const SelectorMoneda = ({
           alt=""
         />
       </div>
-      {list}
+      {htmlListGenerator()}
     </div>
   );
 };

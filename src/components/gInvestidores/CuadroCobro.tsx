@@ -1,5 +1,6 @@
 import React from "react";
 import { format } from "../coinFormater";
+import { textosExtra } from "../../textos";
 
 interface cuadroCobroProps {
   balanceOfAt: number | undefined;
@@ -20,12 +21,14 @@ const CuadroCobro: React.FC<cuadroCobroProps> = ({
       <div className="transparente">
         <p>13/04/2023 - {currentSnap}</p>
         <p className="aCobrar">
-          BTC a cobrar: {(payAt * balanceOfAt) / totalSupplyAt}
+          {textosExtra.por.btcACobrar} {(payAt * balanceOfAt) / totalSupplyAt}
         </p>
-        <p>Distribucion: {payAt}</p>
+        <p>
+          {textosExtra.por.distribucion} {payAt}
+        </p>
       </div>
 
-      <button>Cobrar</button>
+      <button>{textosExtra.por.cobrar}</button>
     </div>
   );
 };

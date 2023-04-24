@@ -237,6 +237,8 @@ u {
 }
 
 .containterSelector {
+  overflow: scroll;
+  height: 40vh;
   background-color: white;
 
   border-radius: 15px;
@@ -293,6 +295,10 @@ u {
 
 .verde {
   background-color: #00ff57;
+}
+
+.imgDex {
+  width: 35px;
 }
 
 /*

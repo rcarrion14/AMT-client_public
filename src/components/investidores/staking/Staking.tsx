@@ -1,27 +1,34 @@
 import React from "react";
-import CuadroUnimoneda from "./CuadroUnimoneda";
+import CuadroUnimoneda from "../CuadroUnimoneda";
+import { textoStaking, textoInfoAllowance } from "../../../textos";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../../store/store";
+import { amtOperations } from "../../../store/features/amt/amtOperations";
+import { vaultBtcbOperations } from "../../../store/features/vaultBtcb/vaultBtcbOperations";
 
-interface StakingInterface {
+interface AmtStaking {
   setActivePage: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const Staking: React.FC<StakingInterface> = ({ setActivePage }) => {
-  const infoAllowance = (
-    <>
-      <p>
-        ATENÇÃO: caso seja a primeira vez que você faz staking, você precisará
-        aprovar esse contrato inteligente na sua MetaMask. Para isso basta
-        clicar em "Habilitar Staking". Depois, sua MetaMask pedirá a sua
-        confirmação e fará a cobrança da taxa de gás que é única e típica para
-        esse tipo de transação.
-      </p>
-      <p>
-        Depois você poderá clicar em "Fazer staking". Novamente, a sua MetaMask
-        irá solicitar a sua confirmação para pagar a taxa de gás da rede. Feito
-        isso, o staking estará concluido.
-      </p>
-    </>
+const Staking: React.FC<AmtStaking> = ({ setActivePage }) => {
+  const dispatch = useDispatch<AppDispatch>();
+  const balanceAmt = useSelector(
+    (state: typeof RootState) => state.amt.balance
   );
+  const stackedByUser = useSelector(
+    (state: typeof RootState) => state.vaultBtcb.balanceUserAmt
+  );
+  const btcACobrar = useSelector(
+    (state: typeof RootState) => state.vaultBtcb.balanceUserBtcb
+  );
+  const allowance = useSelector(
+    (state: typeof RootState) => state.amt.allowanceVaultBtcb
+  );
+  const aprobarVault = amtOperations.approveVaultBtcb;
+
+  const stake = vaultBtcbOperations.stake;
+
+  const infoAllowance = textoInfoAllowance("por");
   return (
     <div className="containerSlide">
       <div className="navBar_top">
@@ -29,20 +36,16 @@ const Staking: React.FC<StakingInterface> = ({ setActivePage }) => {
         <h1>Investimentos</h1>
       </div>
 
-      <h1>Staking Padrão </h1>
+      {textoStaking("por")}
 
-      <p>
-        Esse é o "Staking Padrão" de AutoMiningToken. Aqui você pode depositar
-        seus AMTs e receber BTCB diariamente.
-      </p>
-      <p>
-        A quantia a ser recebida é proporcional a quantidade de tokens que você
-        deposita.
-      </p>
-      <p>
-        Você pode simular seus recebimentos <u>clicando aquí.</u>
-      </p>
-      <CuadroUnimoneda />
+      <CuadroUnimoneda
+        balanceUserAmt={balanceAmt}
+        stackedByUser={stackedByUser}
+        btcACobrar={btcACobrar}
+        allowance={allowance}
+        operacionAprobar={aprobarVault}
+        operacionStake={stake}
+      />
 
       <button className="btnTransp"> Consultar historico</button>
     </div>

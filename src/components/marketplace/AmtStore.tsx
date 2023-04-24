@@ -1,6 +1,6 @@
 import React from "react";
 import CuadroBimoneda from "../CuadroBimoneda";
-import { textoStoreAmtPortugues } from "../../textoPortugues";
+import { textoStore } from "../../textos";
 
 interface AmtStoreInterface {
   setActivePage: React.Dispatch<React.SetStateAction<string>>;
@@ -14,7 +14,7 @@ const AmtStore: React.FC<AmtStoreInterface> = ({ setActivePage }) => {
         <h1>Marketplace</h1>
       </div>
       <div className="container">
-        {textoStoreAmtPortugues()}
+        {textoStore("por")}
         <CuadroBimoneda />
       </div>
     </div>

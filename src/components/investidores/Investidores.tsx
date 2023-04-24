@@ -3,11 +3,17 @@ import BotonBlanco from "../marketplace/BotonBlanco";
 
 import { CSSTransition } from "react-transition-group";
 import Staking from "./staking/Staking";
-import StakingAmt from "./StakingAmt";
-import Liquidez from "./Liquidez";
-import Rendimientos from "./Rendimientos";
+import StakingAmt from "./stakingAmt/StakingAmt";
+import Liquidez from "./liquidez/Liquidez";
+import Rendimientos from "./rendimientos/Rendimientos";
+import {
+  textoBotonesBlancos,
+  textoInvestidores,
+  textosExtra,
+} from "../../textos";
 
 const Investidores = () => {
+  const nodeRef = useRef(null);
   interface jsxPagesInterface {
     [key: string]: ReactElement<any, any>;
   }
@@ -16,37 +22,10 @@ const Investidores = () => {
   const [activePage, setActivePage] = useState("");
   const [activeInfo, setActiveInfo] = useState(false);
 
-  const saibaMais = <u onClick={() => setActiveInfo(true)}>Saiba maís</u>;
-  const info = (
-    <div>
-      <p>
-        O Projeto AMT nao custodia o dinheiro dos investidores, dde modo que e
-        possivel receber seus rendimientos em bitcoin mesmo mantendo seus AMT em
-        sua MetaMask
-      </p>
-      <p>
-        No entanto, para enviar seus rendimientos em BTCB para a sua MetaMask
-        voce precisará pagar taza de gás e fazer isso diariamente, o que afetará
-        a sua rentabilidade.
-      </p>
-      <p>
-        Por isso, criamos a possibilidade de voce colocar o seus tokens em
-        "staking", isto é, depositalá-los em um contrato inteligente seguro para
-        acumular seus rendimientos de forma automatica e sem precisasr pagar
-        tazas diárias.
-      </p>
-      <p>
-        É preciso pagar taza apenas ao depositar e ao retirar os tokens do
-        staking, mesmo que os manthnha lá por anos.
-      </p>
-      <p>
-        Os seus rendimientos sao enviados para este "cofre" de staking e voce
-        vai recebendo passivamente, enquanto quiser. Só a carteira que depositou
-        os tokens é que poderá retirá-los de lá, mais ninguém terá acesso.
-      </p>
-      <p>Conheca abaixo as modalidades de que dispomos</p>
-    </div>
+  const saibaMais = (
+    <u onClick={() => setActiveInfo(true)}>{textosExtra.por.sepaMas}</u>
   );
+  const info = textoInvestidores("por");
 
   const jsxPages: jsxPagesInterface = {
     staking: <Staking setActivePage={setActivePage} />,
@@ -58,6 +37,7 @@ const Investidores = () => {
   const listaDePaginas = pages.map((pagina) => {
     return (
       <CSSTransition
+        nodeRef={nodeRef}
         key={"transition" + pagina}
         in={activePage == pagina}
         timeout={800}
@@ -76,26 +56,26 @@ const Investidores = () => {
       {activeInfo ? info : saibaMais}
 
       <BotonBlanco
-        titulo={"Staking Padrão"}
-        descripcion={"Receba mais BTCB diariamente."}
+        titulo={textoBotonesBlancos.por.staking.titulo}
+        descripcion={textoBotonesBlancos.por.staking.descripcion}
         activador={"staking"}
         setActivePage={setActivePage}
       />
       <BotonBlanco
-        titulo={"Staking de Autocompra de AMT"}
-        descripcion={"Receba mais AMT diariamente."}
+        titulo={textoBotonesBlancos.por.stakingAmt.titulo}
+        descripcion={textoBotonesBlancos.por.stakingAmt.descripcion}
         activador={"stakingAmt"}
         setActivePage={setActivePage}
       />
       <BotonBlanco
-        titulo={"Prover Liquidez"}
-        descripcion={"Receba pelas transacoes no pool de liquidez."}
+        titulo={textoBotonesBlancos.por.liquidez.titulo}
+        descripcion={textoBotonesBlancos.por.liquidez.descripcion}
         activador={"liquidez"}
         setActivePage={setActivePage}
       />
       <BotonBlanco
-        titulo={"Quanto rende o AMT?"}
-        descripcion={"Entenda e simule a rentabilidade do AMT."}
+        titulo={textoBotonesBlancos.por.rendimientos.titulo}
+        descripcion={textoBotonesBlancos.por.rendimientos.descripcion}
         activador={"rendimiento"}
         setActivePage={setActivePage}
       />

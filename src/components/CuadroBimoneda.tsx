@@ -1,9 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import SelectorMoneda from "./SelectorMoneda";
 import { CSSTransition } from "react-transition-group";
-//import { contractAddresses } from "../assets/addresses";
 import BotonOperacion from "./BotonOperacion";
-//import { useConexionContext } from "./context/Conexion";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../store/store";
 import { marketPlaceOperations } from "../store/features/marketplace/marketPlaceOperations";

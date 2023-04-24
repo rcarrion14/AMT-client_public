@@ -1,12 +1,18 @@
 import React, { useEffect, useRef, useState, ReactElement } from "react";
 import AmtStore from "./AmtStore";
 import { CSSTransition } from "react-transition-group";
-import PancakeSwap from "./PancakeSwap";
+import PancakeSwap from "./pancake/PancakeSwap";
 import Pix from "./Pix";
 import Quema from "./Quema";
 import BotonBlanco from "./BotonBlanco";
+import { textoBotonesBlancos, textoMarketplace } from "../../textos";
 
-const Marketplace = () => {
+interface MarketplaceInterface {
+  setActivePage: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const Marketplace: React.FC<MarketplaceInterface> = () => {
+  const nodeRef = useRef(null);
   const pages: string[] = ["store", "pancake", "quema", "pix"];
   const [activePage, setActivePage] = useState("marketplace");
 
@@ -23,6 +29,7 @@ const Marketplace = () => {
   const listaDePaginas = pages.map((pagina) => {
     return (
       <CSSTransition
+        nodeRef={nodeRef}
         key={"transition" + pagina}
         in={activePage == pagina}
         timeout={800}
@@ -36,45 +43,31 @@ const Marketplace = () => {
 
   return (
     <>
-      <h1>Marketplace</h1>
-      <p>
-        Para comprar AMT basta ter saldo na sua MetaMask, que pode estar em
-        qualquer moeda da Rede de BSC.
-      </p>
-      <p>A taxa de gás da rede, porém, é sempre cobrada em BNB.</p>
-      <p>
-        Para visualizar qualquer token em sua MetaMask é preciso importá-lo
-        primeiro, mas nós facilitamos isso para você!
-      </p>
-      <p>
-        Clique no botão abaixo e importe os principais tokens da Rede BSC
-        (Binance Smart Chain) que são utilizados com frequência pela comunidade
-        AMT. É grátis, útil e seguro!
-      </p>
+      {textoMarketplace("por")}
       <div className="textoConexion">
         <button>IMPORTAR TOKENS</button>
       </div>
       <BotonBlanco
-        titulo={"AMT Store"}
-        descripcion={"Compre AMT diretamente do nosso site."}
+        titulo={textoBotonesBlancos.por.store.titulo}
+        descripcion={textoBotonesBlancos.por.store.descripcion}
         activador={"store"}
         setActivePage={setActivePage}
       />
       <BotonBlanco
-        titulo={"PancakeSwap"}
-        descripcion={"Utilize nosso site para comprar via PancakeSwap."}
+        titulo={textoBotonesBlancos.por.pancake.titulo}
+        descripcion={textoBotonesBlancos.por.pancake.descripcion}
         activador={"pancake"}
         setActivePage={setActivePage}
       />
       <BotonBlanco
-        titulo={"Venda AMT"}
-        descripcion={"Troque AMT por BTCB no Cofre de Garantía."}
+        titulo={textoBotonesBlancos.por.quema.titulo}
+        descripcion={textoBotonesBlancos.por.quema.descripcion}
         activador={"quema"}
         setActivePage={setActivePage}
       />
       <BotonBlanco
-        titulo={"Compre e venda cripto con PIX"}
-        descripcion={"Disponível apenas para usuários no Brasil."}
+        titulo={textoBotonesBlancos.por.pix.titulo}
+        descripcion={textoBotonesBlancos.por.pix.descripcion}
         activador={"pix"}
         setActivePage={setActivePage}
       />

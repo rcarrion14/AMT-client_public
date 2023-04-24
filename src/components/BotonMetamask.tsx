@@ -12,19 +12,11 @@ const BotonMetamask = () => {
       <button
         onClick={() => {
           dispatch(connectWallet());
-          //amtLoaders.generalLoadAmt(dispatch);
-
-          /*
-          amtLoaders.generalLoadAmt(dispatch);
-        generalLoadBtcb(dispatch);
-        generalLoadUsdt(dispatch);
-        
-        generalLoadMarketPlace(dispatch);
-        console.log("hola");
-        */
         }}
       >
-        {!!address ? address : "Conectar billetera"}
+        {!!address
+          ? address.slice(0, 6) + " .... " + address.slice(37)
+          : "Conectar billetera"}
       </button>
     </>
   );
