@@ -21,14 +21,7 @@ const BotonOperacion: React.FC<BotonOperacionProps> = ({
   console.log("REND");
 
   const mesajeBoton = () => {
-    console.log("mensajebtn");
-    console.log("allowance: " + allowance);
-    console.log("input: " + parseFloat(input));
-    console.log("balanceUserAMt: " + balanceUserAmt);
-
-    if (allowance && balanceUserAmt) {
-      console.log(!!allowance);
-
+    if (allowance) {
       if (allowance < parseFloat(input)) {
         return textosExtra.por.aprobar;
       }

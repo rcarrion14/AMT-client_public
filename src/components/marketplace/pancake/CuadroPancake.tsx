@@ -1,88 +1,125 @@
 import React, { useEffect, useRef, useState } from "react";
 import SelectorMoneda from "../../SelectorMoneda";
 import { CSSTransition } from "react-transition-group";
-import BotonOperacion from "../../BotonOperacion";
+import BotonOperacionPancake from "./BotonOperacionPancake";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../store/store";
-import { marketPlaceOperations } from "../../../store/features/marketplace/marketPlaceOperations";
-import { usdtOperations } from "../../../store/features/usdt/usdtOperations";
 import { ethers } from "ethers";
-
-//import opBlock from "../components/context/OperacionesBlockChain"; // P: Por que hice esto?  -  R: Ni idea
+import { listaMonedas } from "../../../listaMonedas";
+import contractAddresses from "../../../contracts/contractAddresses";
+import abiErc20 from "../../../contracts/abis/genericERC20.json";
 
 const CuadroPancake = () => {
-  const inputPagar = useRef<HTMLInputElement>(null);
-  const inputRecibir = useRef<HTMLInputElement>(null);
-  const [monedaActive, setmonedaActive] = useState({
-    symbol: "USDT",
-    name: "Tether USD",
-    decimals: 18,
-    address: "0x55d398326f99059ff775485246999027b3197955",
-    logoURI:
-      "https://tokens.1inch.io/0xdac17f958d2ee523a2206206994597c13d831ec7.png",
-  });
+  const balanceAmt = useSelector(
+    (state: typeof RootState) => state.amt.balance
+  );
+  const signer = useSelector((state: typeof RootState) => state.wallet.signer);
+  const addr = useSelector((state: typeof RootState) => state.wallet.address);
+
+  const [selector, setSelector] = useState(false);
+  const [monedaActive, setmonedaActive] = useState(listaMonedas.usdt);
   const [inputPagarValue, setInputPagarValue] = useState("");
   const [inputRecibirValue, setInputRecibirValue] = useState("");
+  const [balanceErc20, setBalanceErc20] = useState(0);
+  const [allowanceErc20, setAllowanceErc20] = useState(0);
+  const [approveErc20, setApproveErc20] = useState<Function | null>(null);
+  const [txData, setTxData] = useState();
 
+  const inputPagar = useRef<HTMLInputElement>(null);
+  const inputRecibir = useRef<HTMLInputElement>(null);
+
+  // Pedir quote:
   useEffect(() => {
     if (inputPagarValue) {
       async function fetchData() {
         let endpoint = "https://api.1inch.io/v5.0/56/quote?";
-        let from =
-          "fromTokenAddress=" + "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE";
-        let to =
-          "&toTokenAddress=" + "0x111111111117dc0aa78b770fa6a738034120c302";
+        let from = "fromTokenAddress=" + monedaActive.address;
+        let to = "&toTokenAddress=" + contractAddresses.Amt;
         let amount =
           "&amount=" + ethers.utils.parseEther(inputPagarValue.toString());
 
         let response = await fetch(endpoint + from + to + amount);
         let data = await response.json();
-        console.log(data);
+        setInputRecibirValue(ethers.utils.formatEther(data.toTokenAmount));
+      }
+      fetchData();
+    }
+  }, [inputPagarValue, monedaActive]);
+
+  useEffect(() => {
+    if (
+      inputPagarValue &&
+      allowanceErc20 > 5 &&
+      balanceErc20 > Number(inputPagarValue)
+    ) {
+      async function fetchData() {
+        let endpoint = "https://api.1inch.io/v5.0/56/swap?";
+
+        let from = "fromTokenAddress=" + monedaActive.address;
+        let to = "&toTokenAddress=" + contractAddresses.Amt;
+        let amount =
+          "&amount=" + ethers.utils.parseEther(inputPagarValue.toString());
+        let fromAddr = "&fromAddress=" + addr;
+        let slippage = "&slippage=1";
+
+        let response = await fetch(
+          endpoint + from + to + amount + fromAddr + slippage
+        );
+        let rawData = await response.json();
+
+        const data = {
+          from: rawData.tx.from,
+          to: rawData.tx.to,
+          data: rawData.tx.data,
+        };
+
+        setTxData(data);
       }
       fetchData();
     }
   }, [inputPagarValue]);
 
+  useEffect(() => {
+    const contractErc20 = new ethers.Contract(
+      monedaActive.address,
+      abiErc20,
+      signer
+    );
+
+    async function fetchData() {
+      setBalanceErc20(
+        Number(ethers.utils.formatEther(await contractErc20.balanceOf(addr)))
+      );
+      setAllowanceErc20(
+        Number(
+          ethers.utils.formatEther(
+            await contractErc20.allowance(
+              addr,
+              "0x1111111254eeb25477b68fb85ed929f73a960582"
+            )
+          )
+        )
+      );
+
+      setApproveErc20(() => contractErc20.approve);
+    }
+
+    fetchData();
+  }, []);
+
   const dispatch = useDispatch<AppDispatch>();
-
-  //Datos del componente
-  const balanceAmt = useSelector(
-    (state: typeof RootState) => state.amt.balance
-  );
-  const balanceUsdt = useSelector(
-    (state: typeof RootState) => state.usdt.balance
-  );
-
-  const allowanceUsdt = useSelector(
-    (state: typeof RootState) => state.usdt.allowanceMarketVault
-  );
-
-  const balanceTienda = useSelector(
-    (state: typeof RootState) => state.marketPlace.amtEnVenta
-  );
-
-  const precioTienda = useSelector(
-    (state: typeof RootState) => state.marketPlace.precioVenta
-  );
-
-  //Gestion de los input
 
   const handleInputPagarChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     setInputPagarValue(event.target.value);
-    setInputRecibirValue(event.target.value);
   };
 
   const handleInputRecibirChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     setInputRecibirValue(event.target.value);
-    setInputPagarValue(event.target.value);
   };
-
-  //Esto lo vamos a necesitar???
-  const [selector, setSelector] = useState(false);
 
   //Esto de arriba
 
@@ -91,7 +128,7 @@ const CuadroPancake = () => {
       <div id="primeraSeccion">
         <div className="saldo">
           <h2>Vocé paga</h2>
-          <p>Saldo: {balanceUsdt}</p>
+          <p>Saldo: {balanceErc20}</p>
         </div>
         <div className="cuadroCompra">
           <img
@@ -132,21 +169,23 @@ const CuadroPancake = () => {
       <div className="containerSaldos">
         <div>
           <h2>AMT a venda:</h2>
-          <div>{balanceTienda}</div>
+          <div>{}</div>
         </div>
         <div>
           <h2>Preco do AMT:</h2>
-          <div>1 AMT = {precioTienda} USDT</div>
+          <div>1 AMT = {""} USDT</div>
         </div>
       </div>
       <div>
-        <BotonOperacion
-          balanceTienda={balanceTienda}
-          allowanceUsdt={allowanceUsdt}
-          balanceUsdt={balanceUsdt}
+        <BotonOperacionPancake
+          balanceAmt={balanceAmt}
+          balanceErc20={balanceErc20}
+          allowanceErc20={allowanceErc20}
+          txData={txData}
           input={inputPagarValue}
-          operacionAprobar={usdtOperations.approveMarketVault}
-          operacionBuy={marketPlaceOperations.buy}
+          signer={signer}
+          approveErc20={approveErc20}
+          addr={addr}
         />
       </div>
       <CSSTransition
