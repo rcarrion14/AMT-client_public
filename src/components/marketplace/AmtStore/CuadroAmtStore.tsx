@@ -1,15 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
-import SelectorMoneda from "./SelectorMoneda";
+import SelectorMoneda from "../pancake/SelectorMonedaPancake";
 import { CSSTransition } from "react-transition-group";
-import BotonOperacion from "./BotonOperacion";
+import BotonOperacionAmtStore from "./BotonOperacionAmtStore";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../store/store";
-import { marketPlaceOperations } from "../store/features/marketplace/marketPlaceOperations";
-import { usdtOperations } from "../store/features/usdt/usdtOperations";
+import { AppDispatch, RootState } from "../../../store/store";
+import { marketPlaceOperations } from "../../../store/features/marketplace/marketPlaceOperations";
+import { usdtOperations } from "../../../store/features/usdt/usdtOperations";
 
 //import opBlock from "../components/context/OperacionesBlockChain"; // P: Por que hice esto?  -  R: Ni idea
 
-const CuadroBimoneda = () => {
+const CuadroAmtStore = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   //Datos del componente
@@ -118,7 +118,7 @@ const CuadroBimoneda = () => {
         </div>
       </div>
       <div>
-        <BotonOperacion
+        <BotonOperacionAmtStore
           balanceTienda={balanceTienda}
           allowanceUsdt={allowanceUsdt}
           balanceUsdt={balanceUsdt}
@@ -144,4 +144,4 @@ const CuadroBimoneda = () => {
   );
 };
 
-export default CuadroBimoneda;
+export default CuadroAmtStore;

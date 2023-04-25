@@ -1,39 +1,39 @@
 import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState, AppDispatch } from "../store/store";
+import { RootState, AppDispatch } from "../../store/store";
 import {
   generalLoadBtcb,
   createContract as createContractBtcb,
-} from "../store/features/btcb/btcbSlice";
+} from "../../store/features/btcb/btcbSlice";
 import {
   generalLoadUsdt,
   createContract as createContractUsdt,
-} from "../store/features/usdt/usdtSlice";
+} from "../../store/features/usdt/usdtSlice";
 import {
   generalLoadMarketPlace,
   createContract as createContractMarketPlace,
-} from "../store/features/marketplace/marketPlaceSlice";
+} from "../../store/features/marketplace/marketPlaceSlice";
 import {
   amtLoaders,
   createContract as createContractAmt,
-} from "../store/features/amt/amtSlice";
+} from "../../store/features/amt/amtSlice";
 import {
   liqAmtLoaders,
   createContract as createCotractLiqAmt,
-} from "../store/features/liqAmt/liqAmtSlice";
+} from "../../store/features/liqAmt/liqAmtSlice";
 import {
   masterLoaders,
   createContract as createContractMaster,
-} from "../store/features/master/masterSlice";
+} from "../../store/features/master/masterSlice";
 import {
   generalLoadVaultAmt,
   createContract as createContractVaultAmt,
-} from "../store/features/vaultAmt/vaultAmtSlice";
+} from "../../store/features/vaultAmt/vaultAmtSlice";
 import {
   generalLoadVaultBtcb,
   createContract as createContractVaultBtcb,
-} from "../store/features/vaultBtcb/vaultBtcbSlice";
+} from "../../store/features/vaultBtcb/vaultBtcbSlice";
 
 const Loader = () => {
   const dispatch = useDispatch<AppDispatch>();

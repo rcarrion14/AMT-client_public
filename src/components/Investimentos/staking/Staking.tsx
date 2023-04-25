@@ -1,49 +1,55 @@
 import React from "react";
-import CuadroUnimoneda from "../CuadroUnimoneda";
-import { textoStakingAmt } from "../../../textos";
-
+import CuadroStaking from "../CuadroStaking";
+import { textoStaking, textoInfoAllowance } from "../../../Utils/textos";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../store/store";
 import { amtOperations } from "../../../store/features/amt/amtOperations";
-import { vaultAmtOperations } from "../../../store/features/vaultAmt/vaultAmtOperations";
+import { vaultBtcbOperations } from "../../../store/features/vaultBtcb/vaultBtcbOperations";
 
-interface StakingAmtInterface {
+interface AmtStaking {
   setActivePage: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const StakingAmt: React.FC<StakingAmtInterface> = ({ setActivePage }) => {
+const Staking: React.FC<AmtStaking> = ({ setActivePage }) => {
   const dispatch = useDispatch<AppDispatch>();
   const balanceAmt = useSelector(
     (state: typeof RootState) => state.amt.balance
   );
   const stackedByUser = useSelector(
-    (state: typeof RootState) => state.vaultAmt.balanceUserAmt
+    (state: typeof RootState) => state.vaultBtcb.balanceUserAmt
   );
-
+  const btcACobrar = useSelector(
+    (state: typeof RootState) => state.vaultBtcb.balanceUserBtcb
+  );
   const allowance = useSelector(
-    (state: typeof RootState) => state.amt.allowanceVaultAmt
+    (state: typeof RootState) => state.amt.allowanceVaultBtcb
   );
-  const aprobarVault = amtOperations.approveVaultAmt;
+  const aprobarVault = amtOperations.approveVaultBtcb;
 
-  const stake = vaultAmtOperations.stake;
+  const stake = vaultBtcbOperations.stake;
 
+  const infoAllowance = textoInfoAllowance("por");
   return (
     <div className="containerSlide">
       <div className="navBar_top">
         <img onClick={() => setActivePage("")} src="icon_nav.png" />
         <h1>Investimentos</h1>
       </div>
-      {textoStakingAmt("por")}
-      <CuadroUnimoneda
+
+      {textoStaking("por")}
+
+      <CuadroStaking
         balanceUserAmt={balanceAmt}
         stackedByUser={stackedByUser}
-        btcACobrar={undefined}
+        btcACobrar={btcACobrar}
         allowance={allowance}
         operacionAprobar={aprobarVault}
         operacionStake={stake}
       />
+
+      <button className="btnTransp"> Consultar historico</button>
     </div>
   );
 };
 
-export default StakingAmt;
+export default Staking;

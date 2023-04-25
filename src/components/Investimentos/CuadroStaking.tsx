@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import BotonOperacionStaking from "./BotonOperacionStaking";
-import { textosExtra } from "../../textos";
+import { textosExtra } from "../../Utils/textos";
 
 interface BotonOperacionProps {
   balanceUserAmt: number | undefined;
@@ -11,7 +11,7 @@ interface BotonOperacionProps {
   operacionStake: Function;
 }
 
-const CuadroUnimoneda: React.FC<BotonOperacionProps> = ({
+const CuadroStaking: React.FC<BotonOperacionProps> = ({
   balanceUserAmt,
   stackedByUser,
   btcACobrar,
@@ -71,4 +71,4 @@ const CuadroUnimoneda: React.FC<BotonOperacionProps> = ({
   );
 };
 
-export default CuadroUnimoneda;
+export default CuadroStaking;

@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
-import SelectorMoneda from "../../SelectorMoneda";
+import SelectorMoneda from "./SelectorMonedaPancake";
 import { CSSTransition } from "react-transition-group";
 import BotonOperacionPancake from "./BotonOperacionPancake";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../store/store";
 import { ethers } from "ethers";
-import { listaMonedas } from "../../../listaMonedas";
+import { listaMonedas } from "../../../Utils/listaMonedas";
 import contractAddresses from "../../../contracts/contractAddresses";
 import abiErc20 from "../../../contracts/abis/genericERC20.json";
 

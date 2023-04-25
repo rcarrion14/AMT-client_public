@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
-import { BotonMetamask } from "./BotonMetamask";
-import BotonBlanco from "./marketplace/BotonBlanco";
-import { textosExtra, textoBotonesBlancos } from "../textos";
+import { BotonMetamask } from "../Generales/BotonMetamask";
+import BotonBlanco from "../Generales/BotonBlanco";
+import { textosExtra, textoBotonesBlancos } from "../../Utils/textos";
 
 interface HomeProps {
   setActivePage: React.Dispatch<React.SetStateAction<string>>;

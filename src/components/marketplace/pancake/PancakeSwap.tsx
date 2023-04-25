@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import CuadroPancake from "./CuadroPancake";
-import { textoPancake } from "../../../textos";
+import { textoPancake } from "../../../Utils/textos";
 
 interface PancakeSwapInterface {
   setActivePage: React.Dispatch<React.SetStateAction<string>>;

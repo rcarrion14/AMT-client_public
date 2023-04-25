@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { AppDispatch } from "../../store/store";
 import { useDispatch, useSelector } from "react-redux";
 import { ethers } from "ethers";
-import { textosExtra } from "../../textos";
+import { textosExtra } from "../../Utils/textos";
 
 interface BotonOperacionProps {
   balanceUserAmt: number | undefined;

@@ -1,6 +1,6 @@
 import React from "react";
-import CuadroBimoneda from "../../CuadroBimoneda";
-import { textoLiquidez } from "../../../textos";
+import CuadroBimoneda from "../../marketplace/AmtStore/CuadroAmtStore";
+import { textoLiquidez } from "../../../Utils/textos";
 import CuadroProveerLiquidez from "./CuadroProveerLiquidez";
 
 interface LiquidezInterface {

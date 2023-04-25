@@ -1,7 +1,8 @@
 import React from "react";
-import { textoPix } from "../../textos";
+import CuadroBimoneda from "../AmtStore/CuadroAmtStore";
+import { textoQuema } from "../../../Utils/textos";
 
-const Pix = ({ setActivePage }) => {
+const Quema = ({ setActivePage }) => {
   return (
     <div className="containerSlide">
       <div className="navBar_top">
@@ -9,14 +10,12 @@ const Pix = ({ setActivePage }) => {
         <h1>Marketplace</h1>
       </div>
       <div className="container">
-        {textoPix("por")}
-        <div className="flexBox">
-          <button className="verde">WhatsApp</button>
-          <button>Telegram</button>
-        </div>
+        {textoQuema("por")}
+        <button className="btnLarge">Estatisticas</button>
+        <CuadroBimoneda />
       </div>
     </div>
   );
 };
 
-export default Pix;
+export default Quema;

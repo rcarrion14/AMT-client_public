@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState, ReactElement } from "react";
-import AmtStore from "./AmtStore";
+import AmtStore from "./AmtStore/AmtStore";
 import { CSSTransition } from "react-transition-group";
 import PancakeSwap from "./pancake/PancakeSwap";
-import Pix from "./Pix";
-import Quema from "./Quema";
-import BotonBlanco from "./BotonBlanco";
-import { textoBotonesBlancos, textoMarketplace } from "../../textos";
+import Pix from "./Pix/Pix";
+import Quema from "./Quema/Quema";
+import BotonBlanco from "../Generales/BotonBlanco";
+import { textoBotonesBlancos, textoMarketplace } from "../../Utils/textos";
 
 interface MarketplaceInterface {
   setActivePage: React.Dispatch<React.SetStateAction<string>>;

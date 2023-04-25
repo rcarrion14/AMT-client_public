@@ -1,8 +1,8 @@
 import React from "react";
 import { format } from "../coinFormater";
 import { snapToDateMapp } from "./snapshotDateMapper";
-import Spinner from "../Spinner";
-import { textosExtra } from "../../textos";
+import Spinner from "../Generales/Spinner/Spinner";
+import { textosExtra } from "../../Utils/textos";
 
 interface cuadroCobroProps {
   balanceOfAt: number | undefined;

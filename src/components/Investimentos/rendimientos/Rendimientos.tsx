@@ -1,12 +1,12 @@
 import React, { ReactElement } from "react";
-import BotonBlanco from "../../marketplace/BotonBlanco";
+import BotonBlanco from "../../Generales/BotonBlanco";
 import Simulador from "./Simulador";
 import SimuladorActual from "./SimuladorActual";
 import Maquinas from "./Maquinas";
-import Grafico from "./Grafico";
+import Grafico from "./GraficaPrecioAmt/Grafico";
 import { useState, useRef } from "react";
 import { CSSTransition } from "react-transition-group";
-import { textoBotonesBlancos, textoRendimientos } from "../../../textos";
+import { textoBotonesBlancos, textoRendimientos } from "../../../Utils/textos";
 
 interface RendimientosInterface {
   setActivePage: React.Dispatch<React.SetStateAction<string>>;

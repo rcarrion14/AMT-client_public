@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState, ReactElement } from "react";
-import BotonBlanco from "../marketplace/BotonBlanco";
+import BotonBlanco from "../Generales/BotonBlanco";
 
 import { CSSTransition } from "react-transition-group";
 import Staking from "./staking/Staking";
@@ -10,7 +10,7 @@ import {
   textoBotonesBlancos,
   textoInvestidores,
   textosExtra,
-} from "../../textos";
+} from "../../Utils/textos";
 
 const Investidores = () => {
   const nodeRef = useRef(null);

@@ -6,7 +6,7 @@ import { amtLoaders } from "../../store/features/amt/amtSlice";
 import { masterLoaders } from "../../store/features/master/masterSlice";
 import { useState } from "react";
 import { masterOperations } from "../../store/features/master/masterOperations";
-import { textoStaking } from "../../textos";
+import { textoStaking } from "../../Utils/textos";
 
 const GInvestidores = () => {
   const dispatch = useDispatch<AppDispatch>();

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { AppDispatch } from "../store/store";
+import { AppDispatch } from "../../../store/store";
 import { useDispatch, useSelector } from "react-redux";
-import { format, formatAllowances } from "./coinFormater";
 import { ethers } from "ethers";
 
 interface BotonOperacionProps {
@@ -12,7 +11,7 @@ interface BotonOperacionProps {
   operacionAprobar: Function;
   operacionBuy: Function;
 }
-const BotonOperacion: React.FC<BotonOperacionProps> = ({
+const BotonOperacionAmtStore: React.FC<BotonOperacionProps> = ({
   balanceTienda,
   allowanceUsdt,
   balanceUsdt,
@@ -53,7 +52,7 @@ const BotonOperacion: React.FC<BotonOperacionProps> = ({
   );
 };
 
-export default BotonOperacion;
+export default BotonOperacionAmtStore;
 
 /*   const logicaBoton = () => {
     if (balanceTienda < input) {
