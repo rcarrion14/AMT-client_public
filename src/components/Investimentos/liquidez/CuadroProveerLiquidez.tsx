@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
+import BotonDarLiquidez from "./BotonDarLiquidez/BotonDarLiquidez";
 
 const CuadroProveerLiquidez = () => {
   const balanceAmt = useSelector(
@@ -57,10 +58,11 @@ const CuadroProveerLiquidez = () => {
             placeholder="0"
             className="inputCompra"
             type="number"
-            onChange={()=>{}}
+            onChange={() => {}}
             value={undefined}
           />
         </div>
+        <BotonDarLiquidez inputAmt={inputAmt}></BotonDarLiquidez>
       </div>
     </>
   );
