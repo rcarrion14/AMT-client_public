@@ -385,6 +385,32 @@ export const nombre = (idioma: string) => {
 
 /******************/
 /******************/
+export interface interfaceTextoExtra {
+  bienvenido: string;
+  textoConexion: string;
+  market: string;
+  comprar: string;
+  aprobar: string;
+  cobrar: string;
+  bceInsuf: string;
+  stake: string;
+  depositarAmt: string;
+  saldo: string;
+  amtDepositados: string;
+  precioAmt: string;
+  btcACobrar: string;
+  distribucion: string;
+  sepaMas: string;
+  aprobarBTCB: string;
+  aprobarUSDT: string;
+  aprobarAMT: string;
+  aprobarLiqAmt: string;
+  bceAmtInsuficiente: string;
+  bceBtcInsuficiente: string;
+  bceUSDTInsuficiente: string;
+  bceLiqAmtInsuficiente: string;
+}
+
 export const textosExtra = {
   por: {
     bienvenido: "Bem-vindo!",
@@ -410,6 +436,16 @@ export const textosExtra = {
     distribucion: "Distribucion:",
 
     sepaMas: "Saiba maís",
+    //Añadidos pero para ver si iria aca
+    aprobarBTCB: "Approve BTCB",
+    aprobarUSDT: "Approve USDT",
+    aprobarAMT: "Approve AMT",
+    aprobarLiqAmt: "Approve LiqAmt",
+
+    bceAmtInsuficiente: "balance AMT insuficiente",
+    bceBtcInsuficiente: "balance BTC insuficiente",
+    bceUSDTInsuficiente: "balance USDT insuficiente",
+    bceLiqAmtInsuficiente: "balance LiqAmt insuficiente",
   },
   esp: {},
   eng: {},

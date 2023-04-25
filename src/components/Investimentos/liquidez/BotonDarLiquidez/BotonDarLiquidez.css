@@ -1,0 +1,28 @@
+.double-button-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  overflow: hidden;
+  margin-top: 3%;
+}
+
+.double-button-left {
+  background-color: #00bfdc;
+  border-left-color: rgb(165, 0, 0);
+  border-left-width: 1px;
+  margin-right: -10px;
+  box-shadow: none;
+  flex-basis: 50%;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.double-button-right {
+  background-color: #00a9dc;
+  margin-left: -10px;
+  box-shadow: none;
+  flex-basis: 50%;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
