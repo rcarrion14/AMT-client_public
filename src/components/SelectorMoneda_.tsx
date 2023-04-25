@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { listaMonedas } from "../listaMonedas";
 
 interface SelectorMonedaInterface {
   monedaActive: React.Dispatch<React.SetStateAction<string>>;
@@ -12,18 +11,35 @@ const SelectorMoneda: React.FC<SelectorMonedaInterface> = ({
   monedaActive,
   setSelector,
 }) => {
+  const [dataMonedas, setDataMonedas] = useState(undefined);
+
+  const listaMonedas = {
+    usdt: "0x55d398326f99059fF775485246999027B3197955",
+    usdc: "0xab6290bBd5C2d26881E8A7a10bC98552B9082E7f",
+  };
+
+  useEffect(() => {
+    async function fetchData() {
+      let response = await fetch("https://api.1inch.io/v5.0/56/tokens");
+      let data = await response.json();
+      setDataMonedas(data);
+    }
+    fetchData();
+  }, []);
+
   const checkedIcon = (
     <img src="check.png" className="activeIcon iconChecked" alt="" />
   );
 
   const htmlListGenerator = () => {
-    if (listaMonedas) {
-      const htmlList = Object.keys(listaMonedas).map((moneda: string) => {
+    if (dataMonedas) {
+      const addrKeys = Object.keys(dataMonedas["tokens"]);
+      const htmlList = addrKeys.map((addr) => {
         return (
-          <div key={moneda} className="moneda">
+          <div className="moneda">
             <div
               className={
-                listaMonedas[moneda].symbol == monedaActive.symbol
+                dataMonedas["tokens"][addr]["symbol"] == monedaActive.symbol
                   ? "monedaSelected"
                   : null
               }
@@ -31,15 +47,15 @@ const SelectorMoneda: React.FC<SelectorMonedaInterface> = ({
               <img
                 className="imgDex"
                 onClick={() => {
-                  setmonedaActive(listaMonedas[moneda]);
+                  setmonedaActive(dataMonedas["tokens"][addr]);
                   setSelector(false);
-                  console.log(listaMonedas[moneda]);
+                  console.log(dataMonedas["tokens"][addr]);
                 }}
-                src={listaMonedas[moneda].logoURI}
+                src={dataMonedas["tokens"][addr]["logoURI"]}
               />
-              {listaMonedas[moneda].symbol}
+              {dataMonedas["tokens"][addr]["symbol"]}
             </div>
-            {listaMonedas[moneda].symbol == monedaActive.symbol
+            {dataMonedas["tokens"][addr]["symbol"] == monedaActive.symbol
               ? checkedIcon
               : null}
           </div>
