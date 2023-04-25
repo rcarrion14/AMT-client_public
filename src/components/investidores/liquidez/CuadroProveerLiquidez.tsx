@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useRef } from "react";
+
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 
@@ -14,7 +15,55 @@ const CuadroProveerLiquidez = () => {
     (state: typeof RootState) => state.liqAmt.balance
   );
 
-  return <div>CuadroProveerLiquidez</div>;
+  const balanceOfPoolAmt = useSelector(
+    (state: typeof RootState) => state.amt.balanceOfPool
+  );
+
+  const balanceOfPoolBtcb = useSelector(
+    (state: typeof RootState) => state.btcb.balanceOfPool
+  );
+
+  //Gestion de los input
+  const inputAmt = useRef<HTMLInputElement>(null);
+  const inputBtcb = useRef<HTMLInputElement>(null);
+  return (
+    <>
+      <div id="primeraSeccion">
+        <div className="saldo">
+          <p>Saldo: {balanceAmt}</p>
+        </div>
+        <div className="cuadroCompra">
+          <img src="coinAutomining.png" />
+          <div>AMT</div>
+          <input
+            ref={inputAmt}
+            placeholder="0"
+            className="inputCompra"
+            type="number"
+            onChange={() => {}}
+            value={undefined}
+          />
+        </div>
+      </div>
+      <div id="segundaSeccion">
+        <div className="saldo">
+          <p>Saldo: {balanceBtcb}</p>
+        </div>
+        <div className="cuadroCompra">
+          <img src="coinBitcoin.png" alt="" />
+          <div>BTCB</div>
+          <input
+            ref={inputBtcb}
+            placeholder="0"
+            className="inputCompra"
+            type="number"
+            onChange={()=>{}}
+            value={undefined}
+          />
+        </div>
+      </div>
+    </>
+  );
 };
 
 export default CuadroProveerLiquidez;
