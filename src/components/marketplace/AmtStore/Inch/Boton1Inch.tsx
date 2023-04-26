@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { textosExtra } from "../../../../Utils/textos";
 import { ethers } from "ethers";
-
+import { operationExecution } from "../../../../store/features/operationExecution";
 interface Boton1InchProps {
   balanceUsdt: number | undefined;
   balanceErc20: number | undefined;
@@ -25,6 +25,7 @@ const Boton1Inch: React.FC<BotonOperacionProps> = ({
   addr,
 }) => {
   const mensajeBoton = () => {
+    console.log("allowanceERC20: " + allowanceErc20);
     if (allowanceErc20 >= 0) {
       if (allowanceErc20 < parseFloat(input)) {
         return textosExtra.por.aprobar;
@@ -46,9 +47,11 @@ const Boton1Inch: React.FC<BotonOperacionProps> = ({
         onClick={() => {
           if (true) {
             Number(input) > allowanceErc20
-              ? approveErc20(
-                  "0x1111111254eeb25477b68fb85ed929f73a960582",
-                  ethers.utils.parseEther("99999999999")
+              ? operationExecution(
+                  approveErc20(
+                    "0x1111111254eeb25477b68fb85ed929f73a960582",
+                    ethers.utils.parseEther("99999999999")
+                  )
                 )
               : signer.sendTransaction(txData);
           }

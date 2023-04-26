@@ -94,7 +94,7 @@ const CuadroInterfaz1Inch = () => {
     }
 
     fetchData();
-  }, [monedaActive]);
+  }, [monedaActive, inputPagar]);
 
   const dispatch = useDispatch<AppDispatch>();
 
