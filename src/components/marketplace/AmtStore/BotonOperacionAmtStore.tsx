@@ -31,7 +31,7 @@ const BotonOperacionAmtStore: React.FC<BotonOperacionProps> = ({
       onClick={() => {
         if (allowanceUsdt) {
           allowanceUsdt > parseInt(input)
-            ? operacionBuy(dispatch, input)
+            ? operacionAprobar(dispatch) //operacionBuy(dispatch, input)
             : operacionAprobar(dispatch);
         }
       }}
@@ -39,11 +39,13 @@ const BotonOperacionAmtStore: React.FC<BotonOperacionProps> = ({
     >
       {
         //Posible texts of button based on conditions
-        balanceTienda < parseInt(input)
+        //balanceTienda < parseInt(input)
+        false
           ? "No hay tantos amt en venta"
           : balanceUsdt < parseInt(input)
           ? "Balance insuficiente"
-          : parseInt(input) > allowanceUsdt
+          : //parseInt(input) > allowanceUsdt
+          true
           ? "Approve"
           : "buy"
       }

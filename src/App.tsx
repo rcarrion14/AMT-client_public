@@ -1,8 +1,8 @@
 import "./normalize.css";
 import "./styles.css";
+import "react-toastify/dist/ReactToastify.css";
 
-import { useEffect, useState } from "react";
-import reactLogo from "./assets/react.svg";
+import { useState } from "react";
 import Banner from "./components/Generales/Banner";
 import Home from "./components/Home/Home";
 import { Provider } from "react-redux";
@@ -11,6 +11,7 @@ import Investidores from "./components/Investimentos/Investidores";
 import GInvestidores from "./components/gInvestidores/GInvestidores";
 import NavBar from "./components/Generales/NavBar";
 import store from "./store/store";
+import { ToastContainer } from "react-toastify";
 
 import Loader from "./components/Generales/Loader";
 function App() {
@@ -29,6 +30,7 @@ function App() {
           {activePage == "gInvestidores" ? <GInvestidores /> : null}
         </div>
         <NavBar setActivePage={setActivePage} activePage={activePage} />
+        <ToastContainer />
       </Provider>
     </>
   );
