@@ -409,6 +409,7 @@ export interface interfaceTextoExtra {
   bceBtcInsuficiente: string;
   bceUSDTInsuficiente: string;
   bceLiqAmtInsuficiente: string;
+  proveerLiquidez: string;
 }
 
 export const textosExtra = {
@@ -446,6 +447,8 @@ export const textosExtra = {
     bceBtcInsuficiente: "balance BTC insuficiente",
     bceUSDTInsuficiente: "balance USDT insuficiente",
     bceLiqAmtInsuficiente: "balance LiqAmt insuficiente",
+
+    proveerLiquidez: "Dar liquidez",
   },
   esp: {},
   eng: {},

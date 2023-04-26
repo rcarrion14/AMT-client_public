@@ -24,6 +24,13 @@ const CuadroProveerLiquidez = () => {
     (state: typeof RootState) => state.btcb.balanceOfPool
   );
 
+  const allowanceAmt = useSelector(
+    (state: typeof RootState) => state.amt.allowanceMaster
+  );
+
+  const allowanceBtcb = useSelector(
+    (state: typeof RootState) => state.btcb.allowanceMaster
+  );
   const ratioAmtBtcb =
     balanceOfPoolAmt !== undefined && balanceOfPoolBtcb !== undefined
       ? balanceOfPoolAmt / balanceOfPoolBtcb
@@ -37,6 +44,7 @@ const CuadroProveerLiquidez = () => {
   const handleInputAmtValueChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
+    setInputAmtValue(event.target.value);
     setInputBtcbValue(
       (parseFloat(event.target.value) / ratioAmtBtcb).toString()
     );
@@ -46,6 +54,7 @@ const CuadroProveerLiquidez = () => {
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     console.log("recibir change");
+    setInputBtcbValue(event.target.value);
     setInputAmtValue(
       (parseFloat(event.target.value) * ratioAmtBtcb).toString()
     );
@@ -85,7 +94,14 @@ const CuadroProveerLiquidez = () => {
             value={inputBtcbValue}
           />
         </div>
-        <BotonDarLiquidez inputAmt={inputAmt}></BotonDarLiquidez>
+        <BotonDarLiquidez
+          balanceAmt={balanceAmt}
+          balanceBtc={balanceBtcb}
+          inputAmt={parseFloat(inputAmtValue)}
+          inputBtc={parseFloat(inputBtcbValue)}
+          allowanceAmt={allowanceAmt}
+          allowanceBtc={allowanceBtcb}
+        ></BotonDarLiquidez>
       </div>
     </>
   );
