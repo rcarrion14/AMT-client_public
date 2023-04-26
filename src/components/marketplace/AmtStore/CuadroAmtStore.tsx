@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import SelectorMoneda from "../pancake/SelectorMonedaPancake";
+//import SelectorMoneda from "../pancake/SelectorMonedaPancake";
 import { CSSTransition } from "react-transition-group";
 import BotonOperacionAmtStore from "./BotonOperacionAmtStore";
 import { useDispatch, useSelector } from "react-redux";
@@ -41,7 +41,6 @@ const CuadroAmtStore = () => {
   const handleInputPagarChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    console.log("pagar change");
     setInputPagarValue(event.target.value);
     setInputRecibirValue(event.target.value);
   };
@@ -49,7 +48,6 @@ const CuadroAmtStore = () => {
   const handleInputRecibirChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    console.log("recibir change");
     setInputRecibirValue(event.target.value);
     setInputPagarValue(event.target.value);
   };
@@ -127,7 +125,7 @@ const CuadroAmtStore = () => {
           operacionBuy={marketPlaceOperations.buy}
         />
       </div>
-      <CSSTransition
+      {/*       <CSSTransition
         in={selector}
         timeout={700}
         classNames="animacionSelector"
@@ -139,7 +137,7 @@ const CuadroAmtStore = () => {
           dataMonedas={dataMonedas}
           setSelector={setSelector}
         />
-      </CSSTransition>
+      </CSSTransition> */}
     </>
   );
 };

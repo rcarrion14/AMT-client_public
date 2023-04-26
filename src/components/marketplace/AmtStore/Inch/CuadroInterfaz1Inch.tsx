@@ -1,40 +1,51 @@
 import React, { useEffect, useRef, useState } from "react";
-import SelectorMoneda from "./SelectorMonedaPancake";
+import SelectorMoneda1Inch from "./SelectorMoneda1Inch";
 import { CSSTransition } from "react-transition-group";
-import BotonOperacionPancake from "./BotonOperacionPancake";
+import Boton1Inch from "./Boton1Inch";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../../store/store";
+import { AppDispatch, RootState } from "../../../../store/store";
 import { ethers } from "ethers";
-import { listaMonedas } from "../../../Utils/listaMonedas";
-import contractAddresses from "../../../contracts/contractAddresses";
-import abiErc20 from "../../../contracts/abis/genericERC20.json";
-import { useGetQuote, useGetTxData } from "../../../Utils/1inch";
+import { listaMonedas } from "../../../../Utils/listaMonedas";
+import contractAddresses from "../../../../contracts/contractAddresses";
+import abiErc20 from "../../../../contracts/abis/genericERC20.json";
+import {
+  useGetQuote,
+  useGetTokens,
+  useGetTxData,
+} from "../../../../Utils/1inch";
 
-const CuadroPancake = () => {
-  const balanceAmt = useSelector(
-    (state: typeof RootState) => state.amt.balance
+const CuadroInterfaz1Inch = () => {
+  const balanceUsdt = useSelector(
+    (state: typeof RootState) => state.usdt.balance
   );
   const signer = useSelector((state: typeof RootState) => state.wallet.signer);
   const addr = useSelector((state: typeof RootState) => state.wallet.address);
 
   const [selector, setSelector] = useState(false);
-  const [monedaActive, setmonedaActive] = useState(listaMonedas.usdt);
+  const [monedaActive, setmonedaActive] = useState(listaMonedas.btcb);
   const [inputPagarValue, setInputPagarValue] = useState("");
   const [inputRecibirValue, setInputRecibirValue] = useState("");
   const [balanceErc20, setBalanceErc20] = useState(0);
   const [allowanceErc20, setAllowanceErc20] = useState(0);
   const [approveErc20, setApproveErc20] = useState<Function | null>(null);
   const [txData, setTxData] = useState();
+  const [tokenList, setTokenList] = useState({});
 
   const inputPagar = useRef<HTMLInputElement>(null);
   const inputRecibir = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    useGetTokens().then((result) => {
+      setTokenList(result);
+    });
+  }, []);
 
   // Pedir quote:
   useEffect(() => {
     if (inputPagarValue) {
       useGetQuote(
         monedaActive.address,
-        contractAddresses.Amt,
+        contractAddresses.Usdt,
         inputPagarValue
       ).then((response) => {
         setInputRecibirValue(ethers.utils.formatEther(response.toTokenAmount));
@@ -50,7 +61,7 @@ const CuadroPancake = () => {
     ) {
       useGetTxData(
         monedaActive.address,
-        contractAddresses.Amt,
+        contractAddresses.Usdt,
         inputPagarValue,
         addr
       );
@@ -83,7 +94,7 @@ const CuadroPancake = () => {
     }
 
     fetchData();
-  }, []);
+  }, [monedaActive]);
 
   const dispatch = useDispatch<AppDispatch>();
 
@@ -114,6 +125,10 @@ const CuadroPancake = () => {
               setSelector(true);
             }}
             src={monedaActive.logoURI}
+            onError={({ currentTarget }) => {
+              currentTarget.onerror = null;
+              currentTarget.src = "icon_question.png";
+            }}
           />
           <div>{monedaActive.symbol}</div>
           <input
@@ -129,11 +144,11 @@ const CuadroPancake = () => {
       <div id="segundaSeccion">
         <div className="saldo">
           <h2>Vocé recebe</h2>
-          <p>Saldo: {balanceAmt}</p>
+          <p>Saldo: {balanceUsdt}</p>
         </div>
         <div className="cuadroCompra">
-          <img src="coinAutomining.png" alt="" />
-          <div>AMT</div>
+          <img src="coinT.png" alt="" />
+          <div>USDT</div>
           <input
             ref={inputRecibir}
             placeholder="0"
@@ -155,8 +170,8 @@ const CuadroPancake = () => {
         </div>
       </div>
       <div>
-        <BotonOperacionPancake
-          balanceAmt={balanceAmt}
+        <Boton1Inch
+          balanceUsdt={balanceUsdt}
           balanceErc20={balanceErc20}
           allowanceErc20={allowanceErc20}
           txData={txData}
@@ -172,14 +187,15 @@ const CuadroPancake = () => {
         classNames="animacionSelector"
         unmountOnExit
       >
-        <SelectorMoneda
+        <SelectorMoneda1Inch
           setmonedaActive={setmonedaActive}
           monedaActive={monedaActive}
           setSelector={setSelector}
+          tokenList={tokenList}
         />
       </CSSTransition>
     </>
   );
 };
 
-export default CuadroPancake;
+export default CuadroInterfaz1Inch;

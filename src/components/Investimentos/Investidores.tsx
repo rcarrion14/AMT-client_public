@@ -13,7 +13,6 @@ import {
 } from "../../Utils/textos";
 
 const Investidores = () => {
-  const nodeRef = useRef(null);
   interface jsxPagesInterface {
     [key: string]: ReactElement<any, any>;
   }
@@ -37,7 +36,6 @@ const Investidores = () => {
   const listaDePaginas = pages.map((pagina) => {
     return (
       <CSSTransition
-        nodeRef={nodeRef}
         key={"transition" + pagina}
         in={activePage == pagina}
         timeout={800}

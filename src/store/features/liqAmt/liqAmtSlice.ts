@@ -291,7 +291,6 @@ const liqAmtSlice = createSlice({
         state.totalSupplyAt5 = action.payload?.totalSupplyAt5;
       })
       .addCase(getBalanceOfAt.fulfilled, (state, action) => {
-        console.log(action.payload);
         state.balanceOfAt1 = action.payload?.balanceOfAt1;
         state.balanceOfAt2 = action.payload?.balanceOfAt2;
         state.balanceOfAt3 = action.payload?.balanceOfAt3;

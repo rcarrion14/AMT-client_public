@@ -21,7 +21,6 @@ declare var window: any;
 export const connectWallet = createAsyncThunk(
   "wallet/connectWallet",
   async () => {
-    console.log("trying to connect");
     const provider: ethers.providers.Web3Provider = await window.ethereum
       .request({ method: "eth_requestAccounts" })
       .then(() => {

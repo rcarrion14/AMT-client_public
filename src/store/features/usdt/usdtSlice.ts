@@ -47,7 +47,7 @@ export const getBalance = createAsyncThunk("usdt/getBalance", async () => {
   const address = staticState.wallet.address;
   if (contract) {
     const newBalance = formatter(await contract.balanceOf(address));
-    console.log(newBalance);
+
     return { newBalance };
   } else return null;
 });

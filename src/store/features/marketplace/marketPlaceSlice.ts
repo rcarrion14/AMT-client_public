@@ -40,7 +40,6 @@ export const getAmtEnVenta = createAsyncThunk(
     const contract = staticState.amt.contract;
     const address = contractAddresses.Camboriu;
     if (contract) {
-      console.log("Getting amtEnVenta");
       const newBalance = formatter(await contract.balanceOf(address));
       return { newBalance };
     } else return null;

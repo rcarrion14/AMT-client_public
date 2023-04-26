@@ -33,7 +33,6 @@ const SelectorMoneda: React.FC<SelectorMonedaInterface> = ({
                 onClick={() => {
                   setmonedaActive(listaMonedas[moneda]);
                   setSelector(false);
-                  console.log(listaMonedas[moneda]);
                 }}
                 src={listaMonedas[moneda].logoURI}
               />

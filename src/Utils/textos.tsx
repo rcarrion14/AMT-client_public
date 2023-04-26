@@ -368,6 +368,25 @@ export const textoStakingAmt = (idioma: string) => {
   }
 };
 
+export const textoInterfaz1Inch = (idioma: string) => {
+  if (idioma == "por") {
+    return (
+      <>
+        <h1>Interfaz 1 inch</h1>
+        <p>Primer parrafo</p>
+        <p>Mas texto en el segundo</p>
+        <p>Y llegamos al tercero nomás!</p>
+      </>
+    );
+  }
+
+  if (idioma == "esp") {
+  }
+
+  if (idioma == "eng") {
+  }
+};
+
 /******************/
 /******************/
 

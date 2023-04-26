@@ -18,8 +18,6 @@ const BotonOperacion: React.FC<BotonOperacionProps> = ({
   operacionAprobar,
   operacionStake,
 }) => {
-  console.log("REND");
-
   const mesajeBoton = () => {
     if (allowance) {
       if (allowance < parseFloat(input)) {

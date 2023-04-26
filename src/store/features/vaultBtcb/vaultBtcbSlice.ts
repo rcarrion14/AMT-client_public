@@ -52,8 +52,6 @@ export const getBalanceUserAmt = createAsyncThunk(
     const contract = getStaticState().vaultBtcb.contract;
     const address = getStaticState().wallet.address;
     if (contract) {
-      console.log(contract);
-
       const newBalance = formatter(await contract.addressAmt(address));
       return { newBalance };
     }
