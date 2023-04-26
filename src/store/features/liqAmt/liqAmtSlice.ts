@@ -66,7 +66,7 @@ export const getBalance = createAsyncThunk("liqAmt/getBalance", async () => {
   const address = staticState.wallet.address;
   if (contract) {
     const newBalance = formatter(await contract.balanceOf(address));
-    console.log(newBalance);
+
     return { newBalance };
   } else return undefined;
 });
@@ -268,7 +268,6 @@ const liqAmtSlice = createSlice({
         state.totalSupplyAt5 = action.payload?.totalSupplyAt5;
       })
       .addCase(getBalanceOfAt.fulfilled, (state, action) => {
-        console.log(action.payload);
         state.balanceOfAt1 = action.payload?.balanceOfAt1;
         state.balanceOfAt2 = action.payload?.balanceOfAt2;
         state.balanceOfAt3 = action.payload?.balanceOfAt3;

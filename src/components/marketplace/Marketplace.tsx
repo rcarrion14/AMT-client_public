@@ -12,7 +12,6 @@ interface MarketplaceInterface {
 }
 
 const Marketplace: React.FC<MarketplaceInterface> = () => {
-  const nodeRef = useRef(null);
   const pages: string[] = ["store", "pancake", "quema", "pix"];
   const [activePage, setActivePage] = useState("marketplace");
 
@@ -29,7 +28,6 @@ const Marketplace: React.FC<MarketplaceInterface> = () => {
   const listaDePaginas = pages.map((pagina) => {
     return (
       <CSSTransition
-        nodeRef={nodeRef}
         key={"transition" + pagina}
         in={activePage == pagina}
         timeout={800}

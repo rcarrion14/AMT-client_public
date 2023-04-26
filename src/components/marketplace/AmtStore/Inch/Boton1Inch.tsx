@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { AppDispatch } from "../../../store/store";
+import { AppDispatch } from "../../../../store/store";
 import { useDispatch, useSelector } from "react-redux";
 
-import { textosExtra } from "../../../Utils/textos";
+import { textosExtra } from "../../../../Utils/textos";
 import { ethers } from "ethers";
 
-interface BotonOperacionProps {
-  balanceAmt: number | undefined;
+interface Boton1InchProps {
+  balanceUsdt: number | undefined;
   balanceErc20: number | undefined;
   allowanceErc20: number | undefined;
   txData: string;
@@ -14,8 +14,8 @@ interface BotonOperacionProps {
   signer: any;
   approveErc20: any;
 }
-const BotonOperacion: React.FC<BotonOperacionProps> = ({
-  balanceAmt,
+const Boton1Inch: React.FC<BotonOperacionProps> = ({
+  balanceUsdt,
   balanceErc20,
   allowanceErc20,
   txData,
@@ -61,4 +61,4 @@ const BotonOperacion: React.FC<BotonOperacionProps> = ({
   );
 };
 
-export default BotonOperacion;
+export default Boton1Inch;

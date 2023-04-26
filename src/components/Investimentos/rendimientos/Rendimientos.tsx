@@ -30,10 +30,8 @@ const Rendimientos: React.FC<RendimientosInterface> = ({ setActivePage }) => {
   };
 
   const listaDePaginas = pages.map((pagina) => {
-    const nodeRef = useRef(null);
     return (
       <CSSTransition
-        nodeRef={nodeRef}
         key={"transition" + pagina}
         in={activePageRendimientos == pagina}
         timeout={670}

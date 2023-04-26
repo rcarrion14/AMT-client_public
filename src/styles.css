@@ -420,3 +420,7 @@ iconos: #9C9EA1
   transition: transform 700ms linear;
 }
 /**********************/
+
+.inputBusqueda {
+  width: 40vw;
+}

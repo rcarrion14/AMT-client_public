@@ -29,7 +29,6 @@ const BotonOperacionAmtStore: React.FC<BotonOperacionProps> = ({
       }
       // onClick operations based on conditions
       onClick={() => {
-        console.log(allowanceUsdt);
         if (allowanceUsdt) {
           allowanceUsdt > parseInt(input)
             ? operacionBuy(dispatch, input)
