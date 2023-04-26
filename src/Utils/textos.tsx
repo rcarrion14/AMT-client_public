@@ -437,11 +437,12 @@ export const textosExtra = {
     distribucion: "Distribucion:",
 
     sepaMas: "Saiba maís",
+
     //Añadidos pero para ver si iria aca
-    aprobarBTCB: "Approve BTCB",
-    aprobarUSDT: "Approve USDT",
-    aprobarAMT: "Approve AMT",
-    aprobarLiqAmt: "Approve LiqAmt",
+    aprobarBTCB: "Aprobar BTCB",
+    aprobarUSDT: "Aprobar USDT",
+    aprobarAMT: "Aprobar AMT",
+    aprobarLiqAmt: "Aprobar LiqAmt",
 
     bceAmtInsuficiente: "balance AMT insuficiente",
     bceBtcInsuficiente: "balance BTC insuficiente",

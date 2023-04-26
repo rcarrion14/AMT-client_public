@@ -35,6 +35,7 @@ const CuadroProveerLiquidez = () => {
   const allowanceBtcb = useSelector(
     (state: typeof RootState) => state.btcb.allowanceMaster
   );
+
   const ratioAmtBtcb =
     balanceOfPoolAmt !== undefined && balanceOfPoolBtcb !== undefined
       ? balanceOfPoolAmt / balanceOfPoolBtcb
