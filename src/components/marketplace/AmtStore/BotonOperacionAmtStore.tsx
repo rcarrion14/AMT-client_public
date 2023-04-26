@@ -24,7 +24,7 @@ const BotonOperacionAmtStore: React.FC<BotonOperacionProps> = ({
     <button
       //Disabling the button conditions
       disabled={
-        parseInt(format(balanceTienda)) < parseInt(input) ||
+        parseInt(balanceTienda) < parseInt(input) ||
         balanceUsdt < parseInt(input) ||
         input == ""
       }
