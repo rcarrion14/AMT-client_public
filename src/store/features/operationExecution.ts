@@ -11,13 +11,24 @@ export async function operationExecution(operation: Promise<any>) {
       },
     }
   );
-  return operation.then((execution) => {
-    toast.dismiss(initialiceTransaction);
-    const transactionInProgress = toast.loading("transaccion en proceso...");
-    return execution.wait().then(() => {
-      toast.dismiss(transactionInProgress);
-      toast.success("operacion finalizada");
-      return true;
+  return operation
+    .then((execution) => {
+      toast.dismiss(initialiceTransaction);
+      const transactionInProgress = toast.loading("transaccion en proceso...");
+      return execution
+        .wait()
+        .then(() => {
+          toast.dismiss(transactionInProgress);
+          toast.success("operacion finalizada");
+          return true;
+        })
+        .catch(() => {
+          toast.dismiss(transactionInProgress);
+          toast.error(`Transaction failed`);
+        });
+    })
+    .catch((error) => {
+      toast.dismiss(initialiceTransaction);
+      toast.error(`Error: ${error.message}`);
     });
-  });
 }
