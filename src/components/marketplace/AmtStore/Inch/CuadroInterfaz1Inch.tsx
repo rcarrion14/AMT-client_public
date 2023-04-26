@@ -64,7 +64,9 @@ const CuadroInterfaz1Inch = () => {
         contractAddresses.Usdt,
         inputPagarValue,
         addr
-      );
+      ).then((result) => {
+        setTxData(result);
+      });
     }
   }, [inputPagarValue]);
 
@@ -94,7 +96,7 @@ const CuadroInterfaz1Inch = () => {
     }
 
     fetchData();
-  }, [monedaActive, inputPagar]);
+  }, [monedaActive, inputPagarValue]);
 
   const dispatch = useDispatch<AppDispatch>();
 
