@@ -8,16 +8,20 @@ import { formatter } from "../formatter";
 export interface usdtState {
   contract: any | undefined;
   balance: number | undefined;
+  totalSupply: number | undefined;
+
   allowanceMarketVault: number | undefined;
   allowanceVaultAmt: number | undefined;
   allowanceVaultBtcb: number | undefined;
   allowanceVaultBtcbLiq: number | undefined;
   allowanceMaster: number | undefined;
+
   balanceOfAt1: number | undefined;
   balanceOfAt2: number | undefined;
   balanceOfAt3: number | undefined;
   balanceOfAt4: number | undefined;
   balanceOfAt5: number | undefined;
+
   totalSupplyAt1: number | undefined;
   totalSupplyAt2: number | undefined;
   totalSupplyAt3: number | undefined;
@@ -28,6 +32,7 @@ export interface usdtState {
 const initialState: usdtState = {
   contract: undefined,
   balance: undefined,
+  totalSupply: undefined,
   allowanceMarketVault: undefined,
   allowanceVaultAmt: undefined,
   allowanceVaultBtcb: undefined,
@@ -66,10 +71,22 @@ export const getBalance = createAsyncThunk("liqAmt/getBalance", async () => {
   const address = staticState.wallet.address;
   if (contract) {
     const newBalance = formatter(await contract.balanceOf(address));
-    console.log(newBalance);
     return { newBalance };
   } else return undefined;
 });
+
+export const getTotalSupply = createAsyncThunk(
+  "liqAmt/getTotalSupply",
+  async () => {
+    const staticState = getStaticState();
+    const contract = staticState.liqAmt.contract;
+    const address = staticState.wallet.address;
+    if (contract) {
+      const newTotalSupply = formatter(await contract.totalSupply());
+      return { newTotalSupply };
+    } else return undefined;
+  }
+);
 
 export const getAllowanceMarketVault = createAsyncThunk(
   "liqAmt/getAllowanceMarketVault",
@@ -260,6 +277,12 @@ const liqAmtSlice = createSlice({
       .addCase(getAllowanceMaster.pending, (state) => {
         state.allowanceMaster = undefined;
       })
+      .addCase(getTotalSupply.fulfilled, (state, action) => {
+        state.totalSupply = action.payload?.newTotalSupply;
+      })
+      .addCase(getTotalSupply.pending, (state) => {
+        state.totalSupply = undefined;
+      })
       .addCase(getTotalSupplyAt.fulfilled, (state, action) => {
         state.totalSupplyAt1 = action.payload?.totalSupplyAt1;
         state.totalSupplyAt2 = action.payload?.totalSupplyAt2;
@@ -286,6 +309,7 @@ const generalLoadLiqAmt = (dispatch: AppDispatch) => {
   dispatch(getAllowanceVaultAmt());
   dispatch(getAllowanceVaultBtcb());
   dispatch(getAllowanceVaultBtcbLiq());
+  dispatch(getTotalSupply());
 };
 
 const loadTotalSupplyAt = (dispatch: AppDispatch, maxSnapshot: number) => {

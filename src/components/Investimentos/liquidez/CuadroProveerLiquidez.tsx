@@ -16,6 +16,10 @@ const CuadroProveerLiquidez = () => {
     (state: typeof RootState) => state.liqAmt.balance
   );
 
+  const totalSupplyLiqAmt = useSelector(
+    (state: typeof RootState) => state.liqAmt.totalSupply
+  );
+
   const balanceOfPoolAmt = useSelector(
     (state: typeof RootState) => state.amt.balanceOfPool
   );

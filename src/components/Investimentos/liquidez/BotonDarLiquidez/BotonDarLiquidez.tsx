@@ -1,6 +1,11 @@
 import React from "react";
 import "./BotonDarLiquidez.css";
 import { textosExtra, interfaceTextoExtra } from "../../../../Utils/textos";
+import { amtOperations } from "../../../../store/features/amt/amtOperations";
+import { btcbOperations } from "../../../../store/features/btcb/btcbOperations";
+import { masterOperations } from "../../../../store/features/master/masterOperations";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../../../store/store";
 interface BotonDarLiquidezProps {
   balanceAmt: number;
   balanceBtc: number;
@@ -18,6 +23,7 @@ const BotonDarLiquidez: React.FC<BotonDarLiquidezProps> = ({
   inputBtc,
 }) => {
   const lenguaje = "por"; // Pensar cambio dinamico
+  const dispatch = useDispatch<AppDispatch>();
 
   const textos: interfaceTextoExtra = textosExtra[lenguaje];
   const noPuedeProveerLiquidez =
@@ -34,8 +40,9 @@ const BotonDarLiquidez: React.FC<BotonDarLiquidezProps> = ({
             <button
               className="double-button-left"
               onClick={() => {
-                console.log("click1");
+                amtOperations.approveMaster(dispatch);
               }}
+              disabled={inputAmt > balanceAmt && allowanceAmt >= inputAmt}
             >
               {allowanceAmt < inputAmt
                 ? textos.aprobarAMT
@@ -45,8 +52,9 @@ const BotonDarLiquidez: React.FC<BotonDarLiquidezProps> = ({
             </button>
             <button
               className="double-button-right"
+              disabled={inputBtc > balanceBtc && allowanceBtc >= inputBtc}
               onClick={() => {
-                console.log("click2");
+                btcbOperations.approveMaster(dispatch);
               }}
             >
               {allowanceBtc < inputBtc
@@ -58,7 +66,15 @@ const BotonDarLiquidez: React.FC<BotonDarLiquidezProps> = ({
           </div>
         ) : (
           //Caso puede proveer liquidez
-          <button className="btnLarge">{textos.proveerLiquidez}</button>
+          <button
+            className="btnLarge"
+            disabled={Number.isNaN(inputAmt) || Number.isNaN(inputBtc)}
+            onClick={() => {
+              masterOperations.addLiquidity(dispatch, inputAmt, inputBtc);
+            }}
+          >
+            {textos.proveerLiquidez}
+          </button>
         )
       }
     </>
