@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
@@ -24,9 +24,32 @@ const CuadroProveerLiquidez = () => {
     (state: typeof RootState) => state.btcb.balanceOfPool
   );
 
+  const ratioAmtBtcb =
+    balanceOfPoolAmt !== undefined && balanceOfPoolBtcb !== undefined
+      ? balanceOfPoolAmt / balanceOfPoolBtcb
+      : undefined;
+
   //Gestion de los input
   const inputAmt = useRef<HTMLInputElement>(null);
   const inputBtcb = useRef<HTMLInputElement>(null);
+  const [inputAmtValue, setInputAmtValue] = useState("");
+  const [inputBtcbValue, setInputBtcbValue] = useState("");
+  const handleInputAmtValueChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setInputBtcbValue(
+      (parseFloat(event.target.value) / ratioAmtBtcb).toString()
+    );
+  };
+
+  const handleInputBtcbValueChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    console.log("recibir change");
+    setInputAmtValue(
+      (parseFloat(event.target.value) * ratioAmtBtcb).toString()
+    );
+  };
   return (
     <>
       <div id="primeraSeccion">
@@ -41,8 +64,8 @@ const CuadroProveerLiquidez = () => {
             placeholder="0"
             className="inputCompra"
             type="number"
-            onChange={() => {}}
-            value={undefined}
+            onChange={handleInputAmtValueChange}
+            value={inputAmtValue}
           />
         </div>
       </div>
@@ -58,8 +81,8 @@ const CuadroProveerLiquidez = () => {
             placeholder="0"
             className="inputCompra"
             type="number"
-            onChange={() => {}}
-            value={undefined}
+            onChange={handleInputBtcbValueChange}
+            value={inputBtcbValue}
           />
         </div>
         <BotonDarLiquidez inputAmt={inputAmt}></BotonDarLiquidez>
