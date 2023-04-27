@@ -7,6 +7,7 @@ import { masterLoaders } from "../../store/features/master/masterSlice";
 import { useState } from "react";
 import { masterOperations } from "../../store/features/master/masterOperations";
 import { textoStaking } from "../../Utils/textos";
+import Pagination from "./paginationComponent/pagination";
 
 const GInvestidores = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -160,28 +161,23 @@ const GInvestidores = () => {
             : console.log("notloaded");
         }}
       />
-
-      {/* Arrow button */}
-      <button
-        disabled={readingSnapshot + 5 > currentSnapshot}
-        onClick={() => {
-          setReadingSnapshot(readingSnapshot + 5);
-          amtLoaders.loaderWithSnapshots(dispatch, readingSnapshot + 5);
-          masterLoaders.generalLoad(dispatch, readingSnapshot + 5);
-        }}
-      >
-        {"<="}{" "}
-      </button>
-      <button
-        disabled={readingSnapshot - 5 < 0}
-        onClick={() => {
-          setReadingSnapshot(readingSnapshot - 5);
-          amtLoaders.loaderWithSnapshots(dispatch, readingSnapshot - 5);
-          masterLoaders.generalLoad(dispatch, readingSnapshot - 5);
-        }}
-      >
-        {"=>"}{" "}
-      </button>
+      <div>
+        <Pagination
+          itemsPerPage={5}
+          totalItems={currentSnapshot}
+          paginate={(pageNumber: number) => {
+            setReadingSnapshot(currentSnapshot - 5 * (pageNumber - 1));
+            amtLoaders.loaderWithSnapshots(
+              dispatch,
+              currentSnapshot - 5 * (pageNumber - 1)
+            );
+            masterLoaders.generalLoad(
+              dispatch,
+              currentSnapshot - 5 * (pageNumber - 1)
+            );
+          }}
+        ></Pagination>
+      </div>
     </>
   );
 };
