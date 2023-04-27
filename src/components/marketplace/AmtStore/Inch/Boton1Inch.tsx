@@ -45,8 +45,6 @@ const Boton1Inch: React.FC<BotonOperacionProps> = ({
     <>
       <button
         onClick={() => {
-          console.log(txData);
-
           if (true) {
             Number(input) > allowanceErc20
               ? operationExecution(
