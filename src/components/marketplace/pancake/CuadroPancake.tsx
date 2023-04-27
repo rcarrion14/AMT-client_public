@@ -53,7 +53,9 @@ const CuadroPancake = () => {
         contractAddresses.Amt,
         inputPagarValue,
         addr
-      );
+      ).then((result) => {
+        setTxData(result);
+      });
     }
   }, [inputPagarValue]);
 

@@ -64,7 +64,9 @@ const CuadroInterfaz1Inch = () => {
         contractAddresses.Usdt,
         inputPagarValue,
         addr
-      );
+      ).then((result) => {
+        setTxData(result);
+      });
     }
   }, [inputPagarValue]);
 
