@@ -4,12 +4,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { ethers } from "ethers";
 import { textosExtra } from "../../Utils/textos";
 
+//CUANDO TERMINA LA OPERACION NO CAMBIA AMT DEPOSITADOS
+
 interface BotonOperacionProps {
+  stackedByUser: number | undefined;
   balanceUserAmt: number | undefined;
   allowance: number | undefined;
   operacionAprobar: Function;
   operacionStake: Function;
   input: string;
+  operacionWithdrawl: Function;
 }
 const BotonOperacion: React.FC<BotonOperacionProps> = ({
   balanceUserAmt,
@@ -17,6 +21,8 @@ const BotonOperacion: React.FC<BotonOperacionProps> = ({
   input,
   operacionAprobar,
   operacionStake,
+  operacionWithdrawl,
+  stackedByUser,
 }) => {
   const mesajeBoton = () => {
     if (allowance) {
@@ -35,18 +41,33 @@ const BotonOperacion: React.FC<BotonOperacionProps> = ({
 
   const dispatch = useDispatch<AppDispatch>();
   return (
-    <button
-      onClick={() => {
-        if (allowance) {
-          allowance > parseFloat(input)
-            ? operacionStake(dispatch, input)
-            : operacionAprobar(dispatch);
-        }
-      }}
-      className="btnLarge"
-    >
-      {mesajeBoton()}
-    </button>
+    <>
+      <div className="doubleButtonContainer">
+        <button
+          className={stackedByUser > 0 ? null : "gris"}
+          onClick={() => {
+            console.log(operacionWithdrawl);
+
+            operacionWithdrawl();
+          }}
+        >
+          Sacar tokens
+        </button>
+        <button
+          className={stackedByUser > 0 ? "gris" : null}
+          onClick={() => {
+            if (allowance) {
+              let monto = ethers.utils.parseEther(input);
+              allowance > parseFloat(input)
+                ? operacionStake(dispatch, monto)
+                : operacionAprobar(dispatch);
+            }
+          }}
+        >
+          {mesajeBoton()}
+        </button>
+      </div>
+    </>
   );
 };
 

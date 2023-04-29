@@ -229,7 +229,7 @@ export const textoStaking = (idioma: string) => {
           você deposita.
         </p>
         <p>
-          Você pode simular seus recebimentos<u>clicando aquí</u>
+          Você pode simular seus recebimentos <u>clicando aquí.</u>
         </p>
       </>
     );
@@ -239,6 +239,28 @@ export const textoStaking = (idioma: string) => {
   }
 
   if (idioma == "eng") {
+  }
+};
+
+export const textoAtencionStaking = (idioma: string) => {
+  {
+    if (idioma == "por") {
+      return (
+        <>
+          <b>
+            <p>
+              ATENÇÃO: se deseja depositar mais tokens em staking, é preciso
+              sacar seus AMT que já estão depositados, para depois fazer um novo
+              depósito na quantia que desejar.
+            </p>
+            <p>
+              Caso o seu interesse seja em aumentar a sua posição em AMT
+              constantemente, conheça o <u>Staking de Recompra.</u>
+            </p>
+          </b>
+        </>
+      );
+    }
   }
 };
 

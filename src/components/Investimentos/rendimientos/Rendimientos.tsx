@@ -34,8 +34,8 @@ const Rendimientos: React.FC<RendimientosInterface> = ({ setActivePage }) => {
       <CSSTransition
         key={"transition" + pagina}
         in={activePageRendimientos == pagina}
-        timeout={670}
-        classNames="market"
+        timeout={800}
+        classNames="slideIzquierda"
         unmountOnExit
       >
         {jsxPages[pagina]}

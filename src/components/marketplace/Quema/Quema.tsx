@@ -1,5 +1,5 @@
 import React from "react";
-import CuadroBimoneda from "../AmtStore/CuadroAmtStore";
+import CuadroQuema from "./CuadroQuema";
 import { textoQuema } from "../../../Utils/textos";
 
 const Quema = ({ setActivePage }) => {
@@ -12,7 +12,7 @@ const Quema = ({ setActivePage }) => {
       <div className="container">
         {textoQuema("por")}
         <button className="btnLarge">Estatisticas</button>
-        <CuadroBimoneda />
+        <CuadroQuema />
       </div>
     </div>
   );

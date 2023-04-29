@@ -329,6 +329,7 @@ iconos: #9C9EA1
 }
 
 .cuadroCobro {
+  height: 78px;
   display: flex;
   background-color: white;
   align-items: center;
@@ -423,4 +424,78 @@ iconos: #9C9EA1
 
 .inputBusqueda {
   width: 40vw;
+}
+
+.doubleButtonContainer {
+  display: flex;
+}
+
+.gris {
+  background-color: #a7a7a7;
+}
+
+.rendimientosStakingContainer {
+  margin-top: 25px;
+}
+
+.investimentoActual {
+  font-size: 0.9rem;
+  display: flex;
+  justify-content: space-around;
+}
+
+.investimentoActual > div {
+  background-color: #d9d9d9;
+  padding: 8px;
+  text-align: center;
+  margin-top: 11px;
+}
+
+.investimentoActual > div > div:first-child {
+  font-weight: bold;
+}
+
+.containerPasos {
+  display: flex;
+  justify-content: center;
+}
+
+.pasos {
+  width: 25px;
+}
+
+.inactiveIcon {
+  filter: invert(80%) sepia(8%) saturate(20%) hue-rotate(342deg) brightness(82%)
+    contrast(92%);
+  background: center;
+}
+
+.cuadroGanaciasStaking {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 0.8rem;
+}
+
+.cuadroGanaciasStaking > div:first-child {
+  font-weight: bold;
+}
+
+.cuadroGanaciasStaking > div:nth-child(2) {
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+.celeste {
+  background-color: #98e8f5;
+  border-radius: 11px;
+  padding: 5px 8px 5px 8px;
+  min-width: 90%;
+}
+
+.cuadroGanaciasStaking > div:nth-child(3) {
+  font-weight: bold;
+  min-width: auto;
 }
