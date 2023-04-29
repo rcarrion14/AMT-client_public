@@ -26,6 +26,7 @@ const StakingAmt: React.FC<StakingAmtInterface> = ({ setActivePage }) => {
   const aprobarVault = amtOperations.approveVaultAmt;
 
   const stake = vaultAmtOperations.stake;
+  const operacionWithdrawl = vaultAmtOperations.withdrawl;
 
   return (
     <div className="containerSlide">
@@ -35,6 +36,7 @@ const StakingAmt: React.FC<StakingAmtInterface> = ({ setActivePage }) => {
       </div>
       {textoStakingAmt("por")}
       <CuadroStaking
+        operacionWithdrawl={operacionWithdrawl}
         balanceUserAmt={balanceAmt}
         stackedByUser={stackedByUser}
         btcACobrar={undefined}

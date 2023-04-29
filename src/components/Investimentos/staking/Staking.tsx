@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import CuadroStaking from "../CuadroStaking";
 import { textoStaking, textoInfoAllowance } from "../../../Utils/textos";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,11 +6,16 @@ import { AppDispatch, RootState } from "../../../store/store";
 import { amtOperations } from "../../../store/features/amt/amtOperations";
 import { vaultBtcbOperations } from "../../../store/features/vaultBtcb/vaultBtcbOperations";
 
+import Historico from "./Historico";
+import { CSSTransition } from "react-transition-group";
+
 interface AmtStaking {
   setActivePage: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const Staking: React.FC<AmtStaking> = ({ setActivePage }) => {
+  const [historico, setHistorico] = useState(false);
+
   const dispatch = useDispatch<AppDispatch>();
   const balanceAmt = useSelector(
     (state: typeof RootState) => state.amt.balance
@@ -27,28 +32,57 @@ const Staking: React.FC<AmtStaking> = ({ setActivePage }) => {
   const aprobarVault = amtOperations.approveVaultBtcb;
 
   const stake = vaultBtcbOperations.stake;
+  const operacionWithdrawl = vaultBtcbOperations.withdrawl;
 
   const infoAllowance = textoInfoAllowance("por");
   return (
-    <div className="containerSlide">
-      <div className="navBar_top">
-        <img onClick={() => setActivePage("")} src="icon_nav.png" />
-        <h1>Investimentos</h1>
+    <>
+      <div className="containerSlide">
+        <div className="navBar_top">
+          <img onClick={() => setActivePage("")} src="icon_nav.png" />
+          <h1>Investimentos</h1>
+        </div>
+
+        {textoStaking("por")}
+
+        <CuadroStaking
+          operacionWithdrawl={operacionWithdrawl}
+          balanceUserAmt={balanceAmt}
+          stackedByUser={stackedByUser}
+          btcACobrar={btcACobrar}
+          allowance={allowance}
+          operacionAprobar={aprobarVault}
+          operacionStake={stake}
+        />
+
+        <div className="doubleButtonContainer">
+          <button
+            onClick={() => {
+              setHistorico(true);
+            }}
+            className="btnTransp"
+          >
+            Consultar historico
+          </button>
+          <button
+            onClick={() => {
+              operacionWithdrawl(dispatch);
+            }}
+            className=""
+          >
+            Sacar
+          </button>
+        </div>
       </div>
-
-      {textoStaking("por")}
-
-      <CuadroStaking
-        balanceUserAmt={balanceAmt}
-        stackedByUser={stackedByUser}
-        btcACobrar={btcACobrar}
-        allowance={allowance}
-        operacionAprobar={aprobarVault}
-        operacionStake={stake}
-      />
-
-      <button className="btnTransp"> Consultar historico</button>
-    </div>
+      <CSSTransition
+        in={historico == true}
+        timeout={800}
+        classNames="slideIzquierda"
+        unmountOnExit
+      >
+        <Historico setHistorico={setHistorico} />
+      </CSSTransition>
+    </>
   );
 };
 

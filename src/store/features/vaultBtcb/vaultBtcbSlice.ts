@@ -73,6 +73,7 @@ export const getBalanceUserBtcb = createAsyncThunk(
         : (newBalance = formatter(
             await contract.btcToWithdrawl(address, shares)
           ));
+
       return { newBalance };
     }
   }

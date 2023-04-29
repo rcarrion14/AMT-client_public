@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import BotonOperacionStaking from "./BotonOperacionStaking";
-import { textosExtra } from "../../Utils/textos";
+import { textoAtencionStaking, textosExtra } from "../../Utils/textos";
 
 interface BotonOperacionProps {
   balanceUserAmt: number | undefined;
@@ -9,6 +9,7 @@ interface BotonOperacionProps {
   allowance: number | undefined;
   operacionAprobar: Function;
   operacionStake: Function;
+  operacionWithdrawl: Function;
 }
 
 const CuadroStaking: React.FC<BotonOperacionProps> = ({
@@ -18,6 +19,7 @@ const CuadroStaking: React.FC<BotonOperacionProps> = ({
   allowance,
   operacionAprobar,
   operacionStake,
+  operacionWithdrawl,
 }) => {
   const inputStake = useRef<HTMLInputElement>(null);
 
@@ -36,7 +38,7 @@ const CuadroStaking: React.FC<BotonOperacionProps> = ({
         </div>
         <div className="cuadroCompra">
           <img src="coinAutomining.png" />
-          <div>USDT</div>
+          <div>AMT</div>
           <input
             ref={inputStake}
             placeholder="0"
@@ -49,26 +51,83 @@ const CuadroStaking: React.FC<BotonOperacionProps> = ({
         </div>
       </div>
 
-      <div className="containerSaldos">
-        <div>
-          <h2>{textosExtra.por.amtDepositados}</h2>
-          <div>{stackedByUser?.toString()}</div>
-        </div>
-        <div>
-          <h2>{textosExtra.por.precioAmt}</h2>
-          <div>1AMT = 0.10 USDT</div>
-        </div>
-      </div>
+      {btcACobrar == undefined ? null : textoAtencionStaking("por")}
 
       <BotonOperacionStaking
+        stackedByUser={stackedByUser}
+        operacionWithdrawl={operacionWithdrawl}
         balanceUserAmt={balanceUserAmt}
         allowance={allowance}
         operacionAprobar={operacionAprobar}
         operacionStake={operacionStake}
         input={inputStakeValue}
       />
+      <div className="containerPasos">
+        <img
+          src="number-one.png"
+          alt=""
+          className={
+            stackedByUser > 0 ? "activeIcon pasos" : "inactiveIcon pasos"
+          }
+        />
+        <img src="right-arrow.png" alt="" className="inactiveIcon pasos" />
+        <img
+          src="number-two.png"
+          alt=""
+          className={
+            stackedByUser > 0 ? "inactiveIcon pasos" : "activeIcon pasos"
+          }
+        />
+      </div>
+
+      <div className="rendimientosStakingContainer">
+        Meu investimento atual:
+        <div className="investimentoActual">
+          <div>
+            <div>{btcACobrar >= 0 ? "BTCB acumulados" : "AMT generados"}</div>
+            <div>{btcACobrar}</div>
+          </div>
+          <div>
+            <div>AMT depositados</div>
+            <div>{stackedByUser}</div>
+          </div>
+        </div>
+      </div>
     </>
   );
 };
 
 export default CuadroStaking;
+
+/*
+
+endpoint = "https://api.bscscan.com/api"
+
+blocks = "?module=logs&action=getLogs&fromBlock=4993830&toBlock=27745094"
+
+addr = "&address=" + "0x6Ae0A238a6f51Df8eEe084B1756A54dD8a8E85d3" 
+
+topic0 = "&topic0" + "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef"
+
+topic2 = "&topic2" + "0x00000000000000000000000084a8cd271cf9ba2119027791d342fc47a125c2d6"
+
+api = "&apikey=" + "JW3HDZAW5Q2WUYKSU8WITXPHE9NFQC48ME"
+
+//https://api.bscscan.com/api
+?module=logs
+&action=getLogs
+&fromBlock=4993830
+&toBlock=27745094
+
+&address=0xe561479bebee0e606c19bb1973fc4761613e3c42
+&topic0=0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef
+&topic0_1_opr=and
+&topic1=0x000000000000000000000000730e2065b9daee84c3003c05bf6d2b3a08e55667
+&apikey=YourApiKeyToken 
+
+
+
+
+
+
+*/

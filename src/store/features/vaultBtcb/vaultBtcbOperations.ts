@@ -1,7 +1,11 @@
 import { getStaticState } from "../../store";
 import { AppDispatch } from "../../store";
 import { operationExecution } from "../operationExecution";
-import { getBalanceAmt, getBalanceUserAmt, getBalanceUserBtcb } from "./vaultBtcbSlice";
+import {
+  getBalanceAmt,
+  getBalanceUserAmt,
+  getBalanceUserBtcb,
+} from "./vaultBtcbSlice";
 import { getAmtbalance } from "../amt/amtSlice";
 
 function stake(dispatch: AppDispatch, amount: number) {
@@ -12,13 +16,12 @@ function stake(dispatch: AppDispatch, amount: number) {
     dispatch(getBalanceAmt());
     dispatch(getAmtbalance());
     dispatch(getBalanceUserBtcb());
-    
   });
 }
 
 function withdrawl(dispatch: AppDispatch) {
   const contract = getStaticState().vaultBtcb.contract;
-  const operationPromise = contract.withdrawl();
+  const operationPromise = contract.withdrwal();
   operationExecution(operationPromise).then(() => {
     dispatch(getBalanceUserAmt());
     dispatch(getBalanceAmt());
