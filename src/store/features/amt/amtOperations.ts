@@ -11,6 +11,7 @@ import contractAddresses from "../../../contracts/contractAddresses";
 import { ethers } from "ethers";
 import { operationExecution } from "../operationExecution";
 
+//to change to 2 new approve functions: approve market (when new market is done) and approve burnVault.
 function approveMarketVault(dispatcher: AppDispatch) {
   const contract = getStaticState().amt.contract;
   const operationPromise = contract.approve(

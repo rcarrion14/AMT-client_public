@@ -35,6 +35,11 @@ import {
   createContract as createContractVaultBtcb,
 } from "../../store/features/vaultBtcb/vaultBtcbSlice";
 
+import {
+  burnVaultLoaders,
+  createContract as createContractBurnVault,
+} from "../../store/features/burnVault/burnVaultSlice";
+
 const Loader = () => {
   const dispatch = useDispatch<AppDispatch>();
   const isConnected = useSelector(
@@ -51,14 +56,15 @@ const Loader = () => {
       async function load() {
         console.log("createing contracts");
         //Load contracts
-        dispatch(createContractAmt);
-        dispatch(createContractBtcb);
-        dispatch(createContractMarketPlace);
-        dispatch(createContractMaster);
-        dispatch(createContractUsdt);
-        dispatch(createContractVaultAmt);
-        dispatch(createContractVaultBtcb);
-        dispatch(createCotractLiqAmt);
+        dispatch(createContractAmt());
+        dispatch(createContractBtcb());
+        dispatch(createContractMarketPlace());
+        dispatch(createContractMaster());
+        dispatch(createContractUsdt());
+        dispatch(createContractVaultAmt());
+        dispatch(createContractVaultBtcb());
+        dispatch(createCotractLiqAmt());
+        dispatch(createContractBurnVault());
         await delay(1000);
         //Initial general loads
         generalLoadBtcb(dispatch);
@@ -68,6 +74,7 @@ const Loader = () => {
         liqAmtLoaders.generalLoadLiqAmt(dispatch);
         generalLoadVaultAmt(dispatch);
         generalLoadVaultBtcb(dispatch);
+        burnVaultLoaders.generalLoad(dispatch);
         await delay(1000);
 
         //Second general loads
@@ -78,6 +85,8 @@ const Loader = () => {
         liqAmtLoaders.generalLoadLiqAmt(dispatch);
         generalLoadVaultAmt(dispatch);
         generalLoadVaultBtcb(dispatch);
+        burnVaultLoaders.generalLoad(dispatch);
+
         await delay(1000);
 
         //Loads with snapshot

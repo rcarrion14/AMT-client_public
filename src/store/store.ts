@@ -9,7 +9,7 @@ import masterReducer from "./features/master/masterSlice";
 import marketPlaceReducer from "./features/marketplace/marketPlaceSlice";
 import vaultAmtReducer from "./features/vaultAmt/vaultAmtSlice";
 import vaultBtcbReducer from "./features/vaultBtcb/vaultBtcbSlice";
-
+import burnVaultReducer from "./features/burnVault/burnVaultSlice";
 const store = configureStore({
   reducer: {
     wallet: walletReducer,
@@ -21,6 +21,7 @@ const store = configureStore({
     vaultAmt: vaultAmtReducer,
     vaultBtcb: vaultBtcbReducer,
     btcb: btcbReducer,
+    burnVault: burnVaultReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }),
@@ -38,6 +39,7 @@ const {
   vaultAmt,
   btcb,
   vaultBtcb,
+  burnVault,
 } = store.getState();
 export const RootState = {
   wallet,
@@ -49,6 +51,7 @@ export const RootState = {
   vaultAmt,
   btcb,
   vaultBtcb,
+  burnVault,
 };
 
 export const getStaticState = store.getState;
