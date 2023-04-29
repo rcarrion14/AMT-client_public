@@ -18,3 +18,5 @@ function backingWithdrawl(dispatch: AppDispatch, amountToBurn: number) {
     dispatch(getBalanceBtcb());
   });
 }
+
+export const burnVaultOperations = { backingWithdrawl };
