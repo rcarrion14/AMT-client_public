@@ -82,7 +82,7 @@ const GInvestidores = () => {
 
   return (
     <>
-      <p>BRONTOROC CARLOTA</p>
+      <p>BRONTOROC CARLOTA PERRO</p>
       {textoStaking("por")}
       <CuadroCobro
         balanceOfAt={balanceOfAt1}
