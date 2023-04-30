@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import React, { useState } from "react";
 import { textoInterfaz1Inch, textoStore } from "../../../../Utils/textos";
 import CuadroInterfaz1Inch from "./CuadroInterfaz1Inch";

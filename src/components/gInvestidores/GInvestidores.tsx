@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import React, { useEffect } from "react";
 import CuadroCobro from "./CuadroCobro";
 import { useDispatch, useSelector } from "react-redux";

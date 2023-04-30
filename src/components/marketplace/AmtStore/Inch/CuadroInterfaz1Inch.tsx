@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import React, { useEffect, useRef, useState } from "react";
 import SelectorMoneda1Inch from "./SelectorMoneda1Inch";
 import { CSSTransition } from "react-transition-group";

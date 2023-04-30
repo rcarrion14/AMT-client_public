@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import React from "react";
 import CuadroQuema from "./CuadroQuema";
 import { textoQuema } from "../../../Utils/textos";

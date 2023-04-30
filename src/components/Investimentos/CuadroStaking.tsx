@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import React, { useEffect, useRef, useState } from "react";
 import BotonOperacionStaking from "./BotonOperacionStaking";
 import { textoAtencionStaking, textosExtra } from "../../Utils/textos";

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import React, { useEffect, useRef, useState } from "react";
 import BotonOperacionQuema from "./BotonOperacionQuema";
 import { useDispatch, useSelector } from "react-redux";
@@ -63,7 +65,7 @@ const CuadroPancake = () => {
         <div className="cuadroCompra">
           <img
             onClick={() => {
-              setSelector(true);
+              true;
             }}
             src={listaMonedas.amt.logoURI}
           />

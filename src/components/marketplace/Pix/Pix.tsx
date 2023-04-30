@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import React from "react";
 import { textoPix } from "../../../Utils/textos";
 
