@@ -15,18 +15,17 @@ interface StakingAmtInterface {
 const StakingAmt: React.FC<StakingAmtInterface> = ({ setActivePage }) => {
   const [historico, setHistorico] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
+
   const balanceAmt = useSelector(
     (state: typeof RootState) => state.amt.balance
   );
   const stackedByUser = useSelector(
     (state: typeof RootState) => state.vaultAmt.balanceUserAmt
   );
-
   const allowance = useSelector(
     (state: typeof RootState) => state.amt.allowanceVaultAmt
   );
   const aprobarVault = amtOperations.approveVaultAmt;
-
   const stake = vaultAmtOperations.stake;
   const operacionWithdrawl = vaultAmtOperations.withdrawl;
 

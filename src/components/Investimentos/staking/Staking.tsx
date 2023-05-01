@@ -14,14 +14,8 @@ interface AmtStaking {
 
 const Staking: React.FC<AmtStaking> = ({ setActivePage }) => {
   const [historico, setHistorico] = useState(false);
-  const contractAmt = useSelector(
-    (state: typeof RootState) => state.amt.contract
-  );
-  const currentSnapshot = useSelector(
-    (state: typeof RootState) => state.amt.currentSnapshot
-  );
-
   const dispatch = useDispatch<AppDispatch>();
+
   const balanceAmt = useSelector(
     (state: typeof RootState) => state.amt.balance
   );
@@ -35,9 +29,15 @@ const Staking: React.FC<AmtStaking> = ({ setActivePage }) => {
     (state: typeof RootState) => state.amt.allowanceVaultBtcb
   );
   const aprobarVault = amtOperations.approveVaultBtcb;
-
   const stake = vaultBtcbOperations.stake;
   const operacionWithdrawl = vaultBtcbOperations.withdrawl;
+
+  const contractAmt = useSelector(
+    (state: typeof RootState) => state.amt.contract
+  );
+  const currentSnapshot = useSelector(
+    (state: typeof RootState) => state.amt.currentSnapshot
+  );
 
   const infoAllowance = textoInfoAllowance("por");
   return (
@@ -88,6 +88,7 @@ const Staking: React.FC<AmtStaking> = ({ setActivePage }) => {
         <HistoricoStaking
           setHistorico={setHistorico}
           stackedByUser={stackedByUser}
+          contractAmt={contractAmt}
           currentSnapshot={currentSnapshot}
         />
       </CSSTransition>
