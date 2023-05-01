@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import React, { useEffect, useRef, useState } from "react";
 //import SelectorMoneda from "../pancake/SelectorMonedaPancake";
 import { CSSTransition } from "react-transition-group";
