@@ -1,17 +1,26 @@
-import React, { useEffect, useRef, useState, ReactElement } from "react";
+import React, { useState, ReactElement } from "react";
 import AmtStore from "./AmtStore/AmtStore";
 import { CSSTransition } from "react-transition-group";
 import PancakeSwap from "./pancake/PancakeSwap";
 import Pix from "./Pix/Pix";
 import Quema from "./Quema/Quema";
 import BotonBlanco from "../Generales/BotonBlanco";
-import { textoBotonesBlancos, textoMarketplace } from "../../Utils/textos";
+import {
+  textoBotonesBlancos,
+  textoMarketplace,
+  textosExtra,
+} from "../../Utils/textos";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
 
 interface MarketplaceInterface {
   setActivePage: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const Marketplace: React.FC<MarketplaceInterface> = () => {
+  const currentLanguage = useSelector(
+    (state: typeof RootState) => state.session.language
+  );
   const pages: string[] = ["store", "pancake", "quema", "pix"];
   const [activePage, setActivePage] = useState("marketplace");
 
@@ -41,31 +50,31 @@ const Marketplace: React.FC<MarketplaceInterface> = () => {
 
   return (
     <>
-      {textoMarketplace("por")}
+      {textoMarketplace(currentLanguage)}
       <div className="textoConexion">
-        <button>IMPORTAR TOKENS</button>
+        <button>{textosExtra[currentLanguage].importarTokens}</button>
       </div>
       <BotonBlanco
-        titulo={textoBotonesBlancos.por.store.titulo}
-        descripcion={textoBotonesBlancos.por.store.descripcion}
+        titulo={textoBotonesBlancos[currentLanguage].store.titulo}
+        descripcion={textoBotonesBlancos[currentLanguage].store.descripcion}
         activador={"store"}
         setActivePage={setActivePage}
       />
       <BotonBlanco
-        titulo={textoBotonesBlancos.por.pancake.titulo}
-        descripcion={textoBotonesBlancos.por.pancake.descripcion}
+        titulo={textoBotonesBlancos[currentLanguage].pancake.titulo}
+        descripcion={textoBotonesBlancos[currentLanguage].pancake.descripcion}
         activador={"pancake"}
         setActivePage={setActivePage}
       />
       <BotonBlanco
-        titulo={textoBotonesBlancos.por.quema.titulo}
-        descripcion={textoBotonesBlancos.por.quema.descripcion}
+        titulo={textoBotonesBlancos[currentLanguage].quema.titulo}
+        descripcion={textoBotonesBlancos[currentLanguage].quema.descripcion}
         activador={"quema"}
         setActivePage={setActivePage}
       />
       <BotonBlanco
-        titulo={textoBotonesBlancos.por.pix.titulo}
-        descripcion={textoBotonesBlancos.por.pix.descripcion}
+        titulo={textoBotonesBlancos[currentLanguage].pix.titulo}
+        descripcion={textoBotonesBlancos[currentLanguage].pix.descripcion}
         activador={"pix"}
         setActivePage={setActivePage}
       />

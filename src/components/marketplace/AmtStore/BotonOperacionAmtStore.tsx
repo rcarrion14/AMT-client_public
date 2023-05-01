@@ -4,7 +4,8 @@ import React, { useEffect, useState } from "react";
 import { AppDispatch } from "../../../store/store";
 import { useDispatch, useSelector } from "react-redux";
 import { ethers } from "ethers";
-
+import { textosExtra } from "../../../Utils/textos";
+import { RootState } from "../../../store/store";
 interface BotonOperacionProps {
   balanceTienda: number | undefined;
   balanceUsdt: number | undefined;
@@ -22,6 +23,9 @@ const BotonOperacionAmtStore: React.FC<BotonOperacionProps> = ({
   operacionBuy,
 }) => {
   const dispatch = useDispatch<AppDispatch>();
+  const currentLanguage = useSelector(
+    (state: typeof RootState) => state.session.language
+  );
   return (
     <button
       //Disabling the button conditions
@@ -43,37 +47,15 @@ const BotonOperacionAmtStore: React.FC<BotonOperacionProps> = ({
       {
         //Posible texts of button based on conditions
         balanceTienda < parseInt(input)
-          ? "No hay tantos amt en venta"
+          ? textosExtra[currentLanguage].noHaytantosAmtEnVenta
           : balanceUsdt < parseInt(input)
-          ? "Balance insuficiente"
+          ? textosExtra[currentLanguage].bceUSDTInsuficiente
           : parseInt(input) > allowanceUsdt
-          ? "Approve"
-          : "buy"
+          ? textosExtra[currentLanguage].aprobar
+          : textosExtra[currentLanguage].comprar
       }
     </button>
   );
 };
 
 export default BotonOperacionAmtStore;
-
-/*   const logicaBoton = () => {
-    if (balanceTienda < input) {
-      return { texto: "No hay a la venta", operacion: null };
-    }
-    if (allowanceUsdt <= input) {
-      return {
-        texto: "Aprobar",
-        operacion: () => {
-          operacionAprobar("9999999999999999999999");
-        },
-      };
-    }
-    if (balanceUsdt < input) {
-      return { texto: "Balance insuf.", operacion: null };
-    } else {
-      return {
-        texto: "Comprar",
-        operacion: (amount) => operacionBuy(amount),
-      };
-    }
-  }; */

@@ -1,6 +1,8 @@
 import React from "react";
 import "./BotonDarLiquidez.css";
 import { textosExtra, interfaceTextoExtra } from "../../../../Utils/textos";
+import { RootState } from "../../../../store/store";
+import { useSelector } from "react-redux";
 import { amtOperations } from "../../../../store/features/amt/amtOperations";
 import { btcbOperations } from "../../../../store/features/btcb/btcbOperations";
 import { masterOperations } from "../../../../store/features/master/masterOperations";
@@ -22,10 +24,11 @@ const BotonDarLiquidez: React.FC<BotonDarLiquidezProps> = ({
   inputAmt,
   inputBtc,
 }) => {
-  const lenguaje = "por"; // Pensar cambio dinamico
+  const currentLanguage = useSelector(
+    (state: typeof RootState) => state.session.language
+  );
   const dispatch = useDispatch<AppDispatch>();
 
-  const textos: interfaceTextoExtra = textosExtra[lenguaje];
   const noPuedeProveerLiquidez =
     allowanceAmt < inputAmt ||
     inputAmt > balanceAmt ||
@@ -45,9 +48,9 @@ const BotonDarLiquidez: React.FC<BotonDarLiquidezProps> = ({
               disabled={inputAmt > balanceAmt && allowanceAmt >= inputAmt}
             >
               {allowanceAmt < inputAmt
-                ? textos.aprobarAMT
+                ? textosExtra[currentLanguage].aprobarAMT
                 : inputAmt > balanceAmt
-                ? textos.bceAmtInsuficiente
+                ? textosExtra[currentLanguage].bceAmtInsuficiente
                 : ""}
             </button>
             <button
@@ -58,9 +61,9 @@ const BotonDarLiquidez: React.FC<BotonDarLiquidezProps> = ({
               }}
             >
               {allowanceBtc < inputBtc
-                ? textos.aprobarBTCB
+                ? textosExtra[currentLanguage].aprobarBTCB
                 : inputBtc > balanceBtc
-                ? textos.bceBtcInsuficiente
+                ? textosExtra[currentLanguage].bceBtcInsuficiente
                 : ""}
             </button>
           </div>
@@ -73,7 +76,7 @@ const BotonDarLiquidez: React.FC<BotonDarLiquidezProps> = ({
               masterOperations.addLiquidity(dispatch, inputAmt, inputBtc);
             }}
           >
-            {textos.proveerLiquidez}
+            {textosExtra[currentLanguage].proveerLiquidez}
           </button>
         )
       }

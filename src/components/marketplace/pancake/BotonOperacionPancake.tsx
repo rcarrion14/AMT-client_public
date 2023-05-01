@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { AppDispatch } from "../../../store/store";
 import { useDispatch, useSelector } from "react-redux";
-
+import { RootState } from "../../../store/store";
 import { textosExtra } from "../../../Utils/textos";
 import { ethers } from "ethers";
 
@@ -26,15 +26,18 @@ const BotonOperacion: React.FC<BotonOperacionProps> = ({
   approveErc20,
   addr,
 }) => {
+  const currentLanguage = useSelector(
+    (state: typeof RootState) => state.session.language
+  );
   const mensajeBoton = () => {
     if (allowanceErc20 >= 0) {
       if (allowanceErc20 < parseFloat(input)) {
-        return textosExtra.por.aprobar;
+        return textosExtra[currentLanguage].aprobar;
       }
       if (balanceErc20 < parseFloat(input)) {
-        return textosExtra.por.bceInsuf;
+        return textosExtra[currentLanguage].bceInsuf;
       } else {
-        return "Comprar";
+        return textosExtra[currentLanguage].comprar;
       }
     } else {
       return "hola";
