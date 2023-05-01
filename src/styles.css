@@ -499,3 +499,36 @@ iconos: #9C9EA1
   font-weight: bold;
   min-width: auto;
 }
+
+.quema {
+  background-color: orange;
+}
+
+.cuadroStakings {
+  height: 58px;
+  display: flex;
+  background-color: white;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 15px;
+  padding: 5px 10px 5px 10px;
+  margin: 8px 8px 8px 8px;
+}
+
+.cuadroStakings > img {
+  width: 25px;
+  height: fit-content;
+}
+
+.cuadroStakings > button {
+  margin: 0;
+}
+
+.cuadroStakings > div > p {
+  color: #34383e;
+  margin: 0.25rem;
+}
+
+.cuadroStakings > button {
+  width: 30%;
+}

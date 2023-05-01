@@ -10,12 +10,22 @@ interface vaultAmtState {
   contract: any | undefined;
   balanceAmt: number | undefined;
   balanceUserAmt: number | undefined;
+  balanceAmt1: number | undefined;
+  balanceAmt2: number | undefined;
+  balanceAmt3: number | undefined;
+  balanceAmt4: number | undefined;
+  balanceAmt5: number | undefined;
 }
 
 const initialState: vaultAmtState = {
   contract: null,
   balanceAmt: undefined,
   balanceUserAmt: undefined,
+  balanceAmt1: undefined,
+  balanceAmt2: undefined,
+  balanceAmt3: undefined,
+  balanceAmt4: undefined,
+  balanceAmt5: undefined,
 };
 
 export const createContract = createAsyncThunk(
@@ -56,6 +66,40 @@ export const getBalanceUserAmt = createAsyncThunk(
   }
 );
 
+export const getBalanceAt = createAsyncThunk(
+  "vaultAmt/getBalanceAt",
+  async (snapshot: number) => {
+    const staticState = getStaticState();
+    const contract = staticState.amt.contract;
+
+    if (contract) {
+      const balanceAt1 = formatter(
+        await contract.balanceOfAt(contractAddresses.VaultAmt, snapshot)
+      );
+      const balanceAt2 = formatter(
+        await contract.balanceOfAt(contractAddresses.VaultAmt, snapshot - 1)
+      );
+      const balanceAt3 = formatter(
+        await contract.balanceOfAt(contractAddresses.VaultAmt, snapshot - 2)
+      );
+      const balanceAt4 = formatter(
+        await contract.balanceOfAt(contractAddresses.VaultAmt, snapshot - 3)
+      );
+      const balanceAt5 = formatter(
+        await contract.balanceOfAt(contractAddresses.VaultAmt, snapshot - 4)
+      );
+
+      return {
+        balanceAt1,
+        balanceAt2,
+        balanceAt3,
+        balanceAt4,
+        balanceAt5,
+      };
+    } else return undefined;
+  }
+);
+
 const vaultAmtSlice = createSlice({
   name: "vaultAmt",
   initialState,
@@ -76,6 +120,20 @@ const vaultAmtSlice = createSlice({
       })
       .addCase(getBalanceUserAmt.pending, (state) => {
         state.balanceUserAmt = undefined;
+      })
+      .addCase(getBalanceAt.fulfilled, (state, action) => {
+        state.balanceAmt1 = action.payload?.balanceAt1;
+        state.balanceAmt2 = action.payload?.balanceAt2;
+        state.balanceAmt3 = action.payload?.balanceAt3;
+        state.balanceAmt4 = action.payload?.balanceAt4;
+        state.balanceAmt5 = action.payload?.balanceAt5;
+      })
+      .addCase(getBalanceAt.pending, (state) => {
+        state.balanceAmt1 = undefined;
+        state.balanceAmt2 = undefined;
+        state.balanceAmt3 = undefined;
+        state.balanceAmt4 = undefined;
+        state.balanceAmt5 = undefined;
       });
   },
 });

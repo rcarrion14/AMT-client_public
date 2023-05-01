@@ -34,7 +34,6 @@ const CuadroCobro: React.FC<cuadroCobroProps> = ({
       <div className="transparente">
         {allValuesDefined ? (
           <>
-            {" "}
             <p>
               {snapToDateMapp(currentSnap)} - {currentSnap}
             </p>
