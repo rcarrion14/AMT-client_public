@@ -5,62 +5,55 @@ import { AppDispatch } from "../../../store/store";
 import { useDispatch, useSelector } from "react-redux";
 
 import { textosExtra } from "../../../Utils/textos";
+import { useDispatch, useSelector } from "react-redux";
 import { ethers } from "ethers";
 
-interface BotonOperacionProps {
+interface BotonOperacionQuemaProps {
   balanceAmt: number | undefined;
-  balanceErc20: number | undefined;
-  allowanceErc20: number | undefined;
-  txData: string;
+  balanceBtcb: number | undefined;
+  allowanceAmt: number | undefined;
+  backRate: number | undefined;
+  approveMarket: Function;
+  burn: Function;
   input: string;
-  signer: any;
-  approveErc20: any;
 }
-const BotonOperacion: React.FC<BotonOperacionProps> = ({
+
+const BotonOperacionQuema: React.FC<BotonOperacionQuemaProps> = ({
   balanceAmt,
-  balanceErc20,
-  allowanceErc20,
-  txData,
+  balanceBtcb,
+  allowanceAmt,
+  backRate,
+  approveMarket,
+  burn,
   input,
-  signer,
-  approveErc20,
-  addr,
 }) => {
-  const mensajeBoton = () => {
-    if (allowanceErc20 >= 0) {
-      if (allowanceErc20 < parseFloat(input)) {
-        return textosExtra.por.aprobar;
-      }
-      if (balanceErc20 < parseFloat(input)) {
-        return textosExtra.por.bceInsuf;
-      } else {
-        return "Comprar";
-      }
+  const dispatch = useDispatch<AppDispatch>();
+
+  const mesajeBoton = () => {
+    if (allowanceAmt < parseFloat(input)) {
+      return textosExtra.por.aprobar;
+    }
+    if (balanceAmt < parseFloat(input)) {
+      return textosExtra.por.bceInsuf;
     } else {
-      return "hola";
+      return textosExtra.por.quemar;
     }
   };
 
-  const dispatch = useDispatch<AppDispatch>();
   return (
-    <>
-      <button
-        onClick={() => {
-          if (true) {
-            Number(input) > allowanceErc20
-              ? approveErc20(
-                  "0x1111111254eeb25477b68fb85ed929f73a960582",
-                  ethers.utils.parseEther("99999999999")
-                )
-              : signer.sendTransaction(txData);
-          }
-        }}
-        className="btnLarge"
-      >
-        {mensajeBoton()}
-      </button>
-    </>
+    <button
+      onClick={() => {
+        console.log(approveMarket);
+
+        allowanceAmt > parseFloat(input)
+          ? burn(dispatch, input)
+          : approveMarket(dispatch);
+      }}
+      className="btnLarge quema"
+    >
+      {mesajeBoton()}
+    </button>
   );
 };
 
-export default BotonOperacion;
+export default BotonOperacionQuema;

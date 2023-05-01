@@ -1,75 +1,70 @@
 // @ts-nocheck
 
 import React, { useEffect, useRef, useState } from "react";
+//import SelectorMoneda from "../pancake/SelectorMonedaPancake";
+import { CSSTransition } from "react-transition-group";
 import BotonOperacionQuema from "./BotonOperacionQuema";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../../store/store";
-import { listaMonedas } from "../../../Utils/listaMonedas";
+import store, { AppDispatch, RootState } from "../../../store/store";
 import { marketPlaceOperations } from "../../../store/features/marketplace/marketPlaceOperations";
+import { usdtOperations } from "../../../store/features/usdt/usdtOperations";
+import { listaMonedas } from "../../../Utils/listaMonedas";
+import { amtOperations } from "../../../store/features/amt/amtOperations";
+import { burnVaultOperations } from "../../../store/features/burnVault/burntVaultOperation";
 
-//const stake = vaultBtcbOperations.stake;
+const CuadroQuema = () => {
+  const dispatch = useDispatch<AppDispatch>();
 
-// balance BTC
-// balance AMT
-// allowanceAMT
-//tasa de cmabio
-
-const CuadroPancake = () => {
+  //Datos del componente
   const balanceAmt = useSelector(
     (state: typeof RootState) => state.amt.balance
   );
-
   const balanceBtcb = useSelector(
     (state: typeof RootState) => state.btcb.balance
   );
-
-  /*   const burnPrice = useSelector(
-    (state: typeof RootState) => state.marketPlace.getBackRate
-  ); */
-
-  const burnPrice = 0.00000067312;
 
   const allowanceAmt = useSelector(
     (state: typeof RootState) => state.amt.allowanceMarketVault
   );
 
-  /*   const quema = marketPlaceOperations.backingWithdrawl */
+  const backRate = useSelector(
+    (state: typeof RootState) => state.burnVault.backRate
+  );
 
-  const [inputPagarValue, setInputPagarValue] = useState("");
-  const [inputRecibirValue, setInputRecibirValue] = useState("");
+  const approveMarket = amtOperations.approveMarketVault;
 
+  const burn = burnVaultOperations.backingWithdrawl;
+
+  //Gestion de los input
   const inputPagar = useRef<HTMLInputElement>(null);
   const inputRecibir = useRef<HTMLInputElement>(null);
-
-  const dispatch = useDispatch<AppDispatch>();
+  const [inputPagarValue, setInputPagarValue] = useState("");
+  const [inputRecibirValue, setInputRecibirValue] = useState("");
 
   const handleInputPagarChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     setInputPagarValue(event.target.value);
+    setInputRecibirValue(event.target.value);
   };
 
   const handleInputRecibirChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     setInputRecibirValue(event.target.value);
+    setInputPagarValue(event.target.value);
   };
 
   return (
     <>
       <div id="primeraSeccion">
         <div className="saldo">
-          <h2>Vocé vende</h2>
+          <h2>Vocé paga</h2>
           <p>Saldo: {balanceAmt}</p>
         </div>
         <div className="cuadroCompra">
-          <img
-            onClick={() => {
-              true;
-            }}
-            src={listaMonedas.amt.logoURI}
-          />
-          <div>{listaMonedas.amt.symbol}</div>
+          <img src="coinAutomining.png" />
+          <div>AMT</div>
           <input
             ref={inputPagar}
             placeholder="0"
@@ -87,7 +82,7 @@ const CuadroPancake = () => {
         </div>
         <div className="cuadroCompra">
           <img src={listaMonedas.btcb.logoURI} alt="" />
-          <div>BTC</div>
+          <div>BTCB</div>
           <input
             ref={inputRecibir}
             placeholder="0"
@@ -100,19 +95,23 @@ const CuadroPancake = () => {
       </div>
       <div className="containerSaldos">
         <div>
-          <h2>AMT a venda:</h2>
-          <div>{}</div>
-        </div>
-        <div>
           <h2>Preco do AMT:</h2>
-          <div>1 AMT = {""} USDT</div>
+          <div>1 AMT = {1 / backRate} BTC</div>
         </div>
       </div>
       <div>
-        <BotonOperacionQuema balanceAmt={balanceAmt} input={inputPagarValue} />
+        <BotonOperacionQuema
+          balanceAmt={balanceAmt}
+          balanceBtcb={balanceBtcb}
+          allowanceAmt={allowanceAmt}
+          backRate={backRate}
+          approveMarket={approveMarket}
+          burn={burn}
+          input={inputPagarValue}
+        />
       </div>
     </>
   );
 };
 
-export default CuadroPancake;
+export default CuadroQuema;

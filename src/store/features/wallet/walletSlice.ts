@@ -28,7 +28,8 @@ export const connectWallet = createAsyncThunk(
         return newProvider;
       });
     const signer = provider.getSigner();
-    const address = await signer.getAddress();
+    const address_ = await signer.getAddress();
+    const address = address_.toLocaleLowerCase();
     return { provider, signer, address };
   }
 );

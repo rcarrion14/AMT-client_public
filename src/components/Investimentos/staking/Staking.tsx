@@ -5,8 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../store/store";
 import { amtOperations } from "../../../store/features/amt/amtOperations";
 import { vaultBtcbOperations } from "../../../store/features/vaultBtcb/vaultBtcbOperations";
-
-import Historico from "./Historico";
+import HistoricoStaking from "./HistoricoStaking";
 import { CSSTransition } from "react-transition-group";
 
 interface AmtStaking {
@@ -15,6 +14,12 @@ interface AmtStaking {
 
 const Staking: React.FC<AmtStaking> = ({ setActivePage }) => {
   const [historico, setHistorico] = useState(false);
+  const contractAmt = useSelector(
+    (state: typeof RootState) => state.amt.contract
+  );
+  const currentSnapshot = useSelector(
+    (state: typeof RootState) => state.amt.currentSnapshot
+  );
 
   const dispatch = useDispatch<AppDispatch>();
   const balanceAmt = useSelector(
@@ -80,7 +85,11 @@ const Staking: React.FC<AmtStaking> = ({ setActivePage }) => {
         classNames="slideIzquierda"
         unmountOnExit
       >
-        <Historico setHistorico={setHistorico} />
+        <HistoricoStaking
+          setHistorico={setHistorico}
+          stackedByUser={stackedByUser}
+          currentSnapshot={currentSnapshot}
+        />
       </CSSTransition>
     </>
   );
