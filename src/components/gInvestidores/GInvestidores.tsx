@@ -10,7 +10,7 @@ import { useState } from "react";
 import { masterOperations } from "../../store/features/master/masterOperations";
 import { textoStaking } from "../../Utils/textos";
 import Pagination from "./paginationComponent/pagination";
-
+import { textoGInvestidores } from "../../Utils/textos";
 const GInvestidores = () => {
   const dispatch = useDispatch<AppDispatch>();
   const currentSnapshot = useSelector(
@@ -79,10 +79,12 @@ const GInvestidores = () => {
   const alreadyCharged5 = useSelector(
     (state: typeof RootState) => state.master.alreadyCharged5
   );
-
+  const currentLanguage = useSelector(
+    (state: typeof RootState) => state.session.language
+  );
   return (
     <>
-      {textoStaking("por")}
+      {textoGInvestidores(currentLanguage)}
       <CuadroCobro
         balanceOfAt={balanceOfAt1}
         payAt={pays1}

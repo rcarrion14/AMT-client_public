@@ -3,7 +3,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import BotonOperacionStaking from "./BotonOperacionStaking";
 import { textoAtencionStaking, textosExtra } from "../../Utils/textos";
-
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
 interface BotonOperacionProps {
   balanceUserAmt: number | undefined;
   stackedByUser: number | undefined;
@@ -26,16 +27,18 @@ const CuadroStaking: React.FC<BotonOperacionProps> = ({
   const inputStake = useRef<HTMLInputElement>(null);
 
   const [inputStakeValue, setInputStakeValue] = useState("");
-
+  const currentLanguage = useSelector(
+    (state: typeof RootState) => state.session.language
+  );
   //////////
 
   return (
     <>
       <div id="primeraSeccion">
         <div className="saldo">
-          <h2>{textosExtra.por.depositarAmt}</h2>
+          <h2>{textosExtra[currentLanguage].depositarAmt}</h2>
           <p>
-            {textosExtra.por.saldo} {balanceUserAmt}
+            {textosExtra[currentLanguage].saldo} {balanceUserAmt}
           </p>
         </div>
         <div className="cuadroCompra">
@@ -53,7 +56,7 @@ const CuadroStaking: React.FC<BotonOperacionProps> = ({
         </div>
       </div>
 
-      {btcACobrar == undefined ? null : textoAtencionStaking("por")}
+      {btcACobrar == undefined ? null : textoAtencionStaking(currentLanguage)}
 
       <BotonOperacionStaking
         stackedByUser={stackedByUser}
@@ -86,11 +89,15 @@ const CuadroStaking: React.FC<BotonOperacionProps> = ({
         Meu investimento atual:
         <div className="investimentoActual">
           <div>
-            <div>{btcACobrar >= 0 ? "BTCB acumulados" : "AMT generados"}</div>
+            <div>
+              {btcACobrar >= 0
+                ? textosExtra[currentLanguage].btcbAcumulados
+                : textosExtra[currentLanguage].amtGenerados}
+            </div>
             <div>{btcACobrar}</div>
           </div>
           <div>
-            <div>AMT depositados</div>
+            <div>{textosExtra[currentLanguage].amtDepositados}</div>
             <div>{stackedByUser}</div>
           </div>
         </div>

@@ -15,8 +15,12 @@ import {
   useGetTokens,
   useGetTxData,
 } from "../../../../Utils/1inch";
+import { textosExtra } from "../../../../Utils/textos";
 
 const CuadroInterfaz1Inch = () => {
+  const currentLanguage = useSelector(
+    (state: typeof RootState) => state.session.language
+  );
   const balanceUsdt = useSelector(
     (state: typeof RootState) => state.usdt.balance
   );
@@ -120,8 +124,10 @@ const CuadroInterfaz1Inch = () => {
     <>
       <div id="primeraSeccion">
         <div className="saldo">
-          <h2>Vocé paga</h2>
-          <p>Saldo: {balanceErc20}</p>
+          <h2>{textosExtra[currentLanguage].ustedPaga}</h2>
+          <p>
+            {textosExtra[currentLanguage].saldo} {balanceErc20}
+          </p>
         </div>
         <div className="cuadroCompra">
           <img
@@ -147,8 +153,10 @@ const CuadroInterfaz1Inch = () => {
       </div>
       <div id="segundaSeccion">
         <div className="saldo">
-          <h2>Vocé recebe</h2>
-          <p>Saldo: {balanceUsdt}</p>
+          <h2>{textosExtra[currentLanguage].ustedRecibe}</h2>
+          <p>
+            {textosExtra[currentLanguage].saldo} {balanceUsdt}
+          </p>
         </div>
         <div className="cuadroCompra">
           <img src="coinT.png" alt="" />
@@ -165,11 +173,11 @@ const CuadroInterfaz1Inch = () => {
       </div>
       <div className="containerSaldos">
         <div>
-          <h2>AMT a venda:</h2>
+          <h2>{textosExtra[currentLanguage].amtEnVenta}</h2>
           <div>{}</div>
         </div>
         <div>
-          <h2>Preco do AMT:</h2>
+          <h2>{textosExtra[currentLanguage].precioAmt}</h2>
           <div>1 AMT = {""} USDT</div>
         </div>
       </div>

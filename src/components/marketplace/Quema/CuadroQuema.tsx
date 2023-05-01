@@ -11,9 +11,12 @@ import { usdtOperations } from "../../../store/features/usdt/usdtOperations";
 import { listaMonedas } from "../../../Utils/listaMonedas";
 import { amtOperations } from "../../../store/features/amt/amtOperations";
 import { burnVaultOperations } from "../../../store/features/burnVault/burntVaultOperation";
+import { textosExtra } from "../../../Utils/textos";
 
 const CuadroQuema = () => {
-  const dispatch = useDispatch<AppDispatch>();
+  const currentLanguage = useSelector(
+    (state: typeof RootState) => state.session.language
+  );
 
   //Datos del componente
   const balanceAmt = useSelector(
@@ -59,8 +62,10 @@ const CuadroQuema = () => {
     <>
       <div id="primeraSeccion">
         <div className="saldo">
-          <h2>Vocé paga</h2>
-          <p>Saldo: {balanceAmt}</p>
+          <h2>{textosExtra[currentLanguage].ustedPaga}</h2>
+          <p>
+            {textosExtra[currentLanguage].saldo} {balanceAmt}
+          </p>
         </div>
         <div className="cuadroCompra">
           <img src="coinAutomining.png" />
@@ -77,8 +82,10 @@ const CuadroQuema = () => {
       </div>
       <div id="segundaSeccion">
         <div className="saldo">
-          <h2>Vocé recebe</h2>
-          <p>Saldo: {balanceBtcb}</p>
+          <h2>{textosExtra[currentLanguage].ustedRecibe}</h2>
+          <p>
+            {textosExtra[currentLanguage].saldo} {balanceBtcb}
+          </p>
         </div>
         <div className="cuadroCompra">
           <img src={listaMonedas.btcb.logoURI} alt="" />
@@ -95,7 +102,7 @@ const CuadroQuema = () => {
       </div>
       <div className="containerSaldos">
         <div>
-          <h2>Preco do AMT:</h2>
+          <h2>{textosExtra[currentLanguage].precioAmt}</h2>
           <div>1 AMT = {1 / backRate} BTC</div>
         </div>
       </div>
