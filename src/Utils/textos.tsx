@@ -490,6 +490,8 @@ export const textosExtra = {
     bceUSDTInsuficiente: "balance USDT insuficiente",
     bceLiqAmtInsuficiente: "balance LiqAmt insuficiente",
 
+    quemar: "Quemar",
+
     proveerLiquidez: "Dar liquidez",
   },
   esp: {},
