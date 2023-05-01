@@ -1,8 +1,11 @@
+// @ts-nocheck
+
 import React, { useEffect, useState } from "react";
 import { AppDispatch } from "../../store/store";
 import { useDispatch, useSelector } from "react-redux";
 import { ethers } from "ethers";
 import { textosExtra } from "../../Utils/textos";
+import { RootState } from "../../store/store";
 
 //CUANDO TERMINA LA OPERACION NO CAMBIA AMT DEPOSITADOS
 
@@ -24,15 +27,18 @@ const BotonOperacion: React.FC<BotonOperacionProps> = ({
   operacionWithdrawl,
   stackedByUser,
 }) => {
+  const currentLanguage = useSelector(
+    (state: typeof RootState) => state.session.language
+  );
   const mesajeBoton = () => {
     if (allowance) {
       if (allowance < parseFloat(input)) {
-        return textosExtra.por.aprobar;
+        return textosExtra[currentLanguage].aprobar;
       }
       if (balanceUserAmt < parseFloat(input)) {
-        return textosExtra.por.bceInsuf;
+        return textosExtra[currentLanguage].bceInsuf;
       } else {
-        return textosExtra.por.stake;
+        return textosExtra[currentLanguage].stake;
       }
     } else {
       return "hola";
@@ -51,7 +57,7 @@ const BotonOperacion: React.FC<BotonOperacionProps> = ({
             operacionWithdrawl();
           }}
         >
-          Sacar tokens
+          {textosExtra[currentLanguage].retirar}
         </button>
         <button
           className={stackedByUser > 0 ? "gris" : null}

@@ -6,6 +6,8 @@ import Staking from "./staking/Staking";
 import StakingAmt from "./stakingAmt/StakingAmt";
 import Liquidez from "./liquidez/Liquidez";
 import Rendimientos from "./rendimientos/Rendimientos";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
 import {
   textoBotonesBlancos,
   textoInvestidores,
@@ -13,6 +15,9 @@ import {
 } from "../../Utils/textos";
 
 const Investidores = () => {
+  const currentLanguage = useSelector(
+    (state: typeof RootState) => state.session.language
+  );
   interface jsxPagesInterface {
     [key: string]: ReactElement<any, any>;
   }
@@ -49,31 +54,35 @@ const Investidores = () => {
 
   return (
     <>
-      <h1>Investimentos</h1>
+      <h1>{textosExtra[currentLanguage].inversiones}</h1>
 
       {activeInfo ? info : saibaMais}
 
       <BotonBlanco
-        titulo={textoBotonesBlancos.por.staking.titulo}
-        descripcion={textoBotonesBlancos.por.staking.descripcion}
+        titulo={textoBotonesBlancos[currentLanguage].staking.titulo}
+        descripcion={textoBotonesBlancos[currentLanguage].staking.descripcion}
         activador={"staking"}
         setActivePage={setActivePage}
       />
       <BotonBlanco
-        titulo={textoBotonesBlancos.por.stakingAmt.titulo}
-        descripcion={textoBotonesBlancos.por.stakingAmt.descripcion}
+        titulo={textoBotonesBlancos[currentLanguage].stakingAmt.titulo}
+        descripcion={
+          textoBotonesBlancos[currentLanguage].stakingAmt.descripcion
+        }
         activador={"stakingAmt"}
         setActivePage={setActivePage}
       />
       <BotonBlanco
-        titulo={textoBotonesBlancos.por.liquidez.titulo}
-        descripcion={textoBotonesBlancos.por.liquidez.descripcion}
+        titulo={textoBotonesBlancos[currentLanguage].liquidez.titulo}
+        descripcion={textoBotonesBlancos[currentLanguage].liquidez.descripcion}
         activador={"liquidez"}
         setActivePage={setActivePage}
       />
       <BotonBlanco
-        titulo={textoBotonesBlancos.por.rendimientos.titulo}
-        descripcion={textoBotonesBlancos.por.rendimientos.descripcion}
+        titulo={textoBotonesBlancos[currentLanguage].rendimientos.titulo}
+        descripcion={
+          textoBotonesBlancos[currentLanguage].rendimientos.descripcion
+        }
         activador={"rendimiento"}
         setActivePage={setActivePage}
       />

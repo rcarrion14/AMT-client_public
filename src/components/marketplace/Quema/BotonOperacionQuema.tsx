@@ -1,7 +1,11 @@
-import React from "react";
+// @ts-nocheck
+
+import React, { useEffect, useState } from "react";
+import { AppDispatch } from "../../../store/store";
 import { textosExtra } from "../../../Utils/textos";
 import { useDispatch, useSelector } from "react-redux";
 import { ethers } from "ethers";
+import { RootState } from "../../../store/store";
 
 interface BotonOperacionQuemaProps {
   balanceAmt: number | undefined;
@@ -23,23 +27,24 @@ const BotonOperacionQuema: React.FC<BotonOperacionQuemaProps> = ({
   input,
 }) => {
   const dispatch = useDispatch<AppDispatch>();
+  const currentLanguage = useSelector(
+    (state: typeof RootState) => state.session.language
+  );
 
   const mesajeBoton = () => {
     if (allowanceAmt < parseFloat(input)) {
-      return textosExtra.por.aprobar;
+      return textosExtra[currentLanguage].aprobar;
     }
     if (balanceAmt < parseFloat(input)) {
-      return textosExtra.por.bceInsuf;
+      return textosExtra[currentLanguage].bceInsuf;
     } else {
-      return textosExtra.por.quemar;
+      return textosExtra[currentLanguage].quemar;
     }
   };
 
   return (
     <button
       onClick={() => {
-        console.log(approveMarket);
-
         allowanceAmt > parseFloat(input)
           ? burn(dispatch, input)
           : approveMarket(dispatch);

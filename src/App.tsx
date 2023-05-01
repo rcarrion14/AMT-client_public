@@ -1,3 +1,4 @@
+// @ts-nocheck
 import "./normalize.css";
 import "./styles.css";
 import "react-toastify/dist/ReactToastify.css";

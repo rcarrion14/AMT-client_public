@@ -6,7 +6,13 @@ import Maquinas from "./Maquinas";
 import Grafico from "./GraficaPrecioAmt/Grafico";
 import { useState, useRef } from "react";
 import { CSSTransition } from "react-transition-group";
-import { textoBotonesBlancos, textoRendimientos } from "../../../Utils/textos";
+import {
+  textoBotonesBlancos,
+  textoRendimientos,
+  textosExtra,
+} from "../../../Utils/textos";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../store/store";
 
 interface RendimientosInterface {
   setActivePage: React.Dispatch<React.SetStateAction<string>>;
@@ -17,6 +23,10 @@ interface jsxPagesInterface {
 
 const Rendimientos: React.FC<RendimientosInterface> = ({ setActivePage }) => {
   const pages = ["simulador", "simuladorActual", "maquinas", "grafico"];
+
+  const currentLanguage = useSelector(
+    (state: typeof RootState) => state.session.language
+  );
 
   const [activePageRendimientos, setActivePageRendimientos] = useState("");
 
@@ -46,30 +56,32 @@ const Rendimientos: React.FC<RendimientosInterface> = ({ setActivePage }) => {
     <div className="containerSlide">
       <div className="navBar_top">
         <img onClick={() => setActivePage("")} src="icon_nav.png" />
-        <h1>Investimentos</h1>
+        <h1>{textosExtra[currentLanguage].inversiones}</h1>
       </div>
-      {textoRendimientos("por")}
+      {textoRendimientos(currentLanguage)}
       <BotonBlanco
-        titulo={textoBotonesBlancos.por.simulador.titulo}
-        descripcion={textoBotonesBlancos.por.simulador.descripcion}
+        titulo={textoBotonesBlancos[currentLanguage].simulador.titulo}
+        descripcion={textoBotonesBlancos[currentLanguage].simulador.descripcion}
         activador={"simulador"}
         setActivePage={setActivePageRendimientos}
       />
       <BotonBlanco
-        titulo={textoBotonesBlancos.por.simuladorActual.titulo}
-        descripcion={textoBotonesBlancos.por.simuladorActual.descripcion}
+        titulo={textoBotonesBlancos[currentLanguage].simuladorActual.titulo}
+        descripcion={
+          textoBotonesBlancos[currentLanguage].simuladorActual.descripcion
+        }
         activador={"simuladorActual"}
         setActivePage={setActivePageRendimientos}
       />
       <BotonBlanco
-        titulo={textoBotonesBlancos.por.maquinas.titulo}
-        descripcion={textoBotonesBlancos.por.maquinas.descripcion}
+        titulo={textoBotonesBlancos[currentLanguage].maquinas.titulo}
+        descripcion={textoBotonesBlancos[currentLanguage].maquinas.descripcion}
         activador={"maquinas"}
         setActivePage={setActivePageRendimientos}
       />
       <BotonBlanco
-        titulo={textoBotonesBlancos.por.grafico.titulo}
-        descripcion={textoBotonesBlancos.por.grafico.descripcion}
+        titulo={textoBotonesBlancos[currentLanguage].grafico.titulo}
+        descripcion={textoBotonesBlancos[currentLanguage].grafico.descripcion}
         activador={"grafico"}
         setActivePage={setActivePageRendimientos}
       />

@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import CuadroStaking from "../CuadroStaking";
-import { textoStaking, textoInfoAllowance } from "../../../Utils/textos";
+import {
+  textoStaking,
+  textoInfoAllowance,
+  textosExtra,
+} from "../../../Utils/textos";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../store/store";
 import { amtOperations } from "../../../store/features/amt/amtOperations";
@@ -14,6 +18,19 @@ interface AmtStaking {
 
 const Staking: React.FC<AmtStaking> = ({ setActivePage }) => {
   const [historico, setHistorico] = useState(false);
+<<<<<<< HEAD
+=======
+  const currentLanguage = useSelector(
+    (state: typeof RootState) => state.session.language
+  );
+  const contractAmt = useSelector(
+    (state: typeof RootState) => state.amt.contract
+  );
+  const currentSnapshot = useSelector(
+    (state: typeof RootState) => state.amt.currentSnapshot
+  );
+
+>>>>>>> 5adc5db1f76ea342e3f941ba2d3bea7019f35fee
   const dispatch = useDispatch<AppDispatch>();
 
   const balanceAmt = useSelector(
@@ -32,6 +49,7 @@ const Staking: React.FC<AmtStaking> = ({ setActivePage }) => {
   const stake = vaultBtcbOperations.stake;
   const operacionWithdrawl = vaultBtcbOperations.withdrawl;
 
+<<<<<<< HEAD
   const contractAmt = useSelector(
     (state: typeof RootState) => state.amt.contract
   );
@@ -40,15 +58,17 @@ const Staking: React.FC<AmtStaking> = ({ setActivePage }) => {
   );
 
   const infoAllowance = textoInfoAllowance("por");
+=======
+>>>>>>> 5adc5db1f76ea342e3f941ba2d3bea7019f35fee
   return (
     <>
       <div className="containerSlide">
         <div className="navBar_top">
           <img onClick={() => setActivePage("")} src="icon_nav.png" />
-          <h1>Investimentos</h1>
+          <h1>{textosExtra[currentLanguage].inversiones}</h1>
         </div>
 
-        {textoStaking("por")}
+        {textoStaking(currentLanguage)}
 
         <CuadroStaking
           operacionWithdrawl={operacionWithdrawl}
@@ -67,7 +87,7 @@ const Staking: React.FC<AmtStaking> = ({ setActivePage }) => {
             }}
             className="btnTransp"
           >
-            Consultar historico
+            {textosExtra[currentLanguage].consultarHistorico}
           </button>
           <button
             onClick={() => {
@@ -75,7 +95,7 @@ const Staking: React.FC<AmtStaking> = ({ setActivePage }) => {
             }}
             className=""
           >
-            Sacar
+            {textosExtra[currentLanguage].retirar}
           </button>
         </div>
       </div>

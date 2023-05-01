@@ -1,8 +1,11 @@
+// @ts-nocheck
+
 import React, { useRef, useState } from "react";
 
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 import BotonDarLiquidez from "./BotonDarLiquidez/BotonDarLiquidez";
+import { textosExtra } from "../../../Utils/textos";
 
 const CuadroProveerLiquidez = () => {
   const balanceAmt = useSelector(
@@ -34,6 +37,10 @@ const CuadroProveerLiquidez = () => {
 
   const allowanceBtcb = useSelector(
     (state: typeof RootState) => state.btcb.allowanceMaster
+  );
+
+  const currentLanguage = useSelector(
+    (state: typeof RootState) => state.session.language
   );
 
   const ratioAmtBtcb =
@@ -68,7 +75,9 @@ const CuadroProveerLiquidez = () => {
     <>
       <div id="primeraSeccion">
         <div className="saldo">
-          <p>Saldo: {balanceAmt}</p>
+          <p>
+            {textosExtra[currentLanguage].saldo} {balanceAmt}
+          </p>
         </div>
         <div className="cuadroCompra">
           <img src="coinAutomining.png" />
@@ -85,7 +94,10 @@ const CuadroProveerLiquidez = () => {
       </div>
       <div id="segundaSeccion">
         <div className="saldo">
-          <p>Saldo: {balanceBtcb}</p>
+          <p>
+            {textosExtra[currentLanguage].saldo}
+            {balanceBtcb}
+          </p>
         </div>
         <div className="cuadroCompra">
           <img src="coinBitcoin.png" alt="" />

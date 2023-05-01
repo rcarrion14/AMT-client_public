@@ -1,4 +1,5 @@
-import React, { useContext, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
 import { BotonMetamask } from "../Generales/BotonMetamask";
 import BotonBlanco from "../Generales/BotonBlanco";
 import { textosExtra, textoBotonesBlancos } from "../../Utils/textos";
@@ -7,9 +8,12 @@ interface HomeProps {
   setActivePage: React.Dispatch<React.SetStateAction<string>>;
 }
 const Home: React.FC<HomeProps> = ({ setActivePage }) => {
+  const currentLanguage = useSelector(
+    (state: typeof RootState) => state.session.language
+  );
   return (
     <>
-      <h1> {textosExtra.por.bienvenido}</h1>
+      <h1> {textosExtra[currentLanguage].bienvenido}</h1>
       <div className="containerVideo">
         <iframe
           className="video"
@@ -20,28 +24,32 @@ const Home: React.FC<HomeProps> = ({ setActivePage }) => {
         ></iframe>
       </div>
       <p className="textoConexion">
-        {textosExtra.por.textoConexion}
-        h
+        {textosExtra[currentLanguage].textoConexion}
+
         <BotonMetamask />
       </p>
 
       <BotonBlanco
-        titulo={textoBotonesBlancos.por.market.titulo}
-        descripcion={textoBotonesBlancos.por.market.descripcion}
+        titulo={textoBotonesBlancos[currentLanguage].market.titulo}
+        descripcion={textoBotonesBlancos[currentLanguage].market.descripcion}
         activador={"marketplace"}
         setActivePage={setActivePage}
         image={"icon_marketplace.png"}
       />
       <BotonBlanco
-        titulo={textoBotonesBlancos.por.investimentos.titulo}
-        descripcion={textoBotonesBlancos.por.investimentos.descripcion}
+        titulo={textoBotonesBlancos[currentLanguage].investimentos.titulo}
+        descripcion={
+          textoBotonesBlancos[currentLanguage].investimentos.descripcion
+        }
         activador={"investidores"}
         setActivePage={setActivePage}
         image={"icon_invest.png"}
       />
       <BotonBlanco
-        titulo={textoBotonesBlancos.por.gInvestidores.titulo}
-        descripcion={textoBotonesBlancos.por.gInvestidores.descripcion}
+        titulo={textoBotonesBlancos[currentLanguage].gInvestidores.titulo}
+        descripcion={
+          textoBotonesBlancos[currentLanguage].gInvestidores.descripcion
+        }
         activador={"gInvestidores"}
         setActivePage={setActivePage}
         image={"icon_grandesInvest.png"}

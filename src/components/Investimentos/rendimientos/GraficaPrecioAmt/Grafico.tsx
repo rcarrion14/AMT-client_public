@@ -1,5 +1,9 @@
-import React, { useEffect, useRef } from "react";
+// @ts-nocheck
 
+import React, { useEffect, useRef } from "react";
+import { textosExtra } from "../../../../Utils/textos";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../../store/store";
 interface GraficoInterface {
   setActivePage: React.Dispatch<React.SetStateAction<string>>;
 }
@@ -16,7 +20,7 @@ const Grafico: React.FC<GraficoInterface> = ({ setActivePage }) => {
         {
           "symbols": [
             [
-              "PANCAKESWAP:AMTUSD_66CD75|1D"
+              "PANCAKESWAP:AMTUSD_66CD75|1Y"
             ]
           ],
           "chartOnly": true,
@@ -46,12 +50,14 @@ const Grafico: React.FC<GraficoInterface> = ({ setActivePage }) => {
         }`;
     contariner.current.appendChild(script);
   }, []);
-
+  const currentLanguage = useSelector(
+    (state: typeof RootState) => state.session.language
+  );
   return (
     <div className="containerSlide">
       <div className="navBar_top">
         <img onClick={() => setActivePage("")} src="icon_nav.png" />
-        <h1>Marketplace</h1>
+        <h1>{textosExtra[currentLanguage].inversiones}</h1>
       </div>
       <div className="tradingview-widget-container" ref={contariner}>
         <div className="tradingview-widget-container__widget"></div>

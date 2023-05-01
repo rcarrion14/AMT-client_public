@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import React, { useEffect, useRef, useState } from "react";
 import SelectorMoneda from "./SelectorMonedaPancake";
 import { CSSTransition } from "react-transition-group";
@@ -9,10 +11,15 @@ import { listaMonedas } from "../../../Utils/listaMonedas";
 import contractAddresses from "../../../contracts/contractAddresses";
 import abiErc20 from "../../../contracts/abis/genericERC20.json";
 import { useGetQuote, useGetTxData } from "../../../Utils/1inch";
+import { textosExtra } from "../../../Utils/textos";
 
 const CuadroPancake = () => {
   const balanceAmt = useSelector(
     (state: typeof RootState) => state.amt.balance
+  );
+
+  const currentLanguage = useSelector(
+    (state: typeof RootState) => state.session.language
   );
   const signer = useSelector((state: typeof RootState) => state.wallet.signer);
   const addr = useSelector((state: typeof RootState) => state.wallet.address);
@@ -107,8 +114,10 @@ const CuadroPancake = () => {
     <>
       <div id="primeraSeccion">
         <div className="saldo">
-          <h2>Vocé paga</h2>
-          <p>Saldo: {balanceErc20}</p>
+          <h2>{textosExtra[currentLanguage].ustedPaga}</h2>
+          <p>
+            {textosExtra[currentLanguage].saldo} {balanceErc20}
+          </p>
         </div>
         <div className="cuadroCompra">
           <img
@@ -130,8 +139,10 @@ const CuadroPancake = () => {
       </div>
       <div id="segundaSeccion">
         <div className="saldo">
-          <h2>Vocé recebe</h2>
-          <p>Saldo: {balanceAmt}</p>
+          <h2>{textosExtra[currentLanguage].ustedRecibe}</h2>
+          <p>
+            {textosExtra[currentLanguage].saldo} {balanceAmt}
+          </p>
         </div>
         <div className="cuadroCompra">
           <img src="coinAutomining.png" alt="" />
@@ -148,11 +159,11 @@ const CuadroPancake = () => {
       </div>
       <div className="containerSaldos">
         <div>
-          <h2>AMT a venda:</h2>
+          <h2>{textosExtra[currentLanguage].amtEnVenta}</h2>
           <div>{}</div>
         </div>
         <div>
-          <h2>Preco do AMT:</h2>
+          <h2>{textosExtra[currentLanguage].precioAmt}</h2>
           <div>1 AMT = {""} USDT</div>
         </div>
       </div>

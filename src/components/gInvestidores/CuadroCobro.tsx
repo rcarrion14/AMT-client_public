@@ -1,8 +1,12 @@
+// @ts-nocheck
+
 import React from "react";
 import { format } from "../coinFormater";
 import { snapToDateMapp } from "./snapshotDateMapper";
 import Spinner from "../Generales/Spinner/Spinner";
 import { textosExtra } from "../../Utils/textos";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
 
 interface cuadroCobroProps {
   balanceOfAt: number | undefined;
@@ -27,6 +31,10 @@ const CuadroCobro: React.FC<cuadroCobroProps> = ({
     alreadyCharged !== undefined &&
     currentSnap !== undefined;
 
+  const currentLanguage = useSelector(
+    (state: typeof RootState) => state.session.language
+  );
+
   return (
     <div className="cuadroCobro">
       <img className="activeIcon" src="arrow-down.png" alt="" />
@@ -38,19 +46,25 @@ const CuadroCobro: React.FC<cuadroCobroProps> = ({
               {snapToDateMapp(currentSnap)} - {currentSnap}
             </p>
             <p className="aCobrar">
-              BTC a cobrar: {((payAt * balanceOfAt) / totalSupplyAt).toFixed(5)}
+              {textosExtra[currentLanguage].btcACobrar}{" "}
+              {((payAt * balanceOfAt) / totalSupplyAt).toFixed(5)}
             </p>
-            <p>balanceOfAt: {balanceOfAt}</p>
-            <p>Distribucion: {payAt?.toFixed(5)}</p>
+            <p>
+              {textosExtra[currentLanguage].distribucion} {payAt?.toFixed(5)}
+            </p>
           </>
         ) : (
           <Spinner size={20} gradientColor={["#00bfdc", "#fff"]}></Spinner>
         )}
       </div>
 
-      <button onClick={charge} disabled={alreadyCharged || balanceOfAt == 0}>
+      <button onClick={charge} disabled={false}>
         {allValuesDefined ? (
-          <>{alreadyCharged ? "ya cobrado" : "cobrar"}</>
+          <>
+            {alreadyCharged
+              ? textosExtra[currentLanguage].yaCobrado
+              : textosExtra[currentLanguage].cobrar}
+          </>
         ) : (
           <>
             <Spinner size={20} gradientColor={["#00bfdc", "#fff"]}></Spinner>

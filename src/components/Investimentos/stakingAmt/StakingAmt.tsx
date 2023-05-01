@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import CuadroStaking from "../CuadroStaking";
-import { textoStakingAmt } from "../../../Utils/textos";
+import { textoStakingAmt, textosExtra } from "../../../Utils/textos";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../store/store";
 import { amtOperations } from "../../../store/features/amt/amtOperations";
@@ -15,7 +15,13 @@ interface StakingAmtInterface {
 const StakingAmt: React.FC<StakingAmtInterface> = ({ setActivePage }) => {
   const [historico, setHistorico] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
+<<<<<<< HEAD
 
+=======
+  const currentLanguage = useSelector(
+    (state: typeof RootState) => state.session.language
+  );
+>>>>>>> 5adc5db1f76ea342e3f941ba2d3bea7019f35fee
   const balanceAmt = useSelector(
     (state: typeof RootState) => state.amt.balance
   );
@@ -41,9 +47,9 @@ const StakingAmt: React.FC<StakingAmtInterface> = ({ setActivePage }) => {
       <div className="containerSlide">
         <div className="navBar_top">
           <img onClick={() => setActivePage("")} src="icon_nav.png" />
-          <h1>Investimentos</h1>
+          <h1>{textosExtra[currentLanguage].inversiones}</h1>
         </div>
-        {textoStakingAmt("por")}
+        {textoStakingAmt(currentLanguage)}
         <CuadroStaking
           operacionWithdrawl={operacionWithdrawl}
           balanceUserAmt={balanceAmt}
@@ -61,7 +67,7 @@ const StakingAmt: React.FC<StakingAmtInterface> = ({ setActivePage }) => {
             }}
             className="btnTransp"
           >
-            Consultar historico
+            {textosExtra[currentLanguage].consultarHistorico}
           </button>
           <button
             onClick={() => {
@@ -69,7 +75,7 @@ const StakingAmt: React.FC<StakingAmtInterface> = ({ setActivePage }) => {
             }}
             className=""
           >
-            Sacar
+            {textosExtra[currentLanguage].retirar}
           </button>
         </div>
       </div>

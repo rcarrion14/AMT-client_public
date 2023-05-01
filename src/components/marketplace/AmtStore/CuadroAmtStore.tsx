@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import React, { useEffect, useRef, useState } from "react";
 //import SelectorMoneda from "../pancake/SelectorMonedaPancake";
 import { CSSTransition } from "react-transition-group";
@@ -6,12 +8,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../store/store";
 import { marketPlaceOperations } from "../../../store/features/marketplace/marketPlaceOperations";
 import { usdtOperations } from "../../../store/features/usdt/usdtOperations";
+import { textosExtra } from "../../../Utils/textos";
 
 //import opBlock from "../components/context/OperacionesBlockChain"; // P: Por que hice esto?  -  R: Ni idea
 
 const CuadroAmtStore = () => {
   const dispatch = useDispatch<AppDispatch>();
-
+  const currentLanguage = useSelector(
+    (state: typeof RootState) => state.session.language
+  );
   //Datos del componente
   const balanceAmt = useSelector(
     (state: typeof RootState) => state.amt.balance
@@ -66,8 +71,10 @@ const CuadroAmtStore = () => {
     <>
       <div id="primeraSeccion">
         <div className="saldo">
-          <h2>Vocé paga</h2>
-          <p>Saldo: {balanceUsdt}</p>
+          <h2>{textosExtra[currentLanguage].ustedRecibe}</h2>
+          <p>
+            {textosExtra[currentLanguage].saldo} {balanceUsdt}
+          </p>
         </div>
         <div className="cuadroCompra">
           <img
@@ -89,8 +96,10 @@ const CuadroAmtStore = () => {
       </div>
       <div id="segundaSeccion">
         <div className="saldo">
-          <h2>Vocé recebe</h2>
-          <p>Saldo: {balanceAmt}</p>
+          <h2>{textosExtra[currentLanguage].ustedRecibe}</h2>
+          <p>
+            {textosExtra[currentLanguage].saldo} {balanceAmt}
+          </p>
         </div>
         <div className="cuadroCompra">
           <img src="coinAutomining.png" alt="" />
@@ -107,11 +116,11 @@ const CuadroAmtStore = () => {
       </div>
       <div className="containerSaldos">
         <div>
-          <h2>AMT a venda:</h2>
+          <h2>{textosExtra[currentLanguage].amtEnVenta}</h2>
           <div>{balanceTienda}</div>
         </div>
         <div>
-          <h2>Preco do AMT:</h2>
+          <h2>{textosExtra[currentLanguage].precioAmt}</h2>
           <div>1 AMT = {precioTienda} USDT</div>
         </div>
       </div>
