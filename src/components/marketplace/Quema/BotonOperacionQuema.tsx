@@ -2,8 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 import { AppDispatch } from "../../../store/store";
-import { useDispatch, useSelector } from "react-redux";
-
 import { textosExtra } from "../../../Utils/textos";
 import { useDispatch, useSelector } from "react-redux";
 import { ethers } from "ethers";
