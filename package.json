@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
+    "@types/chart.js": "^2.9.37",
+    "chart.js": "^4.3.0",
     "ethers": "5.4",
     "flag-icon-css": "^4.1.7",
     "react": "^18.2.0",

@@ -616,3 +616,38 @@ iconos: #9C9EA1
 .containerSimuladorStaking > .saldo > h2 {
   margin: 7px 0 5px 0;
 }
+
+.containerSaldosLiquidez {
+  display: flex;
+  flex-direction: row;
+  margin-top: 4%;
+  background-color: #ffffff;
+  border-top-right-radius: 10%;
+  border-top-left-radius: 10%;
+  border-bottom-right-radius: 10%;
+  border-bottom-left-radius: 10%;
+}
+
+.leftSide,
+.rightSide {
+  flex: 1;
+}
+
+.rightSide {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.leftSide {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.rightSide div,
+.rightSide p {
+  margin: 3;
+}
