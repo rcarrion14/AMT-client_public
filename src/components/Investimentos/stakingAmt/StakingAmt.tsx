@@ -15,13 +15,10 @@ interface StakingAmtInterface {
 const StakingAmt: React.FC<StakingAmtInterface> = ({ setActivePage }) => {
   const [historico, setHistorico] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
-<<<<<<< HEAD
-
-=======
   const currentLanguage = useSelector(
     (state: typeof RootState) => state.session.language
   );
->>>>>>> 5adc5db1f76ea342e3f941ba2d3bea7019f35fee
+
   const balanceAmt = useSelector(
     (state: typeof RootState) => state.amt.balance
   );

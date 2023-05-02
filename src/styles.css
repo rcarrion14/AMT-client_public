@@ -540,3 +540,79 @@ iconos: #9C9EA1
 .cuadroStakings > button {
   width: 30%;
 }
+
+.cuadroSimulador {
+  margin-top: 20px;
+}
+
+.cuadroSimulador > .seccion {
+  margin-top: 20px;
+}
+
+.cuadroSimulador > .seccion > .saldo {
+  margin: 5px 20px 5px 0px;
+  justify-content: flex-end;
+}
+
+.containerBotonesSimulacion {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btnSimulacion {
+  border-style: solid;
+  border-color: #00bfdc;
+  width: 55px;
+  height: 25px;
+  padding: 0px;
+  margin: 3px;
+  font-size: 0.7rem;
+  /* box-shadow: none; */
+}
+
+.containerResultadosSimulacion {
+  margin-top: 25px;
+}
+
+.containerResultadosSimulacion > h2 {
+  margin-bottom: 25px;
+}
+
+.containerResultadosSimulacion > div {
+  margin-bottom: 15px;
+  background-color: white;
+  border-radius: 15px;
+  padding: 10px;
+}
+
+.containerSimuladorStaking {
+  padding: 0 20px 0 20px;
+}
+
+.botonesSimuladorStaking {
+  display: flex;
+  justify-content: center;
+}
+
+.botonesSimuladorStaking > button {
+  padding: 7px;
+  border-radius: 12px;
+  height: auto;
+}
+
+.botonesSimuladorStaking > button {
+  padding: 7px;
+  border-radius: 12px;
+  height: auto;
+  background-color: #a9f4ff;
+  opacity: 0.4;
+}
+
+.botonesSimuladorStaking > button.active {
+  background-color: #00ddff;
+  opacity: 1;
+}
+
+.containerSimuladorStaking > .saldo > h2 {
+  margin: 7px 0 5px 0;
+}
