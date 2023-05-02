@@ -7,6 +7,7 @@ import { ethers } from "ethers";
 import contractAddresses from "../../../contracts/contractAddresses";
 import { snapToDateMapp } from "../../gInvestidores/snapshotDateMapper";
 import Spinner from "../../Generales/Spinner/Spinner";
+import { fetchVaultAmt } from "../../../Utils/fetchBuckets";
 
 const Historico = ({
   setHistorico,
@@ -15,7 +16,6 @@ const Historico = ({
   currentSnapshot,
 }) => {
   const addr = useSelector((state: typeof RootState) => state.wallet.address);
-
   const [stakingIniciales, setStakingIniciales] = useState(undefined);
   const [fechasSwaps, setFechasSwaps] = useState([]);
   const [balancesAt, setBalancesAt] = useState([]);
@@ -38,8 +38,7 @@ const Historico = ({
   function getGanancias() {
     let depositoInicial = parseFloat(stakingIniciales[addr].amount);
     var gananciaAt_i = [];
-    var gananciaAcum = [0];
-    var snapsList = [];
+
     var ultimaGananciaAcum = 0;
     for (let i = 0; i < balancesAt.length; i++) {
       let balanceAt = parseFloat(balancesAt[i]);
@@ -54,13 +53,12 @@ const Historico = ({
 
       ultimaGananciaAcum = ultimaGananciaAcum + ganancia;
 
-      gananciaAcum.push(ultimaGananciaAcum);
       gananciaAt_i.push([ganancia, snap]);
     }
     return gananciaAt_i.reverse();
   }
 
-  const containersCoso = () => {
+  const containers = () => {
     if (stakingIniciales) {
       const listaGanancias = getGanancias();
 
@@ -87,23 +85,9 @@ const Historico = ({
   };
 
   useEffect(() => {
-    async function fetchData() {
-      const responseStakings = await fetch(
-        "https://amt-bucket-aws.s3.amazonaws.com/ultimosStaking.json"
-      );
-      const dataStakings = await responseStakings.json();
-
-      const responseFechasSwaps = await fetch(
-        "https://amt-bucket-aws.s3.amazonaws.com/fechasSwaps.json"
-      );
-      const dataFechasSwaps = await responseFechasSwaps.json();
-
-      return { dataStakings, dataFechasSwaps };
-    }
-
-    fetchData().then((result) => {
+    fetchVaultAmt().then((result) => {
       setStakingIniciales(result.dataStakings);
-      setFechasSwaps(result.dataFechasSwaps);
+      setFechasSwaps(result.dataSwaps);
       getAllSnapshotFrom(result.dataStakings[addr].snap).then((result) => {
         setBalancesAt(result);
       });
@@ -125,29 +109,27 @@ const Historico = ({
 
       <div className="cuadroGanaciasStaking">
         <div>AMT</div>
-        <div>{addr ? stackedByUser.toFixed(5) : null}</div>
+        <div>{stackedByUser ? stackedByUser.toFixed(5) : null}</div>
         <div className="celeste">
-          {addr ? (stackedByUser * 0.65).toFixed(3) + " USDT" : null}
+          {stackedByUser ? (stackedByUser * 0.65).toFixed(3) + " USDT" : null}
         </div>
         <div className="celeste">
           <b>AMT depositados: </b>
-          {addr && stakingIniciales ? stakingIniciales[addr].amount : null}
+          {stakingIniciales ? stakingIniciales[addr].amount : null}
         </div>
         <div className="celeste">
           <b>Data do depósito: </b>{" "}
-          {addr && stakingIniciales
-            ? formatDate(stakingIniciales[addr].tstamp)
-            : null}
+          {stakingIniciales ? formatDate(stakingIniciales[addr].tstamp) : null}
         </div>
         <div className="celeste">
           <b>BTCB recebidos: </b>
-          {addr && stakingIniciales
+          {stakingIniciales
             ? (stackedByUser - stakingIniciales[addr].amount).toFixed(5)
             : null}
         </div>
       </div>
 
-      {containersCoso()}
+      {containers()}
     </div>
   );
 };

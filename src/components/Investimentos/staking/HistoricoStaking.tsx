@@ -3,61 +3,92 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
+import { fetchVaultBctb, formatDate } from "../../../Utils/fetchBuckets";
+import contractAddresses from "../../../contracts/contractAddresses";
+import { snapToDateMapp } from "../../gInvestidores/snapshotDateMapper";
+import { ethers } from "ethers";
 
-const Historico = ({ setHistorico, stackedByUser, currentSnapshot }) => {
-  const [stakingIniciales, setStakingIniciales] = useState(undefined);
-  const [fechasSwaps, setFechasSwaps] = useState([]);
+const Historico = ({
+  setHistorico,
+  stackedByUser,
+  currentSnapshot,
+  contractAmt,
+}) => {
   const addr = useSelector((state: typeof RootState) => state.wallet.address);
+  const [stakingIniciales, setStakingIniciales] = useState(undefined);
+  const [dataCobros, setDataCobros] = useState([]);
+  const [balancesAt, setBalancesAt] = useState([]);
 
-  const params = {
-    headers: {
-      "Content-Type": "application/json",
-    },
+  async function getAllSnapshotFrom(snapFrom: number) {
+    let promiseList = [];
+
+    for (let i = snapFrom; i <= currentSnapshot; i++) {
+      const promise = contractAmt.balanceOfAt(contractAddresses.VaultBtcb, i);
+      promiseList.push(promise);
+    }
+    const balances = await Promise.all(promiseList);
+    let balanceDecimal = [];
+    balances.map((hex) => {
+      balanceDecimal.push(ethers.utils.formatEther(hex));
+    });
+    return balanceDecimal;
+  }
+
+  function getGanancias() {
+    let depositoInicial = parseFloat(stakingIniciales[addr].amount);
+    var gananciaAt_i = [];
+
+    for (let i = 0; i < balancesAt.length; i++) {
+      let balanceAt = parseFloat(balancesAt[i]);
+      let swapAt = parseFloat(
+        dataCobros[dataCobros.length - balancesAt.length + i].amount
+      );
+      let snap = dataCobros[dataCobros.length - balancesAt.length + i].snap;
+
+      let ganancia = (depositoInicial / balanceAt) * swapAt;
+
+      gananciaAt_i.push([ganancia, snap]);
+    }
+    console.log(gananciaAt_i);
+
+    return gananciaAt_i.reverse();
+  }
+
+  const containers = () => {
+    if (stakingIniciales) {
+      const listaGanancias = getGanancias();
+
+      return listaGanancias.map((ganancia) => {
+        return (
+          <div className="cuadroStakings">
+            <img className="activeIcon" src="arrow-down.png" alt="" />
+
+            <div className="transparente">
+              <p>
+                <b>Lucros distribuidos</b>
+              </p>
+              <p>{snapToDateMapp(ganancia[1])}</p>
+            </div>
+            <div className="transparente">
+              <p>{ganancia[0].toFixed(6)}</p>
+              <p>XX BTC</p>
+            </div>
+          </div>
+        );
+      });
+    } else {
+    }
   };
 
   useEffect(() => {
-    async function fetchData() {
-      const responseStakings = await fetch(
-        "https://amt-bucket-aws.s3.amazonaws.com/ultimosStaking.json",
-        params
-      );
-      const dataStakings = await responseStakings.json();
-
-      const responseFechasSwaps = await fetch(
-        "https://amt-bucket-aws.s3.amazonaws.com/fechasSwaps.json",
-        params
-      );
-      const dataFechasSwaps = await responseFechasSwaps.json();
-
-      return { dataStakings, dataFechasSwaps };
-    }
-
-    fetchData().then((result) => {
+    fetchVaultBctb().then((result) => {
       setStakingIniciales(result.dataStakings);
-      setFechasSwaps(result.dataFechasSwaps);
+      setDataCobros(result.dataCobros);
+      getAllSnapshotFrom(result.dataStakings[addr].snap).then((result) => {
+        setBalancesAt(result);
+      });
     });
   }, []);
-
-  const formatDate = (timestamp: number) => {
-    let date = new Date(timestamp);
-    date = date.toLocaleDateString();
-    return date;
-  };
-
-  const listaDeContainers = fechasSwaps.map((swaps) => {
-    return stakingIniciales[addr?.toLowerCase()].tstamp < swaps.date ? (
-      <div key={swaps} className="cuadroStakings">
-        <img className="activeIcon" src="arrow-down.png" alt="" />
-        <div className="transparente">
-          <p>
-            <b>Autocompra de AMT</b>
-          </p>
-          <p>{formatDate(swaps.date)}</p>
-        </div>
-        <div className="transparente"> + 150AMT</div>
-      </div>
-    ) : null;
-  });
 
   return (
     <div className="containerSlide">
@@ -95,7 +126,7 @@ const Historico = ({ setHistorico, stackedByUser, currentSnapshot }) => {
           </div>
         </div>
       }
-      {listaDeContainers}
+      {containers()}
     </div>
   );
 };

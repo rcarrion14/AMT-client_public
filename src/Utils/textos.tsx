@@ -978,6 +978,37 @@ export const textoInterfaz1Inch = (idioma: string) => {
   }
 };
 
+export const simuleRentabilidad = (idioma: string) => {
+  if (idioma == "por") {
+    return (
+      <>
+        <h2>Simule a rentabilidade</h2>
+        <p>
+          A rentabilidade de AMT depende de algumas variáveis e, aqui, você pode
+          alterar duas delas para verificar quanto o AMT podes render em
+          diferentes cenários.
+        </p>
+
+        <p>
+          Essas duas variáveis são: peco de AMT ao investir e o preço de
+          Bitcoin.
+        </p>
+
+        <p>
+          Por padrão, utiliza-se ose preços vigentes em tempo real, levando em
+          consideração a taxa de dificuldade da rede de mineração atual.
+        </p>
+      </>
+    );
+  }
+
+  if (idioma == "esp") {
+  }
+
+  if (idioma == "eng") {
+  }
+};
+
 /******************/
 /******************/
 

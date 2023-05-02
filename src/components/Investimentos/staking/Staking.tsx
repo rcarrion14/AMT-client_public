@@ -29,6 +29,7 @@ const Staking: React.FC<AmtStaking> = ({ setActivePage }) => {
   );
 
   const dispatch = useDispatch<AppDispatch>();
+
   const balanceAmt = useSelector(
     (state: typeof RootState) => state.amt.balance
   );
@@ -42,9 +43,10 @@ const Staking: React.FC<AmtStaking> = ({ setActivePage }) => {
     (state: typeof RootState) => state.amt.allowanceVaultBtcb
   );
   const aprobarVault = amtOperations.approveVaultBtcb;
-
   const stake = vaultBtcbOperations.stake;
   const operacionWithdrawl = vaultBtcbOperations.withdrawl;
+
+  const infoAllowance = textoInfoAllowance("por");
 
   return (
     <>
@@ -94,6 +96,7 @@ const Staking: React.FC<AmtStaking> = ({ setActivePage }) => {
         <HistoricoStaking
           setHistorico={setHistorico}
           stackedByUser={stackedByUser}
+          contractAmt={contractAmt}
           currentSnapshot={currentSnapshot}
         />
       </CSSTransition>
