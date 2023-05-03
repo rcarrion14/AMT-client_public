@@ -61,29 +61,27 @@ const SelectorMoneda1Inch: React.FC<SelectorMonedaInterface> = ({
   };
 
   return (
-    <>
-      <div className="containterSelector">
-        <div className="containerClose">
-          <div>Buscador:</div>
-          <input
-            className="inputBusqueda"
-            type="text"
-            ref={inputBusqueda}
-            onChange={() => {
-              setBuscadorValue(inputBusqueda.current.value);
-            }}
-          />
-          <img
-            onClick={() => {
-              setSelector(false);
-            }}
-            className="close"
-            src="close.png"
-          />
-        </div>
-        {htmlListGenerator()}
+    <div className="containterSelectorBuscador">
+      <div className="containerClose">
+        <div>Buscador:</div>
+        <input
+          className="inputBusqueda"
+          type="text"
+          ref={inputBusqueda}
+          onChange={() => {
+            setBuscadorValue(inputBusqueda.current.value);
+          }}
+        />
+        <img
+          onClick={() => {
+            setSelector(false);
+          }}
+          className="close"
+          src="close.png"
+        />
       </div>
-    </>
+      {htmlListGenerator()}
+    </div>
   );
 };
 

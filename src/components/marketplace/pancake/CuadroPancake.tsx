@@ -116,7 +116,8 @@ const CuadroPancake = () => {
         <div className="saldo">
           <h2>{textosExtra[currentLanguage].ustedPaga}</h2>
           <p>
-            {textosExtra[currentLanguage].saldo} {balanceErc20}
+            {textosExtra[currentLanguage].saldo}{" "}
+            {Number(balanceErc20.toFixed(5))}
           </p>
         </div>
         <div className="cuadroCompra">
@@ -126,7 +127,21 @@ const CuadroPancake = () => {
             }}
             src={monedaActive.logoURI}
           />
-          <div>{monedaActive.symbol}</div>
+          <div
+            onClick={() => {
+              setSelector(true);
+            }}
+          >
+            {monedaActive.symbol}
+          </div>
+          <img
+            onClick={() => {
+              setSelector(true);
+            }}
+            src="arrow-down-navigate.png"
+            className="flecha"
+            alt=""
+          />
           <input
             ref={inputPagar}
             placeholder="0"
@@ -157,11 +172,7 @@ const CuadroPancake = () => {
           />
         </div>
       </div>
-      <div className="containerSaldos">
-        <div>
-          <h2>{textosExtra[currentLanguage].amtEnVenta}</h2>
-          <div>{}</div>
-        </div>
+      <div className="soloSaldo">
         <div>
           <h2>{textosExtra[currentLanguage].precioAmt}</h2>
           <div>1 AMT = {""} USDT</div>

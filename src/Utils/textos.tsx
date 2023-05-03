@@ -64,7 +64,7 @@ export const textoMarketplace = (idioma: string) => {
   }
 };
 
-export const textoStore = (idioma: string) => {
+export const textoStore = (idioma: string, func: Function) => {
   if (idioma == "por") {
     return (
       <>
@@ -83,6 +83,11 @@ export const textoStore = (idioma: string) => {
           recursos são 100% destinados para novos investimentos no projeto AMT,
           como compra de máquinas de mineração, contratação de pessoas ou
           serviços, etc.
+        </p>
+        <p>
+          A compra de AMT no AMT Store deve ser feita usando USDT. Caso precise
+          trocar outra moeda por USDT, para conseguir comprar AMT.{" "}
+          <u onClick={() => func()}>clique aquí</u>
         </p>
       </>
     );
@@ -1105,10 +1110,10 @@ export const textosExtra: typeTextosExtra = {
     aprobarAMT: "Aprobar AMT",
     aprobarLiqAmt: "Aprobar LiqAmt",
 
-    bceAmtInsuficiente: "balance AMT insuficiente",
-    bceBtcInsuficiente: "balance BTC insuficiente",
-    bceUSDTInsuficiente: "balance USDT insuficiente",
-    bceLiqAmtInsuficiente: "balance LiqAmt insuficiente",
+    bceAmtInsuficiente: "Balance AMT insuficiente",
+    bceBtcInsuficiente: "Balance BTC insuficiente",
+    bceUSDTInsuficiente: "Balance USDT insuficiente",
+    bceLiqAmtInsuficiente: "Balance LiqAmt insuficiente",
 
     quemar: "Quemar",
 

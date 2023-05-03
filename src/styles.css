@@ -49,6 +49,7 @@ button {
 
 u {
   color: #00bfdc;
+  font-weight: bold;
 }
 
 .containerBanner {
@@ -190,6 +191,10 @@ u {
   width: 30px;
 }
 
+.cuadroCompra > img.flecha {
+  width: 15px;
+}
+
 .inputCompra {
   background-color: inherit;
   border: none;
@@ -207,8 +212,9 @@ u {
 
 .saldo {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
+  margin: 0 15px 0 15px;
 }
 .containerSaldos {
   display: flex;
@@ -245,8 +251,6 @@ u {
 }
 
 .containterSelector {
-  overflow: scroll;
-  height: 40vh;
   background-color: white;
 
   border-radius: 15px;
@@ -259,9 +263,24 @@ u {
   padding: 15px;
 }
 
+.containterSelectorBuscador {
+  overflow: scroll;
+  height: 110%;
+  background-color: white;
+
+  border-radius: 15px;
+
+  position: absolute;
+  top: -4vh;
+
+  width: 100%;
+  box-sizing: border-box;
+  padding: 15px;
+}
+
 .moneda {
   margin: 0 20px 0 20px;
-  padding: 20px 0 20px 0;
+  padding: 7px 0 7px 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -306,15 +325,8 @@ u {
 }
 
 .imgDex {
-  width: 35px;
+  width: 30px;
 }
-
-/*
-turquesa: #00DDFF
-oscuro:
-iconos: #9C9EA1
-
-*/
 
 .flexBox {
   display: flex;
@@ -650,4 +662,56 @@ iconos: #9C9EA1
 .rightSide div,
 .rightSide p {
   margin: 3;
+}
+
+.cointainer1Inch {
+  overflow: scroll;
+  background-color: #adceff;
+
+  border-radius: 15px;
+  position: relative;
+  top: -55vh;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 15px;
+}
+
+.cointainer1Inch > .close1Inch {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.soloSaldo {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.soloSaldo > div {
+  text-align: center;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  background-color: #e6e6e6;
+  border-radius: 15px;
+  padding: 5px 12px 5px 12px;
+
+  width: 40%;
+  align-items: center;
+}
+
+.containerSaldos > div > div {
+  color: #a9a9a9;
+  font-size: 0.8rem;
+  background-color: inherit;
+}
+
+.container {
+  position: relative;
+}
+
+.inactive {
+  background-color: #a9f4ff;
+  opacity: 0.4;
 }
