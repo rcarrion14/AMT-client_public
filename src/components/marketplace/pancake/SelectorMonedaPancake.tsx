@@ -22,7 +22,14 @@ const SelectorMoneda: React.FC<SelectorMonedaInterface> = ({
     if (listaMonedas) {
       const htmlList = Object.keys(listaMonedas).map((moneda: string) => {
         return (
-          <div key={moneda} className="moneda">
+          <div
+            onClick={() => {
+              setmonedaActive(listaMonedas[moneda]);
+              setSelector(false);
+            }}
+            key={moneda}
+            className="moneda"
+          >
             <div
               className={
                 listaMonedas[moneda].symbol == monedaActive.symbol
@@ -30,14 +37,7 @@ const SelectorMoneda: React.FC<SelectorMonedaInterface> = ({
                   : null
               }
             >
-              <img
-                className="imgDex"
-                onClick={() => {
-                  setmonedaActive(listaMonedas[moneda]);
-                  setSelector(false);
-                }}
-                src={listaMonedas[moneda].logoURI}
-              />
+              <img className="imgDex" src={listaMonedas[moneda].logoURI} />
               {listaMonedas[moneda].symbol}
             </div>
             {listaMonedas[moneda].symbol == monedaActive.symbol

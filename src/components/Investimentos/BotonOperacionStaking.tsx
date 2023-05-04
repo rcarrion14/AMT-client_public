@@ -31,7 +31,7 @@ const BotonOperacion: React.FC<BotonOperacionProps> = ({
     (state: typeof RootState) => state.session.language
   );
   const mesajeBoton = () => {
-    if (allowance) {
+    if (allowance >= 0) {
       if (allowance < parseFloat(input)) {
         return textosExtra[currentLanguage].aprobar;
       }
@@ -41,7 +41,7 @@ const BotonOperacion: React.FC<BotonOperacionProps> = ({
         return textosExtra[currentLanguage].stake;
       }
     } else {
-      return "hola";
+      return textosExtra[currentLanguage].stake;
     }
   };
 

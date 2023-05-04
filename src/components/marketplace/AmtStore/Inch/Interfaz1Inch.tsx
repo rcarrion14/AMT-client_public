@@ -12,13 +12,16 @@ const Interfaz1Inch: React.FC<Interfaz1InchInterface> = ({ setInterfaz }) => {
     (state: typeof RootState) => state.session.language
   );
   return (
-    <div className="containerSlide">
-      <div className="navBar_top">
-        <img onClick={() => setInterfaz(false)} src="icon_nav.png" />
-        <h1>AMT Store</h1>
+    <div className="cointainer1Inch">
+      <div className="close1Inch">
+        <h2>Seleccione moneda</h2>
+        <img
+          className="close"
+          onClick={() => setInterfaz(false)}
+          src="close.png"
+        />
       </div>
       <div className="container">
-        {textoInterfaz1Inch(currentLanguage)}
         <CuadroInterfaz1Inch />
       </div>
     </div>
