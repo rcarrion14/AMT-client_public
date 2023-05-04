@@ -1014,6 +1014,79 @@ export const simuleRentabilidad = (idioma: string) => {
   }
 };
 
+export const textoRetirarLiquidez = (idioma: string) => {
+  if (idioma === "por") {
+    return (
+      <>
+        <h1>Detalhes</h1>
+        <p>
+          A quantidade de cada moeda varia para que a relação de valor investida
+          em cada token seja mantida.
+        </p>
+        <p>
+          Portanto, quando, por exemplo, AMT se valoriza em relação a BTCB, o
+          investidor terá menos AMT e mais BTCB, e vice-versa.
+        </p>
+        <p>
+          O melhor momento para retirar os tokens de liquidez depende da
+          estratégia e dos interesses do investidor.
+        </p>
+        <p>
+          Ao retirar a liquidez, o investidor aceita a quantidade de tokens que
+          lhe corresponde no momento da retirada.
+        </p>
+      </>
+    );
+  }
+  if (idioma === "esp") {
+    return (
+      <>
+        {" "}
+        <h1>Detalles</h1>
+        <p>
+          La cantidad de cada moneda varía para que se mantenga la relación de
+          valor invertida en cada token
+        </p>
+        <p>
+          Entonces, cuando por ejemplo AMT se valoriza contra BTCB, el inversor
+          tendra menos AMT y más BTCB, y viceversa
+        </p>
+        <p>
+          El mejor momento para retirar los tokens de liquidez dependerá de la
+          estrategia y los intereses del inversor
+        </p>
+        <p>
+          Al retirar la liquidez el inversor acepta la cantidad de tokens que le
+          corresponden en el momento de la retirada
+        </p>
+      </>
+    );
+  }
+  if (idioma === "eng") {
+    return (
+      <>
+        <h1>Details</h1>
+        <p>
+          The amount of each currency varies so that the invested value ratio is
+          maintained in each token.
+        </p>
+        <p>
+          Therefore, when for example AMT appreciates against BTCB, the investor
+          will have less AMT and more BTCB, and vice versa.
+        </p>
+        <p>
+          The best time to withdraw liquidity tokens depends on the investor's
+          strategy and interests.
+        </p>
+        <p>
+          When withdrawing liquidity, the investor accepts the amount of tokens
+          corresponding to them at the time of withdrawal.
+        </p>
+      </>
+    );
+  }
+};
+
 /******************/
 /******************/
 
@@ -1071,6 +1144,7 @@ export interface interfaceTextoExtra {
   retirar: string;
   btcbAcumulados: string;
   amtGenerados: string;
+  participacionEnPool: string;
 }
 export type typeTextosExtra = {
   [key in languageCode]: interfaceTextoExtra;
@@ -1128,6 +1202,7 @@ export const textosExtra: typeTextosExtra = {
     retirar: "Retirar",
     btcbAcumulados: "BTCB acumulados",
     amtGenerados: "AMT gerados",
+    participacionEnPool: "Participação total no pool:",
   },
   esp: {
     bienvenido: "¡Bienvenido!",
@@ -1179,6 +1254,7 @@ export const textosExtra: typeTextosExtra = {
     retirar: "Retirar",
     btcbAcumulados: "BTCB acumulados",
     amtGenerados: "AMT generados",
+    participacionEnPool: "Participación total en pool:",
   },
   eng: {
     bienvenido: "Welcome!",
@@ -1220,6 +1296,7 @@ export const textosExtra: typeTextosExtra = {
     retirar: "Withdraw",
     btcbAcumulados: "Accumulated BTCB",
     amtGenerados: "Generated AMT",
+    participacionEnPool: "Total participation in pool:",
   },
 };
 

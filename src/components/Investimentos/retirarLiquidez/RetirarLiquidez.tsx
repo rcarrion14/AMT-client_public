@@ -1,5 +1,9 @@
 import React, { useRef } from "react";
-import { textoLiquidez, textosExtra } from "../../../Utils/textos";
+import {
+  textoLiquidez,
+  textoRetirarLiquidez,
+  textosExtra,
+} from "../../../Utils/textos";
 import CuadroProveerLiquidez from "../liquidez/CuadroProveerLiquidez";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
@@ -35,9 +39,11 @@ const RetirarLiquidez: React.FC<LiquidezInterface> = ({ setActivePage }) => {
   let usdtEnBtcb = 0;
   let amtEnLiquidez = 0;
   let btcbEnLiquidez = 0;
+  let poolParticipation = 0;
   if (balanceLiqAmt && liqAmtTotalSupply && balancePoolAmt && balancePoolBtc) {
-    amtEnLiquidez = (balanceLiqAmt / liqAmtTotalSupply) * balancePoolAmt;
-    btcbEnLiquidez = (balanceLiqAmt / liqAmtTotalSupply) * balancePoolBtc;
+    poolParticipation = balanceLiqAmt / liqAmtTotalSupply;
+    amtEnLiquidez = poolParticipation * balancePoolAmt;
+    btcbEnLiquidez = poolParticipation * balancePoolBtc;
     usdtEnAmt = amtEnLiquidez * precioAmt;
     usdtEnBtcb = btcbEnLiquidez * precioBtcb;
   }
@@ -48,36 +54,43 @@ const RetirarLiquidez: React.FC<LiquidezInterface> = ({ setActivePage }) => {
   console.log(usdtEnBtcb);
   return (
     <div className="containerSlide">
-      <div className="navBar_top">
-        <img onClick={() => setActivePage("")} src="icon_nav.png" />
-        <h1>{textosExtra[currentLanguage].inversiones}</h1>
-      </div>
-      <div style={{ display: "flex" }}>
-        {" "}
-        <h1>Saldo total: </h1>
-        <h3>{usdtEnAmt + usdtEnBtcb}$</h3>
-      </div>
-
-      <DoughnutChart
-        data={[usdtEnAmt + 10, usdtEnBtcb + 1]}
-        labels={["AMT", "BTC"]}
-      />
-
-      <div className="containerSaldosLiquidez">
-        <div className="leftSide">
-          <img src="coinAutomining.png" />
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            <div>texto</div>
-            <p>mas texto</p>
+      <div className="containerSlideRetirarLiquidez">
+        <div className="navBar_top">
+          <img onClick={() => setActivePage("")} src="icon_nav.png" />
+          <h1>{textosExtra[currentLanguage].inversiones}</h1>
+        </div>
+        <div style={{ display: "flex", textAlign: "center" }}>
+          {" "}
+          <h1>Saldo total: </h1>
+          <h3>{usdtEnAmt + usdtEnBtcb}$</h3>
+        </div>
+        <div className="donutContainer">
+          <DoughnutChart
+            data={[usdtEnAmt + 10, usdtEnBtcb + 10]}
+            labels={["AMT", "BTC"]}
+          />
+        </div>
+        <div className="containerParticipacionEnPool">
+          <b>{textosExtra[currentLanguage].participacionEnPool} </b>
+          {poolParticipation * 100} %
+        </div>
+        <div className="containerSaldosLiquidez">
+          <div className="leftSide">
+            <img src="coinAutomining.png" />
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              <div>AMT</div>
+              <p>{amtEnLiquidez}</p>
+            </div>
+          </div>
+          <div className="rightSide">
+            <img src="coinBitcoin.png" />
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              <div>BTCB</div>
+              <p>{btcbEnLiquidez}</p>
+            </div>
           </div>
         </div>
-        <div className="rightSide">
-          <img src="coinBitcoin.png" />
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            <div>texto</div>
-            <p>mas texto</p>
-          </div>
-        </div>
+        {textoRetirarLiquidez(currentLanguage)}
       </div>
     </div>
   );

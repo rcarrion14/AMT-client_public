@@ -629,39 +629,64 @@ u {
   margin: 7px 0 5px 0;
 }
 
+.donutContainer {
+  max-height: 500px;
+}
+.containerParticipacionEnPool {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 4%;
+  background-color: #ffffff;
+}
 .containerSaldosLiquidez {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   margin-top: 4%;
   background-color: #ffffff;
-  border-top-right-radius: 10%;
-  border-top-left-radius: 10%;
-  border-bottom-right-radius: 10%;
-  border-bottom-left-radius: 10%;
-}
-
-.leftSide,
-.rightSide {
-  flex: 1;
-}
-
-.rightSide {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: flex-start;
+  border-radius: 80px;
 }
 
 .leftSide {
+  flex: auto;
+  margin-top: 3%;
+  margin-bottom: 3%;
+  margin-left: 5%;
   display: flex;
   flex-direction: row;
-  justify-content: center;
   align-items: flex-start;
 }
+.rightSide {
+  flex: auto;
+  margin-top: 3%;
+  margin-bottom: 3%;
+  margin-right: 5%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: right;
+  border-left-style: dashed;
+  border-left-color: #b2becf;
+}
+.containerSlideRetirarLiquidez {
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+.leftSide img {
+  margin-right: 10px;
+}
+.rightSide img {
+  margin-right: 10px;
+}
 
-.rightSide div,
+.leftSide p {
+  margin: 0%;
+}
+
 .rightSide p {
-  margin: 3;
+  margin: 0%;
 }
 
 .cointainer1Inch {
