@@ -58,7 +58,11 @@ const CuadroCobro: React.FC<cuadroCobroProps> = ({
         )}
       </div>
 
-      <button onClick={charge} disabled={false}>
+      <button
+        onClick={alreadyCharged ? charge : null}
+        className={alreadyCharged ? "inactive" : null}
+        // style={{ backgroundColor: alreadyCharged ? "#a9a9a9" : "#00ddff" }}
+      >
         {allValuesDefined ? (
           <>
             {alreadyCharged

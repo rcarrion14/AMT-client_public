@@ -5,6 +5,8 @@ import CuadroAmtStore from "./CuadroAmtStore";
 import { textoStore } from "../../../Utils/textos";
 import Interfaz1Inch from "./Inch/Interfaz1Inch";
 import { useSelector } from "react-redux";
+import { CSSTransition } from "react-transition-group";
+
 interface AmtStoreInterface {
   setActivePage: React.Dispatch<React.SetStateAction<string>>;
 }
@@ -14,19 +16,30 @@ const AmtStore: React.FC<AmtStoreInterface> = ({ setActivePage }) => {
     (state: typeof RootState) => state.session.language
   );
   return (
-    <div className="containerSlide">
-      <div className="navBar_top">
-        <img onClick={() => setActivePage("marketplace")} src="icon_nav.png" />
-        <h1>Marketplace</h1>
-      </div>
-      <div className="container">
-        {textoStore(currentLanguage)}
-        <CuadroAmtStore />
-        {interfaz ? <Interfaz1Inch setInterfaz={setInterfaz} /> : null}
-      </div>
+    <>
+      <div className={!interfaz ? "containerSlide" : "containerSlide opaco"}>
+        <div className="navBar_top">
+          <img
+            onClick={() => setActivePage("marketplace")}
+            src="icon_nav.png"
+          />
+          <h1>Marketplace</h1>
+        </div>
+        <div className="container">
+          {textoStore(currentLanguage, () => setInterfaz(true))}
 
-      <button onClick={() => setInterfaz(true)}>coso</button>
-    </div>
+          <CuadroAmtStore />
+        </div>
+        <CSSTransition
+          in={interfaz}
+          timeout={700}
+          classNames="animacionSelector"
+          unmountOnExit
+        >
+          <Interfaz1Inch setInterfaz={setInterfaz} />
+        </CSSTransition>
+      </div>
+    </>
   );
 };
 

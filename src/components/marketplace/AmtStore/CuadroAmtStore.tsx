@@ -1,7 +1,6 @@
 // @ts-nocheck
 
 import React, { useEffect, useRef, useState } from "react";
-//import SelectorMoneda from "../pancake/SelectorMonedaPancake";
 import { CSSTransition } from "react-transition-group";
 import BotonOperacionAmtStore from "./BotonOperacionAmtStore";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,8 +8,6 @@ import { AppDispatch, RootState } from "../../../store/store";
 import { marketPlaceOperations } from "../../../store/features/marketplace/marketPlaceOperations";
 import { usdtOperations } from "../../../store/features/usdt/usdtOperations";
 import { textosExtra } from "../../../Utils/textos";
-
-//import opBlock from "../components/context/OperacionesBlockChain"; // P: Por que hice esto?  -  R: Ni idea
 
 const CuadroAmtStore = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -40,7 +37,6 @@ const CuadroAmtStore = () => {
   //Gestion de los input
   const inputPagar = useRef<HTMLInputElement>(null);
   const inputRecibir = useRef<HTMLInputElement>(null);
-  const [monedaActive, setmonedaActive] = useState("USDT");
   const [inputPagarValue, setInputPagarValue] = useState("");
   const [inputRecibirValue, setInputRecibirValue] = useState("");
   const handleInputPagarChange = (
@@ -57,32 +53,18 @@ const CuadroAmtStore = () => {
     setInputPagarValue(event.target.value);
   };
 
-  //Esto lo vamos a necesitar???
-  const [selector, setSelector] = useState(false);
-  interface dataMonedasInterface {
-    [key: string]: string;
-  }
-  const dataMonedas: dataMonedasInterface = {
-    USDT: "coinT.png",
-  };
-  //Esto de arriba
-
   return (
     <>
       <div id="primeraSeccion">
         <div className="saldo">
           <h2>{textosExtra[currentLanguage].ustedRecibe}</h2>
           <p>
-            {textosExtra[currentLanguage].saldo} {balanceUsdt}
+            {textosExtra[currentLanguage].saldo}{" "}
+            {balanceAmt >= 0 ? Number(balanceUsdt?.toFixed(4)) : "-"}
           </p>
         </div>
         <div className="cuadroCompra">
-          <img
-            onClick={() => {
-              setSelector(true);
-            }}
-            src={dataMonedas[monedaActive]}
-          />
+          <img src="coinT.png" />
           <div>USDT</div>
           <input
             ref={inputPagar}
@@ -98,7 +80,8 @@ const CuadroAmtStore = () => {
         <div className="saldo">
           <h2>{textosExtra[currentLanguage].ustedRecibe}</h2>
           <p>
-            {textosExtra[currentLanguage].saldo} {balanceAmt}
+            {textosExtra[currentLanguage].saldo}{" "}
+            {balanceAmt >= 0 ? Number(balanceAmt.toFixed(4)) : "-"}
           </p>
         </div>
         <div className="cuadroCompra">
@@ -117,7 +100,7 @@ const CuadroAmtStore = () => {
       <div className="containerSaldos">
         <div>
           <h2>{textosExtra[currentLanguage].amtEnVenta}</h2>
-          <div>{balanceTienda}</div>
+          <div>{Number(balanceTienda?.toFixed(4))}</div>
         </div>
         <div>
           <h2>{textosExtra[currentLanguage].precioAmt}</h2>
@@ -134,19 +117,6 @@ const CuadroAmtStore = () => {
           operacionBuy={marketPlaceOperations.buy}
         />
       </div>
-      {/*       <CSSTransition
-        in={selector}
-        timeout={700}
-        classNames="animacionSelector"
-        unmountOnExit
-      >
-        <SelectorMoneda
-          setmonedaActive={setmonedaActive}
-          monedaActive={monedaActive}
-          dataMonedas={dataMonedas}
-          setSelector={setSelector}
-        />
-      </CSSTransition> */}
     </>
   );
 };

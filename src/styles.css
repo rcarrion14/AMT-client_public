@@ -3,7 +3,7 @@
 }
 
 body {
-  background-color: #e9e9e9;
+  background-color: #eeeeee;
 }
 
 div {
@@ -49,6 +49,7 @@ button {
 
 u {
   color: #00bfdc;
+  font-weight: bold;
 }
 
 .containerBanner {
@@ -180,14 +181,19 @@ u {
 .cuadroCompra {
   background-color: white;
   display: flex;
-  justify-content: space-around;
-  padding: 10px 0px 10px 0px;
+  justify-content: space-between;
+
   border-radius: 15px;
   align-items: center;
+  padding: 10px 15px 10px 15px;
 }
 
 .cuadroCompra > img {
   width: 30px;
+}
+
+.cuadroCompra > img.flecha {
+  width: 15px;
 }
 
 .inputCompra {
@@ -197,7 +203,7 @@ u {
   caret-color: #00bfdc;
   text-align: right;
   font-size: 1.2rem;
-  width: 70%;
+  width: 100%;
 }
 
 .inputCompra:focus-visible {
@@ -207,8 +213,9 @@ u {
 
 .saldo {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
+  margin: 0 15px 0 15px;
 }
 .containerSaldos {
   display: flex;
@@ -245,8 +252,6 @@ u {
 }
 
 .containterSelector {
-  overflow: scroll;
-  height: 40vh;
   background-color: white;
 
   border-radius: 15px;
@@ -259,9 +264,24 @@ u {
   padding: 15px;
 }
 
+.containterSelectorBuscador {
+  overflow: scroll;
+  height: 110%;
+  background-color: white;
+
+  border-radius: 15px;
+
+  position: absolute;
+  top: -4vh;
+
+  width: 100%;
+  box-sizing: border-box;
+  padding: 15px;
+}
+
 .moneda {
   margin: 0 20px 0 20px;
-  padding: 20px 0 20px 0;
+  padding: 7px 0 7px 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -306,15 +326,8 @@ u {
 }
 
 .imgDex {
-  width: 35px;
+  width: 30px;
 }
-
-/*
-turquesa: #00DDFF
-oscuro:
-iconos: #9C9EA1
-
-*/
 
 .flexBox {
   display: flex;
@@ -561,28 +574,15 @@ iconos: #9C9EA1
 
 .btnSimulacion {
   border-style: solid;
+
   border-color: #00bfdc;
-  width: 55px;
-  height: 25px;
+  width: 45px;
+  height: 20px;
   padding: 0px;
   margin: 3px;
-  font-size: 0.7rem;
-  /* box-shadow: none; */
-}
-
-.containerResultadosSimulacion {
-  margin-top: 25px;
-}
-
-.containerResultadosSimulacion > h2 {
-  margin-bottom: 25px;
-}
-
-.containerResultadosSimulacion > div {
-  margin-bottom: 15px;
-  background-color: white;
-  border-radius: 15px;
-  padding: 10px;
+  font-size: 0.6rem;
+  box-shadow: none;
+  border-width: 2px;
 }
 
 .containerSimuladorStaking {
@@ -615,4 +615,201 @@ iconos: #9C9EA1
 
 .containerSimuladorStaking > .saldo > h2 {
   margin: 7px 0 5px 0;
+}
+
+.donutContainer {
+  max-height: 500px;
+}
+
+.boxLegends1 {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  top: 50%;
+  left: 2%;
+  transform: translateY(-320%);
+  background-color: transparent;
+}
+
+.boxLegends1 img {
+  width: 60%;
+  height: 60%;
+}
+
+.boxLegends2 {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(320%);
+  background-color: transparent;
+}
+
+.boxLegends2 img {
+  width: 60%;
+  height: 60%;
+}
+.containerParticipacionEnPool {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 4%;
+  background-color: #ffffff;
+}
+.containerSaldosLiquidez {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 4%;
+  background-color: #ffffff;
+  border-radius: 80px;
+}
+
+.leftSide {
+  flex: auto;
+  margin-top: 3%;
+  margin-bottom: 3%;
+  margin-left: 5%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+.rightSide {
+  flex: auto;
+  margin-top: 3%;
+  margin-bottom: 3%;
+  margin-right: 5%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: right;
+  border-left-style: dashed;
+  border-left-color: #b2becf;
+}
+.containerSlideRetirarLiquidez {
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+.leftSide img {
+  margin-right: 10px;
+}
+.rightSide img {
+  margin-right: 10px;
+}
+
+.leftSide p {
+  margin: 0%;
+}
+
+.rightSide p {
+  margin: 0%;
+}
+
+.cointainer1Inch {
+  overflow: scroll;
+  background-color: #adceff;
+
+  border-radius: 15px;
+  position: relative;
+  top: -55vh;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 15px;
+}
+
+.cointainer1Inch > .close1Inch {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.soloSaldo {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.soloSaldo > div {
+  text-align: center;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  background-color: #e6e6e6;
+  border-radius: 15px;
+  padding: 5px 12px 5px 12px;
+
+  width: 40%;
+  align-items: center;
+}
+
+.containerSaldos > div > div {
+  color: #a9a9a9;
+  font-size: 0.8rem;
+  background-color: inherit;
+}
+
+.container {
+  position: relative;
+}
+
+.inactive {
+  background-color: #a9f4ff;
+  opacity: 0.4;
+}
+
+.cuadroCompraSimulador {
+  background-color: #dedede;
+  display: grid;
+  grid-template-columns: 0.7fr 0.7fr 3fr 1fr;
+  border-radius: 15px;
+  text-align: center;
+  justify-items: start;
+  align-items: center;
+  padding: 10px 15px 10px 15px;
+}
+
+.cuadroCompraSimulador > b {
+  font-size: 0.75rem;
+}
+
+.cantidadSimulador {
+  grid-column: 3/5;
+  background-color: inherit;
+  border: none;
+  outline: none;
+  caret-color: #00bfdc;
+  text-align: right;
+  font-size: 1.2rem;
+  width: 100%;
+}
+
+.seccionCantidad {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cantidad {
+  width: 75%;
+}
+
+.cuadroCompraSimulador.cantidad {
+  grid-template-columns: 1fr 1fr 2fr 1fr;
+  background-color: white;
+}
+
+.cuadroCompraSimulador.cantidad > img {
+  width: 50px;
+}
+
+.containerResultadosSimulacion {
+  background-color: #dedede;
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto auto;
+  padding: 10px 15px 10px 15px;
+  border-radius: 15px;
+  margin-top: 15px;
 }
