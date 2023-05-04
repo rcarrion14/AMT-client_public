@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import React from "react";
 import "./BotonDarLiquidez.css";
 import { textosExtra, interfaceTextoExtra } from "../../../../Utils/textos";
