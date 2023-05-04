@@ -32,7 +32,7 @@ const DoughnutChart: React.FC<Props> = ({ data, labels }) => {
             options: {
               cutout: "80%",
               plugins: {
-                legend: { display: true },
+                legend: { display: false },
               },
             },
           });

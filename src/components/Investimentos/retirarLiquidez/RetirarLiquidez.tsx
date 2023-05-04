@@ -48,10 +48,6 @@ const RetirarLiquidez: React.FC<LiquidezInterface> = ({ setActivePage }) => {
     usdtEnBtcb = btcbEnLiquidez * precioBtcb;
   }
 
-  const ref = useRef();
-
-  console.log(usdtEnAmt);
-  console.log(usdtEnBtcb);
   return (
     <div className="containerSlide">
       <div className="containerSlideRetirarLiquidez">
@@ -65,8 +61,21 @@ const RetirarLiquidez: React.FC<LiquidezInterface> = ({ setActivePage }) => {
           <h3>{usdtEnAmt + usdtEnBtcb}$</h3>
         </div>
         <div className="donutContainer">
+          <div className="boxLegends1">
+            {" "}
+            <img src="coinBitcoin.png"></img>
+            <p>
+              <b>52%</b>
+            </p>
+          </div>
+          <div className="boxLegends2">
+            <img src="coinAutomining.png"></img>
+            <b>
+              <p>48%</p>
+            </b>
+          </div>
           <DoughnutChart
-            data={[usdtEnAmt + 10, usdtEnBtcb + 10]}
+            data={[usdtEnAmt + 10, usdtEnBtcb + 12]} // Eliminar sumas son para testear
             labels={["AMT", "BTC"]}
           />
         </div>
@@ -91,6 +100,7 @@ const RetirarLiquidez: React.FC<LiquidezInterface> = ({ setActivePage }) => {
           </div>
         </div>
         {textoRetirarLiquidez(currentLanguage)}
+        <button className="btnLarge">todo: retirar liquidez</button>
       </div>
     </div>
   );
