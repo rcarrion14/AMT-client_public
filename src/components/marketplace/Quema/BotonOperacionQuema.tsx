@@ -46,7 +46,7 @@ const BotonOperacionQuema: React.FC<BotonOperacionQuemaProps> = ({
     <button
       onClick={() => {
         allowanceAmt > parseFloat(input)
-          ? burn(dispatch, input)
+          ? burn(dispatch, ethers.utils.parseEther(input))
           : approveMarket(dispatch);
       }}
       className="btnLarge quema"

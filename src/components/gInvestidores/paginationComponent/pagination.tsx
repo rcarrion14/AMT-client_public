@@ -32,9 +32,11 @@ const Pagination: React.FC<Props> = ({
       return (
         <button
           key={number}
-          className={`pagination-button ${
-            number === currentPage ? "active" : ""
-          } small square`}
+          className={
+            number === currentPage
+              ? "pagination-button active"
+              : "pagination-button"
+          }
           onClick={() => handleClick(number)}
         >
           {number}

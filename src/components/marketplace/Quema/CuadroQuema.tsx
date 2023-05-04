@@ -100,10 +100,10 @@ const CuadroQuema = () => {
           />
         </div>
       </div>
-      <div className="containerSaldos">
+      <div className="soloSaldo">
         <div>
           <h2>{textosExtra[currentLanguage].precioAmt}</h2>
-          <div>1 AMT = {1 / backRate} BTC</div>
+          <div>1 AMT = {Number((1 / backRate).toFixed(6))} BTC</div>
         </div>
       </div>
       <div>

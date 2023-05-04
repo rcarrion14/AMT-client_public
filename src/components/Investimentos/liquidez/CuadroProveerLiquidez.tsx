@@ -95,8 +95,8 @@ const CuadroProveerLiquidez = () => {
       <div id="segundaSeccion">
         <div className="saldo">
           <p>
-            {textosExtra[currentLanguage].saldo}
-            {balanceBtcb}
+            {textosExtra[currentLanguage].saldo}{" "}
+            {Number(balanceBtcb?.toFixed(5))}
           </p>
         </div>
         <div className="cuadroCompra">

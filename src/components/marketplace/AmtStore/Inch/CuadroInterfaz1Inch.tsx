@@ -121,12 +121,13 @@ const CuadroInterfaz1Inch = () => {
   //Esto de arriba
 
   return (
-    <>
+    <div>
       <div id="primeraSeccion">
         <div className="saldo">
           <h2>{textosExtra[currentLanguage].ustedPaga}</h2>
           <p>
-            {textosExtra[currentLanguage].saldo} {balanceErc20}
+            {textosExtra[currentLanguage].saldo}{" "}
+            {Number(balanceErc20.toFixed(5))}
           </p>
         </div>
         <div className="cuadroCompra">
@@ -140,7 +141,21 @@ const CuadroInterfaz1Inch = () => {
               currentTarget.src = "icon_question.png";
             }}
           />
-          <div>{monedaActive.symbol}</div>
+          <div
+            onClick={() => {
+              setSelector(true);
+            }}
+          >
+            {monedaActive.symbol}
+          </div>
+          <img
+            onClick={() => {
+              setSelector(true);
+            }}
+            src="arrow-down-navigate.png"
+            className="flecha"
+            alt=""
+          />
           <input
             ref={inputPagar}
             placeholder="0"
@@ -155,7 +170,8 @@ const CuadroInterfaz1Inch = () => {
         <div className="saldo">
           <h2>{textosExtra[currentLanguage].ustedRecibe}</h2>
           <p>
-            {textosExtra[currentLanguage].saldo} {balanceUsdt}
+            {textosExtra[currentLanguage].saldo}{" "}
+            {Number(balanceUsdt?.toFixed(4))}
           </p>
         </div>
         <div className="cuadroCompra">
@@ -171,16 +187,7 @@ const CuadroInterfaz1Inch = () => {
           />
         </div>
       </div>
-      <div className="containerSaldos">
-        <div>
-          <h2>{textosExtra[currentLanguage].amtEnVenta}</h2>
-          <div>{}</div>
-        </div>
-        <div>
-          <h2>{textosExtra[currentLanguage].precioAmt}</h2>
-          <div>1 AMT = {""} USDT</div>
-        </div>
-      </div>
+
       <div>
         <Boton1Inch
           balanceUsdt={balanceUsdt}
@@ -193,6 +200,7 @@ const CuadroInterfaz1Inch = () => {
           addr={addr}
         />
       </div>
+
       <CSSTransition
         in={selector}
         timeout={700}
@@ -206,7 +214,7 @@ const CuadroInterfaz1Inch = () => {
           tokenList={tokenList}
         />
       </CSSTransition>
-    </>
+    </div>
   );
 };
 

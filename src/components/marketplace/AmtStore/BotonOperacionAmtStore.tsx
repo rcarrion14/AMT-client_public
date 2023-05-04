@@ -28,15 +28,8 @@ const BotonOperacionAmtStore: React.FC<BotonOperacionProps> = ({
   );
   return (
     <button
-      //Disabling the button conditions
-      disabled={
-        parseInt(balanceTienda) < parseInt(input) ||
-        balanceUsdt < parseInt(input) ||
-        input == ""
-      }
-      // onClick operations based on conditions
       onClick={() => {
-        if (allowanceUsdt) {
+        if (allowanceUsdt >= 0) {
           allowanceUsdt > parseInt(input)
             ? operacionBuy(dispatch, input)
             : operacionAprobar(dispatch);
@@ -44,16 +37,13 @@ const BotonOperacionAmtStore: React.FC<BotonOperacionProps> = ({
       }}
       className="btnLarge"
     >
-      {
-        //Posible texts of button based on conditions
-        balanceTienda < parseInt(input)
-          ? textosExtra[currentLanguage].noHaytantosAmtEnVenta
-          : balanceUsdt < parseInt(input)
-          ? textosExtra[currentLanguage].bceUSDTInsuficiente
-          : parseInt(input) > allowanceUsdt
-          ? textosExtra[currentLanguage].aprobar
-          : textosExtra[currentLanguage].comprar
-      }
+      {balanceTienda < parseInt(input)
+        ? textosExtra[currentLanguage].noHaytantosAmtEnVenta
+        : balanceUsdt < parseInt(input)
+        ? textosExtra[currentLanguage].bceUSDTInsuficiente
+        : parseInt(input) > allowanceUsdt
+        ? textosExtra[currentLanguage].aprobar
+        : textosExtra[currentLanguage].comprar}
     </button>
   );
 };

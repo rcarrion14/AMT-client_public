@@ -5,11 +5,10 @@ export function snapToDateMapp(snapshot: number) {
 
   const millisecondsPerDay = 24 * 60 * 60 * 1000;
 
-  const daysToAdd = snapshot - referenceSnapshot;
+  const daysToAdd = snapshot - referenceSnapshot + 1;
 
   const dateInMilliseconds =
-    referenceDate.getTime() +
-    (referenceSnapshot + daysToAdd) * millisecondsPerDay;
+    referenceDate.getTime() + daysToAdd * millisecondsPerDay;
   const date = new Date(dateInMilliseconds);
   const year = date.getFullYear();
   const month = (date.getMonth() + 1).toString().padStart(2, "0");

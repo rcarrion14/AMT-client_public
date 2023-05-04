@@ -39,23 +39,21 @@ const BotonDarLiquidez: React.FC<BotonDarLiquidezProps> = ({
       {
         // Caso no puede proveer liquidez
         noPuedeProveerLiquidez ? (
-          <div className="double-button-wrapper">
+          <div className="doubleButtonContainer">
             <button
-              className="double-button-left"
+              className={allowanceAmt > inputAmt ? "inactive" : null}
               onClick={() => {
                 amtOperations.approveMaster(dispatch);
               }}
-              disabled={inputAmt > balanceAmt && allowanceAmt >= inputAmt}
             >
               {allowanceAmt < inputAmt
                 ? textosExtra[currentLanguage].aprobarAMT
                 : inputAmt > balanceAmt
                 ? textosExtra[currentLanguage].bceAmtInsuficiente
-                : ""}
+                : "AMT aprobado"}
             </button>
             <button
-              className="double-button-right"
-              disabled={inputBtc > balanceBtc && allowanceBtc >= inputBtc}
+              className={allowanceBtc > inputBtc ? "inactive" : null}
               onClick={() => {
                 btcbOperations.approveMaster(dispatch);
               }}
@@ -64,11 +62,10 @@ const BotonDarLiquidez: React.FC<BotonDarLiquidezProps> = ({
                 ? textosExtra[currentLanguage].aprobarBTCB
                 : inputBtc > balanceBtc
                 ? textosExtra[currentLanguage].bceBtcInsuficiente
-                : ""}
+                : "BTCB aprobado"}
             </button>
           </div>
         ) : (
-          //Caso puede proveer liquidez
           <button
             className="btnLarge"
             disabled={Number.isNaN(inputAmt) || Number.isNaN(inputBtc)}
