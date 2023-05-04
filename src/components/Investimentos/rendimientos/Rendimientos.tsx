@@ -1,7 +1,6 @@
 import React, { ReactElement } from "react";
 import BotonBlanco from "../../Generales/BotonBlanco";
 import Simulador from "./Simulador";
-import SimuladorActual from "./SimuladorActual";
 import Maquinas from "./Maquinas";
 import Grafico from "./GraficaPrecioAmt/Grafico";
 import { useState, useRef } from "react";
@@ -22,7 +21,7 @@ interface jsxPagesInterface {
 }
 
 const Rendimientos: React.FC<RendimientosInterface> = ({ setActivePage }) => {
-  const pages = ["simulador", "simuladorActual", "maquinas", "grafico"];
+  const pages = ["simulador", "maquinas", "grafico"];
 
   const currentLanguage = useSelector(
     (state: typeof RootState) => state.session.language
@@ -32,9 +31,7 @@ const Rendimientos: React.FC<RendimientosInterface> = ({ setActivePage }) => {
 
   const jsxPages: jsxPagesInterface = {
     simulador: <Simulador setActivePage={setActivePageRendimientos} />,
-    simuladorActual: (
-      <SimuladorActual setActivePage={setActivePageRendimientos} />
-    ),
+
     maquinas: <Maquinas setActivePage={setActivePageRendimientos} />,
     grafico: <Grafico setActivePage={setActivePageRendimientos} />,
   };
@@ -65,14 +62,7 @@ const Rendimientos: React.FC<RendimientosInterface> = ({ setActivePage }) => {
         activador={"simulador"}
         setActivePage={setActivePageRendimientos}
       />
-      <BotonBlanco
-        titulo={textoBotonesBlancos[currentLanguage].simuladorActual.titulo}
-        descripcion={
-          textoBotonesBlancos[currentLanguage].simuladorActual.descripcion
-        }
-        activador={"simuladorActual"}
-        setActivePage={setActivePageRendimientos}
-      />
+
       <BotonBlanco
         titulo={textoBotonesBlancos[currentLanguage].maquinas.titulo}
         descripcion={textoBotonesBlancos[currentLanguage].maquinas.descripcion}

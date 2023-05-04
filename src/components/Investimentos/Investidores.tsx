@@ -96,7 +96,7 @@ const Investidores = () => {
       />
 
       <BotonBlanco
-        titulo="retirar liquidez"
+        titulo="Retirar liquidez"
         descripcion="aca la descripción para retirar liquidez"
         activador="retirarLiquidez"
         setActivePage={setActivePage}
