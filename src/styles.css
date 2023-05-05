@@ -182,7 +182,7 @@ u {
   background-color: white;
   display: flex;
   justify-content: space-between;
-
+  gap: 10px;
   border-radius: 15px;
   align-items: center;
   padding: 10px 15px 10px 15px;
@@ -813,4 +813,68 @@ u {
   padding: 10px 15px 10px 15px;
   border-radius: 15px;
   margin-top: 15px;
+}
+
+@media (max-width: 450px) {
+  .containerResultadosSimulacion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+  }
+}
+
+.containterSelectorTokens {
+  background-color: white;
+  width: 80%;
+
+  border-radius: 15px;
+
+  box-sizing: border-box;
+  padding: 15px;
+}
+
+.divContainterSelectorTokens {
+  background-color: #a7a7a700;
+  position: fixed;
+  top: 37vh;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  transform: translateX(100vw);
+}
+
+.animacionAgregar-enter-active {
+  -webkit-transform: translateX(0%);
+  transform: translateX(0%);
+  transition: transform 800ms linear;
+}
+
+.animacionAgregar-enter-done {
+  transform: translateX(0vw);
+}
+
+.animacionAgregar-exit {
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
+  transition: transform 8000ms linear;
+}
+
+.animacionAgregar-exit-active {
+  -webkit-transform: translateX(100vw);
+  transform: translateX(100vw);
+  transition: transform 800ms linear;
+}
+
+.listaAgregar {
+  margin: 20px 0 20px 0;
+  display: grid;
+  grid-template-rows: auto auto auto;
+  grid-template-columns: auto auto;
+  justify-items: start;
+  justify-content: center;
+  gap: 15px;
+
+  align-items: center;
 }
