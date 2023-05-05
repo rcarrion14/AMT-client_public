@@ -9,11 +9,8 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 import { current } from "@reduxjs/toolkit";
 import DoughnutChart from "./DoughnutChart";
-interface LiquidezInterface {
-  setActivePage: React.Dispatch<React.SetStateAction<string>>;
-}
 
-const RetirarLiquidez: React.FC<LiquidezInterface> = ({ setActivePage }) => {
+const RetirarLiquidez: React.FC = () => {
   const currentLanguage = useSelector(
     (state: typeof RootState) => state.session.language
   );
@@ -49,59 +46,40 @@ const RetirarLiquidez: React.FC<LiquidezInterface> = ({ setActivePage }) => {
   }
 
   return (
-    <div className="containerSlide">
-      <div className="containerSlideRetirarLiquidez">
-        <div className="navBar_top">
-          <img onClick={() => setActivePage("")} src="icon_nav.png" />
-          <h1>{textosExtra[currentLanguage].inversiones}</h1>
-        </div>
-        <div style={{ display: "flex", textAlign: "center" }}>
-          {" "}
-          <h1>Saldo total: </h1>
-          <h3>{usdtEnAmt + usdtEnBtcb}$</h3>
-        </div>
-        <div className="donutContainer">
-          <div className="boxLegends1">
-            {" "}
-            <img src="coinBitcoin.png"></img>
-            <p>
-              <b>52%</b>
-            </p>
-          </div>
-          <div className="boxLegends2">
-            <img src="coinAutomining.png"></img>
-            <b>
-              <p>48%</p>
-            </b>
-          </div>
-          <DoughnutChart
-            data={[usdtEnAmt + 10, usdtEnBtcb + 12]} // Eliminar sumas son para testear
-            labels={["AMT", "BTC"]}
-          />
-        </div>
-        <div className="containerParticipacionEnPool">
-          <b>{textosExtra[currentLanguage].participacionEnPool} </b>
-          {poolParticipation * 100} %
-        </div>
-        <div className="containerSaldosLiquidez">
-          <div className="leftSide">
-            <img src="coinAutomining.png" />
-            <div style={{ display: "flex", flexDirection: "column" }}>
-              <div>AMT</div>
-              <p>{amtEnLiquidez}</p>
-            </div>
-          </div>
-          <div className="rightSide">
-            <img src="coinBitcoin.png" />
-            <div style={{ display: "flex", flexDirection: "column" }}>
-              <div>BTCB</div>
-              <p>{btcbEnLiquidez}</p>
-            </div>
-          </div>
-        </div>
-        {textoRetirarLiquidez(currentLanguage)}
-        <button className="btnLarge">todo: retirar liquidez</button>
+    <div className="containerSlideRetirarLiquidez">
+      <div style={{ display: "flex", textAlign: "center" }}>
+        {" "}
+        <h1>Saldo total: </h1>
+        <h3>{usdtEnAmt + usdtEnBtcb}$</h3>
       </div>
+      <div className="donutContainer">
+        <DoughnutChart
+          data={[usdtEnAmt + 10, usdtEnBtcb + 12]} // Eliminar sumas son para testear
+          labels={["AMT", "BTC"]}
+        ></DoughnutChart>
+      </div>
+      <div className="containerParticipacionEnPool">
+        <b>{textosExtra[currentLanguage].participacionEnPool} </b>
+        {poolParticipation * 100} %
+      </div>
+      <div className="containerSaldosLiquidez">
+        <div className="leftSide">
+          <img src="coinAutomining.png" />
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <div>AMT</div>
+            <p>{amtEnLiquidez}</p>
+          </div>
+        </div>
+        <div className="rightSide">
+          <img src="coinBitcoin.png" />
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <div>BTCB</div>
+            <p>{btcbEnLiquidez}</p>
+          </div>
+        </div>
+      </div>
+      {textoRetirarLiquidez(currentLanguage)}
+      <button className="btnLarge">todo: retirar liquidez</button>
     </div>
   );
 };

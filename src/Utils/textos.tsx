@@ -1145,6 +1145,7 @@ export interface interfaceTextoExtra {
   btcbAcumulados: string;
   amtGenerados: string;
   participacionEnPool: string;
+  tuLiquidezYRetirar: string;
 }
 export type typeTextosExtra = {
   [key in languageCode]: interfaceTextoExtra;
@@ -1203,6 +1204,7 @@ export const textosExtra: typeTextosExtra = {
     btcbAcumulados: "BTCB acumulados",
     amtGenerados: "AMT gerados",
     participacionEnPool: "Participação total no pool:",
+    tuLiquidezYRetirar: "Sua liquidez e liquidez para saque",
   },
   esp: {
     bienvenido: "¡Bienvenido!",
@@ -1255,6 +1257,7 @@ export const textosExtra: typeTextosExtra = {
     btcbAcumulados: "BTCB acumulados",
     amtGenerados: "AMT generados",
     participacionEnPool: "Participación total en pool:",
+    tuLiquidezYRetirar: "Tu liquidez y retirar liquidez",
   },
   eng: {
     bienvenido: "Welcome!",
@@ -1297,6 +1300,7 @@ export const textosExtra: typeTextosExtra = {
     btcbAcumulados: "Accumulated BTCB",
     amtGenerados: "Generated AMT",
     participacionEnPool: "Total participation in pool:",
+    tuLiquidezYRetirar: "Your liquidity and withdrawl liquidity",
   },
 };
 
@@ -1365,7 +1369,7 @@ export const textoBotonesBlancos: typeTextoBotonesBlancos = {
       descripcion: "Receba mais AMT diariamente.",
     },
     liquidez: {
-      titulo: "Prover Liquidez",
+      titulo: "Liquidez",
       descripcion: "Receba pelas transacoes no pool de liquidez.",
     },
     rendimientos: {
@@ -1428,7 +1432,7 @@ export const textoBotonesBlancos: typeTextoBotonesBlancos = {
       descripcion: "Recibe más AMT diariamente.",
     },
     liquidez: {
-      titulo: "Aportar liquidez",
+      titulo: "liquidez",
       descripcion: "Recibe por las transacciones en el pool de liquidez.",
     },
     rendimientos: {
@@ -1490,7 +1494,7 @@ export const textoBotonesBlancos: typeTextoBotonesBlancos = {
       descripcion: "Receive more AMT daily.",
     },
     liquidez: {
-      titulo: "Provide Liquidity",
+      titulo: "Liquidity",
       descripcion: "Get paid for transactions in the liquidity pool.",
     },
     rendimientos: {

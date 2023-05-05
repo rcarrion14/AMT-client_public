@@ -62,7 +62,7 @@ const Simulador: React.FC<SimuladorInterface> = ({ setActivePage }) => {
       </div>
       {simuleRentabilidad(currentLanguage)}
 
-      <div className="cuadroSimulador">
+      <div className="cuadroSimula  dor">
         <div className="seccionCantidad">
           <div className="saldo">
             <h2>Quantidade de AMT: </h2>
