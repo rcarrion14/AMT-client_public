@@ -990,17 +990,17 @@ export const simuleRentabilidad = (idioma: string) => {
         <h2>Simule a rentabilidade</h2>
         <p>
           A rentabilidade de AMT depende de algumas variáveis e, aqui, você pode
-          alterar duas delas para verificar quanto o AMT podes render em
+          alterar duas delas para verificar quanto o AMT pode render em
           diferentes cenários.
         </p>
 
         <p>
-          Essas duas variáveis são: peco de AMT ao investir e o preço de
+          Essas duas variáveis são: preço de AMT ao investir e o preço de
           Bitcoin.
         </p>
 
         <p>
-          Por padrão, utiliza-se ose preços vigentes em tempo real, levando em
+          Por padrão, utiliza-se os preços vigentes em tempo real, levando em
           consideração a taxa de dificuldade da rede de mineração atual.
         </p>
       </>
@@ -1008,9 +1008,49 @@ export const simuleRentabilidad = (idioma: string) => {
   }
 
   if (idioma == "esp") {
+    return (
+      <>
+        <h2>Simulación de Rentabilidad</h2>
+        <p>
+          La rentabilidad de AMT depende de algunas variables y aquí puede
+          cambiar dos de ellas para verificar cuánto puede generar AMT en
+          diferentes escenarios.
+        </p>
+
+        <p>
+          Estas dos variables son: el precio de AMT al invertir y el precio de
+          Bitcoin.
+        </p>
+
+        <p>
+          Por defecto, se utilizan los precios vigentes en tiempo real, teniendo
+          en cuenta la tasa de dificultad de la red de minería actual.
+        </p>
+      </>
+    );
   }
 
   if (idioma == "eng") {
+    return (
+      <>
+        <h2>Simulate profitability</h2>
+        <p>
+          The profitability of AMT depends on some variables, and here you can
+          change two of them to see how much AMT can generate in different
+          scenarios.
+        </p>
+
+        <p>
+          These two variables are: the price of AMT when investing and the price
+          of Bitcoin.
+        </p>
+
+        <p>
+          By default, current real-time prices are used, taking into account the
+          current mining network difficulty rate.
+        </p>
+      </>
+    );
   }
 };
 
@@ -1146,6 +1186,16 @@ export interface interfaceTextoExtra {
   amtGenerados: string;
   participacionEnPool: string;
   tuLiquidezYRetirar: string;
+  cantidadAMT: string;
+  escenarioActual: string;
+  simularEscenario: string;
+  valorPagoAmtDolar: string;
+  valorBtcEnDolar: string;
+  rentaDiaria: string;
+  rentaMensual: string;
+  rentaAnual: string;
+  autocompraDiaria: string;
+  enEseEscenarioRentabilidadSeria: string;
 }
 export type typeTextosExtra = {
   [key in languageCode]: interfaceTextoExtra;
@@ -1205,6 +1255,16 @@ export const textosExtra: typeTextosExtra = {
     amtGenerados: "AMT gerados",
     participacionEnPool: "Participação total no pool:",
     tuLiquidezYRetirar: "Sua liquidez e liquidez para saque",
+    cantidadAMT: "Quantidade de AMT: ",
+    escenarioActual: "Cenário atual",
+    simularEscenario: "Simular cenário",
+    valorPagoAmtDolar: "Valor pago por AMT en dólar:",
+    valorBtcEnDolar: "Insira valor do Bitcoin em dólar: ",
+    rentaDiaria: "Renda diária",
+    rentaMensual: "Renda mensal",
+    rentaAnual: "Renda anual",
+    autocompraDiaria: "Autocompra diária:",
+    enEseEscenarioRentabilidadSeria: "Nesse cenário, rentabilidade seria:",
   },
   esp: {
     bienvenido: "¡Bienvenido!",
@@ -1258,6 +1318,17 @@ export const textosExtra: typeTextosExtra = {
     amtGenerados: "AMT generados",
     participacionEnPool: "Participación total en pool:",
     tuLiquidezYRetirar: "Tu liquidez y retirar liquidez",
+    cantidadAMT: "Cantidad de AMT: ",
+    escenarioActual: "Escenario Actual",
+    simularEscenario: "Simular Escenario",
+    valorPagoAmtDolar: "Valor pagado por AMT en dólares:",
+    valorBtcEnDolar: "Inserte el valor de Bitcoin en dólares:",
+    rentaDiaria: "Renta diaria",
+    rentaMensual: "Renta mensual",
+    rentaAnual: "Renta anual",
+    autocompraDiaria: "Autocompra diaria:",
+    enEseEscenarioRentabilidadSeria:
+      "En este escenario, la rentabilidad sería:",
   },
   eng: {
     bienvenido: "Welcome!",
@@ -1301,6 +1372,17 @@ export const textosExtra: typeTextosExtra = {
     amtGenerados: "Generated AMT",
     participacionEnPool: "Total participation in pool:",
     tuLiquidezYRetirar: "Your liquidity and withdrawl liquidity",
+    cantidadAMT: "Amount of AMT: ",
+    escenarioActual: "Current Scenario",
+    simularEscenario: "Simulate Scenario",
+    valorPagoAmtDolar: "Value paid per AMT in dollars:",
+    valorBtcEnDolar: "Insert the value of Bitcoin in dollars:",
+    rentaDiaria: "Daily income",
+    rentaMensual: "Monthly income",
+    rentaAnual: "Annual income",
+    autocompraDiaria: "Daily autoreinvestment:",
+    enEseEscenarioRentabilidadSeria:
+      "In this scenario, the profitability would be:",
   },
 };
 
