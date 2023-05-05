@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState, ReactElement } from "react";
 import AmtStore from "./AmtStore/AmtStore";
 import { CSSTransition } from "react-transition-group";
@@ -12,6 +13,7 @@ import {
 } from "../../Utils/textos";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
+import AgregarTokens from "./AgregarTokens";
 
 interface MarketplaceInterface {
   setActivePage: React.Dispatch<React.SetStateAction<string>>;
@@ -23,6 +25,7 @@ const Marketplace: React.FC<MarketplaceInterface> = () => {
   );
   const pages: string[] = ["store", "pancake", "quema", "pix"];
   const [activePage, setActivePage] = useState("marketplace");
+  const [agregarTokens, setAgregarTokens] = useState(false);
 
   interface jsxPagesInterface {
     [key: string]: ReactElement<any, any>;
@@ -52,7 +55,9 @@ const Marketplace: React.FC<MarketplaceInterface> = () => {
     <>
       {textoMarketplace(currentLanguage)}
       <div className="textoConexion">
-        <button>{textosExtra[currentLanguage].importarTokens}</button>
+        <button onClick={() => setAgregarTokens(true)}>
+          {textosExtra[currentLanguage].importarTokens}
+        </button>
       </div>
       <BotonBlanco
         titulo={textoBotonesBlancos[currentLanguage].store.titulo}
@@ -79,6 +84,15 @@ const Marketplace: React.FC<MarketplaceInterface> = () => {
         setActivePage={setActivePage}
       />
       {listaDePaginas}
+
+      <CSSTransition
+        in={agregarTokens}
+        timeout={800}
+        classNames="animacionAgregar"
+        unmountOnExit
+      >
+        <AgregarTokens setAgregarTokens={setAgregarTokens} />
+      </CSSTransition>
     </>
   );
 };

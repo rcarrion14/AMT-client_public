@@ -36,6 +36,10 @@ const SelectorMoneda1Inch: React.FC<SelectorMonedaInterface> = ({
                   ? "monedaSelected"
                   : null
               }
+              onClick={() => {
+                setmonedaActive(tokenList[addr]);
+                setSelector(false);
+              }}
             >
               <img
                 className="imgDex"

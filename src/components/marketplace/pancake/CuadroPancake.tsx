@@ -92,7 +92,7 @@ const CuadroPancake = () => {
     }
 
     fetchData();
-  }, []);
+  }, [monedaActive]);
 
   const dispatch = useDispatch<AppDispatch>();
 

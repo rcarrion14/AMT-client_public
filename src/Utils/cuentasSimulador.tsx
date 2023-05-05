@@ -18,7 +18,7 @@ export const cuentasSimulador = (
   );
 
   let autoCompra_amt_diario = Number(
-    ((cobradoTotal_btcb_diario * precioBtcb) / precioAmt).toFixed(5)
+    ((cobradoTotal_btcb_diario * precioBtcb) / precioAmt).toFixed(2)
   );
 
   /////// --- MENSUAL: ------ /////
@@ -33,7 +33,7 @@ export const cuentasSimulador = (
     (
       cantidad * (1 + (cobradoUnitario_btcb * precioBtcb) / precioAmt) ** 30 -
       cantidad
-    ).toFixed(2)
+    ).toFixed(0)
   );
 
   /////// --- ANUAL: ------ /////
@@ -46,7 +46,7 @@ export const cuentasSimulador = (
     (
       cantidad * (1 + (cobradoUnitario_btcb * precioBtcb) / precioAmt) ** 365 -
       cantidad
-    ).toFixed(2)
+    ).toFixed(0)
   );
 
   return {
