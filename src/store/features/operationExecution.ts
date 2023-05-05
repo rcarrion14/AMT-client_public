@@ -8,6 +8,7 @@ export async function operationExecution(operation: Promise<any>) {
       style: {
         background: "white",
         color: "black",
+        justifyContent: "center",
       },
     }
   );

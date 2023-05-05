@@ -115,7 +115,7 @@ export const getAllowanceMarket = createAsyncThunk(
 );
 
 export const getAllowanceBurnVault = createAsyncThunk(
-  "amt/getAllowanceMarket",
+  "amt/getAllowanceBurnVault",
   async () => {
     const staticState = getStaticState();
     const contract = staticState.amt.contract;

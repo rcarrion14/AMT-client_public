@@ -16,6 +16,8 @@ interface BotonOperacionProps {
   input: string;
   signer: any;
   approveErc20: any;
+  toggler: any;
+  setToggler: any;
 }
 const BotonOperacion: React.FC<BotonOperacionProps> = ({
   balanceAmt,
@@ -26,6 +28,8 @@ const BotonOperacion: React.FC<BotonOperacionProps> = ({
   signer,
   approveErc20,
   addr,
+  toggler,
+  setToggler,
 }) => {
   const currentLanguage = useSelector(
     (state: typeof RootState) => state.session.language
@@ -57,8 +61,12 @@ const BotonOperacion: React.FC<BotonOperacionProps> = ({
                     "0x1111111254eeb25477b68fb85ed929f73a960582",
                     ethers.utils.parseEther("99999999999")
                   )
-                )
-              : operationExecution(signer.sendTransaction(txData));
+                ).then(() => {
+                  setToggler(!toggler);
+                })
+              : operationExecution(signer.sendTransaction(txData)).then(() => {
+                  setToggler(!toggler);
+                });
           }
         }}
         className="btnLarge"

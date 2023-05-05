@@ -15,6 +15,8 @@ interface Boton1InchProps {
   input: string;
   signer: any;
   approveErc20: any;
+  toggler: any;
+  setToggler: any;
 }
 const Boton1Inch: React.FC<BotonOperacionProps> = ({
   balanceUsdt,
@@ -25,6 +27,8 @@ const Boton1Inch: React.FC<BotonOperacionProps> = ({
   signer,
   approveErc20,
   addr,
+  toggler,
+  setToggler,
 }) => {
   const currentLanguage = useSelector(
     (state: typeof RootState) => state.session.language
@@ -56,8 +60,12 @@ const Boton1Inch: React.FC<BotonOperacionProps> = ({
                     "0x1111111254eeb25477b68fb85ed929f73a960582",
                     ethers.utils.parseEther("99999999999")
                   )
-                )
-              : operationExecution(signer.sendTransaction(txData));
+                ).then(() => {
+                  setToggler(!toggler);
+                })
+              : operationExecution(signer.sendTransaction(txData)).then(() => {
+                  setToggler(!toggler);
+                });
           }
         }}
         className="btnLarge"
