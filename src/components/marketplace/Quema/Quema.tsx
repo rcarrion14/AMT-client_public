@@ -21,7 +21,6 @@ const Quema = ({ setActivePage }) => {
       </div>
       <div className="container">
         {textoQuema(currentLanguage)}
-        <button className="btnLarge">Estadisticas ??¿¿</button>
         <CuadroQuema />
       </div>
     </div>
