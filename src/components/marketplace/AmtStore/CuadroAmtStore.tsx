@@ -23,7 +23,7 @@ const CuadroAmtStore = () => {
   );
 
   const allowanceUsdt = useSelector(
-    (state: typeof RootState) => state.usdt.allowanceMarketVault
+    (state: typeof RootState) => state.usdt.allowanceMarket
   );
 
   const balanceTienda = useSelector(

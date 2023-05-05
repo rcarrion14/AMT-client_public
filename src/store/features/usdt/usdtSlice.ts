@@ -9,7 +9,7 @@ import { formatter } from "../formatter";
 export interface usdtState {
   contract: any | null;
   balance: number | undefined;
-  allowanceMarketVault: number | undefined;
+  allowanceMarket: number | undefined;
   allowanceVaultAmt: number | undefined;
   allowanceVaultBtcb: number | undefined;
   allowanceVaultBtcbLiq: number | undefined;
@@ -19,7 +19,7 @@ export interface usdtState {
 const initialState: usdtState = {
   contract: undefined,
   balance: undefined,
-  allowanceMarketVault: undefined,
+  allowanceMarket: undefined,
   allowanceVaultAmt: undefined,
   allowanceVaultBtcb: undefined,
   allowanceVaultBtcbLiq: undefined,
@@ -52,8 +52,8 @@ export const getBalance = createAsyncThunk("usdt/getBalance", async () => {
   } else return null;
 });
 
-export const getAllowanceMarketVault = createAsyncThunk(
-  "usdt/getAllowanceMarketVault",
+export const getAllowanceMarket = createAsyncThunk(
+  "usdt/getAllowanceMarket",
   async () => {
     const staticState = getStaticState();
     const contract = staticState.usdt.contract;
@@ -61,7 +61,7 @@ export const getAllowanceMarketVault = createAsyncThunk(
 
     if (contract) {
       const newAllowance = formatter(
-        await contract.allowance(address, contractAddresses.Camboriu)
+        await contract.allowance(address, contractAddresses.marketPlace)
       );
       return { newAllowance };
     } else return null;
@@ -146,11 +146,11 @@ const usdtSlice = createSlice({
       .addCase(getBalance.pending, (state) => {
         state.balance = undefined;
       })
-      .addCase(getAllowanceMarketVault.fulfilled, (state, action) => {
-        state.allowanceMarketVault = action.payload?.newAllowance;
+      .addCase(getAllowanceMarket.fulfilled, (state, action) => {
+        state.allowanceMarket = action.payload?.newAllowance;
       })
-      .addCase(getAllowanceMarketVault.pending, (state) => {
-        state.allowanceMarketVault = undefined;
+      .addCase(getAllowanceMarket.pending, (state) => {
+        state.allowanceMarket = undefined;
       })
       .addCase(getAllowanceVaultAmt.fulfilled, (state, action) => {
         state.allowanceVaultAmt = action.payload?.newAllowance;
@@ -182,7 +182,7 @@ const usdtSlice = createSlice({
 export const generalLoadUsdt = (dispatch: AppDispatch) => {
   dispatch(createContract());
   dispatch(getBalance());
-  dispatch(getAllowanceMarketVault());
+  dispatch(getAllowanceMarket());
   dispatch(getAllowanceMaster());
   dispatch(getAllowanceVaultAmt());
   dispatch(getAllowanceVaultBtcb());

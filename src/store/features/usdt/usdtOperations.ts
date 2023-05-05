@@ -1,7 +1,7 @@
 import { getStaticState } from "../../store";
 import { AppDispatch } from "../../store";
 import {
-  getAllowanceMarketVault,
+  getAllowanceMarket,
   getAllowanceMaster,
   getAllowanceVaultAmt,
   getAllowanceVaultBtcb,
@@ -12,14 +12,14 @@ import contractAddresses from "../../../contracts/contractAddresses";
 import { ethers } from "ethers";
 import { operationExecution } from "../operationExecution";
 
-function approveMarketVault(dispatcher: AppDispatch) {
+function approveMarket(dispatcher: AppDispatch) {
   const contract = getStaticState().usdt.contract;
   const operationPromise = contract.approve(
-    contractAddresses.Camboriu,
+    contractAddresses.marketPlace,
     ethers.utils.parseEther("99999999999999999999999")
   );
   operationExecution(operationPromise).then(() => {
-    dispatcher(getAllowanceMarketVault());
+    dispatcher(getAllowanceMarket());
   });
 }
 
@@ -68,7 +68,7 @@ function approveMaster(dispatcher: AppDispatch) {
 }
 
 export const usdtOperations = {
-  approveMarketVault,
+  approveMarket,
   approveVaultAmt,
   approveVaultBtcb,
   approveVaultBtcbLiq,

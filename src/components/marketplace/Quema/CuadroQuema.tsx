@@ -27,7 +27,7 @@ const CuadroQuema = () => {
   );
 
   const allowanceAmt = useSelector(
-    (state: typeof RootState) => state.amt.allowanceMarketVault
+    (state: typeof RootState) => state.amt.allowanceBurnVault
   );
 
   const backRate = useSelector(
