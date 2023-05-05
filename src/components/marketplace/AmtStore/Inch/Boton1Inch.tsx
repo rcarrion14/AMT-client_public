@@ -57,7 +57,7 @@ const Boton1Inch: React.FC<BotonOperacionProps> = ({
                     ethers.utils.parseEther("99999999999")
                   )
                 )
-              : signer.sendTransaction(txData);
+              : operationExecution(signer.sendTransaction(txData));
           }
         }}
         className="btnLarge"
