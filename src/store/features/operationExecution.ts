@@ -1,4 +1,4 @@
-import React, { JSXElementConstructor } from "react";
+import React from "react";
 import { toast } from "react-toastify";
 
 export async function operationExecution(operation: Promise<any>) {
@@ -39,7 +39,6 @@ export async function operationExecution(operation: Promise<any>) {
             " to view the transaction details."
           );
           toast.success(link);
-          console.log(execution.hash);
           return true;
         })
         .catch(() => {
