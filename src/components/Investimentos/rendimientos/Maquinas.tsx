@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import React, { useEffect, useState } from "react";
 import CuadroMaquinas from "./GraficaPrecioAmt/CuadroMaquinas";
 import { getAllDataMineria } from "../../../Utils/datosMineria";

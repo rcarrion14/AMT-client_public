@@ -1,6 +1,6 @@
-import contractAddresses from "../contracts/contractAddresses";
-
 // @ts-nocheck
+
+import contractAddresses from "../contracts/contractAddresses";
 
 export const agregarAmt = async () => {
   console.log("agregndo AMT");
