@@ -18,7 +18,10 @@ import { CSSTransition } from "react-transition-group";
 function App() {
   const pages = ["home", "marketplace", "investidores", "gInvestidores"];
   const [activePage, setActivePage] = useState("home");
-
+  const customToastContainerStyle = {
+    display: "flex",
+    left: 0,
+  };
   return (
     <>
       <Provider store={store}>
@@ -66,7 +69,7 @@ function App() {
         </CSSTransition>
         ;
         <NavBar setActivePage={setActivePage} activePage={activePage} />
-        <ToastContainer />
+        <ToastContainer style={customToastContainerStyle} />
       </Provider>
     </>
   );

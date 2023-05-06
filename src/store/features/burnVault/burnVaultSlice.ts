@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { ethers } from "ethers";
 import contractAddresses from "../../../contracts/contractAddresses";
-import abiMarketVault from "../../../contracts/abis/marketVault.json";
+import abiBurnVault from "../../../contracts/abis/burnVault.json";
 import { getStaticState } from "../../store";
 import { AppDispatch } from "../../store";
 import { formatter } from "../formatter";
@@ -22,8 +22,8 @@ export const createContract = createAsyncThunk(
     const signer = getStaticState().wallet.signer;
     if (signer) {
       const newContract = new ethers.Contract(
-        contractAddresses.MarketVault,
-        abiMarketVault,
+        contractAddresses.burnVault,
+        abiBurnVault,
         signer
       );
       return { newContract };

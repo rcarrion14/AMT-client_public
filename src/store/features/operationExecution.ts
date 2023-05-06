@@ -1,7 +1,11 @@
+import React from "react";
 import { toast } from "react-toastify";
+
 export async function operationExecution(operation: Promise<any>) {
+  const baseUrl = "https://bscscan.com/tx/";
+
   const initialiceTransaction = toast.info(
-    "iniciando operation : requiere aprobación en billetera",
+    "Starting operation : require wallet accept",
     {
       autoClose: 30000,
       hideProgressBar: true,
@@ -14,12 +18,27 @@ export async function operationExecution(operation: Promise<any>) {
   return operation
     .then((execution) => {
       toast.dismiss(initialiceTransaction);
-      const transactionInProgress = toast.loading("transaccion en proceso...");
+      const transactionInProgress = toast.loading("Transaction in progress...");
       return execution
         .wait()
         .then(() => {
           toast.dismiss(transactionInProgress);
-          toast.success("operacion finalizada");
+          const link = React.createElement(
+            "span",
+            null,
+            "Operation finished successfully - ",
+            React.createElement(
+              "a",
+              {
+                href: baseUrl + execution.hash,
+                target: "_blank",
+                rel: "noopener noreferrer",
+              },
+              "here"
+            ),
+            " to view the transaction details."
+          );
+          toast.success(link);
           return true;
         })
         .catch(() => {

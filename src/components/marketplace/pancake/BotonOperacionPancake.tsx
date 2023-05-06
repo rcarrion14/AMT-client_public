@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 import { textosExtra } from "../../../Utils/textos";
 import { ethers } from "ethers";
+import { operationExecution } from "../../../store/features/operationExecution";
 
 interface BotonOperacionProps {
   balanceAmt: number | undefined;
@@ -15,6 +16,8 @@ interface BotonOperacionProps {
   input: string;
   signer: any;
   approveErc20: any;
+  toggler: any;
+  setToggler: any;
 }
 const BotonOperacion: React.FC<BotonOperacionProps> = ({
   balanceAmt,
@@ -25,6 +28,8 @@ const BotonOperacion: React.FC<BotonOperacionProps> = ({
   signer,
   approveErc20,
   addr,
+  toggler,
+  setToggler,
 }) => {
   const currentLanguage = useSelector(
     (state: typeof RootState) => state.session.language
@@ -51,11 +56,17 @@ const BotonOperacion: React.FC<BotonOperacionProps> = ({
         onClick={() => {
           if (true) {
             Number(input) > allowanceErc20
-              ? approveErc20(
-                  "0x1111111254eeb25477b68fb85ed929f73a960582",
-                  ethers.utils.parseEther("99999999999")
-                )
-              : signer.sendTransaction(txData);
+              ? operationExecution(
+                  approveErc20(
+                    "0x1111111254eeb25477b68fb85ed929f73a960582",
+                    ethers.utils.parseEther("99999999999")
+                  )
+                ).then(() => {
+                  setToggler(!toggler);
+                })
+              : operationExecution(signer.sendTransaction(txData)).then(() => {
+                  setToggler(!toggler);
+                });
           }
         }}
         className="btnLarge"

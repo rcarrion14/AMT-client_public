@@ -15,7 +15,7 @@ import { operationExecution } from "../operationExecution";
 function approveMarketVault(dispatcher: AppDispatch) {
   const contract = getStaticState().btcb.contract;
   const operationPromise = contract.approve(
-    contractAddresses.MarketVault,
+    contractAddresses.burnVault,
     ethers.utils.parseEther("99999999999999999999999")
   );
   operationExecution(operationPromise).then(() => {

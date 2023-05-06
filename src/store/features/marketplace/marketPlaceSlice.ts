@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { ethers } from "ethers";
 import contractAddresses from "../../../contracts/contractAddresses";
-import abiCamboriu from "../../../contracts/abis/camboriu.json";
+import abiMarketplace from "../../../contracts/abis/marketplace.json";
 import { getStaticState } from "../../store";
 import { AppDispatch } from "../../store";
 import { formatter } from "../formatter";
@@ -24,8 +24,8 @@ export const createContract = createAsyncThunk(
     const signer = getStaticState().wallet.signer;
     if (signer) {
       const newContract = new ethers.Contract(
-        contractAddresses.Camboriu,
-        abiCamboriu,
+        contractAddresses.marketPlace,
+        abiMarketplace,
         signer
       );
       return { newContract };
@@ -38,7 +38,7 @@ export const getAmtEnVenta = createAsyncThunk(
   async () => {
     const staticState = getStaticState();
     const contract = staticState.amt.contract;
-    const address = contractAddresses.Camboriu;
+    const address = contractAddresses.marketPlace;
     if (contract) {
       const newBalance = formatter(await contract.balanceOf(address));
       return { newBalance };
@@ -51,7 +51,7 @@ export const getPrecioVenta = createAsyncThunk(
   async () => {
     const staticState = getStaticState();
     const contract = staticState.amt.contract;
-    const address = contractAddresses.Camboriu;
+    const address = contractAddresses.marketPlace;
     if (contract) {
       //const newPrecioVenta = (await contract.precioVenta()).toString(); //Change when new marketplace is deployed
       const newPrecioVenta = 1;

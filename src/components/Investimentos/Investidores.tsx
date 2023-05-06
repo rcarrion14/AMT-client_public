@@ -22,28 +22,23 @@ const Investidores = () => {
   interface jsxPagesInterface {
     [key: string]: ReactElement<any, any>;
   }
-  const pages = [
-    "staking",
-    "stakingAmt",
-    "liquidez",
-    "rendimiento",
-    "retirarLiquidez",
-  ];
+  const pages = ["staking", "stakingAmt", "liquidez", "rendimiento"];
 
   const [activePage, setActivePage] = useState("");
   const [activeInfo, setActiveInfo] = useState(false);
 
   const saibaMais = (
-    <u onClick={() => setActiveInfo(true)}>{textosExtra.por.sepaMas}</u>
+    <u onClick={() => setActiveInfo(true)}>
+      {textosExtra[currentLanguage].sepaMas}
+    </u>
   );
-  const info = textoInvestidores("por");
+  const info = textoInvestidores(currentLanguage);
 
   const jsxPages: jsxPagesInterface = {
     staking: <Staking setActivePage={setActivePage} />,
     stakingAmt: <StakingAmt setActivePage={setActivePage} />,
     liquidez: <Liquidez setActivePage={setActivePage} />,
     rendimiento: <Rendimientos setActivePage={setActivePage} />,
-    retirarLiquidez: <RetirarLiquidez setActivePage={setActivePage} />,
   };
 
   const listaDePaginas = pages.map((pagina) => {
@@ -92,13 +87,6 @@ const Investidores = () => {
           textoBotonesBlancos[currentLanguage].rendimientos.descripcion
         }
         activador={"rendimiento"}
-        setActivePage={setActivePage}
-      />
-
-      <BotonBlanco
-        titulo="Retirar liquidez"
-        descripcion="aca la descripción para retirar liquidez"
-        activador="retirarLiquidez"
         setActivePage={setActivePage}
       />
 

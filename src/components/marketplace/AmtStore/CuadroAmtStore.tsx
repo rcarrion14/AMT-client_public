@@ -23,7 +23,7 @@ const CuadroAmtStore = () => {
   );
 
   const allowanceUsdt = useSelector(
-    (state: typeof RootState) => state.usdt.allowanceMarketVault
+    (state: typeof RootState) => state.usdt.allowanceMarket
   );
 
   const balanceTienda = useSelector(
@@ -57,7 +57,7 @@ const CuadroAmtStore = () => {
     <>
       <div id="primeraSeccion">
         <div className="saldo">
-          <h2>{textosExtra[currentLanguage].ustedRecibe}</h2>
+          <h2>{textosExtra[currentLanguage].ustedPaga}</h2>
           <p>
             {textosExtra[currentLanguage].saldo}{" "}
             {balanceAmt >= 0 ? Number(balanceUsdt?.toFixed(4)) : "-"}

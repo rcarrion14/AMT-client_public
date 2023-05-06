@@ -3,7 +3,7 @@
 }
 
 body {
-  background-color: #eeeeee;
+  background-color: #f6f6f6;
 }
 
 div {
@@ -182,9 +182,14 @@ u {
   background-color: white;
   display: flex;
   justify-content: space-between;
-
+  gap: 10px;
   border-radius: 15px;
   align-items: center;
+  padding: 10px 15px 10px 15px;
+
+  -webkit-box-shadow: 0px 4px 11px -8px rgba(0, 0, 0, 0.67);
+  box-shadow: 0px 4px 11px -9px rgba(0, 0, 0, 0.77);
+  border-radius: 8px;
   padding: 10px 15px 10px 15px;
 }
 
@@ -619,36 +624,39 @@ u {
 
 .donutContainer {
   max-height: 500px;
+  max-width: 400px;
 }
 
 .boxLegends1 {
   display: flex;
   flex-direction: row;
-  position: absolute;
+
+  position: relative;
   top: 50%;
-  left: 2%;
-  transform: translateY(-320%);
+  left: 0%;
+  transform: translateY(-800%);
   background-color: transparent;
 }
 
 .boxLegends1 img {
-  width: 60%;
-  height: 60%;
+  width: 10%;
+  height: 10%;
 }
 
 .boxLegends2 {
   display: flex;
   flex-direction: row;
-  position: absolute;
+  position: relative;
+  size: 1px;
   top: 50%;
-  right: 0;
-  transform: translateY(320%);
+  left: 80%;
+  transform: translateY(-150%);
   background-color: transparent;
 }
 
 .boxLegends2 img {
-  width: 60%;
-  height: 60%;
+  width: 10%;
+  height: 10%;
 }
 .containerParticipacionEnPool {
   display: flex;
@@ -812,4 +820,115 @@ u {
   padding: 10px 15px 10px 15px;
   border-radius: 15px;
   margin-top: 15px;
+}
+
+@media (max-width: 450px) {
+  .containerResultadosSimulacion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+  }
+}
+
+.containterSelectorTokens {
+  background-color: white;
+  width: 80%;
+
+  border-radius: 15px;
+
+  box-sizing: border-box;
+  padding: 15px;
+}
+
+.divContainterSelectorTokens {
+  background-color: #a7a7a700;
+  position: fixed;
+  top: 37vh;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  transform: translateX(100vw);
+}
+
+.animacionAgregar-enter-active {
+  -webkit-transform: translateX(0%);
+  transform: translateX(0%);
+  transition: transform 800ms linear;
+}
+
+.animacionAgregar-enter-done {
+  transform: translateX(0vw);
+}
+
+.animacionAgregar-exit {
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
+  transition: transform 8000ms linear;
+}
+
+.animacionAgregar-exit-active {
+  -webkit-transform: translateX(100vw);
+  transform: translateX(100vw);
+  transition: transform 800ms linear;
+}
+
+.listaAgregar {
+  margin: 20px 0 20px 0;
+  display: grid;
+  grid-template-rows: auto auto auto;
+  grid-template-columns: auto auto;
+  justify-items: start;
+  justify-content: center;
+  gap: 15px;
+
+  align-items: center;
+}
+
+.shadowBox {
+  -webkit-box-shadow: 0px 4px 11px -8px rgba(0, 0, 0, 0.67);
+  box-shadow: 0px 4px 11px -9px rgba(0, 0, 0, 0.77);
+  border-radius: 8px;
+  padding: 10px 15px 10px 15px;
+}
+
+.containerMaquinas {
+  margin: 20px 0 20px 0;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+
+  justify-items: start;
+  align-items: center;
+  gap: 10px;
+  background-color: white;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.containerMaquinas b {
+  display: block;
+  margin: 3px 0 3px 0;
+}
+
+.logoMaquinas {
+  width: 70px;
+  grid-column: 1;
+  grid-row: 1/3;
+  justify-self: center;
+}
+
+.maquinas {
+  grid-column: 2;
+  grid-row: 1;
+}
+.petahash {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+.produccion {
+  grid-column: 2/4;
+  grid-row: 2;
 }
