@@ -45,7 +45,24 @@ const DoughnutChart: React.FC<Props> = ({ data, labels }) => {
     }
   }, [data, labels]);
 
-  return <canvas ref={chartContainer} />;
+  return (
+    <>
+      <canvas ref={chartContainer} />
+      <div className="boxLegends1">
+        {" "}
+        <img src="coinBitcoin.png"></img>
+        <p>
+          <b>{((data[1] / (data[0] + data[1])) * 100).toFixed(0)}%</b>
+        </p>
+      </div>
+      <div className="boxLegends2">
+        <img src="coinAutomining.png"></img>
+        <b>
+          <p>{((data[0] / (data[0] + data[1])) * 100).toFixed(0)}%</p>
+        </b>
+      </div>
+    </>
+  );
 };
 
 export default DoughnutChart;

@@ -33,6 +33,7 @@ const CuadroPancake = () => {
   const [approveErc20, setApproveErc20] = useState<Function | null>(null);
   const [txData, setTxData] = useState();
 
+  const [toggler, setToggler] = useState(false);
   const inputPagar = useRef<HTMLInputElement>(null);
   const inputRecibir = useRef<HTMLInputElement>(null);
 
@@ -47,7 +48,7 @@ const CuadroPancake = () => {
         setInputRecibirValue(ethers.utils.formatEther(response.toTokenAmount));
       });
     }
-  }, [inputPagarValue, monedaActive]);
+  }, [inputPagarValue, monedaActive, toggler]);
 
   useEffect(() => {
     if (
@@ -64,7 +65,7 @@ const CuadroPancake = () => {
         setTxData(result);
       });
     }
-  }, [inputPagarValue]);
+  }, [inputPagarValue, toggler]);
 
   useEffect(() => {
     const contractErc20 = new ethers.Contract(
@@ -92,7 +93,7 @@ const CuadroPancake = () => {
     }
 
     fetchData();
-  }, [monedaActive]);
+  }, [toggler, monedaActive]);
 
   const dispatch = useDispatch<AppDispatch>();
 
@@ -188,6 +189,8 @@ const CuadroPancake = () => {
           signer={signer}
           approveErc20={approveErc20}
           addr={addr}
+          toggler={toggler}
+          setToggler={setToggler}
         />
       </div>
       <CSSTransition

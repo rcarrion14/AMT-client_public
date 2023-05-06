@@ -1,6 +1,10 @@
 // @ts-nocheck
 import React, { useRef, useState } from "react";
-import { simuleRentabilidad } from "../../../Utils/textos";
+import {
+  simuleRentabilidad,
+  textoBotonesBlancos,
+  textosExtra,
+} from "../../../Utils/textos";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 import { cuentasSimulador } from "../../../Utils/cuentasSimulador";
@@ -64,14 +68,14 @@ const Simulador: React.FC<SimuladorInterface> = ({ setActivePage }) => {
     <div className="containerSlide">
       <div className="navBar_top">
         <img onClick={() => setActivePage("")} src="icon_nav.png" />
-        <h1>Investimentos</h1>
+        <h1>{textosExtra[currentLanguage].inversiones}</h1>
       </div>
       {simuleRentabilidad(currentLanguage)}
 
-      <div className="cuadroSimulador">
+      <div className="cuadroSimula  dor">
         <div className="seccionCantidad">
           <div className="saldo">
-            <h2>Quantidade de AMT: </h2>
+            <h2>{textosExtra[currentLanguage].cantidadAMT}</h2>
           </div>
           <div className="cuadroCompraSimulador cantidad">
             <img src="coinAutomining.png" />
@@ -95,7 +99,7 @@ const Simulador: React.FC<SimuladorInterface> = ({ setActivePage }) => {
             }}
             className={escenarioActual ? "active" : null}
           >
-            Cenário atual
+            {textosExtra[currentLanguage].escenarioActual}
           </button>
           <button
             onClick={() => {
@@ -103,7 +107,7 @@ const Simulador: React.FC<SimuladorInterface> = ({ setActivePage }) => {
             }}
             className={escenarioActual ? null : "active"}
           >
-            Simular cenário
+            {textosExtra[currentLanguage].simularEscenario}
           </button>
         </div>
         <div className="seccion">
@@ -114,7 +118,7 @@ const Simulador: React.FC<SimuladorInterface> = ({ setActivePage }) => {
           >
             <img src="coinAutomining.png" />
             <div>AMT</div>
-            <b>Valor pago por AMT en dólar: </b>
+            <b>{textosExtra[currentLanguage].valorPagoAmtDolar}</b>
             <input
               disabled={escenarioActual ? true : false}
               ref={inputPrecioAmt}
@@ -135,8 +139,8 @@ const Simulador: React.FC<SimuladorInterface> = ({ setActivePage }) => {
             className="cuadroCompraSimulador"
           >
             <img src="coinBitcoin.png" />
-            <div>AMT</div>
-            <b>Insira valor do Bitcoin em dólar: </b>
+            <div>BTCB</div>
+            <b>{textosExtra[currentLanguage].valorBtcEnDolar} </b>
             <input
               disabled={escenarioActual ? true : false}
               ref={inputPrecioBtcb}
@@ -177,17 +181,17 @@ const Simulador: React.FC<SimuladorInterface> = ({ setActivePage }) => {
           </div>
         </div>
 
-        <h2>Nesse cenário, rentabilidade seria:</h2>
+        <h2>{textosExtra[currentLanguage].enEseEscenarioRentabilidadSeria}</h2>
 
         <div className="containerResultadosSimulacion">
-          <h2>Rentabilidade diaria:</h2>
+          <h2>{textosExtra[currentLanguage].rentaDiaria}</h2>
           <div>{rentPorcent_usdt_diario} %</div>
-          <h2>Staking Padrao:</h2>
+          <h2>{textoBotonesBlancos[currentLanguage].staking.titulo}</h2>
           <div>
             {cobradoTotal_btcb_diario} BTCB (
             {Number((cobradoTotal_btcb_diario * precioBtcb).toFixed(1))} USD)
           </div>
-          <h2>Autocompra diaria:</h2>
+          <h2>{textosExtra[currentLanguage].autocompraDiaria}</h2>
           <div>
             {autoCompra_amt_diario} AMT (
             {Number((autoCompra_amt_diario * precioAmt).toFixed(1))} USD)
@@ -195,14 +199,14 @@ const Simulador: React.FC<SimuladorInterface> = ({ setActivePage }) => {
         </div>
 
         <div className="containerResultadosSimulacion">
-          <h2>Rentabilidade mensal:</h2>
+          <h2>{textosExtra[currentLanguage].rentaMensual}</h2>
           <div>{rentPorcent_usdt_mensual} %</div>
-          <h2>Staking Padrao:</h2>
+          <h2>{textoBotonesBlancos[currentLanguage].staking.titulo}</h2>
           <div>
             {cobradoTotal_btcb_mensual} BTCB (
             {Number((cobradoTotal_btcb_mensual * precioBtcb).toFixed(0))} USD){" "}
           </div>
-          <h2>Autocompra diaria:</h2>
+          <h2>{textosExtra[currentLanguage].autocompraDiaria}</h2>
           <div>
             {autoCompra_amt_mensual} AMT (
             {Number((autoCompra_amt_mensual * precioAmt).toFixed(0))} USD)
@@ -210,14 +214,14 @@ const Simulador: React.FC<SimuladorInterface> = ({ setActivePage }) => {
         </div>
 
         <div className="containerResultadosSimulacion">
-          <h2>Rentabilidade anual:</h2>
+          <h2>{textosExtra[currentLanguage].rentaAnual}</h2>
           <div>{rentPorcent_usdt_anual}%</div>
-          <h2>Staking Padrao:</h2>
+          <h2>{textoBotonesBlancos[currentLanguage].staking.titulo}</h2>
           <div>
             {cobradoTotal_btcb_anual} BTCB (
             {Number((cobradoTotal_btcb_anual * precioBtcb).toFixed(0))} USD)
           </div>
-          <h2>Autocompra diaria:</h2>
+          <h2>{textosExtra[currentLanguage].autocompraDiaria}</h2>
           <div>
             {autoCompra_amt_anual} AMT (
             {Number((autoCompra_amt_anual * precioAmt).toFixed(0))} USD)
