@@ -75,7 +75,7 @@ export const getAllowanceMarketVault = createAsyncThunk(
 
     if (contract) {
       const newAllowance = formatter(
-        await contract.allowance(address, contractAddresses.MarketVault)
+        await contract.allowance(address, contractAddresses.burnVault)
       );
       return { newAllowance };
     } else return undefined;

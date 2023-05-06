@@ -1,8 +1,9 @@
 import { getStaticState } from "../../store";
 import { AppDispatch } from "../../store";
 import {
-  getAllowanceMarketVault,
   getAllowanceMaster,
+  getAllowanceMarket,
+  getAllowanceBurnVault,
   getAllowanceVaultAmt,
   getAllowanceVaultBtcb,
   getAllowanceVaultBtcbLiq,
@@ -12,14 +13,25 @@ import { ethers } from "ethers";
 import { operationExecution } from "../operationExecution";
 
 //to change to 2 new approve functions: approve market (when new market is done) and approve burnVault.
-function approveMarketVault(dispatcher: AppDispatch) {
+function approveMarket(dispatcher: AppDispatch) {
   const contract = getStaticState().amt.contract;
   const operationPromise = contract.approve(
-    contractAddresses.MarketVault,
+    contractAddresses.marketPlace,
     ethers.utils.parseEther("99999999999999999999999")
   );
   operationExecution(operationPromise).then(() => {
-    dispatcher(getAllowanceMarketVault());
+    dispatcher(getAllowanceMarket());
+  });
+}
+
+function approveBurnVault(dispatcher: AppDispatch) {
+  const contract = getStaticState().amt.contract;
+  const operationPromise = contract.approve(
+    contractAddresses.burnVault,
+    ethers.utils.parseEther("99999999999999999999999")
+  );
+  operationExecution(operationPromise).then(() => {
+    dispatcher(getAllowanceBurnVault());
   });
 }
 
@@ -68,7 +80,8 @@ function approveMaster(dispatcher: AppDispatch) {
 }
 
 export const amtOperations = {
-  approveMarketVault,
+  approveBurnVault,
+  approveMarket,
   approveVaultAmt,
   approveVaultBtcb,
   approveVaultBtcbLiq,

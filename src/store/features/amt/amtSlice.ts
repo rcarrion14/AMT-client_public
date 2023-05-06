@@ -9,7 +9,8 @@ import { formatter } from "../formatter";
 export interface amtState {
   contract: any | undefined;
   balance: number | undefined;
-  allowanceMarketVault: number | undefined;
+  allowanceMarket: number | undefined;
+  allowanceBurnVault: number | undefined;
   allowanceVaultAmt: number | undefined;
   allowanceVaultBtcb: number | undefined;
   allowanceVaultBtcbLiq: number | undefined;
@@ -42,7 +43,8 @@ export interface amtState {
 const initialState: amtState = {
   contract: undefined,
   balance: undefined,
-  allowanceMarketVault: undefined,
+  allowanceMarket: undefined,
+  allowanceBurnVault: undefined,
   allowanceVaultAmt: undefined,
   allowanceVaultBtcb: undefined,
   allowanceVaultBtcbLiq: undefined,
@@ -96,8 +98,8 @@ export const getAmtbalance = createAsyncThunk("amt/getAmtbalance", async () => {
     return { newBalance };
   } else return undefined;
 });
-export const getAllowanceMarketVault = createAsyncThunk(
-  "amt/getAllowanceMarketVault",
+export const getAllowanceMarket = createAsyncThunk(
+  "amt/getAllowanceMarket",
   async () => {
     const staticState = getStaticState();
     const contract = staticState.amt.contract;
@@ -105,7 +107,23 @@ export const getAllowanceMarketVault = createAsyncThunk(
 
     if (contract) {
       const newAllowance = formatter(
-        await contract.allowance(address, contractAddresses.MarketVault)
+        await contract.allowance(address, contractAddresses.marketPlace)
+      );
+      return { newAllowance };
+    } else return undefined;
+  }
+);
+
+export const getAllowanceBurnVault = createAsyncThunk(
+  "amt/getAllowanceBurnVault",
+  async () => {
+    const staticState = getStaticState();
+    const contract = staticState.amt.contract;
+    const address = staticState.wallet.address;
+
+    if (contract) {
+      const newAllowance = formatter(
+        await contract.allowance(address, contractAddresses.burnVault)
       );
       return { newAllowance };
     } else return undefined;
@@ -335,11 +353,17 @@ const amtSlice = createSlice({
       .addCase(getAmtbalance.pending, (state) => {
         state.balance = undefined;
       })
-      .addCase(getAllowanceMarketVault.fulfilled, (state, action) => {
-        state.allowanceMarketVault = action.payload?.newAllowance;
+      .addCase(getAllowanceMarket.fulfilled, (state, action) => {
+        state.allowanceMarket = action.payload?.newAllowance;
       })
-      .addCase(getAllowanceMarketVault.pending, (state) => {
-        state.allowanceMarketVault = undefined;
+      .addCase(getAllowanceMarket.pending, (state) => {
+        state.allowanceMarket = undefined;
+      })
+      .addCase(getAllowanceBurnVault.fulfilled, (state, action) => {
+        state.allowanceBurnVault = action.payload?.newAllowance;
+      })
+      .addCase(getAllowanceBurnVault.pending, (state) => {
+        state.allowanceBurnVault = undefined;
       })
       .addCase(getAllowanceVaultAmt.fulfilled, (state, action) => {
         state.allowanceVaultAmt = action.payload?.newAllowance;
@@ -424,7 +448,8 @@ const amtSlice = createSlice({
 const generalLoadAmt = (dispatch: AppDispatch) => {
   dispatch(createContract());
   dispatch(getAmtbalance());
-  dispatch(getAllowanceMarketVault());
+  dispatch(getAllowanceBurnVault());
+  dispatch(getAllowanceMarket());
   dispatch(getAllowanceMaster());
   dispatch(getAllowanceVaultAmt());
   dispatch(getAllowanceVaultBtcb());

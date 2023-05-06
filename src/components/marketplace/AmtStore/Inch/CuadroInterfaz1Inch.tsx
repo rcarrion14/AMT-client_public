@@ -36,6 +36,7 @@ const CuadroInterfaz1Inch = () => {
   const [approveErc20, setApproveErc20] = useState<Function | null>(null);
   const [txData, setTxData] = useState();
   const [tokenList, setTokenList] = useState({});
+  const [toggler, setToggler] = useState(false);
 
   const inputPagar = useRef<HTMLInputElement>(null);
   const inputRecibir = useRef<HTMLInputElement>(null);
@@ -57,7 +58,7 @@ const CuadroInterfaz1Inch = () => {
         setInputRecibirValue(ethers.utils.formatEther(response.toTokenAmount));
       });
     }
-  }, [inputPagarValue, monedaActive]);
+  }, [inputPagarValue, monedaActive, toggler]);
 
   useEffect(() => {
     if (
@@ -74,7 +75,7 @@ const CuadroInterfaz1Inch = () => {
         setTxData(result);
       });
     }
-  }, [inputPagarValue]);
+  }, [inputPagarValue, toggler]);
 
   useEffect(() => {
     const contractErc20 = new ethers.Contract(
@@ -102,7 +103,7 @@ const CuadroInterfaz1Inch = () => {
     }
 
     fetchData();
-  }, [monedaActive, inputPagarValue]);
+  }, [monedaActive, inputPagarValue, toggler]);
 
   const dispatch = useDispatch<AppDispatch>();
 
@@ -198,6 +199,8 @@ const CuadroInterfaz1Inch = () => {
           signer={signer}
           approveErc20={approveErc20}
           addr={addr}
+          toggler={toggler}
+          setToggler={setToggler}
         />
       </div>
 

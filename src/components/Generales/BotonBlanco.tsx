@@ -15,7 +15,7 @@ const BotonBlanco: React.FC<BotonBlancoProps> = ({
 }) => {
   return (
     <div
-      className="botonBlanco"
+      className="botonBlanco shadowBox"
       onClick={() => {
         setActivePage(activador);
       }}
