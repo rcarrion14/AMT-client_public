@@ -47,6 +47,21 @@ const GInvestidores = () => {
   const pays4 = useSelector((state: typeof RootState) => state.master.pays4);
   const pays5 = useSelector((state: typeof RootState) => state.master.pays5);
 
+  const liqPay1 = useSelector(
+    (state: typeof RootState) => state.master.liqPays1
+  );
+  const liqPay2 = useSelector(
+    (state: typeof RootState) => state.master.liqPays2
+  );
+  const liqPay3 = useSelector(
+    (state: typeof RootState) => state.master.liqPays3
+  );
+  const liqPay4 = useSelector(
+    (state: typeof RootState) => state.master.liqPays4
+  );
+  const liqPay5 = useSelector(
+    (state: typeof RootState) => state.master.liqPays5
+  );
   //TotalSupplyAt
   const TotalSupplyAt1 = useSelector(
     (state: typeof RootState) => state.amt.totalSupplyAt1
@@ -87,7 +102,7 @@ const GInvestidores = () => {
       {textoGInvestidores(currentLanguage)}
       <CuadroCobro
         balanceOfAt={balanceOfAt1}
-        payAt={pays1}
+        payAt={pays1 + liqPay1}
         totalSupplyAt={TotalSupplyAt1}
         currentSnap={readingSnapshot ? readingSnapshot : 0}
         alreadyCharged={alreadyCharged1}
@@ -103,7 +118,7 @@ const GInvestidores = () => {
       />
       <CuadroCobro
         balanceOfAt={balanceOfAt2}
-        payAt={pays2}
+        payAt={pays2 + liqPay2}
         totalSupplyAt={TotalSupplyAt2}
         currentSnap={readingSnapshot ? readingSnapshot - 1 : 0}
         alreadyCharged={alreadyCharged2}
@@ -119,7 +134,7 @@ const GInvestidores = () => {
       />
       <CuadroCobro
         balanceOfAt={balanceOfAt3}
-        payAt={pays3}
+        payAt={pays3 + liqPay3}
         totalSupplyAt={TotalSupplyAt3}
         currentSnap={readingSnapshot ? readingSnapshot - 2 : 0}
         alreadyCharged={alreadyCharged3}
@@ -135,7 +150,7 @@ const GInvestidores = () => {
       />
       <CuadroCobro
         balanceOfAt={balanceOfAt4}
-        payAt={pays4}
+        payAt={pays4 + liqPay4}
         totalSupplyAt={TotalSupplyAt4}
         currentSnap={readingSnapshot ? readingSnapshot - 3 : 0}
         alreadyCharged={alreadyCharged4}
@@ -151,7 +166,7 @@ const GInvestidores = () => {
       />
       <CuadroCobro
         balanceOfAt={balanceOfAt5}
-        payAt={pays5}
+        payAt={pays5 + liqPay5}
         totalSupplyAt={TotalSupplyAt5}
         currentSnap={readingSnapshot ? readingSnapshot - 4 : 0}
         alreadyCharged={alreadyCharged5}

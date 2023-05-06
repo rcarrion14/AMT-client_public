@@ -19,9 +19,15 @@ const Simulador: React.FC<SimuladorInterface> = ({ setActivePage }) => {
     (state: typeof RootState) => state.session.language
   );
 
-  const ultimoPago = useSelector(
+  const ultimoPagoUser = useSelector(
     (state: typeof RootState) => state.master.pays1
   );
+  const ultimoPagoLiq = useSelector(
+    (state: typeof RootState) => state.master.liqPays1
+  );
+
+  const ultimoPago = ultimoPagoUser + ultimoPagoLiq;
+  console.log(ultimoPago);
 
   const totalSupply = useSelector(
     (state: typeof RootState) => state.amt.totalSupply
