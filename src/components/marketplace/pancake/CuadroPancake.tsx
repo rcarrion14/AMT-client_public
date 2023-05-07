@@ -176,9 +176,13 @@ const CuadroPancake = () => {
       <div className="soloSaldo">
         <div>
           <h2>{textosExtra[currentLanguage].precioAmt}</h2>
-          <div>1 AMT = {""} USDT</div>
+          <div>1 AMT = USDT</div>
+          <div className="slippage">
+            <b>Slippage Tolerance 1%</b>
+          </div>
         </div>
       </div>
+
       <div>
         <BotonOperacionPancake
           balanceAmt={balanceAmt}
@@ -193,6 +197,7 @@ const CuadroPancake = () => {
           setToggler={setToggler}
         />
       </div>
+
       <CSSTransition
         in={selector}
         timeout={700}

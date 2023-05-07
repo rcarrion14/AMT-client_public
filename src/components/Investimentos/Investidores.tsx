@@ -32,7 +32,6 @@ const Investidores = () => {
       {textosExtra[currentLanguage].sepaMas}
     </u>
   );
-  const info = textoInvestidores(currentLanguage);
 
   const jsxPages: jsxPagesInterface = {
     staking: <Staking setActivePage={setActivePage} />,
@@ -59,7 +58,7 @@ const Investidores = () => {
     <>
       <h1>{textosExtra[currentLanguage].inversiones}</h1>
 
-      {activeInfo ? info : saibaMais}
+      {activeInfo ? textoInvestidores(currentLanguage) : saibaMais}
 
       <BotonBlanco
         titulo={textoBotonesBlancos[currentLanguage].staking.titulo}
