@@ -87,7 +87,7 @@ export const textoStore = (idioma: string, func: Function) => {
         <p>
           A compra de AMT no AMT Store deve ser feita usando USDT. Caso precise
           trocar outra moeda por USDT, para conseguir comprar AMT.{" "}
-          <u onClick={() => func()}>clique aquí</u>
+          <u onClick={() => func()}>Clique aquí</u>
         </p>
       </>
     );
@@ -110,6 +110,11 @@ export const textoStore = (idioma: string, func: Function) => {
           AMT, como la compra de máquinas mineras, la contratación de personal o
           servicios, etc.
         </p>
+        <p>
+          La compra de AMT en la Tienda AMT se debe realizar mediante USDT. en
+          caso de que necesites cambiar otra moneda por USDT, para poder comprar
+          AMT. <u onClick={() => func()}>Cliquee aquí.</u>
+        </p>
       </>
     );
   } else if (idioma == "eng") {
@@ -129,6 +134,11 @@ export const textoStore = (idioma: string, func: Function) => {
           Buying from AMT Store benefits the project as a whole, as resources
           are 100% dedicated to new investments in the AMT project, such as
           purchasing mining machines, hiring personnel or services, etc.
+        </p>
+        <p>
+          Purchasing AMT from the AMT Store must be done using USDT. In case you
+          need exchange another currency for USDT, to be able to buy AMT.{" "}
+          <u onClick={() => func()}>Click here.</u>
         </p>
       </>
     );
@@ -1310,7 +1320,7 @@ export const textosExtra: typeTextosExtra = {
     noHaytantosAmtEnVenta: "No hay tantos AMT en venta",
     ustedPaga: "Usted paga:",
     ustedRecibe: "Usted recibe:",
-    amtEnVenta: "AMT a venda:",
+    amtEnVenta: "AMT en venta:",
     consultarHistorico: "Consultar Historico",
     inversiones: "Inversiones",
     retirar: "Retirar",
