@@ -109,27 +109,29 @@ const Historico = ({
 
       <div className="cuadroGanaciasStaking">
         <div>AMT</div>
-        <div>{stackedByUser ? stackedByUser.toFixed(5) : null}</div>
+        <div>{stackedByUser ? stackedByUser.toFixed(5) : 0}</div>
         <div className="celeste">
-          {stackedByUser ? (stackedByUser * 0.65).toFixed(3) + " USDT" : null}
+          {stackedByUser
+            ? (stackedByUser * 0.65).toFixed(3) + " USDT"
+            : 0 + " USDT"}
         </div>
         <div className="celeste">
           <b>AMT depositados: </b>
-          {stakingIniciales ? stakingIniciales[addr].amount : null}
+          {stakingIniciales ? stackedByUser : null}
         </div>
         <div className="celeste">
           <b>Data do depósito: </b>{" "}
-          {stakingIniciales ? formatDate(stakingIniciales[addr].tstamp) : null}
+          {stackedByUser > 0 ? formatDate(stakingIniciales[addr].tstamp) : "-"}
         </div>
         <div className="celeste">
           <b>BTCB recebidos: </b>
-          {stakingIniciales
+          {stackedByUser > 0
             ? (stackedByUser - stakingIniciales[addr].amount).toFixed(5)
-            : null}
+            : "-"}
         </div>
       </div>
 
-      {containers()}
+      {stackedByUser > 0 ? containers() : null}
     </div>
   );
 };

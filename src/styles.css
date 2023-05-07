@@ -53,7 +53,7 @@ u {
 }
 
 .containerBanner {
-  height: 120px;
+  height: 160px;
   background-color: #34383e;
   display: flex;
   justify-content: center;
@@ -63,12 +63,12 @@ u {
 .containerLanguageSelector {
   display: flex;
   color: #d9d9d9;
-  margin-top: 10px;
+  margin-top: -8px;
   justify-content: right;
   align-items: right;
 }
 .containerBanner > img {
-  width: 150px;
+  width: 250px;
 }
 
 .containerLengueta {
@@ -770,7 +770,7 @@ u {
 .cuadroCompraSimulador {
   background-color: #dedede;
   display: grid;
-  grid-template-columns: 0.7fr 0.7fr 3fr 1fr;
+  grid-template-columns: 0.7fr 0.7fr 2fr 2fr;
   border-radius: 15px;
   text-align: center;
   justify-items: start;
