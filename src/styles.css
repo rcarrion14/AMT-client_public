@@ -749,7 +749,6 @@ u {
   border-radius: 15px;
   padding: 5px 12px 5px 12px;
 
-  width: 40%;
   align-items: center;
 }
 
@@ -955,4 +954,9 @@ u {
 
 .seccion {
   margin: 10px 0 10px 0;
+}
+
+.slippage {
+  text-align: centerC;
+  margin: 10px 0 5px 0;
 }
