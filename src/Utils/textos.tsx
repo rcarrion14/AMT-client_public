@@ -1343,7 +1343,7 @@ export const textosExtra: typeTextosExtra = {
     autocompraDiaria: "Autocompra diaria:",
     enEseEscenarioRentabilidadSeria:
       "En este escenario, la rentabilidad sería:",
-    dataDeDeposito: "Data de deposito",
+    dataDeDeposito: "Fecha de deposito",
     gananciasDistribuidas: "Ganancias distribuidas",
   },
   eng: {
@@ -1399,7 +1399,7 @@ export const textosExtra: typeTextosExtra = {
     autocompraDiaria: "Daily autoreinvestment:",
     enEseEscenarioRentabilidadSeria:
       "In this scenario, the profitability would be:",
-    dataDeDeposito: "Deposit data",
+    dataDeDeposito: "Deposit date",
     gananciasDistribuidas: "Earnings",
   },
 };
