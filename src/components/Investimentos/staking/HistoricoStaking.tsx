@@ -7,6 +7,7 @@ import { fetchVaultBctb, formatDate } from "../../../Utils/fetchBuckets";
 import contractAddresses from "../../../contracts/contractAddresses";
 import { snapToDateMapp } from "../../gInvestidores/snapshotDateMapper";
 import { ethers } from "ethers";
+import { textoBotonesBlancos, textosExtra } from "../../../Utils/textos";
 
 const Historico = ({
   setHistorico,
@@ -15,6 +16,9 @@ const Historico = ({
   contractAmt,
 }) => {
   const addr = useSelector((state: typeof RootState) => state.wallet.address);
+  const currentLanguage = useSelector(
+    (state: typeof RootState) => state.session.language
+  );
   const [stakingIniciales, setStakingIniciales] = useState(undefined);
   const [dataCobros, setDataCobros] = useState([]);
   const [balancesAt, setBalancesAt] = useState([]);
@@ -65,7 +69,7 @@ const Historico = ({
 
             <div className="transparente">
               <p>
-                <b>Lucros distribuidos</b>
+                <b>{textosExtra[currentLanguage].gananciasDistribuidas}</b>
               </p>
               <p>{snapToDateMapp(ganancia[1])}</p>
             </div>
@@ -94,7 +98,7 @@ const Historico = ({
     <div className="containerSlide">
       <div className="navBar_top">
         <img onClick={() => setHistorico(false)} src="icon_nav.png" />
-        <h1>Staking Padrao</h1>
+        <h1>{textoBotonesBlancos[currentLanguage].staking.titulo}</h1>
       </div>
 
       {
@@ -105,19 +109,19 @@ const Historico = ({
             {addr ? (stackedByUser * 0.65).toFixed(3) + " USDT" : null}
           </div>
           <div className="celeste">
-            <b>AMT depositados: </b>
+            <b>{textosExtra[currentLanguage].amtDepositados} </b>
             {addr && stakingIniciales
               ? stakingIniciales[addr?.toLowerCase()].amount
               : null}
           </div>
           <div className="celeste">
-            <b>Data do depósito: </b>{" "}
+            <b>{textosExtra[currentLanguage].dataDeDeposito}</b>{" "}
             {addr && stakingIniciales
               ? formatDate(stakingIniciales[addr?.toLowerCase()].tstamp)
               : null}
           </div>
           <div className="celeste">
-            <b>BTCB recebidos: </b>
+            <b>{textosExtra[currentLanguage].btcbAcumulados} </b>
             {addr && stakingIniciales
               ? (
                   stackedByUser - stakingIniciales[addr?.toLowerCase()].amount

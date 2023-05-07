@@ -1206,6 +1206,8 @@ export interface interfaceTextoExtra {
   rentaAnual: string;
   autocompraDiaria: string;
   enEseEscenarioRentabilidadSeria: string;
+  dataDeDeposito: string;
+  gananciasDistribuidas: string;
 }
 export type typeTextosExtra = {
   [key in languageCode]: interfaceTextoExtra;
@@ -1275,6 +1277,8 @@ export const textosExtra: typeTextosExtra = {
     rentaAnual: "Renda anual",
     autocompraDiaria: "Autocompra diária:",
     enEseEscenarioRentabilidadSeria: "Nesse cenário, rentabilidade seria:",
+    dataDeDeposito: "Data do deposito",
+    gananciasDistribuidas: "Lucros distribuidos",
   },
   esp: {
     bienvenido: "¡Bienvenido!",
@@ -1339,6 +1343,8 @@ export const textosExtra: typeTextosExtra = {
     autocompraDiaria: "Autocompra diaria:",
     enEseEscenarioRentabilidadSeria:
       "En este escenario, la rentabilidad sería:",
+    dataDeDeposito: "Data de deposito",
+    gananciasDistribuidas: "Ganancias distribuidas",
   },
   eng: {
     bienvenido: "Welcome!",
@@ -1393,6 +1399,8 @@ export const textosExtra: typeTextosExtra = {
     autocompraDiaria: "Daily autoreinvestment:",
     enEseEscenarioRentabilidadSeria:
       "In this scenario, the profitability would be:",
+    dataDeDeposito: "Deposit data",
+    gananciasDistribuidas: "Earnings",
   },
 };
 
