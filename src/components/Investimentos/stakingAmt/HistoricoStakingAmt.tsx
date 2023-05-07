@@ -75,7 +75,7 @@ const Historico = ({
             </div>
             <div className="transparente">
               <p>{ganancia[0].toFixed(6)}</p>
-              <p>XX BTC</p>
+              <p>AMT</p>
             </div>
           </div>
         );

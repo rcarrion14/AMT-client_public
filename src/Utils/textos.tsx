@@ -1251,7 +1251,7 @@ export const textosExtra: typeTextosExtra = {
     consultarHistorico: "Consultar histórico",
     inversiones: "Investimentos",
     retirar: "Retirar",
-    btcbAcumulados: "BTCB acumulados",
+    btcbAcumulados: "BTCB gerados",
     amtGenerados: "AMT gerados",
     participacionEnPool: "Participação total no pool:",
     tuLiquidezYRetirar: "Sua liquidez e liquidez para saque",

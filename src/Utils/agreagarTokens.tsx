@@ -1,6 +1,6 @@
-import contractAddresses from "../contracts/contractAddresses";
-
 // @ts-nocheck
+
+import contractAddresses from "../contracts/contractAddresses";
 
 export const agregarAmt = async () => {
   console.log("agregndo AMT");
@@ -14,7 +14,7 @@ export const agregarAmt = async () => {
         symbol: "AMT",
         decimals: 18,
         image:
-          "https://autominingtoken.com/wp-content/uploads/2022/06/Agrupar-1-copiar-3.png",
+          "https://golden-storage-production.s3.amazonaws.com/topic_images/ef55267487d24b24bf2ac48ae2212b16.png",
       },
     },
   });

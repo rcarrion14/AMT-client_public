@@ -539,6 +539,7 @@ u {
   border-radius: 15px;
   padding: 5px 10px 5px 10px;
   margin: 8px 8px 8px 8px;
+  text-align: center;
 }
 
 .cuadroStakings > img {
@@ -931,4 +932,27 @@ u {
 .produccion {
   grid-column: 2/4;
   grid-row: 2;
+}
+
+.disabledContainer {
+  opacity: 0.4;
+  pointer-events: none;
+  opacity: 0.4;
+  z-index: 4;
+}
+
+.noMetamask {
+  width: 250px;
+  height: 250px;
+  background-color: cornflowerblue;
+}
+
+.boton100porcent {
+  display: flex;
+  margin-top: 5px;
+  justify-content: flex-end;
+}
+
+.seccion {
+  margin: 10px 0 10px 0;
 }
