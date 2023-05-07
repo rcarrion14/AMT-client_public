@@ -111,7 +111,6 @@ const Simulador: React.FC<SimuladorInterface> = ({ setActivePage }) => {
           </button>
         </div>
         <div className="seccion">
-          <div className="saldo"></div>
           <div
             style={escenarioActual ? null : { backgroundColor: "white" }}
             className="cuadroCompraSimulador"

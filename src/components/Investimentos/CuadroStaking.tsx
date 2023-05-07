@@ -5,6 +5,7 @@ import BotonOperacionStaking from "./BotonOperacionStaking";
 import { textoAtencionStaking, textosExtra } from "../../Utils/textos";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
+import { fetchVaultAmt } from "../../Utils/fetchBuckets";
 interface BotonOperacionProps {
   balanceUserAmt: number | undefined;
   stackedByUser: number | undefined;
@@ -24,13 +25,19 @@ const CuadroStaking: React.FC<BotonOperacionProps> = ({
   operacionStake,
   operacionWithdrawl,
 }) => {
+  const addr = useSelector((state: typeof RootState) => state.wallet.address);
   const inputStake = useRef<HTMLInputElement>(null);
-
   const [inputStakeValue, setInputStakeValue] = useState("");
   const currentLanguage = useSelector(
     (state: typeof RootState) => state.session.language
   );
-  //////////
+  const [stakingIniciales, setStakingIniciales] = useState(undefined);
+
+  useEffect(() => {
+    fetchVaultAmt().then((result) => {
+      setStakingIniciales(result.dataStakings);
+    });
+  }, []);
 
   return (
     <>
@@ -54,6 +61,18 @@ const CuadroStaking: React.FC<BotonOperacionProps> = ({
               setInputStakeValue(inputStake.current?.value);
             }}
           />
+        </div>
+
+        <div className="boton100porcent">
+          <button
+            onClick={() => {
+              setInputStakeValue(balanceUserAmt);
+              inputStake.current.value = balanceUserAmt;
+            }}
+            className="btnSimulacion transparente"
+          >
+            100%
+          </button>
         </div>
       </div>
 
@@ -88,18 +107,28 @@ const CuadroStaking: React.FC<BotonOperacionProps> = ({
 
       <div className="rendimientosStakingContainer">
         Meu investimento atual:
-        <div className="investimentoActual">
-          <div>
+        <div>
+          <div className="containerSaldos">
             <div>
-              {btcACobrar >= 0
-                ? textosExtra[currentLanguage].btcbAcumulados
-                : textosExtra[currentLanguage].amtGenerados}
+              <h2>
+                {btcACobrar >= 0
+                  ? textosExtra[currentLanguage].btcbAcumulados
+                  : textosExtra[currentLanguage].amtGenerados}
+              </h2>
+              <div>
+                {btcACobrar >= 0
+                  ? btcACobrar
+                  : stakingIniciales == undefined
+                  ? "-"
+                  : Number(
+                      (stackedByUser - stakingIniciales[addr].amount).toFixed(1)
+                    )}
+              </div>
             </div>
-            <div>{btcACobrar}</div>
-          </div>
-          <div>
-            <div>{textosExtra[currentLanguage].amtDepositados}</div>
-            <div>{Number(stackedByUser?.toFixed(4))}</div>
+            <div>
+              <h2>{textosExtra[currentLanguage].amtDepositados}</h2>
+              <div>{Number(stackedByUser?.toFixed(4))}</div>
+            </div>
           </div>
         </div>
       </div>

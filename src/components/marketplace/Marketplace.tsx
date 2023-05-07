@@ -84,7 +84,6 @@ const Marketplace: React.FC<MarketplaceInterface> = () => {
         setActivePage={setActivePage}
       />
       {listaDePaginas}
-
       <CSSTransition
         in={agregarTokens}
         timeout={800}
