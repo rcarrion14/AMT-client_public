@@ -204,6 +204,10 @@ const CuadroInterfaz1Inch = () => {
         />
       </div>
 
+      <div className="slippage">
+        <b>Slippage Tolerance 1%</b>
+      </div>
+
       <CSSTransition
         in={selector}
         timeout={700}
