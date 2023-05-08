@@ -10,7 +10,7 @@ export const cuentasSimulador = (
   let cobradoUnitario_btcb = ultimoPago / totalSupply;
 
   let rentPorcent_usdt_diario = Number(
-    ((cobradoUnitario_btcb * precioBtcb) / precioAmt).toFixed(6) * 100
+    (((cobradoUnitario_btcb * precioBtcb) / precioAmt) * 100).toFixed(5)
   );
 
   let cobradoTotal_btcb_diario = Number(

@@ -113,27 +113,29 @@ const Historico = ({
 
       <div className="cuadroGanaciasStaking">
         <div>AMT</div>
-        <div>{stackedByUser ? stackedByUser.toFixed(5) : null}</div>
+        <div>{stackedByUser ? stackedByUser.toFixed(5) : 0}</div>
         <div className="celeste">
-          {stackedByUser ? (stackedByUser * 0.65).toFixed(3) + " USDT" : null}
+          {stackedByUser
+            ? (stackedByUser * 0.65).toFixed(3) + " USDT"
+            : 0 + " USDT"}
         </div>
         <div className="celeste">
-          <b>{textosExtra[currentLanguage].amtDepositados} </b>
-          {stakingIniciales ? stakingIniciales[addr].amount : null}
+          <b>{textosExtra[currentLanguage].amtDepositados}</b>
+          {stakingIniciales ? stackedByUser : null}
         </div>
         <div className="celeste">
-          <b>{textosExtra[currentLanguage].dataDeDeposito} </b>{" "}
-          {stakingIniciales ? formatDate(stakingIniciales[addr].tstamp) : null}
+          <b>{textosExtra[currentLanguage].dataDeDeposito}</b>{" "}
+          {stackedByUser > 0 ? formatDate(stakingIniciales[addr].tstamp) : "-"}
         </div>
         <div className="celeste">
           <b>{textosExtra[currentLanguage].btcACobrar}</b>
-          {stakingIniciales
+          {stackedByUser > 0
             ? (stackedByUser - stakingIniciales[addr].amount).toFixed(5)
-            : null}
+            : "-"}
         </div>
       </div>
 
-      {containers()}
+      {stackedByUser > 0 ? containers() : null}
     </div>
   );
 };
