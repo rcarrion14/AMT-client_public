@@ -96,6 +96,8 @@ const Simulador: React.FC<SimuladorInterface> = ({ setActivePage }) => {
           <button
             onClick={() => {
               setEscenarioActual(true);
+              setInputPrecioBtcbValue(precioBtcb);
+              setInputPrecioAmtValue(precioAmt);
             }}
             className={escenarioActual ? "active" : null}
           >
@@ -152,36 +154,37 @@ const Simulador: React.FC<SimuladorInterface> = ({ setActivePage }) => {
               value={inputPrecioBtcbValue}
             />
           </div>
-          <div className="containerBotonesSimulacion">
-            <button
-              className="btnSimulacion transparente"
-              onClick={() => {
-                setPrecioBtcbValue(100000);
-              }}
-            >
-              $ 100k
-            </button>
-            <button
-              className="btnSimulacion transparente"
-              onClick={() => {
-                setInputPrecioBtcbValue(200000);
-              }}
-            >
-              $ 200 k
-            </button>
-            <button
-              className="btnSimulacion transparente"
-              onClick={() => {
-                setInputPrecioBtcbValue(1000000);
-              }}
-            >
-              $ 1M
-            </button>
-          </div>
+          {escenarioActual ? null : (
+            <div className="containerBotonesSimulacion">
+              <button
+                className="btnSimulacion transparente"
+                onClick={() => {
+                  setInputPrecioBtcbValue(100000);
+                }}
+              >
+                $ 100k
+              </button>
+              <button
+                className="btnSimulacion transparente"
+                onClick={() => {
+                  setInputPrecioBtcbValue(200000);
+                }}
+              >
+                $ 200 k
+              </button>
+              <button
+                className="btnSimulacion transparente"
+                onClick={() => {
+                  setInputPrecioBtcbValue(1000000);
+                }}
+              >
+                $ 1M
+              </button>
+            </div>
+          )}
         </div>
-
         <h2>{textosExtra[currentLanguage].enEseEscenarioRentabilidadSeria}</h2>
-
+        {/* DIARIO */}
         <div className="containerResultadosSimulacion">
           <h2>{textosExtra[currentLanguage].rentaDiaria}</h2>
           <div>{rentPorcent_usdt_diario} %</div>
@@ -196,7 +199,7 @@ const Simulador: React.FC<SimuladorInterface> = ({ setActivePage }) => {
             {Number((autoCompra_amt_diario * precioAmt).toFixed(1))} USD)
           </div>
         </div>
-
+        {/* MENSUAL */}
         <div className="containerResultadosSimulacion">
           <h2>{textosExtra[currentLanguage].rentaMensual}</h2>
           <div>{rentPorcent_usdt_mensual} %</div>
@@ -211,7 +214,7 @@ const Simulador: React.FC<SimuladorInterface> = ({ setActivePage }) => {
             {Number((autoCompra_amt_mensual * precioAmt).toFixed(0))} USD)
           </div>
         </div>
-
+        {/* ANUAL */}
         <div className="containerResultadosSimulacion">
           <h2>{textosExtra[currentLanguage].rentaAnual}</h2>
           <div>{rentPorcent_usdt_anual}%</div>

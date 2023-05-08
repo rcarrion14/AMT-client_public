@@ -8,6 +8,7 @@ import contractAddresses from "../../../contracts/contractAddresses";
 import { snapToDateMapp } from "../../gInvestidores/snapshotDateMapper";
 import Spinner from "../../Generales/Spinner/Spinner";
 import { fetchVaultAmt } from "../../../Utils/fetchBuckets";
+import { textoBotonesBlancos, textosExtra } from "../../../Utils/textos";
 
 const Historico = ({
   setHistorico,
@@ -20,6 +21,9 @@ const Historico = ({
   const [fechasSwaps, setFechasSwaps] = useState([]);
   const [balancesAt, setBalancesAt] = useState([]);
 
+  const currentLanguage = useSelector(
+    (state: typeof RootState) => state.session.language
+  );
   async function getAllSnapshotFrom(snapFrom: number) {
     let promiseList = [];
 
@@ -69,7 +73,7 @@ const Historico = ({
 
             <div className="transparente">
               <p>
-                <b>Autocompra de AMT</b>
+                <b>{textosExtra[currentLanguage].autocompraDiaria}</b>
               </p>
               <p>{snapToDateMapp(ganancia[1])}</p>
             </div>
@@ -104,32 +108,34 @@ const Historico = ({
     <div className="containerSlide">
       <div className="navBar_top">
         <img onClick={() => setHistorico(false)} src="icon_nav.png" />
-        <h1>Staking Autocompra</h1>
+        <h1>{textoBotonesBlancos[currentLanguage].stakingAmt.titulo}</h1>
       </div>
 
       <div className="cuadroGanaciasStaking">
         <div>AMT</div>
-        <div>{stackedByUser ? stackedByUser.toFixed(5) : null}</div>
+        <div>{stackedByUser ? stackedByUser.toFixed(5) : 0}</div>
         <div className="celeste">
-          {stackedByUser ? (stackedByUser * 0.65).toFixed(3) + " USDT" : null}
+          {stackedByUser
+            ? (stackedByUser * 0.65).toFixed(3) + " USDT"
+            : 0 + " USDT"}
         </div>
         <div className="celeste">
-          <b>AMT depositados: </b>
-          {stakingIniciales ? stakingIniciales[addr].amount : null}
+          <b>{textosExtra[currentLanguage].amtDepositados}</b>
+          {stakingIniciales ? stackedByUser : null}
         </div>
         <div className="celeste">
-          <b>Data do depósito: </b>{" "}
-          {stakingIniciales ? formatDate(stakingIniciales[addr].tstamp) : null}
+          <b>{textosExtra[currentLanguage].dataDeDeposito}</b>{" "}
+          {stackedByUser > 0 ? formatDate(stakingIniciales[addr].tstamp) : "-"}
         </div>
         <div className="celeste">
-          <b>BTCB recebidos: </b>
-          {stakingIniciales
+          <b>{textosExtra[currentLanguage].btcACobrar}</b>
+          {stackedByUser > 0
             ? (stackedByUser - stakingIniciales[addr].amount).toFixed(5)
-            : null}
+            : "-"}
         </div>
       </div>
 
-      {containers()}
+      {stackedByUser > 0 ? containers() : null}
     </div>
   );
 };

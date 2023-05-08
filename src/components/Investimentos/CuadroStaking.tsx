@@ -117,8 +117,8 @@ const CuadroStaking: React.FC<BotonOperacionProps> = ({
               </h2>
               <div>
                 {btcACobrar >= 0
-                  ? btcACobrar
-                  : stakingIniciales == undefined
+                  ? Number(btcACobrar?.toFixed(5))
+                  : stakingIniciales == undefined || stackedByUser == 0
                   ? "-"
                   : Number(
                       (stackedByUser - stakingIniciales[addr].amount).toFixed(1)

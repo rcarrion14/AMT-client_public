@@ -1206,6 +1206,8 @@ export interface interfaceTextoExtra {
   rentaAnual: string;
   autocompraDiaria: string;
   enEseEscenarioRentabilidadSeria: string;
+  dataDeDeposito: string;
+  gananciasDistribuidas: string;
 }
 export type typeTextosExtra = {
   [key in languageCode]: interfaceTextoExtra;
@@ -1268,13 +1270,15 @@ export const textosExtra: typeTextosExtra = {
     cantidadAMT: "Quantidade de AMT: ",
     escenarioActual: "Cenário atual",
     simularEscenario: "Simular cenário",
-    valorPagoAmtDolar: "Valor pago por AMT en dólar:",
-    valorBtcEnDolar: "Insira valor do Bitcoin em dólar: ",
+    valorPagoAmtDolar: "Valor pago en dólar:",
+    valorBtcEnDolar: "Insira valor em dólar: ",
     rentaDiaria: "Renda diária",
     rentaMensual: "Renda mensal",
     rentaAnual: "Renda anual",
     autocompraDiaria: "Autocompra diária:",
     enEseEscenarioRentabilidadSeria: "Nesse cenário, rentabilidade seria:",
+    dataDeDeposito: "Data do deposito",
+    gananciasDistribuidas: "Lucros distribuidos",
   },
   esp: {
     bienvenido: "¡Bienvenido!",
@@ -1339,6 +1343,8 @@ export const textosExtra: typeTextosExtra = {
     autocompraDiaria: "Autocompra diaria:",
     enEseEscenarioRentabilidadSeria:
       "En este escenario, la rentabilidad sería:",
+    dataDeDeposito: "Fecha de deposito",
+    gananciasDistribuidas: "Ganancias distribuidas",
   },
   eng: {
     bienvenido: "Welcome!",
@@ -1393,6 +1399,8 @@ export const textosExtra: typeTextosExtra = {
     autocompraDiaria: "Daily autoreinvestment:",
     enEseEscenarioRentabilidadSeria:
       "In this scenario, the profitability would be:",
+    dataDeDeposito: "Deposit date",
+    gananciasDistribuidas: "Earnings",
   },
 };
 
