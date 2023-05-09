@@ -82,8 +82,8 @@ const Historico = ({
               <p>{snapToDateMapp(ganancia[1])}</p>
             </div>
             <div className="transparente">
-              <p>{ganancia[0].toFixed(6)}</p>
-              <p>AMT</p>
+              <p>{ganancia[0].toFixed(3)} AMT</p>
+              <p>~{(ganancia[0] * precioAmtEnUsdt).toFixed(3)} USDT</p>
             </div>
           </div>
         );
