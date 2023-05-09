@@ -8,6 +8,8 @@ import contractAddresses from "../../../contracts/contractAddresses";
 import { snapToDateMapp } from "../../gInvestidores/snapshotDateMapper";
 import Spinner from "../../Generales/Spinner/Spinner";
 import { fetchVaultAmt } from "../../../Utils/fetchBuckets";
+import { textoBotonesBlancos, textosExtra } from "../../../Utils/textos";
+import { current } from "@reduxjs/toolkit";
 
 const Historico = ({
   setHistorico,
@@ -16,6 +18,12 @@ const Historico = ({
   currentSnapshot,
 }) => {
   const addr = useSelector((state: typeof RootState) => state.wallet.address);
+  const precioAmtEnUsdt = useSelector(
+    (state: typeof RootState) => state.amt.precioEnUsdt
+  );
+  const currentLanguage = useSelector(
+    (state: typeof RootState) => state.session.language
+  );
   const [stakingIniciales, setStakingIniciales] = useState(undefined);
   const [fechasSwaps, setFechasSwaps] = useState([]);
   const [balancesAt, setBalancesAt] = useState([]);
@@ -69,7 +77,7 @@ const Historico = ({
 
             <div className="transparente">
               <p>
-                <b>Autocompra de AMT</b>
+                <b>{textosExtra[currentLanguage].amtGenerados}</b>
               </p>
               <p>{snapToDateMapp(ganancia[1])}</p>
             </div>
@@ -104,7 +112,7 @@ const Historico = ({
     <div className="containerSlide">
       <div className="navBar_top">
         <img onClick={() => setHistorico(false)} src="icon_nav.png" />
-        <h1>Staking Autocompra</h1>
+        <h1>{textoBotonesBlancos[currentLanguage].stakingAmt.titulo}</h1>
       </div>
 
       <div className="cuadroGanaciasStaking">
@@ -112,21 +120,27 @@ const Historico = ({
         <div>{stackedByUser ? stackedByUser.toFixed(5) : 0}</div>
         <div className="celeste">
           {stackedByUser
-            ? (stackedByUser * 0.65).toFixed(3) + " USDT"
+            ? (stackedByUser * precioAmtEnUsdt).toFixed(3) + " USDT"
             : 0 + " USDT"}
         </div>
         <div className="celeste">
-          <b>AMT depositados: </b>
+          <b>{textosExtra[currentLanguage].amtDepositados} </b>
           {stakingIniciales ? stackedByUser : null}
         </div>
         <div className="celeste">
-          <b>Data do depósito: </b>{" "}
-          {stackedByUser > 0 ? formatDate(stakingIniciales[addr].tstamp) : "-"}
+          <b>{textosExtra[currentLanguage].dataDeDeposito} </b>{" "}
+          {stakingIniciales
+            ? stackedByUser > 0
+              ? formatDate(stakingIniciales[addr].tstamp)
+              : "-"
+            : "-"}
         </div>
         <div className="celeste">
-          <b>BTCB recebidos: </b>
-          {stackedByUser > 0
-            ? (stackedByUser - stakingIniciales[addr].amount).toFixed(5)
+          <b>{textosExtra[currentLanguage].amtGenerados}</b>
+          {stakingIniciales
+            ? stackedByUser > 0
+              ? (stackedByUser - stakingIniciales[addr].amount).toFixed(5)
+              : "-"
             : "-"}
         </div>
       </div>
