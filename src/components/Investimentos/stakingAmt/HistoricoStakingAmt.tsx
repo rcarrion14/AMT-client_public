@@ -8,7 +8,6 @@ import contractAddresses from "../../../contracts/contractAddresses";
 import { snapToDateMapp } from "../../gInvestidores/snapshotDateMapper";
 import Spinner from "../../Generales/Spinner/Spinner";
 import { fetchVaultAmt } from "../../../Utils/fetchBuckets";
-import { textoBotonesBlancos, textosExtra } from "../../../Utils/textos";
 
 const Historico = ({
   setHistorico,
@@ -21,9 +20,6 @@ const Historico = ({
   const [fechasSwaps, setFechasSwaps] = useState([]);
   const [balancesAt, setBalancesAt] = useState([]);
 
-  const currentLanguage = useSelector(
-    (state: typeof RootState) => state.session.language
-  );
   async function getAllSnapshotFrom(snapFrom: number) {
     let promiseList = [];
 
@@ -73,7 +69,7 @@ const Historico = ({
 
             <div className="transparente">
               <p>
-                <b>{textosExtra[currentLanguage].autocompraDiaria}</b>
+                <b>Autocompra de AMT</b>
               </p>
               <p>{snapToDateMapp(ganancia[1])}</p>
             </div>
@@ -108,7 +104,7 @@ const Historico = ({
     <div className="containerSlide">
       <div className="navBar_top">
         <img onClick={() => setHistorico(false)} src="icon_nav.png" />
-        <h1>{textoBotonesBlancos[currentLanguage].stakingAmt.titulo}</h1>
+        <h1>Staking Autocompra</h1>
       </div>
 
       <div className="cuadroGanaciasStaking">
@@ -120,15 +116,15 @@ const Historico = ({
             : 0 + " USDT"}
         </div>
         <div className="celeste">
-          <b>{textosExtra[currentLanguage].amtDepositados}</b>
+          <b>AMT depositados: </b>
           {stakingIniciales ? stackedByUser : null}
         </div>
         <div className="celeste">
-          <b>{textosExtra[currentLanguage].dataDeDeposito}</b>{" "}
+          <b>Data do depósito: </b>{" "}
           {stackedByUser > 0 ? formatDate(stakingIniciales[addr].tstamp) : "-"}
         </div>
         <div className="celeste">
-          <b>{textosExtra[currentLanguage].btcACobrar}</b>
+          <b>BTCB recebidos: </b>
           {stackedByUser > 0
             ? (stackedByUser - stakingIniciales[addr].amount).toFixed(5)
             : "-"}
