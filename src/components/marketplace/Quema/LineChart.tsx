@@ -50,23 +50,26 @@ function LineChart() {
 
   const containers = (ingresos: ingresosType[]) => {
     const ingresosReversed = [...ingresos].reverse();
+
     return ingresosReversed.map((ingreso) => {
       if (formatter(ingreso.amount) > 0 && precioBtcEnUsdt) {
+        const esDistribucion =
+          ingreso.from == "0x0971d6f87fb3a30d512f09275b0c56922b0a304e";
         const valorBtcEnUsdt = precioBtcEnUsdt * formatter(ingreso.amount);
         return (
           <div className="cuadritosQuema">
             <img
-              src={
-                ingreso.from == "0x0971d6f87fb3a30d512f09275b0c56922b0a304e"
-                  ? "iconDistribucion.png"
-                  : "iconGift.png"
-              }
+              src={esDistribucion ? "iconDistribucion.png" : "iconGift.png"}
               alt=""
             />
 
             <div className="transparente">
               <p>
-                <b>{textosExtra[currentLanguage].distribucion}</b>
+                <b>
+                  {esDistribucion
+                    ? textosExtra[currentLanguage].distribucionDiaria
+                    : textosExtra[currentLanguage].aporteDelProjectoAmt}
+                </b>
               </p>
               <p>{ingreso.timestamp}</p>
             </div>
@@ -92,7 +95,7 @@ function LineChart() {
         label: textosExtra[currentLanguage].btcEnVault,
         data: ingresosAcumulados,
         fill: false,
-        borderColor: "rgb(255, 99, 132)",
+        borderColor: "rgb(0, 221, 255)",
       },
     ],
   };
