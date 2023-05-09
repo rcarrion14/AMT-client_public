@@ -9,6 +9,8 @@ import { formatter } from "../formatter";
 export interface btcbState {
   contract: any | undefined;
   balance: number | undefined;
+
+  precioEnUsdt: number | undefined;
   allowanceMarketVault: number | undefined;
   allowanceVaultAmt: number | undefined;
   allowanceVaultBtcb: number | undefined;
@@ -20,6 +22,7 @@ export interface btcbState {
 const initialState: btcbState = {
   contract: undefined,
   balance: undefined,
+  precioEnUsdt: undefined,
   allowanceMarketVault: undefined,
   allowanceVaultAmt: undefined,
   allowanceVaultBtcb: undefined,
@@ -53,6 +56,21 @@ export const getBalance = createAsyncThunk("btcb/getBalance", async () => {
   } else return undefined;
 });
 
+export const getPrecioEnUsdt = createAsyncThunk(
+  "btcb/getPrecioEnUsdt",
+  async () => {
+    const staticState = getStaticState();
+    const contractBtcb = staticState.btcb.contract;
+    const contractUsdt = staticState.usdt.contract;
+    if (contractBtcb && contractUsdt) {
+      const poolAddres = contractAddresses.poolUsdtBtcb;
+      const balanceBtcb = formatter(await contractBtcb.balanceOf(poolAddres));
+      const balanceUsdt = formatter(await contractUsdt.balanceOf(poolAddres));
+      const precio = balanceUsdt / balanceBtcb;
+      return { precio };
+    }
+  }
+);
 export const getBalanceOfPool = createAsyncThunk(
   "btcb/getBalanceOfPool",
   async () => {
@@ -160,6 +178,12 @@ const btcbSlice = createSlice({
       .addCase(getBalance.pending, (state) => {
         state.balance = undefined;
       })
+      .addCase(getPrecioEnUsdt.pending, (state) => {
+        state.precioEnUsdt = undefined;
+      })
+      .addCase(getPrecioEnUsdt.fulfilled, (state, action) => {
+        state.precioEnUsdt = action.payload?.precio;
+      })
       .addCase(getAllowanceMarketVault.fulfilled, (state, action) => {
         state.allowanceMarketVault = action.payload?.newAllowance;
       })
@@ -209,4 +233,5 @@ export const generalLoadBtcb = (dispatch: AppDispatch) => {
   dispatch(getAllowanceVaultBtcb());
   dispatch(getAllowanceVaultBtcbLiq());
   dispatch(getBalanceOfPool());
+  dispatch(getPrecioEnUsdt());
 };
