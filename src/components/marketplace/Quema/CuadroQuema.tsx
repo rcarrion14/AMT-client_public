@@ -12,6 +12,7 @@ import { listaMonedas } from "../../../Utils/listaMonedas";
 import { amtOperations } from "../../../store/features/amt/amtOperations";
 import { burnVaultOperations } from "../../../store/features/burnVault/burntVaultOperation";
 import { textosExtra } from "../../../Utils/textos";
+import EstadisticasQuema from "./EstadisticasQuema";
 
 const CuadroQuema = () => {
   const currentLanguage = useSelector(

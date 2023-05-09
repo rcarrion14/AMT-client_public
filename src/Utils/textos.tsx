@@ -64,6 +64,40 @@ export const textoMarketplace = (idioma: string) => {
   }
 };
 
+export const textoEstadisticasQuema = (idioma: string) => {
+  if (idioma === "por") {
+    return (
+      <>
+        <h1>Cofre garantia</h1>
+        <p>parrafo1</p>
+        <p>parrafo2</p>
+        <p>parrafo3</p>
+        <p>parrafo4</p>
+      </>
+    );
+  } else if (idioma === "esp") {
+    return (
+      <>
+        <h1>Cofre garantia</h1>
+        <p>parrafo1</p>
+        <p>parrafo2</p>
+        <p>parrafo3</p>
+        <p>parrafo4</p>
+      </>
+    );
+  } else if (idioma === "eng") {
+    return (
+      <>
+        <h1>Cofre garantia</h1>
+        <p>parrafo1</p>
+        <p>parrafo2</p>
+        <p>parrafo3</p>
+        <p>parrafo4</p>
+      </>
+    );
+  }
+};
+
 export const textoStore = (idioma: string, func: Function) => {
   if (idioma == "por") {
     return (
@@ -1208,6 +1242,9 @@ export interface interfaceTextoExtra {
   enEseEscenarioRentabilidadSeria: string;
   dataDeDeposito: string;
   gananciasDistribuidas: string;
+  estadisticas: string;
+
+  btcEnVault: string;
 }
 export type typeTextosExtra = {
   [key in languageCode]: interfaceTextoExtra;
@@ -1279,6 +1316,8 @@ export const textosExtra: typeTextosExtra = {
     enEseEscenarioRentabilidadSeria: "Nesse cenário, rentabilidade seria:",
     dataDeDeposito: "Data do deposito",
     gananciasDistribuidas: "Lucros distribuidos",
+    estadisticas: "Estatísticas",
+    btcEnVault: "BTC no baú",
   },
   esp: {
     bienvenido: "¡Bienvenido!",
@@ -1345,6 +1384,8 @@ export const textosExtra: typeTextosExtra = {
       "En este escenario, la rentabilidad sería:",
     dataDeDeposito: "Fecha de deposito",
     gananciasDistribuidas: "Ganancias distribuidas",
+    estadisticas: "Estadisticas",
+    btcEnVault: "BTC en baúl",
   },
   eng: {
     bienvenido: "Welcome!",
@@ -1401,6 +1442,8 @@ export const textosExtra: typeTextosExtra = {
       "In this scenario, the profitability would be:",
     dataDeDeposito: "Deposit date",
     gananciasDistribuidas: "Earnings",
+    estadisticas: "Statistics",
+    btcEnVault: "BTC on vault",
   },
 };
 

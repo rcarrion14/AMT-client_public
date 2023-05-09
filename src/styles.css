@@ -960,3 +960,40 @@ u {
   text-align: centerC;
   margin: 10px 0 5px 0;
 }
+
+.containerEstadisticasQuema {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 0.8rem;
+}
+
+.cuadritosQuema {
+  height: 58px;
+  display: flex;
+  background-color: white;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 15px;
+  padding: 5px 10px 5px 10px;
+  margin: 8px 8px 8px 8px;
+  text-align: center;
+}
+
+.cuadritosQuema > img {
+  width: 30px;
+  height: fit-content;
+}
+
+.cuadritosQuema > button {
+  margin: 0;
+}
+
+.cuadritosQuema > div > p {
+  color: #34383e;
+  margin: 0.25rem;
+}
+
+.cuadritosQuema > button {
+  width: 30%;
+}
