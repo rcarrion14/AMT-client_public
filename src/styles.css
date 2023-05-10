@@ -961,6 +961,31 @@ u {
   margin: 10px 0 5px 0;
 }
 
+.cointainerAlertaVault {
+  background-color: #adceff;
+  height: 250px;
+
+  border-radius: 15px;
+  position: relative;
+  top: -35vh;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 15px;
+  text-align: center;
+  margin-bottom: -250px;
+}
+
+.cointainerAlertaVault > .close1Inch {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.cointainerAlertaVault p {
+  color: black;
+  font-size: 1rem;
+}
+
 .containerEstadisticasQuema {
   display: flex;
   flex-direction: column;

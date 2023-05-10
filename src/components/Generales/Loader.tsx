@@ -37,6 +37,11 @@ import {
 } from "../../store/features/vaultBtcb/vaultBtcbSlice";
 
 import {
+  generalLoadVaultBtcbLiquidity,
+  createContract as createContractVaultBtcbLiquidity,
+} from "../../store/features/vaultBtcbLiquidity/vaultBtcbLiquiditySlice";
+
+import {
   burnVaultLoaders,
   createContract as createContractBurnVault,
 } from "../../store/features/burnVault/burnVaultSlice";
@@ -66,6 +71,7 @@ const Loader = () => {
         dispatch(createContractVaultBtcb());
         dispatch(createCotractLiqAmt());
         dispatch(createContractBurnVault());
+        dispatch(createContractVaultBtcbLiquidity());
         await delay(1000);
         //Initial general loads
         generalLoadBtcb(dispatch);
@@ -76,6 +82,7 @@ const Loader = () => {
         generalLoadVaultAmt(dispatch);
         generalLoadVaultBtcb(dispatch);
         burnVaultLoaders.generalLoad(dispatch);
+        generalLoadVaultBtcbLiquidity(dispatch);
         await delay(1000);
 
         //Second general loads
@@ -86,6 +93,7 @@ const Loader = () => {
         liqAmtLoaders.generalLoadLiqAmt(dispatch);
         generalLoadVaultAmt(dispatch);
         generalLoadVaultBtcb(dispatch);
+        generalLoadVaultBtcbLiquidity(dispatch);
         burnVaultLoaders.generalLoad(dispatch);
 
         await delay(1000);

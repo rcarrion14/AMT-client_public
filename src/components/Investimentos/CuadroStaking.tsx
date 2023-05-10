@@ -6,6 +6,7 @@ import { textoAtencionStaking, textosExtra } from "../../Utils/textos";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { fetchVaultAmt } from "../../Utils/fetchBuckets";
+import { ethers } from "ethers";
 interface BotonOperacionProps {
   balanceUserAmt: number | undefined;
   stackedByUser: number | undefined;
@@ -46,7 +47,7 @@ const CuadroStaking: React.FC<BotonOperacionProps> = ({
           <h2>{textosExtra[currentLanguage].depositarAmt}</h2>
           <p>
             {textosExtra[currentLanguage].saldo}{" "}
-            {Number(balanceUserAmt?.toFixed(5))}
+            {balanceUserAmt ? ethers.utils.formatEther(balanceUserAmt) : "-"}
           </p>
         </div>
         <div className="cuadroCompra">
@@ -111,18 +112,19 @@ const CuadroStaking: React.FC<BotonOperacionProps> = ({
           <div className="containerSaldos">
             <div>
               <h2>
-                {btcACobrar >= 0
+                {btcACobrar != undefined
                   ? textosExtra[currentLanguage].btcbAcumulados
                   : textosExtra[currentLanguage].amtGenerados}
               </h2>
               <div>
-                {btcACobrar >= 0
-                  ? Number(btcACobrar?.toFixed(5))
-                  : stakingIniciales == undefined || stackedByUser == 0
+                {btcACobrar != undefined
+                  ? ethers.utils.formatEther(btcACobrar)
+                  : stakingIniciales == undefined ||
+                    ethers.utils.formatEther(stackedByUser) == "0"
                   ? "-"
-                  : Number(
-                      (stackedByUser - stakingIniciales[addr].amount).toFixed(1)
-                    )}
+                  : 
+                      stackedByUser. - stakingIniciales[addr].amount
+                    }
               </div>
             </div>
             <div>

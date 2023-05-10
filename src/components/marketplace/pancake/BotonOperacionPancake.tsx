@@ -5,17 +5,17 @@ import { AppDispatch } from "../../../store/store";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 import { textosExtra } from "../../../Utils/textos";
-import { ethers } from "ethers";
+import { BigNumber, ethers } from "ethers";
 import { operationExecution } from "../../../store/features/operationExecution";
 
 interface BotonOperacionProps {
-  balanceAmt: number | undefined;
-  balanceErc20: number | undefined;
-  allowanceErc20: number | undefined;
+  balanceAmt: BigNumber | undefined;
+  balanceErc20: BigNumber | undefined;
+  allowanceErc20: BigNumber | undefined;
   txData: string;
   input: string;
   signer: any;
-  approveErc20: any;
+  approveErc20: Function;
   toggler: any;
   setToggler: any;
 }
@@ -35,21 +35,18 @@ const BotonOperacion: React.FC<BotonOperacionProps> = ({
     (state: typeof RootState) => state.session.language
   );
   const mensajeBoton = () => {
-    if (allowanceErc20 >= 0) {
-      if (allowanceErc20 < parseFloat(input)) {
-        return textosExtra[currentLanguage].aprobar;
-      }
-      if (balanceErc20 < parseFloat(input)) {
-        return textosExtra[currentLanguage].bceInsuf;
-      } else {
-        return textosExtra[currentLanguage].comprar;
-      }
+    console.log({ input, allowanceErc20, balanceErc20 });
+
+    if (ethers.utils.parseEther(input).gt(allowanceErc20)) {
+      return textosExtra[currentLanguage].aprobar;
+    }
+    if (balanceErc20.lt(ethers.utils.parseEther(input))) {
+      return textosExtra[currentLanguage].bceInsuf;
     } else {
-      return "hola";
+      return textosExtra[currentLanguage].comprar;
     }
   };
 
-  const dispatch = useDispatch<AppDispatch>();
   return (
     <>
       <button
@@ -71,7 +68,9 @@ const BotonOperacion: React.FC<BotonOperacionProps> = ({
         }}
         className="btnLarge"
       >
-        {mensajeBoton()}
+        {input != "" && balanceErc20
+          ? mensajeBoton()
+          : textosExtra[currentLanguage].comprar}
       </button>
     </>
   );

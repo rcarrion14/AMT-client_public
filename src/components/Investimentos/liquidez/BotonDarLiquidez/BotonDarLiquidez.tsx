@@ -10,6 +10,7 @@ import { btcbOperations } from "../../../../store/features/btcb/btcbOperations";
 import { masterOperations } from "../../../../store/features/master/masterOperations";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../../store/store";
+import { ethers } from "ethers";
 interface BotonDarLiquidezProps {
   balanceAmt: number;
   balanceBtc: number;
@@ -25,6 +26,7 @@ const BotonDarLiquidez: React.FC<BotonDarLiquidezProps> = ({
   allowanceBtc,
   inputAmt,
   inputBtc,
+  setAlertaAlDepositar,
 }) => {
   const currentLanguage = useSelector(
     (state: typeof RootState) => state.session.language
@@ -70,9 +72,13 @@ const BotonDarLiquidez: React.FC<BotonDarLiquidezProps> = ({
         ) : (
           <button
             className="btnLarge"
-            disabled={Number.isNaN(inputAmt) || Number.isNaN(inputBtc)}
             onClick={() => {
-              masterOperations.addLiquidity(dispatch, inputAmt, inputBtc);
+              setAlertaAlDepositar(true);
+              masterOperations.addLiquidity(
+                dispatch,
+                ethers.utils.parseEther(inputAmt.toFixed(15)),
+                ethers.utils.parseEther(inputBtc.toFixed(15))
+              );
             }}
           >
             {textosExtra[currentLanguage].proveerLiquidez}

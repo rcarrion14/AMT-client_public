@@ -9,6 +9,7 @@ import masterReducer from "./features/master/masterSlice";
 import marketPlaceReducer from "./features/marketplace/marketPlaceSlice";
 import vaultAmtReducer from "./features/vaultAmt/vaultAmtSlice";
 import vaultBtcbReducer from "./features/vaultBtcb/vaultBtcbSlice";
+import vaultBtcbLiquidityReducer from "./features/vaultBtcbLiquidity/vaultBtcbLiquiditySlice";
 import burnVaultReducer from "./features/burnVault/burnVaultSlice";
 import sessionSliceReducer from "./features/session/sessionSlice";
 const store = configureStore({
@@ -21,6 +22,7 @@ const store = configureStore({
     marketPlace: marketPlaceReducer,
     vaultAmt: vaultAmtReducer,
     vaultBtcb: vaultBtcbReducer,
+    vaultBtcbLiquidity: vaultBtcbLiquidityReducer,
     btcb: btcbReducer,
     burnVault: burnVaultReducer,
     session: sessionSliceReducer,
@@ -41,6 +43,7 @@ const {
   vaultAmt,
   btcb,
   vaultBtcb,
+  vaultBtcbLiquidity,
   burnVault,
   session,
 } = store.getState();
@@ -52,6 +55,7 @@ export const RootState = {
   master,
   marketPlace,
   vaultAmt,
+  vaultBtcbLiquidity,
   btcb,
   vaultBtcb,
   burnVault,

@@ -7,7 +7,7 @@ import { RootState } from "../../../store/store";
 import BotonDarLiquidez from "./BotonDarLiquidez/BotonDarLiquidez";
 import { textosExtra } from "../../../Utils/textos";
 
-const CuadroProveerLiquidez = () => {
+const CuadroProveerLiquidez = ({ setAlertaAlDepositar }) => {
   const balanceAmt = useSelector(
     (state: typeof RootState) => state.amt.balance
   );
@@ -118,6 +118,7 @@ const CuadroProveerLiquidez = () => {
           inputBtc={parseFloat(inputBtcbValue)}
           allowanceAmt={allowanceAmt}
           allowanceBtc={allowanceBtcb}
+          setAlertaAlDepositar={setAlertaAlDepositar}
         ></BotonDarLiquidez>
       </div>
     </>

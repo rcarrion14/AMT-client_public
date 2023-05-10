@@ -3,13 +3,13 @@
 import React, { useEffect, useState } from "react";
 import { AppDispatch } from "../../../store/store";
 import { useDispatch, useSelector } from "react-redux";
-import { ethers } from "ethers";
+import { BigNumber, ethers, utils } from "ethers";
 import { textosExtra } from "../../../Utils/textos";
 import { RootState } from "../../../store/store";
 interface BotonOperacionProps {
-  balanceTienda: number | undefined;
-  balanceUsdt: number | undefined;
-  allowanceUsdt: number | undefined;
+  balanceTienda: BigNumber | undefined;
+  balanceUsdt: BigNumber | undefined;
+  allowanceUsdt: BigNumber | undefined;
   input: string;
   operacionAprobar: Function;
   operacionBuy: Function;
@@ -26,25 +26,38 @@ const BotonOperacionAmtStore: React.FC<BotonOperacionProps> = ({
   const currentLanguage = useSelector(
     (state: typeof RootState) => state.session.language
   );
+
+  const mensajeBoton = () => {
+    if (balanceTienda?.lt(ethers.utils.parseEther(input))) {
+      return textosExtra[currentLanguage].noHaytantosAmtEnVenta;
+    }
+    if (ethers.utils.parseEther(input) > allowanceUsdt) {
+      return textosExtra[currentLanguage].aprobar;
+    }
+    if (balanceUsdt?.lt(ethers.utils.parseEther(input))) {
+      return textosExtra[currentLanguage].bceInsuf;
+    } else {
+      return textosExtra[currentLanguage].comprar;
+    }
+  };
+
   return (
-    <button
-      onClick={() => {
-        if (allowanceUsdt >= 0) {
-          allowanceUsdt > parseInt(input)
-            ? operacionBuy(dispatch, input)
-            : operacionAprobar(dispatch);
-        }
-      }}
-      className="btnLarge"
-    >
-      {balanceTienda < parseInt(input)
-        ? textosExtra[currentLanguage].noHaytantosAmtEnVenta
-        : balanceUsdt < parseInt(input)
-        ? textosExtra[currentLanguage].bceUSDTInsuficiente
-        : parseInt(input) > allowanceUsdt
-        ? textosExtra[currentLanguage].aprobar
-        : textosExtra[currentLanguage].comprar}
-    </button>
+    <>
+      <button
+        onClick={() => {
+          if (allowanceUsdt >= 0) {
+            allowanceUsdt?.gt(ethers.utils.parseEther(input))
+              ? operacionBuy(dispatch, ethers.utils.parseEther(input))
+              : operacionAprobar(dispatch);
+          }
+        }}
+        className="btnLarge"
+      >
+        {allowanceUsdt >= 0 && input != ""
+          ? mensajeBoton()
+          : textosExtra[currentLanguage].comprar}
+      </button>
+    </>
   );
 };
 

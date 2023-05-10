@@ -3,12 +3,13 @@ import {
   textoLiquidez,
   textoRetirarLiquidez,
   textosExtra,
-} from "../../../Utils/textos";
-import CuadroProveerLiquidez from "../liquidez/CuadroProveerLiquidez";
+} from "../../../../Utils/textos";
+import CuadroProveerLiquidez from "../CuadroProveerLiquidez";
 import { useSelector } from "react-redux";
-import { RootState } from "../../../store/store";
+import { RootState } from "../../../../store/store";
 import { current } from "@reduxjs/toolkit";
 import DoughnutChart from "./DoughnutChart";
+import BotonRetirarLiquidez from "./BotonRetirarLiquidez";
 
 const RetirarLiquidez: React.FC = () => {
   const currentLanguage = useSelector(
@@ -52,12 +53,7 @@ const RetirarLiquidez: React.FC = () => {
         <h1>Saldo total: </h1>
         <h3>{usdtEnAmt + usdtEnBtcb}$</h3>
       </div>
-      <div className="donutContainer">
-        <DoughnutChart
-          data={[usdtEnAmt + 10, usdtEnBtcb + 12]} // Eliminar sumas son para testear
-          labels={["AMT", "BTC"]}
-        ></DoughnutChart>
-      </div>
+
       <div className="containerParticipacionEnPool">
         <b>{textosExtra[currentLanguage].participacionEnPool} </b>
         {poolParticipation * 100} %
@@ -79,7 +75,7 @@ const RetirarLiquidez: React.FC = () => {
         </div>
       </div>
       {textoRetirarLiquidez(currentLanguage)}
-      <button className="btnLarge">todo: retirar liquidez</button>
+      <BotonRetirarLiquidez />
     </div>
   );
 };

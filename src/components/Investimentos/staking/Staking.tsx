@@ -46,8 +46,6 @@ const Staking: React.FC<AmtStaking> = ({ setActivePage }) => {
   const stake = vaultBtcbOperations.stake;
   const operacionWithdrawl = vaultBtcbOperations.withdrawl;
 
-  const infoAllowance = textoInfoAllowance("por");
-
   return (
     <>
       <div className="containerSlide">

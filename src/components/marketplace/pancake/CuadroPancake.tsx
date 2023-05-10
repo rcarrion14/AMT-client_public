@@ -53,8 +53,8 @@ const CuadroPancake = () => {
   useEffect(() => {
     if (
       inputPagarValue &&
-      allowanceErc20 > Number(inputPagarValue) &&
-      balanceErc20 > Number(inputPagarValue)
+      allowanceErc20.gt(ethers.utils.parseEther(inputPagarValue)) &&
+      balanceErc20.gt(ethers.utils.parseEther(inputPagarValue))
     ) {
       useGetTxData(
         monedaActive.address,
@@ -75,17 +75,11 @@ const CuadroPancake = () => {
     );
 
     async function fetchData() {
-      setBalanceErc20(
-        Number(ethers.utils.formatEther(await contractErc20.balanceOf(addr)))
-      );
+      setBalanceErc20(await contractErc20.balanceOf(addr));
       setAllowanceErc20(
-        Number(
-          ethers.utils.formatEther(
-            await contractErc20.allowance(
-              addr,
-              "0x1111111254eeb25477b68fb85ed929f73a960582"
-            )
-          )
+        await contractErc20.allowance(
+          addr,
+          "0x1111111254eeb25477b68fb85ed929f73a960582"
         )
       );
 
@@ -118,7 +112,7 @@ const CuadroPancake = () => {
           <h2>{textosExtra[currentLanguage].ustedPaga}</h2>
           <p>
             {textosExtra[currentLanguage].saldo}{" "}
-            {Number(balanceErc20.toFixed(5))}
+            {balanceErc20 ? ethers.utils.formatEther(balanceErc20) : "-"}
           </p>
         </div>
         <div className="cuadroCompra">
@@ -157,7 +151,8 @@ const CuadroPancake = () => {
         <div className="saldo">
           <h2>{textosExtra[currentLanguage].ustedRecibe}</h2>
           <p>
-            {textosExtra[currentLanguage].saldo} {balanceAmt}
+            {textosExtra[currentLanguage].saldo}
+            {balanceAmt ? ethers.utils.formatEther(balanceAmt) : "-"}
           </p>
         </div>
         <div className="cuadroCompra">

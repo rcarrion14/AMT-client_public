@@ -4,13 +4,13 @@ import React, { useEffect, useState } from "react";
 import { AppDispatch } from "../../../store/store";
 import { textosExtra } from "../../../Utils/textos";
 import { useDispatch, useSelector } from "react-redux";
-import { ethers } from "ethers";
+import { BigNumber, ethers } from "ethers";
 import { RootState } from "../../../store/store";
 
 interface BotonOperacionQuemaProps {
-  balanceAmt: number | undefined;
-  balanceBtcb: number | undefined;
-  allowanceAmt: number | undefined;
+  balanceAmt: BigNumber | undefined;
+  balanceBtcb: BigNumber | undefined;
+  allowanceAmt: BigNumber | undefined;
   backRate: number | undefined;
   approveMarket: Function;
   burn: Function;
@@ -32,10 +32,10 @@ const BotonOperacionQuema: React.FC<BotonOperacionQuemaProps> = ({
   );
 
   const mesajeBoton = () => {
-    if (allowanceAmt < parseFloat(input)) {
+    if (allowanceAmt.lt(ethers.utils.parseEther(input))) {
       return textosExtra[currentLanguage].aprobar;
     }
-    if (balanceAmt < parseFloat(input)) {
+    if (balanceAmt.lt(ethers.utils.parseEther(input))) {
       return textosExtra[currentLanguage].bceInsuf;
     } else {
       return textosExtra[currentLanguage].quemar;
@@ -51,7 +51,9 @@ const BotonOperacionQuema: React.FC<BotonOperacionQuemaProps> = ({
       }}
       className="btnLarge quema"
     >
-      {mesajeBoton()}
+      {input != "" && balanceAmt
+        ? mesajeBoton()
+        : textosExtra[currentLanguage].quemar}
     </button>
   );
 };

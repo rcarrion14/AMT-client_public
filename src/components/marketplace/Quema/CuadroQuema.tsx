@@ -13,6 +13,7 @@ import { amtOperations } from "../../../store/features/amt/amtOperations";
 import { burnVaultOperations } from "../../../store/features/burnVault/burntVaultOperation";
 import { textosExtra } from "../../../Utils/textos";
 import EstadisticasQuema from "./EstadisticasQuema";
+import { ethers } from "ethers";
 
 const CuadroQuema = () => {
   const currentLanguage = useSelector(
@@ -35,7 +36,7 @@ const CuadroQuema = () => {
     (state: typeof RootState) => state.burnVault.backRate
   );
 
-  const approveMarket = amtOperations.approveMarketVault;
+  const approveMarket = amtOperations.approveBurnVault;
 
   const burn = burnVaultOperations.backingWithdrawl;
 
@@ -49,13 +50,13 @@ const CuadroQuema = () => {
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     setInputPagarValue(event.target.value);
-    setInputRecibirValue(event.target.value);
+    setInputRecibirValue(event.target.value / backRate);
   };
 
   const handleInputRecibirChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    setInputRecibirValue(event.target.value);
+    setInputRecibirValue(event.target.value * backRate);
     setInputPagarValue(event.target.value);
   };
 
@@ -65,7 +66,8 @@ const CuadroQuema = () => {
         <div className="saldo">
           <h2>{textosExtra[currentLanguage].ustedPaga}</h2>
           <p>
-            {textosExtra[currentLanguage].saldo} {balanceAmt}
+            {textosExtra[currentLanguage].saldo}{" "}
+            {balanceAmt ? ethers.utils.formatEther(balanceAmt) : "-"}
           </p>
         </div>
         <div className="cuadroCompra">
@@ -85,7 +87,8 @@ const CuadroQuema = () => {
         <div className="saldo">
           <h2>{textosExtra[currentLanguage].ustedRecibe}</h2>
           <p>
-            {textosExtra[currentLanguage].saldo} {balanceBtcb}
+            {textosExtra[currentLanguage].saldo}{" "}
+            {balanceBtcb ? ethers.utils.formatEther(balanceBtcb) : "-"}
           </p>
         </div>
         <div className="cuadroCompra">
