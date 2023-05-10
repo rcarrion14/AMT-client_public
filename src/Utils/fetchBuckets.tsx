@@ -3,8 +3,7 @@ export const fetchVaultAmt = async () => {
   let endpointUsuarios =
     "https://amt-bucket-aws.s3.amazonaws.com/usuarios_VaulAmt.json";
 
-  let endpointSwaps =
-    "https://amt-bucket-aws.s3.amazonaws.com/lista_Swaps.json";
+  let endpointSwaps = " lista_Swaps.json";
 
   let promiseList = [fetch(endpointUsuarios), fetch(endpointSwaps)];
 
@@ -45,6 +44,7 @@ export const fetchBurnVaultTransfers = async () => {
       timestamp: formatDate(dataIngresosBurnVault[i].timeStamp * 1000),
       from: dataIngresosBurnVault[i].from,
       amount: dataIngresosBurnVault[i].value,
+      to: dataIngresosBurnVault[i].to,
     };
     ret.push(toAdd);
   }
