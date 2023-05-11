@@ -9,7 +9,7 @@ import {
 import { getAmtbalance } from "../amt/amtSlice";
 
 function stake(dispatch: AppDispatch, amount: number) {
-  const contract = getStaticState().vaultBtcb.contract;
+  const contract = getStaticState().vaultBtcbLiquidity.contract;
   const operationPromise = contract.stake(amount);
   operationExecution(operationPromise).then(() => {
     dispatch(getBalanceUserAmt());
@@ -20,7 +20,7 @@ function stake(dispatch: AppDispatch, amount: number) {
 }
 
 function withdrawl(dispatch: AppDispatch) {
-  const contract = getStaticState().vaultBtcb.contract;
+  const contract = getStaticState().vaultBtcbLiquidity.contract;
   const operationPromise = contract.withdrwal();
   operationExecution(operationPromise).then(() => {
     dispatch(getBalanceUserAmt());

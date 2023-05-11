@@ -420,7 +420,7 @@ u {
 
 .fade-enter {
   position: fixed;
-  top: 205px;
+  top: 245px;
   opacity: 0;
   width: -webkit-fill-available;
 }

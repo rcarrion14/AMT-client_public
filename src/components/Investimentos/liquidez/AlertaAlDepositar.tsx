@@ -19,11 +19,11 @@ const AlertaStakingLiquidez = ({
       <div className="cointainerAlertaVault">
         <div className="close1Inch">
           <h2>ALERTA!</h2>
-          <img
+          {/*           <img
             className="close"
             onClick={() => setAlertaAlDepositar(false)}
             src="close.png"
-          />
+          /> */}
         </div>
         <div className="container">
           <p>PARA COBRAR POR LOS TOKENS EN LIQ DEBE DEPOSITAR EN EL BAUL</p>
@@ -35,7 +35,7 @@ const AlertaStakingLiquidez = ({
         ) : (
           <button
             onClick={() => {
-              allowanceVault < balanceLiqAmt
+              allowanceVault.lt(balanceLiqAmt)
                 ? approveVault()
                 : operation(ethers.utils.parseEther(balanceLiqAmt));
             }}

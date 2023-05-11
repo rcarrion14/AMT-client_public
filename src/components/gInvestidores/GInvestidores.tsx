@@ -11,6 +11,7 @@ import { masterOperations } from "../../store/features/master/masterOperations";
 import { textoStaking } from "../../Utils/textos";
 import Pagination from "./paginationComponent/pagination";
 import { textoGInvestidores } from "../../Utils/textos";
+import { ethers } from "ethers";
 const GInvestidores = () => {
   const dispatch = useDispatch<AppDispatch>();
   const currentSnapshot = useSelector(
@@ -102,7 +103,7 @@ const GInvestidores = () => {
       {textoGInvestidores(currentLanguage)}
       <CuadroCobro
         balanceOfAt={balanceOfAt1}
-        payAt={pays1 + liqPay1}
+        payAt={pays1 && liqPay1 ? pays1.add(liqPay1) : undefined}
         totalSupplyAt={TotalSupplyAt1}
         currentSnap={readingSnapshot ? readingSnapshot : 0}
         alreadyCharged={alreadyCharged1}
@@ -118,7 +119,7 @@ const GInvestidores = () => {
       />
       <CuadroCobro
         balanceOfAt={balanceOfAt2}
-        payAt={pays2 + liqPay2}
+        payAt={pays2 && liqPay2 ? pays2.add(liqPay2) : undefined}
         totalSupplyAt={TotalSupplyAt2}
         currentSnap={readingSnapshot ? readingSnapshot - 1 : 0}
         alreadyCharged={alreadyCharged2}
@@ -134,7 +135,7 @@ const GInvestidores = () => {
       />
       <CuadroCobro
         balanceOfAt={balanceOfAt3}
-        payAt={pays3 + liqPay3}
+        payAt={pays3 && liqPay3 ? pays3.add(liqPay3) : undefined}
         totalSupplyAt={TotalSupplyAt3}
         currentSnap={readingSnapshot ? readingSnapshot - 2 : 0}
         alreadyCharged={alreadyCharged3}
@@ -150,7 +151,7 @@ const GInvestidores = () => {
       />
       <CuadroCobro
         balanceOfAt={balanceOfAt4}
-        payAt={pays4 + liqPay4}
+        payAt={pays4 && liqPay4 ? pays4.add(liqPay4) : undefined}
         totalSupplyAt={TotalSupplyAt4}
         currentSnap={readingSnapshot ? readingSnapshot - 3 : 0}
         alreadyCharged={alreadyCharged4}
@@ -166,7 +167,7 @@ const GInvestidores = () => {
       />
       <CuadroCobro
         balanceOfAt={balanceOfAt5}
-        payAt={pays5 + liqPay5}
+        payAt={pays5 && liqPay5 ? pays5.add(liqPay5) : undefined}
         totalSupplyAt={TotalSupplyAt5}
         currentSnap={readingSnapshot ? readingSnapshot - 4 : 0}
         alreadyCharged={alreadyCharged5}

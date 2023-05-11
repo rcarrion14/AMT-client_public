@@ -117,19 +117,20 @@ const CuadroStaking: React.FC<BotonOperacionProps> = ({
                   : textosExtra[currentLanguage].amtGenerados}
               </h2>
               <div>
-                {btcACobrar != undefined
+                {btcACobrar != undefined && btcACobrar.gt(0)
                   ? ethers.utils.formatEther(btcACobrar)
-                  : stakingIniciales == undefined ||
-                    ethers.utils.formatEther(stackedByUser) == "0"
-                  ? "-"
-                  : 
-                      stackedByUser. - stakingIniciales[addr].amount
-                    }
+                  : stakingIniciales != undefined && stackedByUser.gt(0)
+                  ? ethers.utils.formatEther(
+                      stackedByUser.sub(stakingIniciales[addr].amount)
+                    )
+                  : "-"}
               </div>
             </div>
             <div>
               <h2>{textosExtra[currentLanguage].amtDepositados}</h2>
-              <div>{Number(stackedByUser?.toFixed(4))}</div>
+              <div>
+                {stackedByUser ? ethers.utils.formatEther(stackedByUser) : "-"}
+              </div>
             </div>
           </div>
         </div>
