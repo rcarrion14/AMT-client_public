@@ -6,7 +6,7 @@ import { CSSTransition } from "react-transition-group";
 import BotonOperacionPancake from "./BotonOperacionPancake";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../store/store";
-import { ethers } from "ethers";
+import { ethers, BigNumber } from "ethers";
 import { listaMonedas } from "../../../Utils/listaMonedas";
 import contractAddresses from "../../../contracts/contractAddresses";
 import abiErc20 from "../../../contracts/abis/genericERC20.json";
@@ -29,8 +29,8 @@ const CuadroPancake = () => {
   const [monedaActive, setmonedaActive] = useState(listaMonedas.usdt);
   const [inputPagarValue, setInputPagarValue] = useState("");
   const [inputRecibirValue, setInputRecibirValue] = useState("");
-  const [balanceErc20, setBalanceErc20] = useState(0);
-  const [allowanceErc20, setAllowanceErc20] = useState(0);
+  const [balanceErc20, setBalanceErc20] = useState(BigNumber.from(0));
+  const [allowanceErc20, setAllowanceErc20] = useState(BigNumber.from(0));
   const [approveErc20, setApproveErc20] = useState<Function | null>(null);
   const [txData, setTxData] = useState();
 
