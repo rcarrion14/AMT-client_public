@@ -14,6 +14,7 @@ import { burnVaultOperations } from "../../../store/features/burnVault/burntVaul
 import { textosExtra } from "../../../Utils/textos";
 import EstadisticasQuema from "./EstadisticasQuema";
 import { ethers } from "ethers";
+import { toFrontEndString } from "../../../Utils/formatHelpers";
 
 const CuadroQuema = () => {
   const currentLanguage = useSelector(
