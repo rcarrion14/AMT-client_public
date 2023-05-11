@@ -6,11 +6,11 @@ import { textoAtencionStaking, textosExtra } from "../../Utils/textos";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { fetchVaultAmt } from "../../Utils/fetchBuckets";
-import { ethers } from "ethers";
+import { ethers, BigNumber } from "ethers";
 interface BotonOperacionProps {
   balanceUserAmt: number | undefined;
   stackedByUser: number | undefined;
-  btcACobrar: number | undefined;
+  btcACobrar: BigNumber | undefined;
   allowance: number | undefined;
   operacionAprobar: Function;
   operacionStake: Function;

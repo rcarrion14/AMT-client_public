@@ -69,7 +69,7 @@ export const getBalanceUserBtcb = createAsyncThunk(
 
       let newBalance;
       shares == 0
-        ? (newBalance = 0)
+        ? (newBalance = ethers.BigNumber.from(0))
         : (newBalance = formatter(
             await contract.btcToWithdrawl(address, shares)
           ));
