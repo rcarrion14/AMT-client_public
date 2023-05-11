@@ -5,5 +5,5 @@ export function toFrontEndString(
   precision: number = 5
 ): string {
   const formatted = ethers.utils.formatEther(value);
-  return parseFloat(formatted).toFixed(precision);
+  return Number(parseFloat(formatted).toFixed(precision)).toString();
 }
