@@ -46,7 +46,7 @@ const CuadroPancake = () => {
         contractAddresses.Amt,
         inputPagarValue
       ).then((response) => {
-        setInputRecibirValue(ethers.utils.formatEther(response.toTokenAmount));
+        setInputRecibirValue(toFrontEndString(response.toTokenAmount));
       });
     }
   }, [inputPagarValue, monedaActive, toggler]);

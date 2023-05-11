@@ -16,7 +16,7 @@ import {
   useGetTxData,
 } from "../../../../Utils/1inch";
 import { textosExtra } from "../../../../Utils/textos";
-
+import { toFrontEndString } from "../../../../Utils/formatHelpers";
 const CuadroInterfaz1Inch = () => {
   const currentLanguage = useSelector(
     (state: typeof RootState) => state.session.language
@@ -55,7 +55,7 @@ const CuadroInterfaz1Inch = () => {
         contractAddresses.Usdt,
         inputPagarValue
       ).then((response) => {
-        setInputRecibirValue(ethers.utils.formatEther(response.toTokenAmount));
+        setInputRecibirValue(toFrontEndString(response.toTokenAmount));
       });
     }
   }, [inputPagarValue, monedaActive, toggler]);
