@@ -9,7 +9,7 @@ import { marketPlaceOperations } from "../../../store/features/marketplace/marke
 import { usdtOperations } from "../../../store/features/usdt/usdtOperations";
 import { textosExtra } from "../../../Utils/textos";
 import { ethers } from "ethers";
-
+import { toFrontEndString } from "../../../Utils/formatHelpers";
 const CuadroAmtStore = () => {
   const dispatch = useDispatch<AppDispatch>();
   const currentLanguage = useSelector(
@@ -61,7 +61,7 @@ const CuadroAmtStore = () => {
           <h2>{textosExtra[currentLanguage].ustedPaga}</h2>
           <p>
             {textosExtra[currentLanguage].saldo}
-            {balanceUsdt >= 0 ? ethers.utils.formatEther(balanceUsdt) : "-"}
+            {balanceUsdt >= 0 ? toFrontEndString(balanceUsdt) : "-"}
           </p>
         </div>
         <div className="cuadroCompra">
@@ -82,7 +82,7 @@ const CuadroAmtStore = () => {
           <h2>{textosExtra[currentLanguage].ustedRecibe}</h2>
           <p>
             {textosExtra[currentLanguage].saldo}{" "}
-            {balanceAmt >= 0 ? ethers.utils.formatEther(balanceAmt) : "-"}
+            {balanceAmt >= 0 ? toFrontEndString(balanceAmt) : "-"}
           </p>
         </div>
         <div className="cuadroCompra">
@@ -102,7 +102,7 @@ const CuadroAmtStore = () => {
         <div>
           <h2>{textosExtra[currentLanguage].amtEnVenta}</h2>
           <div>
-            {balanceTienda >= 0 ? ethers.utils.formatEther(balanceTienda) : "-"}
+            {balanceTienda >= 0 ? toFrontEndString(balanceTienda) : "-"}
           </div>
         </div>
         <div>

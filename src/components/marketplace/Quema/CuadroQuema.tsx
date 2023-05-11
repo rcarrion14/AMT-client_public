@@ -67,7 +67,7 @@ const CuadroQuema = () => {
           <h2>{textosExtra[currentLanguage].ustedPaga}</h2>
           <p>
             {textosExtra[currentLanguage].saldo}{" "}
-            {balanceAmt ? ethers.utils.formatEther(balanceAmt) : "-"}
+            {balanceAmt ? toFrontEndString(balanceAmt) : "-"}
           </p>
         </div>
         <div className="cuadroCompra">
@@ -88,7 +88,7 @@ const CuadroQuema = () => {
           <h2>{textosExtra[currentLanguage].ustedRecibe}</h2>
           <p>
             {textosExtra[currentLanguage].saldo}{" "}
-            {balanceBtcb ? ethers.utils.formatEther(balanceBtcb) : "-"}
+            {balanceBtcb ? toFrontEndString(balanceBtcb) : "-"}
           </p>
         </div>
         <div className="cuadroCompra">

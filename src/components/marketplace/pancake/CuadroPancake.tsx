@@ -112,7 +112,7 @@ const CuadroPancake = () => {
           <h2>{textosExtra[currentLanguage].ustedPaga}</h2>
           <p>
             {textosExtra[currentLanguage].saldo}{" "}
-            {balanceErc20 ? ethers.utils.formatEther(balanceErc20) : "-"}
+            {balanceErc20 ? toFrontEndString(balanceErc20) : "-"}
           </p>
         </div>
         <div className="cuadroCompra">
@@ -152,7 +152,7 @@ const CuadroPancake = () => {
           <h2>{textosExtra[currentLanguage].ustedRecibe}</h2>
           <p>
             {textosExtra[currentLanguage].saldo}
-            {balanceAmt ? ethers.utils.formatEther(balanceAmt) : "-"}
+            {balanceAmt ? toFrontEndString(balanceAmt) : "-"}
           </p>
         </div>
         <div className="cuadroCompra">
