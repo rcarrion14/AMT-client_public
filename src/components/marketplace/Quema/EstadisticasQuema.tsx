@@ -17,6 +17,9 @@ const EstadisticasQuema: React.FC<estatdisticasQuemaInterface> = ({
   const currentLanguage = useSelector(
     (state: typeof RootState) => state.session.language
   );
+  const backRate = useSelector(
+    (state: typeof RootState) => state.burnVault.backRate
+  );
   return (
     <>
       <div className="containerSlide">
@@ -27,7 +30,6 @@ const EstadisticasQuema: React.FC<estatdisticasQuemaInterface> = ({
           />
           <h1>{textoBotonesBlancos[currentLanguage].quema.titulo}</h1>
         </div>
-
         <div className="containerEstadisticasQuema">
           {textoEstadisticasQuema(currentLanguage)}
         </div>
