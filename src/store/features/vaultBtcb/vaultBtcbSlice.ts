@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { ethers } from "ethers";
 import contractAddresses from "../../../contracts/contractAddresses";
