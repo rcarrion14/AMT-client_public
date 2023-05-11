@@ -8,7 +8,7 @@ import { textosExtra } from "../../Utils/textos";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { ethers } from "ethers";
-
+import { toFrontEndString } from "../../Utils/formatHelpers";
 interface cuadroCobroProps {
   balanceOfAt: number | undefined;
   payAt: number | undefined;
@@ -48,13 +48,11 @@ const CuadroCobro: React.FC<cuadroCobroProps> = ({
             </p>
             <p className="aCobrar">
               {textosExtra[currentLanguage].btcACobrar}{" "}
-              {ethers.utils.formatEther(
-                payAt.mul(balanceOfAt).div(totalSupplyAt)
-              )}
+              {toFrontEndString(payAt.mul(balanceOfAt).div(totalSupplyAt))}
             </p>
             <p>
               {textosExtra[currentLanguage].distribucion}{" "}
-              {ethers.utils.formatEther(payAt)}
+              {toFrontEndString(payAt)}
             </p>
           </>
         ) : (
