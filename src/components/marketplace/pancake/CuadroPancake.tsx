@@ -12,6 +12,7 @@ import contractAddresses from "../../../contracts/contractAddresses";
 import abiErc20 from "../../../contracts/abis/genericERC20.json";
 import { useGetQuote, useGetTxData } from "../../../Utils/1inch";
 import { textosExtra } from "../../../Utils/textos";
+import { toFrontEndString } from "../../../Utils/formatHelpers";
 
 const CuadroPancake = () => {
   const balanceAmt = useSelector(
