@@ -27,28 +27,29 @@ const Historico = ({
       promiseList.push(promise);
     }
     const balances = await Promise.all(promiseList);
-    let balanceDecimal = [];
-    balances.map((hex) => {
-      balanceDecimal.push(ethers.utils.formatEther(hex));
-    });
-    return balanceDecimal;
+
+    return balances;
   }
 
   function getGanancias() {
-    let depositoInicial = parseFloat(stakingIniciales[addr].amount);
+    let depositoInicial = ethers.BigNumber.from(stakingIniciales[addr].amount);
     var gananciaAt_i = [];
-    let gananciaAcum = 0;
+    let gananciaAcum = ethers.BigNumber.from(0);
 
     for (let i = 0; i < balancesAt.length; i++) {
-      let balanceAt = parseFloat(balancesAt[i]);
-      let swapAt = parseFloat(
+      let balanceAt = balancesAt[i];
+
+      let swapAt = ethers.BigNumber.from(
         dataCobros[dataCobros.length - balancesAt.length + i].amount
       );
+
       let snap = dataCobros[dataCobros.length - balancesAt.length + i].snap;
 
-      let ganancia = (depositoInicial / balanceAt) * swapAt;
-      gananciaAcum = gananciaAcum + ganancia;
+      console.log({ depositoInicial, balanceAt, swapAt });
 
+      let ganancia = depositoInicial.mul(swapAt).div(balanceAt);
+
+      gananciaAcum = gananciaAcum.add(ganancia);
       gananciaAt_i.push([ganancia, snap]);
     }
     gananciaAt_i = gananciaAt_i.reverse();
@@ -72,7 +73,7 @@ const Historico = ({
               <p>{snapToDateMapp(ganancia[1])}</p>
             </div>
             <div className="transparente">
-              <p>{ganancia[0].toFixed(6)}</p>
+              <p>{ethers.utils.formatEther(ganancia[0])}</p>
               <p>BTCB</p>
             </div>
           </div>
@@ -101,18 +102,18 @@ const Historico = ({
 
       <div className="cuadroGanaciasStaking">
         <div>AMT</div>
-        <div>{addr ? stackedByUser.toFixed(2) : null}</div>
+        <div>{addr ? ethers.utils.formatEther(stackedByUser) : null}</div>
         <div className="celeste">
-          {addr ? (stackedByUser * 0.65).toFixed(3) + " USDT" : null}
+          {addr ? ethers.utils.formatEther(stackedByUser) + " USDT" : null}
         </div>
         <div className="celeste">
           <b>AMT depositados: </b>
           {addr && stakingIniciales
-            ? Number(stakingIniciales[addr].amount).toFixed(2)
+            ? ethers.utils.formatEther(stakingIniciales[addr].amount)
             : null}
         </div>
         <div className="celeste">
-          <b>Data do depósito: </b>{" "}
+          <b>Data do depósito: </b>
           {addr && stakingIniciales && stackedByUser > 0
             ? formatDate(stakingIniciales[addr].tstamp)
             : null}
@@ -121,8 +122,8 @@ const Historico = ({
           <b>BTCB recebidos: </b>
 
           {addr && stakingIniciales && stackedByUser > 0
-            ? getGanancias().gananciaAcum
-            : 0}
+            ? ethers.utils.formatEther(getGanancias().gananciaAcum)
+            : "oo"}
         </div>
       </div>
 
