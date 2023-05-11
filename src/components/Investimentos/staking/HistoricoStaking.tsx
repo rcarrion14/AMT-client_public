@@ -8,7 +8,7 @@ import contractAddresses from "../../../contracts/contractAddresses";
 import { snapToDateMapp } from "../../gInvestidores/snapshotDateMapper";
 import { ethers } from "ethers";
 import { textoBotonesBlancos, textosExtra } from "../../../Utils/textos";
-
+import { toFrontEndString } from "../../../Utils/formatHelpers";
 const Historico = ({
   setHistorico,
   stackedByUser,
@@ -77,7 +77,7 @@ const Historico = ({
               <p>{snapToDateMapp(ganancia[1])}</p>
             </div>
             <div className="transparente">
-              <p>{ethers.utils.formatEther(ganancia[0])}</p>
+              <p>{toFrontEndString(ganancia[0])}</p>
               <p>BTCB</p>
             </div>
           </div>
@@ -106,14 +106,14 @@ const Historico = ({
 
       <div className="cuadroGanaciasStaking">
         <div>AMT</div>
-        <div>{addr ? ethers.utils.formatEther(stackedByUser) : null}</div>
+        <div>{addr ? toFrontEndString(stackedByUser) : null}</div>
         <div className="celeste">
-          {addr ? ethers.utils.formatEther(stackedByUser) + " USDT" : null}
+          {addr ? toFrontEndString(stackedByUser) + " USDT" : null}
         </div>
         <div className="celeste">
           <b>{textosExtra[currentLanguage].amtDepositados}</b>
           {addr && stakingIniciales
-            ? ethers.utils.formatEther(stakingIniciales[addr].amount)
+            ? toFrontEndString(stakingIniciales[addr].amount)
             : null}
         </div>
         <div className="celeste">
@@ -126,7 +126,7 @@ const Historico = ({
           <b>{textosExtra[currentLanguage].btcACobrar}</b>
 
           {addr && stakingIniciales && stackedByUser > 0
-            ? ethers.utils.formatEther(getGanancias().gananciaAcum)
+            ? toFrontEndString(getGanancias().gananciaAcum)
             : "oo"}
         </div>
       </div>

@@ -10,7 +10,7 @@ import { RootState } from "../../../../store/store";
 import DoughnutChart from "./DoughnutChart";
 import BotonRetirarLiquidez from "./BotonRetirarLiquidez";
 import { ethers } from "ethers";
-
+import { toFrontEndString } from "../../../../Utils/formatHelpers";
 const RetirarLiquidez: React.FC = () => {
   const currentLanguage = useSelector(
     (state: typeof RootState) => state.session.language
@@ -63,7 +63,7 @@ const RetirarLiquidez: React.FC = () => {
     <div className="containerSlideRetirarLiquidez">
       <div style={{ display: "flex", textAlign: "center" }}>
         <h1>Saldo total: </h1>
-        <h3>{ethers.utils.formatEther(usdtEnAmt.add(usdtEnBtcb))}$</h3>
+        <h3>{toFrontEndString(usdtEnAmt.add(usdtEnBtcb))}$</h3>
       </div>
 
       <div className="containerParticipacionEnPool">
@@ -78,18 +78,14 @@ const RetirarLiquidez: React.FC = () => {
           <img src="coinAutomining.png" />
           <div style={{ display: "flex", flexDirection: "column" }}>
             <div>AMT</div>
-            <p>
-              {amtEnLiquidez ? ethers.utils.formatEther(amtEnLiquidez) : "0"}
-            </p>
+            <p>{amtEnLiquidez ? toFrontEndString(amtEnLiquidez) : "0"}</p>
           </div>
         </div>
         <div className="rightSide">
           <img src="coinBitcoin.png" />
           <div style={{ display: "flex", flexDirection: "column" }}>
             <div>BTCB</div>
-            <p>
-              {btcbEnLiquidez ? ethers.utils.formatEther(btcbEnLiquidez) : "0"}
-            </p>
+            <p>{btcbEnLiquidez ? toFrontEndString(btcbEnLiquidez) : "0"}</p>
           </div>
         </div>
       </div>

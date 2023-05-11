@@ -7,6 +7,7 @@ import { RootState } from "../../../store/store";
 import BotonDarLiquidez from "./BotonDarLiquidez/BotonDarLiquidez";
 import { textosExtra } from "../../../Utils/textos";
 import { ethers } from "ethers";
+import { toFrontEndString } from "../../../Utils/formatHelpers";
 
 const CuadroProveerLiquidez = ({ setAlertaAlDepositar }) => {
   const balanceAmt = useSelector(
@@ -77,7 +78,7 @@ const CuadroProveerLiquidez = ({ setAlertaAlDepositar }) => {
         <div className="saldo">
           <p>
             {textosExtra[currentLanguage].saldo}{" "}
-            {balanceAmt ? ethers.utils.formatEther(balanceAmt) : "-"}
+            {balanceAmt ? toFrontEndString(balanceAmt) : "-"}
           </p>
         </div>
         <div className="cuadroCompra">
@@ -97,7 +98,7 @@ const CuadroProveerLiquidez = ({ setAlertaAlDepositar }) => {
         <div className="saldo">
           <p>
             {textosExtra[currentLanguage].saldo}
-            {balanceBtcb ? ethers.utils.formatEther(balanceBtcb) : "-"}
+            {balanceBtcb ? toFrontEndString(balanceBtcb) : "-"}
           </p>
         </div>
         <div className="cuadroCompra">

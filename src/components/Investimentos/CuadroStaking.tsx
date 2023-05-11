@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { fetchVaultAmt } from "../../Utils/fetchBuckets";
 import { ethers, BigNumber } from "ethers";
+import { toFrontEndString } from "../../Utils/formatHelpers";
 interface BotonOperacionProps {
   balanceUserAmt: number | undefined;
   stackedByUser: number | undefined;
@@ -47,7 +48,7 @@ const CuadroStaking: React.FC<BotonOperacionProps> = ({
           <h2>{textosExtra[currentLanguage].depositarAmt}</h2>
           <p>
             {textosExtra[currentLanguage].saldo}{" "}
-            {balanceUserAmt ? ethers.utils.formatEther(balanceUserAmt) : "-"}
+            {balanceUserAmt ? toFrontEndString(balanceUserAmt) : "-"}
           </p>
         </div>
         <div className="cuadroCompra">
@@ -118,7 +119,7 @@ const CuadroStaking: React.FC<BotonOperacionProps> = ({
               </h2>
               <div>
                 {btcACobrar != undefined && btcACobrar.gt(0)
-                  ? ethers.utils.formatEther(btcACobrar)
+                  ? toFrontEndString(btcACobrar)
                   : stakingIniciales != undefined && stackedByUser.gt(0)
                   ? ethers.utils.formatEther(
                       stackedByUser.sub(stakingIniciales[addr].amount)
@@ -128,9 +129,7 @@ const CuadroStaking: React.FC<BotonOperacionProps> = ({
             </div>
             <div>
               <h2>{textosExtra[currentLanguage].amtDepositados}</h2>
-              <div>
-                {stackedByUser ? ethers.utils.formatEther(stackedByUser) : "-"}
-              </div>
+              <div>{stackedByUser ? toFrontEndString(stackedByUser) : "-"}</div>
             </div>
           </div>
         </div>

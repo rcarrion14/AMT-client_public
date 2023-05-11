@@ -10,6 +10,7 @@ import Spinner from "../../Generales/Spinner/Spinner";
 import { fetchVaultAmt } from "../../../Utils/fetchBuckets";
 import { textoBotonesBlancos, textosExtra } from "../../../Utils/textos";
 import { current } from "@reduxjs/toolkit";
+import { toFrontEndString } from "../../../Utils/formatHelpers";
 
 const Historico = ({
   setHistorico,
@@ -80,7 +81,7 @@ const Historico = ({
               <p>{snapToDateMapp(ganancia[1])}</p>
             </div>
             <div className="transparente">
-              <p>{ethers.utils.formatEther(ganancia[0])}</p>
+              <p>{toFrontEndString(ganancia[0])}</p>
               <p>AMT</p>
             </div>
           </div>
@@ -115,15 +116,15 @@ const Historico = ({
 
       <div className="cuadroGanaciasStaking">
         <div>AMT</div>
-        <div>{stackedByUser ? ethers.utils.formatEther(stackedByUser) : 0}</div>
+        <div>{stackedByUser ? toFrontEndString(stackedByUser) : 0}</div>
         <div className="celeste">
           {stackedByUser
-            ? ethers.utils.formatEther(stackedByUser) + " USDT"
+            ? toFrontEndString(stackedByUser) + " USDT"
             : 0 + " USDT"}
         </div>
         <div className="celeste">
           <b>{textosExtra[currentLanguage].amtDepositados} </b>
-          {stakingIniciales ? ethers.utils.formatEther(stackedByUser) : null}
+          {stakingIniciales ? toFrontEndString(stackedByUser) : null}
         </div>
         <div className="celeste">
           <b>Data do depósito: </b>{" "}
