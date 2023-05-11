@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 import BotonDarLiquidez from "./BotonDarLiquidez/BotonDarLiquidez";
 import { textosExtra } from "../../../Utils/textos";
+import { ethers } from "ethers";
 
 const CuadroProveerLiquidez = ({ setAlertaAlDepositar }) => {
   const balanceAmt = useSelector(
@@ -65,7 +66,6 @@ const CuadroProveerLiquidez = ({ setAlertaAlDepositar }) => {
   const handleInputBtcbValueChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    console.log("recibir change");
     setInputBtcbValue(event.target.value);
     setInputAmtValue(
       (parseFloat(event.target.value) * ratioAmtBtcb).toString()
@@ -76,7 +76,8 @@ const CuadroProveerLiquidez = ({ setAlertaAlDepositar }) => {
       <div id="primeraSeccion">
         <div className="saldo">
           <p>
-            {textosExtra[currentLanguage].saldo} {balanceAmt}
+            {textosExtra[currentLanguage].saldo}{" "}
+            {balanceAmt ? ethers.utils.formatEther(balanceAmt) : "-"}
           </p>
         </div>
         <div className="cuadroCompra">
@@ -95,8 +96,8 @@ const CuadroProveerLiquidez = ({ setAlertaAlDepositar }) => {
       <div id="segundaSeccion">
         <div className="saldo">
           <p>
-            {textosExtra[currentLanguage].saldo}{" "}
-            {Number(balanceBtcb?.toFixed(5))}
+            {textosExtra[currentLanguage].saldo}
+            {balanceBtcb ? ethers.utils.formatEther(balanceBtcb) : "-"}
           </p>
         </div>
         <div className="cuadroCompra">

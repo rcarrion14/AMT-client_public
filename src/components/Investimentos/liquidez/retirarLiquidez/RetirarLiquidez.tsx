@@ -1,15 +1,15 @@
+// @ts-nocheck
 import React, { useRef } from "react";
 import {
   textoLiquidez,
   textoRetirarLiquidez,
   textosExtra,
 } from "../../../../Utils/textos";
-import CuadroProveerLiquidez from "../CuadroProveerLiquidez";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../store/store";
-import { current } from "@reduxjs/toolkit";
 import DoughnutChart from "./DoughnutChart";
 import BotonRetirarLiquidez from "./BotonRetirarLiquidez";
+import { ethers } from "ethers";
 
 const RetirarLiquidez: React.FC = () => {
   const currentLanguage = useSelector(
@@ -31,46 +31,65 @@ const RetirarLiquidez: React.FC = () => {
     (state: typeof RootState) => state.btcb.balanceOfPool
   );
 
-  const precioBtcb = 28500;
-  const precioAmt = 0.67;
-  let usdtEnAmt = 0;
-  let usdtEnBtcb = 0;
-  let amtEnLiquidez = 0;
-  let btcbEnLiquidez = 0;
-  let poolParticipation = 0;
+  const precioBtcb = ethers.BigNumber.from(28500);
+
+  //const precioAmt = balancePoolBtc.mul(precioBtcb).div(balanceLiqAmt)
+
+  let usdtEnAmt = ethers.BigNumber.from(0);
+  let usdtEnBtcb = ethers.BigNumber.from(0);
+  let amtEnLiquidez = ethers.BigNumber.from(0);
+  let btcbEnLiquidez = ethers.BigNumber.from(0);
+  let poolParticipation = ethers.BigNumber.from(0);
   if (balanceLiqAmt && liqAmtTotalSupply && balancePoolAmt && balancePoolBtc) {
-    poolParticipation = balanceLiqAmt / liqAmtTotalSupply;
-    amtEnLiquidez = poolParticipation * balancePoolAmt;
-    btcbEnLiquidez = poolParticipation * balancePoolBtc;
-    usdtEnAmt = amtEnLiquidez * precioAmt;
-    usdtEnBtcb = btcbEnLiquidez * precioBtcb;
+    //
+    poolParticipation = liqAmtTotalSupply.div(balanceLiqAmt);
+    amtEnLiquidez = balancePoolAmt.div(poolParticipation);
+    btcbEnLiquidez = balancePoolBtc.div(poolParticipation);
+    usdtEnAmt = amtEnLiquidez.mul(
+      balancePoolBtc.mul(precioBtcb).div(balanceLiqAmt)
+    );
+    /*     usdtEnAmt = amtEnLiquidez.mul(
+      balancePoolBtc.mul(precioBtcb).div(balancePoolAmt)
+    ); */
+    usdtEnAmt = amtEnLiquidez
+      .mul(balancePoolBtc)
+      .mul(precioBtcb)
+      .div(balancePoolAmt);
+
+    usdtEnBtcb = btcbEnLiquidez.mul(precioBtcb);
   }
 
   return (
     <div className="containerSlideRetirarLiquidez">
       <div style={{ display: "flex", textAlign: "center" }}>
-        {" "}
         <h1>Saldo total: </h1>
-        <h3>{usdtEnAmt + usdtEnBtcb}$</h3>
+        <h3>{ethers.utils.formatEther(usdtEnAmt.add(usdtEnBtcb))}$</h3>
       </div>
 
       <div className="containerParticipacionEnPool">
         <b>{textosExtra[currentLanguage].participacionEnPool} </b>
-        {poolParticipation * 100} %
+        {ethers.utils.formatEther(
+          poolParticipation.mul(ethers.BigNumber.from(100))
+        )}
+        %
       </div>
       <div className="containerSaldosLiquidez">
         <div className="leftSide">
           <img src="coinAutomining.png" />
           <div style={{ display: "flex", flexDirection: "column" }}>
             <div>AMT</div>
-            <p>{amtEnLiquidez}</p>
+            <p>
+              {amtEnLiquidez ? ethers.utils.formatEther(amtEnLiquidez) : "0"}
+            </p>
           </div>
         </div>
         <div className="rightSide">
           <img src="coinBitcoin.png" />
           <div style={{ display: "flex", flexDirection: "column" }}>
             <div>BTCB</div>
-            <p>{btcbEnLiquidez}</p>
+            <p>
+              {btcbEnLiquidez ? ethers.utils.formatEther(btcbEnLiquidez) : "0"}
+            </p>
           </div>
         </div>
       </div>

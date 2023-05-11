@@ -11,10 +11,6 @@ import { vaultBtcbLiquidityOperations } from "../../../store/features/vaultBtcbL
 import { amtOperations } from "../../../store/features/amt/amtOperations";
 import AlertaAlDepositar from "./AlertaAlDepositar";
 
-interface LiquidezInterface {
-  setActivePage: React.Dispatch<React.SetStateAction<string>>;
-}
-
 const Liquidez: React.FC<LiquidezInterface> = ({ setActivePage }) => {
   const currentLanguage = useSelector(
     (state: typeof RootState) => state.session.language
@@ -36,6 +32,7 @@ const Liquidez: React.FC<LiquidezInterface> = ({ setActivePage }) => {
   const withdrawl = vaultBtcbLiquidityOperations.withdrawl;
 
   const [selectorDarLiq, setSelectorDarLiquidez] = useState(true);
+
   const [alertaVault, setAlertaVault] = useState(true);
   const [alertaAlDepositar, setAlertaAlDepositar] = useState(false);
 
@@ -55,6 +52,7 @@ const Liquidez: React.FC<LiquidezInterface> = ({ setActivePage }) => {
           allowanceVault={allowanceVault}
         />
       ) : null}
+
       {selectorDarLiq && balanceLiqAmt > 0 && alertaVault ? (
         // Falta depositar liqAmt en baul
         <AlertaStakingLiquidez

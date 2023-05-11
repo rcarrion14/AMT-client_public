@@ -7,6 +7,7 @@ import Spinner from "../Generales/Spinner/Spinner";
 import { textosExtra } from "../../Utils/textos";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
+import { ethers } from "ethers";
 
 interface cuadroCobroProps {
   balanceOfAt: number | undefined;
@@ -47,10 +48,13 @@ const CuadroCobro: React.FC<cuadroCobroProps> = ({
             </p>
             <p className="aCobrar">
               {textosExtra[currentLanguage].btcACobrar}{" "}
-              {((payAt * balanceOfAt) / totalSupplyAt).toFixed(5)}
+              {ethers.utils.formatEther(
+                payAt.mul(balanceOfAt).div(totalSupplyAt)
+              )}
             </p>
             <p>
-              {textosExtra[currentLanguage].distribucion} {payAt?.toFixed(5)}
+              {textosExtra[currentLanguage].distribucion}{" "}
+              {ethers.utils.formatEther(payAt)}
             </p>
           </>
         ) : (
@@ -61,7 +65,6 @@ const CuadroCobro: React.FC<cuadroCobroProps> = ({
       <button
         onClick={alreadyCharged ? charge : null}
         className={alreadyCharged ? "inactive" : null}
-        // style={{ backgroundColor: alreadyCharged ? "#a9a9a9" : "#00ddff" }}
       >
         {allValuesDefined ? (
           <>
