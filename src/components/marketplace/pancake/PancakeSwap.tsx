@@ -11,16 +11,18 @@ const PancakeSwap: React.FC<PancakeSwapInterface> = ({ setActivePage }) => {
   const currentLanguage = useSelector(
     (state: typeof RootState) => state.session.language
   );
+  const [selector, setSelector] = useState(false);
   return (
-    <div className="containerSlide">
+    <div
+      className={selector ? "containerSlide deshabilitador" : "containerSlide"}
+    >
       <div className="navBar_top">
         <img onClick={() => setActivePage("")} src="icon_nav.png" />
         <h1>Marketplace</h1>
       </div>
-      <div className="container">
-        {textoPancake(currentLanguage)}
-        <CuadroPancake />
-      </div>
+
+      {textoPancake(currentLanguage)}
+      <CuadroPancake selector={selector} setSelector={setSelector} />
     </div>
   );
 };

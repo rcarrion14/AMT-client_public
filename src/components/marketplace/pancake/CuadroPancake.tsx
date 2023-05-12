@@ -14,7 +14,7 @@ import { useGetQuote, useGetTxData } from "../../../Utils/1inch";
 import { textosExtra } from "../../../Utils/textos";
 import { toFrontEndString } from "../../../Utils/formatHelpers";
 
-const CuadroPancake = () => {
+const CuadroPancake = ({ selector, setSelector }) => {
   const balanceAmt = useSelector(
     (state: typeof RootState) => state.amt.balance
   );
@@ -25,7 +25,6 @@ const CuadroPancake = () => {
   const signer = useSelector((state: typeof RootState) => state.wallet.signer);
   const addr = useSelector((state: typeof RootState) => state.wallet.address);
 
-  const [selector, setSelector] = useState(false);
   const [monedaActive, setmonedaActive] = useState(listaMonedas.usdt);
   const [inputPagarValue, setInputPagarValue] = useState("");
   const [inputRecibirValue, setInputRecibirValue] = useState("");

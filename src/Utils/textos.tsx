@@ -1415,6 +1415,8 @@ export const textosExtra: typeTextosExtra = {
     quemaDeAmt: "Queima de AMT",
     distribucionDiaria: "Distribuição Diária",
     aporteDelProjectoAmt: "Aporte do Projeto AMT",
+    seleccioneMoneda: "Seleccione moeda",
+    investimentoActual: "Meu investimento atual",
   },
   esp: {
     bienvenido: "¡Bienvenido!",
@@ -1486,6 +1488,8 @@ export const textosExtra: typeTextosExtra = {
     quemaDeAmt: "Quema de AMT",
     distribucionDiaria: "Distribución Diaria",
     aporteDelProjectoAmt: "Aporte del Proyecto AMT",
+    seleccioneMoneda: "Seleccione moneda",
+    investimentoActual: "Mi inversión ahora",
   },
   eng: {
     bienvenido: "Welcome!",
@@ -1547,6 +1551,8 @@ export const textosExtra: typeTextosExtra = {
     quemaDeAmt: "AMT Burning",
     distribucionDiaria: "Daily Distribution",
     aporteDelProjectoAmt: "AMT Project Contribution",
+    seleccioneMoneda: "Select coin",
+    investimentoActual: "My current investment",
   },
 };
 
@@ -1678,7 +1684,7 @@ export const textoBotonesBlancos: typeTextoBotonesBlancos = {
       descripcion: "Recibe más AMT diariamente.",
     },
     liquidez: {
-      titulo: "liquidez",
+      titulo: "Liquidez",
       descripcion: "Recibe por las transacciones en el pool de liquidez.",
     },
     rendimientos: {

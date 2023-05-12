@@ -12,7 +12,7 @@ const Interfaz1Inch: React.FC<Interfaz1InchInterface> = ({ setInterfaz }) => {
     (state: typeof RootState) => state.session.language
   );
   return (
-    <div className="cointainer1Inch">
+    <div className="cointainer1Inch noDeshabilitar">
       <div className="close1Inch">
         <h2>Seleccione moneda</h2>
         <img
@@ -24,6 +24,7 @@ const Interfaz1Inch: React.FC<Interfaz1InchInterface> = ({ setInterfaz }) => {
       <div className="container">
         <CuadroInterfaz1Inch />
       </div>
+      {/* <img src="1inch_logo.png" alt="" /> */}
     </div>
   );
 };
