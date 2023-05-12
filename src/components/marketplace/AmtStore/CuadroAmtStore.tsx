@@ -8,7 +8,8 @@ import { AppDispatch, RootState } from "../../../store/store";
 import { marketPlaceOperations } from "../../../store/features/marketplace/marketPlaceOperations";
 import { usdtOperations } from "../../../store/features/usdt/usdtOperations";
 import { textosExtra } from "../../../Utils/textos";
-
+import { ethers } from "ethers";
+import { toFrontEndString } from "../../../Utils/formatHelpers";
 const CuadroAmtStore = () => {
   const dispatch = useDispatch<AppDispatch>();
   const currentLanguage = useSelector(
@@ -59,8 +60,8 @@ const CuadroAmtStore = () => {
         <div className="saldo">
           <h2>{textosExtra[currentLanguage].ustedPaga}</h2>
           <p>
-            {textosExtra[currentLanguage].saldo}{" "}
-            {balanceAmt >= 0 ? Number(balanceUsdt?.toFixed(4)) : "-"}
+            {textosExtra[currentLanguage].saldo}
+            {balanceUsdt >= 0 ? toFrontEndString(balanceUsdt) : "-"}
           </p>
         </div>
         <div className="cuadroCompra">
@@ -81,7 +82,7 @@ const CuadroAmtStore = () => {
           <h2>{textosExtra[currentLanguage].ustedRecibe}</h2>
           <p>
             {textosExtra[currentLanguage].saldo}{" "}
-            {balanceAmt >= 0 ? Number(balanceAmt.toFixed(4)) : "-"}
+            {balanceAmt >= 0 ? toFrontEndString(balanceAmt) : "-"}
           </p>
         </div>
         <div className="cuadroCompra">
@@ -100,7 +101,9 @@ const CuadroAmtStore = () => {
       <div className="containerSaldos">
         <div>
           <h2>{textosExtra[currentLanguage].amtEnVenta}</h2>
-          <div>{Number(balanceTienda?.toFixed(4))}</div>
+          <div>
+            {balanceTienda >= 0 ? toFrontEndString(balanceTienda) : "-"}
+          </div>
         </div>
         <div>
           <h2>{textosExtra[currentLanguage].precioAmt}</h2>
@@ -113,7 +116,7 @@ const CuadroAmtStore = () => {
           allowanceUsdt={allowanceUsdt}
           balanceUsdt={balanceUsdt}
           input={inputPagarValue}
-          operacionAprobar={usdtOperations.approveMarketVault}
+          operacionAprobar={usdtOperations.approveMarket}
           operacionBuy={marketPlaceOperations.buy}
         />
       </div>

@@ -191,6 +191,7 @@ u {
   box-shadow: 0px 4px 11px -9px rgba(0, 0, 0, 0.77);
   border-radius: 8px;
   padding: 10px 15px 10px 15px;
+  position: relative;
 }
 
 .cuadroCompra > img {
@@ -232,7 +233,7 @@ u {
   display: flex;
   justify-content: space-evenly;
   flex-direction: column;
-  background-color: #e6e6e6;
+  background-color: #eaeaea;
   border-radius: 15px;
   padding: 5px 12px 5px 12px;
 
@@ -241,7 +242,7 @@ u {
 }
 
 .containerSaldos > div > div {
-  color: #a9a9a9;
+  color: #4d4d4d;
   font-size: 0.8rem;
   background-color: inherit;
 }
@@ -420,7 +421,7 @@ u {
 
 .fade-enter {
   position: fixed;
-  top: 205px;
+  top: 245px;
   opacity: 0;
   width: -webkit-fill-available;
 }
@@ -454,6 +455,7 @@ u {
 
 .doubleButtonContainer {
   display: flex;
+  justify-content: space-between;
 }
 
 .gris {
@@ -718,7 +720,6 @@ u {
 
 .cointainer1Inch {
   overflow: scroll;
-  background-color: #adceff;
 
   border-radius: 15px;
   position: relative;
@@ -745,17 +746,11 @@ u {
   display: flex;
   justify-content: space-evenly;
   flex-direction: column;
-  background-color: #e6e6e6;
+  background-color: #eaeaea;
   border-radius: 15px;
   padding: 5px 12px 5px 12px;
 
   align-items: center;
-}
-
-.containerSaldos > div > div {
-  color: #a9a9a9;
-  font-size: 0.8rem;
-  background-color: inherit;
 }
 
 .container {
@@ -959,4 +954,77 @@ u {
 .slippage {
   text-align: centerC;
   margin: 10px 0 5px 0;
+}
+
+.cointainerAlertaVault {
+  background-color: #adceff;
+  height: 250px;
+
+  border-radius: 15px;
+  position: relative;
+  top: -35vh;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 15px;
+  text-align: center;
+  margin-bottom: -250px;
+}
+
+.cointainerAlertaVault > .close1Inch {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.cointainerAlertaVault p {
+  color: black;
+  font-size: 1rem;
+}
+
+.containerEstadisticasQuema {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 0.8rem;
+}
+
+.containerLineGraphQuema {
+  display: flex;
+  height: 400px;
+  align-items: center;
+}
+
+.cuadritosQuema {
+  height: 58px;
+  display: flex;
+  background-color: white;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 15px;
+  padding: 5px 10px 5px 10px;
+  margin: 8px 8px 8px 8px;
+  text-align: center;
+}
+
+.cuadritosQuema > img {
+  width: 30px;
+  height: fit-content;
+}
+
+.cuadritosQuema > button {
+  margin: 0;
+}
+
+.cuadritosQuema > div > p {
+  color: #34383e;
+  margin: 0.25rem;
+}
+
+.cuadritosQuema > button {
+  width: 30%;
+}
+
+.deshabilitador > :not(.noDeshabilitar) {
+  pointer-events: none;
+  opacity: 0.2;
 }

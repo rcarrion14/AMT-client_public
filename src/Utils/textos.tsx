@@ -64,6 +64,131 @@ export const textoMarketplace = (idioma: string) => {
   }
 };
 
+export const textoEstadisticasQuema = (idioma: string) => {
+  if (idioma === "por") {
+    return (
+      <>
+        <h1>Cofre de Garantia</h1>
+        <p>
+          O percentual de distribução diária do Cofre de Garantia pode variar
+          sempre em prol dos melhores interesses para todos os investidores da
+          Comunidade AMT.
+        </p>
+        <p>
+          Por exemplo, quando a margem de lucro da mineraçã está mais baixa em
+          rezão do preço do bitcoin, dos altos custos ou da alta taxa de
+          dificuldade da rede, o Projeto AMT irá diminuir o percentual de
+          distribução para o Cofre de Garantia, para priorizar o pagamento de
+          custos e distribução de lucros
+        </p>
+        <p>
+          Por outro lado, quando houver a possibilidade de abastecer o Cofre de
+          Garantia, sem prejuízo do pagamento dos custos e dos lucros, isso
+          certamente será feito
+        </p>
+        <p>
+          Inclusive, o Projeto AMT sempre avaliará a possibilidade de fazer
+          aportes adicionais nesse Cofre de Garantia, sempre que for conveniente
+          para toda a Comunidade AMT
+        </p>
+        <p>
+          O objetivo do Projeto AMT é que esse Cofre possua tantos BTC a pronto
+          de establecer um piso mínimo para o preço do AMT, ou seja, que o valor
+          que o investidor recebe ao queimar AMT no Cofre possa se igualar á
+          cotação da PancakeSwap.
+        </p>
+        <p>
+          Isso fará com que o preço nunca regrida, mas so aumente. E, vale
+          lembrar, quando o usuário opta por queimar seus AMT no Cofre, toda a
+          comunidade AMT se beneficia disso, pois são menos AMT em circulação e,
+          portanto, a distribução de BTC passa a ser maior por cada token
+          (aumenta a rentabilidade)
+        </p>
+      </>
+    );
+  } else if (idioma === "esp") {
+    return (
+      <>
+        <h1>Cofre de Garantia</h1>
+        <p>
+          El porcentaje de distribución diaria del Cofre de Garantía puede
+          variar siempre en beneficio de los mejores intereses de todos los
+          inversores de la Comunidad AMT.
+        </p>
+        <p>
+          Por ejemplo, cuando el margen de ganancia de la minería es más bajo
+          debido al precio de Bitcoin, altos costos o alta tasa de dificultad de
+          la red, el Proyecto AMT reducirá el porcentaje de distribución al
+          Cofre de Garantía para priorizar el pago de costos y distribución de
+          ganancias.
+        </p>
+        <p>
+          Por otro lado, cuando haya la posibilidad de abastecer el Cofre de
+          Garantía sin perjudicar el pago de costos y ganancias, seguramente se
+          hará.
+        </p>
+        <p>
+          Además, el Proyecto AMT siempre evaluará la posibilidad de realizar
+          aportes adicionales a este Cofre de Garantía cuando sea conveniente
+          para toda la Comunidad AMT.
+        </p>
+        <p>
+          El objetivo del Proyecto AMT es que este Cofre tenga suficiente BTC
+          como para establecer un límite mínimo para el precio de AMT, es decir,
+          que el valor que el inversor reciba al quemar AMT en el Cofre sea
+          igual a la cotización de PancakeSwap.
+        </p>
+        <p>
+          Esto hará que el precio nunca retroceda, sino que solo aumente. Y es
+          importante recordar que cuando el usuario elige quemar sus AMT en el
+          Cofre, toda la comunidad AMT se beneficia, ya que hay menos AMT en
+          circulación y, por lo tanto, la distribución de BTC es mayor por cada
+          token (aumenta la rentabilidad).
+        </p>
+      </>
+    );
+  } else if (idioma === "eng") {
+    return (
+      <>
+        <h1>Guarantee Vault</h1>
+        <p>
+          The percentage of daily distribution from the Guarantee Vault can vary
+          in favor of the best interests of all AMT Community investors.
+        </p>
+        <p>
+          For example, when the mining profit margin is lower due to the price
+          of bitcoin, high costs, or high network difficulty, the AMT Project
+          will reduce the distribution percentage for the Guarantee Vault to
+          prioritize cost payment and profit distribution.
+        </p>
+        <p>
+          On the other hand, when there is the possibility of supplying the
+          Guarantee Vault without prejudice to the payment of costs and profits,
+          this will certainly be done.
+        </p>
+        <p>
+          In fact, the AMT Project will always evaluate the possibility of
+          making additional contributions to this Guarantee Vault whenever it is
+          convenient for the entire AMT Community.
+        </p>
+        <p>
+          The objective of the AMT Project is for this Vault to have so many BTC
+          available to establish a minimum floor for the price of AMT, meaning
+          that the value that the investor receives when burning AMT in the
+          Vault can equal the PancakeSwap quote.
+        </p>
+        <p>
+          This will ensure that the price never regresses but only increases.
+          And it is worth remembering that when the user chooses to burn their
+          AMT in the Vault, the entire AMT community benefits from it, since
+          there are fewer AMTs in circulation and therefore the distribution of
+          BTC becomes higher per token (increases profitability).
+        </p>
+      </>
+    );
+  }
+};
+
 export const textoStore = (idioma: string, func: Function) => {
   if (idioma == "por") {
     return (
@@ -1208,6 +1333,14 @@ export interface interfaceTextoExtra {
   enEseEscenarioRentabilidadSeria: string;
   dataDeDeposito: string;
   gananciasDistribuidas: string;
+  estadisticas: string;
+
+  btcEnVault: string;
+  quemaDeAmt: string;
+  distribucionDiaria: string;
+  aporteDelProjectoAmt: string;
+  seleccioneMoneda: string;
+  investimentoActual: string;
 }
 export type typeTextosExtra = {
   [key in languageCode]: interfaceTextoExtra;
@@ -1279,6 +1412,13 @@ export const textosExtra: typeTextosExtra = {
     enEseEscenarioRentabilidadSeria: "Nesse cenário, rentabilidade seria:",
     dataDeDeposito: "Data do deposito",
     gananciasDistribuidas: "Lucros distribuidos",
+    estadisticas: "Estatísticas",
+    btcEnVault: "BTC no baú",
+    quemaDeAmt: "Queima de AMT",
+    distribucionDiaria: "Distribuição Diária",
+    aporteDelProjectoAmt: "Aporte do Projeto AMT",
+    seleccioneMoneda: "Seleccione moeda",
+    investimentoActual: "Meu investimento atual",
   },
   esp: {
     bienvenido: "¡Bienvenido!",
@@ -1345,6 +1485,13 @@ export const textosExtra: typeTextosExtra = {
       "En este escenario, la rentabilidad sería:",
     dataDeDeposito: "Fecha de deposito",
     gananciasDistribuidas: "Ganancias distribuidas",
+    estadisticas: "Estadisticas",
+    btcEnVault: "BTC en baúl",
+    quemaDeAmt: "Quema de AMT",
+    distribucionDiaria: "Distribución Diaria",
+    aporteDelProjectoAmt: "Aporte del Proyecto AMT",
+    seleccioneMoneda: "Seleccione moneda",
+    investimentoActual: "Mi inversión ahora",
   },
   eng: {
     bienvenido: "Welcome!",
@@ -1401,6 +1548,13 @@ export const textosExtra: typeTextosExtra = {
       "In this scenario, the profitability would be:",
     dataDeDeposito: "Deposit date",
     gananciasDistribuidas: "Earnings",
+    estadisticas: "Statistics",
+    btcEnVault: "BTC on vault",
+    quemaDeAmt: "AMT Burning",
+    distribucionDiaria: "Daily Distribution",
+    aporteDelProjectoAmt: "AMT Project Contribution",
+    seleccioneMoneda: "Select coin",
+    investimentoActual: "My current investment",
   },
 };
 
@@ -1532,7 +1686,7 @@ export const textoBotonesBlancos: typeTextoBotonesBlancos = {
       descripcion: "Recibe más AMT diariamente.",
     },
     liquidez: {
-      titulo: "liquidez",
+      titulo: "Liquidez",
       descripcion: "Recibe por las transacciones en el pool de liquidez.",
     },
     rendimientos: {

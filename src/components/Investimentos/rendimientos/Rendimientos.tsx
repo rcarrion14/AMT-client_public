@@ -1,7 +1,7 @@
 import React, { ReactElement } from "react";
 import BotonBlanco from "../../Generales/BotonBlanco";
 import Simulador from "./Simulador";
-import Maquinas from "./Maquinas";
+import Maquinas from "./maquinas/Maquinas";
 import Grafico from "./GraficaPrecioAmt/Grafico";
 import { useState, useRef } from "react";
 import { CSSTransition } from "react-transition-group";

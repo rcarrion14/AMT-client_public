@@ -6,8 +6,10 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 import BotonDarLiquidez from "./BotonDarLiquidez/BotonDarLiquidez";
 import { textosExtra } from "../../../Utils/textos";
+import { ethers } from "ethers";
+import { toFrontEndString } from "../../../Utils/formatHelpers";
 
-const CuadroProveerLiquidez = () => {
+const CuadroProveerLiquidez = ({ setAlertaAlDepositar }) => {
   const balanceAmt = useSelector(
     (state: typeof RootState) => state.amt.balance
   );
@@ -65,7 +67,6 @@ const CuadroProveerLiquidez = () => {
   const handleInputBtcbValueChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    console.log("recibir change");
     setInputBtcbValue(event.target.value);
     setInputAmtValue(
       (parseFloat(event.target.value) * ratioAmtBtcb).toString()
@@ -76,7 +77,8 @@ const CuadroProveerLiquidez = () => {
       <div id="primeraSeccion">
         <div className="saldo">
           <p>
-            {textosExtra[currentLanguage].saldo} {balanceAmt}
+            {textosExtra[currentLanguage].saldo}{" "}
+            {balanceAmt ? toFrontEndString(balanceAmt) : "-"}
           </p>
         </div>
         <div className="cuadroCompra">
@@ -95,8 +97,8 @@ const CuadroProveerLiquidez = () => {
       <div id="segundaSeccion">
         <div className="saldo">
           <p>
-            {textosExtra[currentLanguage].saldo}{" "}
-            {Number(balanceBtcb?.toFixed(5))}
+            {textosExtra[currentLanguage].saldo}
+            {balanceBtcb ? toFrontEndString(balanceBtcb) : "-"}
           </p>
         </div>
         <div className="cuadroCompra">
@@ -118,6 +120,7 @@ const CuadroProveerLiquidez = () => {
           inputBtc={parseFloat(inputBtcbValue)}
           allowanceAmt={allowanceAmt}
           allowanceBtc={allowanceBtcb}
+          setAlertaAlDepositar={setAlertaAlDepositar}
         ></BotonDarLiquidez>
       </div>
     </>

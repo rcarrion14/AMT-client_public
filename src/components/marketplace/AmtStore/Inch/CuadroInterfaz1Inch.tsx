@@ -16,7 +16,7 @@ import {
   useGetTxData,
 } from "../../../../Utils/1inch";
 import { textosExtra } from "../../../../Utils/textos";
-
+import { toFrontEndString } from "../../../../Utils/formatHelpers";
 const CuadroInterfaz1Inch = () => {
   const currentLanguage = useSelector(
     (state: typeof RootState) => state.session.language
@@ -55,16 +55,17 @@ const CuadroInterfaz1Inch = () => {
         contractAddresses.Usdt,
         inputPagarValue
       ).then((response) => {
-        setInputRecibirValue(ethers.utils.formatEther(response.toTokenAmount));
+        setInputRecibirValue(toFrontEndString(response.toTokenAmount));
       });
     }
   }, [inputPagarValue, monedaActive, toggler]);
 
+  // getting Tx data
   useEffect(() => {
     if (
       inputPagarValue &&
-      allowanceErc20 > Number(inputPagarValue) &&
-      balanceErc20 > Number(inputPagarValue)
+      allowanceErc20.gt(ethers.utils.parseEther(inputPagarValue)) &&
+      balanceErc20.gt(ethers.utils.parseEther(inputPagarValue))
     ) {
       useGetTxData(
         monedaActive.address,
@@ -77,6 +78,8 @@ const CuadroInterfaz1Inch = () => {
     }
   }, [inputPagarValue, toggler]);
 
+  // cargando ERC20 generico
+
   useEffect(() => {
     const contractErc20 = new ethers.Contract(
       monedaActive.address,
@@ -85,17 +88,11 @@ const CuadroInterfaz1Inch = () => {
     );
 
     async function fetchData() {
-      setBalanceErc20(
-        Number(ethers.utils.formatEther(await contractErc20.balanceOf(addr)))
-      );
+      setBalanceErc20(await contractErc20.balanceOf(addr));
       setAllowanceErc20(
-        Number(
-          ethers.utils.formatEther(
-            await contractErc20.allowance(
-              addr,
-              "0x1111111254eeb25477b68fb85ed929f73a960582"
-            )
-          )
+        await contractErc20.allowance(
+          addr,
+          "0x1111111254eeb25477b68fb85ed929f73a960582"
         )
       );
 
@@ -128,7 +125,7 @@ const CuadroInterfaz1Inch = () => {
           <h2>{textosExtra[currentLanguage].ustedPaga}</h2>
           <p>
             {textosExtra[currentLanguage].saldo}{" "}
-            {Number(balanceErc20.toFixed(5))}
+            {balanceErc20 ? toFrontEndString(balanceErc20) : "-"}
           </p>
         </div>
         <div className="cuadroCompra">
@@ -171,8 +168,8 @@ const CuadroInterfaz1Inch = () => {
         <div className="saldo">
           <h2>{textosExtra[currentLanguage].ustedRecibe}</h2>
           <p>
-            {textosExtra[currentLanguage].saldo}{" "}
-            {Number(balanceUsdt?.toFixed(4))}
+            {textosExtra[currentLanguage].saldo}
+            {balanceUsdt ? toFrontEndString(balanceUsdt) : "-"}
           </p>
         </div>
         <div className="cuadroCompra">

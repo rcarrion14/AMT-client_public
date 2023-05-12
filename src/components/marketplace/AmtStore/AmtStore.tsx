@@ -17,7 +17,11 @@ const AmtStore: React.FC<AmtStoreInterface> = ({ setActivePage }) => {
   );
   return (
     <>
-      <div className={!interfaz ? "containerSlide" : "containerSlide opaco"}>
+      <div
+        className={
+          interfaz ? "containerSlide deshabilitador" : "containerSlide"
+        }
+      >
         <div className="navBar_top">
           <img
             onClick={() => setActivePage("marketplace")}

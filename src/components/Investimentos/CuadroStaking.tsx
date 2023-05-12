@@ -6,10 +6,12 @@ import { textoAtencionStaking, textosExtra } from "../../Utils/textos";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { fetchVaultAmt } from "../../Utils/fetchBuckets";
+import { ethers, BigNumber } from "ethers";
+import { toFrontEndString } from "../../Utils/formatHelpers";
 interface BotonOperacionProps {
   balanceUserAmt: number | undefined;
   stackedByUser: number | undefined;
-  btcACobrar: number | undefined;
+  btcACobrar: BigNumber | undefined;
   allowance: number | undefined;
   operacionAprobar: Function;
   operacionStake: Function;
@@ -46,7 +48,7 @@ const CuadroStaking: React.FC<BotonOperacionProps> = ({
           <h2>{textosExtra[currentLanguage].depositarAmt}</h2>
           <p>
             {textosExtra[currentLanguage].saldo}{" "}
-            {Number(balanceUserAmt?.toFixed(5))}
+            {balanceUserAmt ? toFrontEndString(balanceUserAmt) : "-"}
           </p>
         </div>
         <div className="cuadroCompra">
@@ -106,28 +108,28 @@ const CuadroStaking: React.FC<BotonOperacionProps> = ({
       </div>
 
       <div className="rendimientosStakingContainer">
-        Meu investimento atual:
+        {textosExtra[currentLanguage].investimentoActual + ":"}
         <div>
           <div className="containerSaldos">
             <div>
               <h2>
-                {btcACobrar >= 0
+                {btcACobrar != undefined
                   ? textosExtra[currentLanguage].btcbAcumulados
                   : textosExtra[currentLanguage].amtGenerados}
               </h2>
               <div>
-                {btcACobrar >= 0
-                  ? Number(btcACobrar?.toFixed(5))
-                  : stakingIniciales == undefined || stackedByUser == 0
-                  ? "-"
-                  : Number(
-                      (stackedByUser - stakingIniciales[addr].amount).toFixed(1)
-                    )}
+                {btcACobrar != undefined && btcACobrar.gt(0)
+                  ? toFrontEndString(btcACobrar)
+                  : stakingIniciales != undefined && stackedByUser.gt(0)
+                  ? ethers.utils.formatEther(
+                      stackedByUser.sub(stakingIniciales[addr].amount)
+                    )
+                  : "-"}
               </div>
             </div>
             <div>
               <h2>{textosExtra[currentLanguage].amtDepositados}</h2>
-              <div>{Number(stackedByUser?.toFixed(4))}</div>
+              <div>{stackedByUser ? toFrontEndString(stackedByUser) : "-"}</div>
             </div>
           </div>
         </div>

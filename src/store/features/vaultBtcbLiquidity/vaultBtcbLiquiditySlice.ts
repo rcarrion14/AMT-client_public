@@ -2,19 +2,19 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { ethers } from "ethers";
 import contractAddresses from "../../../contracts/contractAddresses";
-import abiVaultBtcb from "../../../contracts/abis/vaultBtcb.json";
+import abivaultBtcbLiquidity from "../../../contracts/abis/vaultBtcbLiq.json";
 import { getStaticState } from "../../store";
 import { AppDispatch } from "../../store";
 import { formatter } from "../formatter";
 
-interface vaultBtcbState {
+interface vaultBtcbLiquidityState {
   contract: any | null;
   balanceAmt: number | undefined;
   balanceUserAmt: number | undefined;
   balanceUserBtcb: number | undefined;
 }
 
-const initialState: vaultBtcbState = {
+const initialState: vaultBtcbLiquidityState = {
   contract: null,
   balanceAmt: undefined,
   balanceUserAmt: undefined,
@@ -22,13 +22,15 @@ const initialState: vaultBtcbState = {
 };
 
 export const createContract = createAsyncThunk(
-  "vaultBtcb/createContract",
+  "vaultBtcbLiquidity/createContract",
   async () => {
+    console.log("LIUIQIDEZ");
+
     const signer = getStaticState().wallet.signer;
     if (signer) {
       const newContract = new ethers.Contract(
-        contractAddresses.VaultBtcb,
-        abiVaultBtcb,
+        contractAddresses.VaultBtcbLiq,
+        abivaultBtcbLiquidity,
         signer
       );
       return { newContract };
@@ -37,9 +39,9 @@ export const createContract = createAsyncThunk(
 );
 
 export const getBalanceAmt = createAsyncThunk(
-  "vaultBtcb/getBalanceAmt",
+  "vaultBtcbLiquidity/getBalanceAmt",
   async () => {
-    const contract = getStaticState().vaultBtcb.contract;
+    const contract = getStaticState().vaultBtcbLiquidity.contract;
     if (contract) {
       const newBalance = formatter(await contract.amtStacked());
       return { newBalance };
@@ -48,9 +50,9 @@ export const getBalanceAmt = createAsyncThunk(
 );
 
 export const getBalanceUserAmt = createAsyncThunk(
-  "vaultBtcb/getBalanceUserAmt",
+  "vaultBtcbLiquidity/getBalanceUserAmt",
   async () => {
-    const contract = getStaticState().vaultBtcb.contract;
+    const contract = getStaticState().vaultBtcbLiquidity.contract;
     const address = getStaticState().wallet.address;
     if (contract) {
       const newBalance = formatter(await contract.addressAmt(address));
@@ -60,9 +62,9 @@ export const getBalanceUserAmt = createAsyncThunk(
 );
 
 export const getBalanceUserBtcb = createAsyncThunk(
-  "vaultBtcb/getBalanceUserBtcb",
+  "vaultBtcbLiquidity/getBalanceUserBtcb",
   async () => {
-    const contract = getStaticState().vaultBtcb.contract;
+    const contract = getStaticState().vaultBtcbLiquidity.contract;
     const address = getStaticState().wallet.address;
 
     if (contract) {
@@ -70,7 +72,7 @@ export const getBalanceUserBtcb = createAsyncThunk(
 
       let newBalance;
       shares == 0
-        ? (newBalance = ethers.BigNumber.from(0))
+        ? (newBalance = 0)
         : (newBalance = formatter(
             await contract.btcToWithdrawl(address, shares)
           ));
@@ -80,8 +82,8 @@ export const getBalanceUserBtcb = createAsyncThunk(
   }
 );
 
-const vaultBtcbSlice = createSlice({
-  name: "vaultBtcb",
+const vaultBtcbLiquiditySlice = createSlice({
+  name: "vaultBtcbLiquidity",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -110,10 +112,10 @@ const vaultBtcbSlice = createSlice({
   },
 });
 
-export const vaultBtcbActions = vaultBtcbSlice.actions;
-export default vaultBtcbSlice.reducer;
+export const vaultBtcbLiquidityActions = vaultBtcbLiquiditySlice.actions;
+export default vaultBtcbLiquiditySlice.reducer;
 
-export const generalLoadVaultBtcb = (dispatch: AppDispatch) => {
+export const generalLoadVaultBtcbLiquidity = (dispatch: AppDispatch) => {
   dispatch(createContract());
   dispatch(getBalanceAmt());
   dispatch(getBalanceUserAmt());

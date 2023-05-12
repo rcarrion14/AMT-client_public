@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { ethers } from "ethers";
 import contractAddresses from "../../../contracts/contractAddresses";
@@ -5,6 +7,7 @@ import abiAmt from "../../../contracts/abis/amt.json";
 import { getStaticState } from "../../store";
 import { AppDispatch } from "../../store";
 import { formatter } from "../formatter";
+import { getPrecioEnUsdt as getPrecioEnUsdtOfBtc } from "../btcb/btcbSlice";
 
 export interface amtState {
   contract: any | undefined;
@@ -38,11 +41,16 @@ export interface amtState {
   balanceOfPoolAt3: number | undefined;
   balanceOfPoolAt4: number | undefined;
   balanceOfPoolAt5: number | undefined;
+
+  precioEnBtc: number | undefined;
+  precioEnUsdt: number | undefined;
 }
 
 const initialState: amtState = {
   contract: undefined,
   balance: undefined,
+  precioEnBtc: undefined,
+  precioEnUsdt: undefined,
   allowanceMarket: undefined,
   allowanceBurnVault: undefined,
   allowanceVaultAmt: undefined,
@@ -111,6 +119,37 @@ export const getAllowanceMarket = createAsyncThunk(
       );
       return { newAllowance };
     } else return undefined;
+  }
+);
+
+export const getPrecioEnBtc = createAsyncThunk(
+  "amt/getPrecioEnBtc",
+  async () => {
+    const staticState = getStaticState();
+    const contractBtcb = staticState.btcb.contract;
+    const contractAmt = staticState.amt.contract;
+    if (contractAmt && contractBtcb) {
+      const poolAddres = contractAddresses.LiqPool;
+      //Servira formatter para calcular este precio?
+      const balanceBtcb = formatter(await contractBtcb.balanceOf(poolAddres));
+      const balanceAmt = formatter(await contractAmt.balanceOf(poolAddres));
+      const precio = balanceBtcb / balanceAmt;
+      return { precio };
+    }
+  }
+);
+
+export const getPrecioEnUsdt = createAsyncThunk(
+  "amt/getPrecioEnUsdt",
+  async () => {
+    const staticState = getStaticState();
+    const precioAmtEnBtcb = staticState.amt.precioEnBtc;
+    const precioBtcEnUsdt = staticState.btcb.precioEnUsdt;
+    //while (precioAmtEnBtcb == undefined || precioBtcEnUsdt == undefined) {}
+    if (precioAmtEnBtcb && precioBtcEnUsdt) {
+      const precio = precioAmtEnBtcb * precioBtcEnUsdt;
+      return { precio };
+    }
   }
 );
 
@@ -353,6 +392,18 @@ const amtSlice = createSlice({
       .addCase(getAmtbalance.pending, (state) => {
         state.balance = undefined;
       })
+      .addCase(getPrecioEnBtc.pending, (state) => {
+        state.precioEnBtc = undefined;
+      })
+      .addCase(getPrecioEnBtc.fulfilled, (state, action) => {
+        state.precioEnBtc = action.payload?.precio;
+      })
+      .addCase(getPrecioEnUsdt.pending, (state) => {
+        state.precioEnUsdt = undefined;
+      })
+      .addCase(getPrecioEnUsdt.fulfilled, (state, action) => {
+        state.precioEnUsdt = action.payload?.precio;
+      })
       .addCase(getAllowanceMarket.fulfilled, (state, action) => {
         state.allowanceMarket = action.payload?.newAllowance;
       })
@@ -457,6 +508,11 @@ const generalLoadAmt = (dispatch: AppDispatch) => {
   dispatch(getCurrentSnapshotId());
   dispatch(getBalanceOfPool());
   dispatch(getTotalSupply());
+  const promisePrecioEnBtc = dispatch(getPrecioEnBtc());
+  const promisePrecioDeBtcEnUsdt = dispatch(getPrecioEnUsdtOfBtc());
+  Promise.all([promisePrecioEnBtc, promisePrecioDeBtcEnUsdt]).then(() => {
+    dispatch(getPrecioEnUsdt());
+  });
 };
 
 const loadBalancesOfAt = (dispatch: AppDispatch, maxSnapshot: number) => {

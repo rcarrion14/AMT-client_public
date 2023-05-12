@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import React, { useState } from "react";
 import CuadroStaking from "../CuadroStaking";
 import {
@@ -46,8 +48,6 @@ const Staking: React.FC<AmtStaking> = ({ setActivePage }) => {
   const stake = vaultBtcbOperations.stake;
   const operacionWithdrawl = vaultBtcbOperations.withdrawl;
 
-  const infoAllowance = textoInfoAllowance("por");
-
   return (
     <>
       <div className="containerSlide">
@@ -81,7 +81,7 @@ const Staking: React.FC<AmtStaking> = ({ setActivePage }) => {
             onClick={() => {
               operacionWithdrawl(dispatch);
             }}
-            className=""
+            className={stackedByUser > 0 ? null : "gris"}
           >
             {textosExtra[currentLanguage].retirar}
           </button>

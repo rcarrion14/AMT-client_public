@@ -6,14 +6,15 @@ import { CSSTransition } from "react-transition-group";
 import BotonOperacionPancake from "./BotonOperacionPancake";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../store/store";
-import { ethers } from "ethers";
+import { ethers, BigNumber } from "ethers";
 import { listaMonedas } from "../../../Utils/listaMonedas";
 import contractAddresses from "../../../contracts/contractAddresses";
 import abiErc20 from "../../../contracts/abis/genericERC20.json";
 import { useGetQuote, useGetTxData } from "../../../Utils/1inch";
 import { textosExtra } from "../../../Utils/textos";
+import { toFrontEndString } from "../../../Utils/formatHelpers";
 
-const CuadroPancake = () => {
+const CuadroPancake = ({ selector, setSelector }) => {
   const balanceAmt = useSelector(
     (state: typeof RootState) => state.amt.balance
   );
@@ -24,12 +25,11 @@ const CuadroPancake = () => {
   const signer = useSelector((state: typeof RootState) => state.wallet.signer);
   const addr = useSelector((state: typeof RootState) => state.wallet.address);
 
-  const [selector, setSelector] = useState(false);
   const [monedaActive, setmonedaActive] = useState(listaMonedas.usdt);
   const [inputPagarValue, setInputPagarValue] = useState("");
   const [inputRecibirValue, setInputRecibirValue] = useState("");
-  const [balanceErc20, setBalanceErc20] = useState(0);
-  const [allowanceErc20, setAllowanceErc20] = useState(0);
+  const [balanceErc20, setBalanceErc20] = useState(BigNumber.from(0));
+  const [allowanceErc20, setAllowanceErc20] = useState(BigNumber.from(0));
   const [approveErc20, setApproveErc20] = useState<Function | null>(null);
   const [txData, setTxData] = useState();
 
@@ -45,7 +45,7 @@ const CuadroPancake = () => {
         contractAddresses.Amt,
         inputPagarValue
       ).then((response) => {
-        setInputRecibirValue(ethers.utils.formatEther(response.toTokenAmount));
+        setInputRecibirValue(toFrontEndString(response.toTokenAmount));
       });
     }
   }, [inputPagarValue, monedaActive, toggler]);
@@ -53,8 +53,8 @@ const CuadroPancake = () => {
   useEffect(() => {
     if (
       inputPagarValue &&
-      allowanceErc20 > Number(inputPagarValue) &&
-      balanceErc20 > Number(inputPagarValue)
+      allowanceErc20.gt(ethers.utils.parseEther(inputPagarValue)) &&
+      balanceErc20.gt(ethers.utils.parseEther(inputPagarValue))
     ) {
       useGetTxData(
         monedaActive.address,
@@ -75,17 +75,11 @@ const CuadroPancake = () => {
     );
 
     async function fetchData() {
-      setBalanceErc20(
-        Number(ethers.utils.formatEther(await contractErc20.balanceOf(addr)))
-      );
+      setBalanceErc20(await contractErc20.balanceOf(addr));
       setAllowanceErc20(
-        Number(
-          ethers.utils.formatEther(
-            await contractErc20.allowance(
-              addr,
-              "0x1111111254eeb25477b68fb85ed929f73a960582"
-            )
-          )
+        await contractErc20.allowance(
+          addr,
+          "0x1111111254eeb25477b68fb85ed929f73a960582"
         )
       );
 
@@ -118,7 +112,7 @@ const CuadroPancake = () => {
           <h2>{textosExtra[currentLanguage].ustedPaga}</h2>
           <p>
             {textosExtra[currentLanguage].saldo}{" "}
-            {Number(balanceErc20.toFixed(5))}
+            {balanceErc20 ? toFrontEndString(balanceErc20) : "-"}
           </p>
         </div>
         <div className="cuadroCompra">
@@ -157,7 +151,8 @@ const CuadroPancake = () => {
         <div className="saldo">
           <h2>{textosExtra[currentLanguage].ustedRecibe}</h2>
           <p>
-            {textosExtra[currentLanguage].saldo} {balanceAmt}
+            {textosExtra[currentLanguage].saldo}
+            {balanceAmt ? toFrontEndString(balanceAmt) : "-"}
           </p>
         </div>
         <div className="cuadroCompra">
