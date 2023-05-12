@@ -1339,6 +1339,8 @@ export interface interfaceTextoExtra {
   quemaDeAmt: string;
   distribucionDiaria: string;
   aporteDelProjectoAmt: string;
+  seleccioneMoneda: string;
+  investimentoActual: string;
 }
 export type typeTextosExtra = {
   [key in languageCode]: interfaceTextoExtra;

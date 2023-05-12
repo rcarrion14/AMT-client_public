@@ -1,6 +1,6 @@
+// @ts-nocheck
 import { ethers, BigNumber } from "ethers";
 
-// @ts-nocheck
 export const fetchVaultAmt = async () => {
   let endpointUsuarios =
     "https://amt-bucket-aws.s3.amazonaws.com/usuarios_VaulAmt.json";

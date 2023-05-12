@@ -58,7 +58,9 @@ function LineChart() {
   let cumulativeSumToShow = 0;
 
   const ingresosAcumulados = transfers.map((transfer) => {
-    return (cumulativeSumToShow += parseFloat(toFrontEndString(transfer)));
+    return (cumulativeSumToShow += parseFloat(
+      toFrontEndString(BigNumber.from(transfer))
+    ));
   });
 
   const containers = (transfers: ingresosType[]) => {
