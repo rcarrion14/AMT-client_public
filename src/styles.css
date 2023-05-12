@@ -993,6 +993,12 @@ u {
   font-size: 0.8rem;
 }
 
+.containerLineGraphQuema {
+  display: flex;
+  height: 400px;
+  align-items: center;
+}
+
 .cuadritosQuema {
   height: 58px;
   display: flex;

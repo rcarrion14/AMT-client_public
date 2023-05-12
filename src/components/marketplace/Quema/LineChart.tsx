@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Line } from "react-chartjs-2";
+import "chart.js/auto";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 import { textosExtra } from "../../../Utils/textos";
@@ -7,10 +8,13 @@ import { fetchBurnVaultTransfers } from "../../../Utils/fetchBuckets";
 import { formatter } from "../../../store/features/formatter";
 import { current } from "@reduxjs/toolkit";
 import contractAddresses from "../../../contracts/contractAddresses";
+import { toFrontEndString } from "../../../Utils/formatHelpers";
+import { BigNumber } from "ethers";
+import { randomBytes } from "ethers/lib/utils";
 
 type ingresosType = {
   from: any;
-  amount: any;
+  amount: BigNumber;
   timestamp: any;
   to: any;
 };
@@ -30,19 +34,18 @@ function LineChart() {
     (state: typeof RootState) => state.burnVault.backRate
   );
 
-  const options = {
-    responsive: true,
-  };
   useEffect(() => {
     fetchBurnVaultTransfers().then((result) => {
       setTransferBurnVault(result);
     });
   }, []);
+
+  const [pags, setPags] = useState(5);
   const transfers = transferBurnVault.map((transfer) => {
     if (transfer.from == contractAddresses.burnVault) {
-      -1 * formatter(transfer.amount);
+      return -1 * parseFloat(transfer.amount.toString());
     } else {
-      formatter(transfer.amount);
+      return transfer.amount;
     }
   });
 
@@ -51,17 +54,17 @@ function LineChart() {
     toString()
   );
 
-  let cumulativeSum = 0;
-  const ingresosAcumulados = transferBurnVault.map((transfer) => {
-    cumulativeSum += formatter(transfer.amount);
-    return cumulativeSum;
+  let cumulativeSum = BigNumber.from(0);
+  let cumulativeSumToShow = 0;
+
+  const ingresosAcumulados = transfers.map((transfer) => {
+    return (cumulativeSumToShow += parseFloat(toFrontEndString(transfer)));
   });
 
   const containers = (transfers: ingresosType[]) => {
-    const transfersReversed = [...transfers].reverse();
-
-    return transfersReversed.map((transfer) => {
-      if (formatter(transfer.amount) > 0 && precioBtcEnUsdt) {
+    return transfers.map((transfer) => {
+      if (precioBtcEnUsdt) {
+        // set condition to render boxes
         const esDistribucion =
           transfer.from == "0x0971d6f87fb3a30d512f09275b0c56922b0a304e";
         const esQuema =
@@ -69,7 +72,7 @@ function LineChart() {
         if (esQuema) {
           let testDate = new Date(transfer.timestamp);
         }
-        const valorBtcEnUsdt = precioBtcEnUsdt * formatter(transfer.amount);
+        const valorBtcEnUsdt = transfer.amount.mul(precioBtcEnUsdt.toFixed(0));
         return (
           <div className="cuadritosQuema">
             <img
@@ -105,19 +108,20 @@ function LineChart() {
               >
                 {esQuema && ratioBurnVault
                   ? "-" +
-                    parseFloat(
-                      (formatter(transfer.amount) * ratioBurnVault).toString()
-                    ).toFixed(6) +
+                    toFrontEndString(transfer.amount.mul(ratioBurnVault)) +
                     " AMT"
-                  : "+" + formatter(transfer.amount).toFixed(6) + " BTCB"}{" "}
+                  : "+" + toFrontEndString(transfer.amount) + " BTCB"}{" "}
               </b>
               <p style={{ justifyContent: "right" }}>
-                {!esQuema ? "(" + valorBtcEnUsdt.toFixed(3) + "USDT)" : ""}
+                {!esQuema
+                  ? "(" + toFrontEndString(valorBtcEnUsdt, 3) + " USDT)"
+                  : ""}
               </p>
             </div>
           </div>
         );
       } else {
+        <></>;
       }
     });
   };
@@ -128,16 +132,38 @@ function LineChart() {
         label: textosExtra[currentLanguage].btcEnVault,
         data: ingresosAcumulados,
         fill: false,
+        backgroundColor: "rgba(75,192,192,0.4)",
         borderColor: "rgb(0, 221, 255)",
       },
     ],
   };
+  const options = {
+    maintainAspectRatio: false,
+    scales: {
+      x: {
+        ticks: {
+          autoSkip: true,
+          maxTicksLimit: 20, // change this to your desired maximum number of ticks
+        },
+      },
+    },
+  };
+  const transfersReversed = [...transferBurnVault].reverse();
   return (
     <>
-      <div>
-        <Line data={data} options={options} />
+      <div className="containerLineGraphQuema">
+        <Line data={data} options={options} height={400}></Line>
       </div>
-      {containers(transferBurnVault)}
+
+      {containers(transfersReversed.slice(0, pags))}
+      <button
+        className="btnLarge"
+        onClick={() => {
+          setPags(pags + 10);
+        }}
+      >
+        {textosExtra[currentLanguage].sepaMas}
+      </button>
     </>
   );
 }

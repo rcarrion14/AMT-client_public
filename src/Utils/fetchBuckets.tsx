@@ -1,3 +1,5 @@
+import { ethers, BigNumber } from "ethers";
+
 // @ts-nocheck
 export const fetchVaultAmt = async () => {
   let endpointUsuarios =
@@ -43,7 +45,7 @@ export const fetchBurnVaultTransfers = async () => {
     let toAdd = {
       timestamp: formatDate(dataIngresosBurnVault[i].timeStamp * 1000),
       from: dataIngresosBurnVault[i].from,
-      amount: dataIngresosBurnVault[i].value,
+      amount: BigNumber.from(dataIngresosBurnVault[i].value),
       to: dataIngresosBurnVault[i].to,
     };
     ret.push(toAdd);

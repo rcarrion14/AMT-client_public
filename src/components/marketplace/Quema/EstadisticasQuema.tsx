@@ -33,6 +33,7 @@ const EstadisticasQuema: React.FC<estatdisticasQuemaInterface> = ({
         <div className="containerEstadisticasQuema">
           {textoEstadisticasQuema(currentLanguage)}
         </div>
+
         <LineChart />
       </div>
     </>
