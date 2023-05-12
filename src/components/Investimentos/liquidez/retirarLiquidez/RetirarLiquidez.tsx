@@ -40,7 +40,12 @@ const RetirarLiquidez: React.FC = () => {
   let amtEnLiquidez = ethers.BigNumber.from(0);
   let btcbEnLiquidez = ethers.BigNumber.from(0);
   let poolParticipation = ethers.BigNumber.from(0);
-  if (balanceLiqAmt && liqAmtTotalSupply && balancePoolAmt && balancePoolBtc) {
+  if (
+    balanceLiqAmt != 0 &&
+    liqAmtTotalSupply &&
+    balancePoolAmt &&
+    balancePoolBtc
+  ) {
     //
     poolParticipation = liqAmtTotalSupply.div(balanceLiqAmt);
     amtEnLiquidez = balancePoolAmt.div(poolParticipation);
