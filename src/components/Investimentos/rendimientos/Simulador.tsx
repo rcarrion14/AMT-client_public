@@ -8,14 +8,20 @@ import {
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 import { cuentasSimulador } from "../../../Utils/cuentasSimulador";
+import { ethers } from "ethers";
 
 interface SimuladorInterface {
   setActivePage: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const Simulador: React.FC<SimuladorInterface> = ({ setActivePage }) => {
-  const precioBtcb = 28450;
-  const precioAmt = 0.2;
+  const precioBtcb = useSelector((state: typeof RootState) =>
+    state.btcb.precioEnUsdt?.toFixed(0)
+  );
+
+  const precioAmt = useSelector((state: typeof RootState) =>
+    state.amt.precioEnUsdt?.toFixed(3)
+  );
 
   const [escenarioActual, setEscenarioActual] = useState(true);
 
@@ -30,8 +36,7 @@ const Simulador: React.FC<SimuladorInterface> = ({ setActivePage }) => {
     (state: typeof RootState) => state.master.liqPays1
   );
 
-  const ultimoPago = ultimoPagoUser + ultimoPagoLiq;
-  console.log(ultimoPago);
+  const ultimoPago = ultimoPagoUser.add(ultimoPagoLiq);
 
   const totalSupply = useSelector(
     (state: typeof RootState) => state.amt.totalSupply
@@ -57,10 +62,10 @@ const Simulador: React.FC<SimuladorInterface> = ({ setActivePage }) => {
     cobradoTotal_btcb_anual,
     autoCompra_amt_anual,
   } = cuentasSimulador(
-    ultimoPago,
+    ethers.utils.formatEther(ultimoPago),
     inputPrecioBtcbValue,
     inputPrecioAmtValue,
-    totalSupply,
+    ethers.utils.formatEther(totalSupply),
     cantidadAmtValue
   );
 

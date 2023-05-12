@@ -1,15 +1,16 @@
 // @ts-nocheck
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { textosExtra } from "../../../../Utils/textos";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../store/store";
-interface GraficoInterface {
-  setActivePage: React.Dispatch<React.SetStateAction<string>>;
-}
 
 const Grafico: React.FC<GraficoInterface> = ({ setActivePage }) => {
   const contariner = useRef();
+  const currentLanguage = useSelector(
+    (state: typeof RootState) => state.session.language
+  );
+
   useEffect(() => {
     const script = document.createElement("script");
     script.src =
@@ -20,10 +21,14 @@ const Grafico: React.FC<GraficoInterface> = ({ setActivePage }) => {
         {
           "symbols": [
             [
-              "PANCAKESWAP:AMTUSD_66CD75|1Y"
+              "PANCAKESWAP:AMTUSD_66CD75|3M"
+              
+            ],
+            ["PANCAKESWAP:AMTBTCB_66CD75|3M"
+              
             ]
           ],
-          "chartOnly": true,
+          "chartOnly": false,
           "width": "100%",
           "height": "100%",
           "locale": "en",
@@ -32,7 +37,7 @@ const Grafico: React.FC<GraficoInterface> = ({ setActivePage }) => {
           "showVolume": false,
           "showMA": false,
           "hideDateRanges": false,
-          "hideMarketStatus": false,
+          "hideMarketStatus": true,
           "hideSymbolLogo": false,
           "scalePosition": "right",
           "scaleMode": "Normal",
@@ -40,7 +45,7 @@ const Grafico: React.FC<GraficoInterface> = ({ setActivePage }) => {
           "fontSize": "10",
           "noTimeScale": false,
           "valuesTracking": "1",
-          "changeMode": "price-and-percent",
+          "changeMode": "no-values",
           "chartType": "area",
           "maLineColor": "#2962FF",
           "maLineWidth": 1,
@@ -50,9 +55,7 @@ const Grafico: React.FC<GraficoInterface> = ({ setActivePage }) => {
         }`;
     contariner.current.appendChild(script);
   }, []);
-  const currentLanguage = useSelector(
-    (state: typeof RootState) => state.session.language
-  );
+
   return (
     <div className="containerSlide">
       <div className="navBar_top">

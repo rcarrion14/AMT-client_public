@@ -40,9 +40,7 @@ function App() {
         classNames="fade"
         unmountOnExit
       >
-        <div className="containerLengueta">
-          <Marketplace />{" "}
-        </div>
+        <Marketplace />
       </CSSTransition>
       <CSSTransition
         in={activePage == "investidores"}
@@ -50,9 +48,7 @@ function App() {
         classNames="fade"
         unmountOnExit
       >
-        <div className="containerLengueta">
-          <Investidores />{" "}
-        </div>
+        <Investidores />
       </CSSTransition>
       <CSSTransition
         in={activePage == "gInvestidores"}
@@ -60,9 +56,7 @@ function App() {
         classNames="fade"
         unmountOnExit
       >
-        <div className="containerLengueta">
-          <GInvestidores />{" "}
-        </div>
+        <GInvestidores />
       </CSSTransition>
 
       <div className={addr ? undefined : "disabledContainer"}>

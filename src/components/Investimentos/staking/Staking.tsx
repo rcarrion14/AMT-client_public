@@ -81,7 +81,7 @@ const Staking: React.FC<AmtStaking> = ({ setActivePage }) => {
             onClick={() => {
               operacionWithdrawl(dispatch);
             }}
-            className=""
+            className={stackedByUser > 0 ? null : "gris"}
           >
             {textosExtra[currentLanguage].retirar}
           </button>

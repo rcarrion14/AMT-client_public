@@ -117,7 +117,7 @@ const Historico = ({
             : null}
         </div>
         <div className="celeste">
-          <b>{textosExtra[currentLanguage].dataDeDeposito}</b>{" "}
+          <b>{textosExtra[currentLanguage].dataDeDeposito}</b>
           {addr && stakingIniciales && stackedByUser > 0
             ? formatDate(stakingIniciales[addr].tstamp)
             : null}
@@ -127,7 +127,7 @@ const Historico = ({
 
           {addr && stakingIniciales && stackedByUser > 0
             ? toFrontEndString(getGanancias().gananciaAcum)
-            : "oo"}
+            : "0"}
         </div>
       </div>
 

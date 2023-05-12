@@ -108,7 +108,7 @@ const CuadroStaking: React.FC<BotonOperacionProps> = ({
       </div>
 
       <div className="rendimientosStakingContainer">
-        Meu investimento atual:
+        {textosExtra[currentLanguage].investimentoActual + ":"}
         <div>
           <div className="containerSaldos">
             <div>

@@ -2,6 +2,9 @@
 
 import React, { useEffect, useState } from "react";
 import { listaMonedas } from "../../../Utils/listaMonedas";
+import { textosExtra } from "../../../Utils/textos";
+import { RootState } from "../../../store/store";
+import { useSelector } from "react-redux";
 
 interface SelectorMonedaInterface {
   monedaActive: React.Dispatch<React.SetStateAction<string>>;
@@ -14,6 +17,9 @@ const SelectorMoneda: React.FC<SelectorMonedaInterface> = ({
   monedaActive,
   setSelector,
 }) => {
+  const currentLanguage = useSelector(
+    (state: typeof RootState) => state.session.language
+  );
   const checkedIcon = (
     <img src="check.png" className="activeIcon iconChecked" alt="" />
   );
@@ -51,9 +57,9 @@ const SelectorMoneda: React.FC<SelectorMonedaInterface> = ({
   };
 
   return (
-    <div className="containterSelector">
+    <div className="containterSelector noDeshabilitar">
       <div className="containerClose">
-        <div>Selecione moneda</div>
+        <div>{textosExtra[currentLanguage].seleccioneMoneda}</div>
         <img
           onClick={() => {
             setSelector(false);

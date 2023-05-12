@@ -6,10 +6,10 @@ import {
   agregarUsdt,
 } from "../../Utils/agreagarTokens";
 
-const AgregarTokens = ({ setAgregarTokens }) => {
+const AgregarTokens = ({ setAgregarTokens, agregarTokens }) => {
   return (
-    <div className="divContainterSelectorTokens">
-      <div className="containterSelectorTokens">
+    <div className="noDeshabilitar divContainterSelectorTokens">
+      <div className="noDeshabilitar containterSelectorTokens">
         <div className="containerClose">
           <div>Para agregar, seleccione moneda</div>
           <img

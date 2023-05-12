@@ -1,9 +1,9 @@
 // @ts-nocheck
 
 import React, { useEffect, useState } from "react";
-import CuadroMaquinas from "./GraficaPrecioAmt/CuadroMaquinas";
-import { getAllDataMineria } from "../../../Utils/datosMineria";
-import Spinner from "../../Generales/Spinner/Spinner";
+import CuadroMaquinas from "./CuadroMaquinas";
+import { getAllDataMineria } from "../../../../Utils/datosMineria";
+import Spinner from "../../../Generales/Spinner/Spinner";
 
 interface MaquinasInterface {
   setActivePage: React.Dispatch<React.SetStateAction<string>>;

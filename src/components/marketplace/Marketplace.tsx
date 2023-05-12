@@ -53,45 +53,53 @@ const Marketplace: React.FC<MarketplaceInterface> = () => {
 
   return (
     <>
-      {textoMarketplace(currentLanguage)}
-      <div className="textoConexion">
-        <button onClick={() => setAgregarTokens(true)}>
-          {textosExtra[currentLanguage].importarTokens}
-        </button>
-      </div>
-      <BotonBlanco
-        titulo={textoBotonesBlancos[currentLanguage].store.titulo}
-        descripcion={textoBotonesBlancos[currentLanguage].store.descripcion}
-        activador={"store"}
-        setActivePage={setActivePage}
-      />
-      <BotonBlanco
-        titulo={textoBotonesBlancos[currentLanguage].pancake.titulo}
-        descripcion={textoBotonesBlancos[currentLanguage].pancake.descripcion}
-        activador={"pancake"}
-        setActivePage={setActivePage}
-      />
-      <BotonBlanco
-        titulo={textoBotonesBlancos[currentLanguage].quema.titulo}
-        descripcion={textoBotonesBlancos[currentLanguage].quema.descripcion}
-        activador={"quema"}
-        setActivePage={setActivePage}
-      />
-      <BotonBlanco
-        titulo={textoBotonesBlancos[currentLanguage].pix.titulo}
-        descripcion={textoBotonesBlancos[currentLanguage].pix.descripcion}
-        activador={"pix"}
-        setActivePage={setActivePage}
-      />
-      {listaDePaginas}
-      <CSSTransition
-        in={agregarTokens}
-        timeout={800}
-        classNames="animacionAgregar"
-        unmountOnExit
+      <div
+        className={
+          agregarTokens
+            ? "containerLengueta deshabilitador"
+            : "containerLengueta"
+        }
       >
-        <AgregarTokens setAgregarTokens={setAgregarTokens} />
-      </CSSTransition>
+        {textoMarketplace(currentLanguage)}
+        <div className="textoConexion">
+          <button onClick={() => setAgregarTokens(true)}>
+            {textosExtra[currentLanguage].importarTokens}
+          </button>
+        </div>
+        <BotonBlanco
+          titulo={textoBotonesBlancos[currentLanguage].store.titulo}
+          descripcion={textoBotonesBlancos[currentLanguage].store.descripcion}
+          activador={"store"}
+          setActivePage={setActivePage}
+        />
+        <BotonBlanco
+          titulo={textoBotonesBlancos[currentLanguage].pancake.titulo}
+          descripcion={textoBotonesBlancos[currentLanguage].pancake.descripcion}
+          activador={"pancake"}
+          setActivePage={setActivePage}
+        />
+        <BotonBlanco
+          titulo={textoBotonesBlancos[currentLanguage].quema.titulo}
+          descripcion={textoBotonesBlancos[currentLanguage].quema.descripcion}
+          activador={"quema"}
+          setActivePage={setActivePage}
+        />
+        <BotonBlanco
+          titulo={textoBotonesBlancos[currentLanguage].pix.titulo}
+          descripcion={textoBotonesBlancos[currentLanguage].pix.descripcion}
+          activador={"pix"}
+          setActivePage={setActivePage}
+        />
+        {listaDePaginas}
+        <CSSTransition
+          in={agregarTokens}
+          timeout={800}
+          classNames="animacionAgregar"
+          unmountOnExit
+        >
+          <AgregarTokens setAgregarTokens={setAgregarTokens} />
+        </CSSTransition>
+      </div>
     </>
   );
 };
