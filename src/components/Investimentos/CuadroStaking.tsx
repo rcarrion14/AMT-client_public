@@ -72,8 +72,8 @@ const CuadroStaking: React.FC<CuadroStakingProps> = ({
           <button
             onClick={() => {
               if (inputStake.current && balanceUserAmt) {
-                inputStake.current.value = toFrontEndString(balanceUserAmt, 18);
-                setInputStakeValue(toFrontEndString(balanceUserAmt));
+                inputStake.current.value = toFrontEndString(balanceUserAmt, 15);
+                setInputStakeValue(toFrontEndString(balanceUserAmt, 15));
               }
             }}
             className="btnSimulacion transparente"

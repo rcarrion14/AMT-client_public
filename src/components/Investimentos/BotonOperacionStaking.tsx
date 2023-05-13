@@ -28,12 +28,13 @@ const BotonOperacion: React.FC<BotonOperacionProps> = ({
   );
 
   const mesajeBoton = () => {
-    if (allowance && balanceUserAmt) {
-      if (allowance >= 0) {
-        if (allowance < parseFloat(input)) {
+    if (input != "") {
+      if (allowance && balanceUserAmt) {
+        const inputParsed = ethers.utils.parseEther(input);
+        if (allowance.lt(BigNumber.from(inputParsed))) {
           return textosExtra[currentLanguage].aprobar;
         }
-        if (balanceUserAmt < parseFloat(input)) {
+        if (balanceUserAmt.lt(BigNumber.from(inputParsed))) {
           return textosExtra[currentLanguage].bceInsuf;
         } else {
           return textosExtra[currentLanguage].stake;
@@ -42,7 +43,7 @@ const BotonOperacion: React.FC<BotonOperacionProps> = ({
         return textosExtra[currentLanguage].stake;
       }
     } else {
-      return "-";
+      return textosExtra[currentLanguage].stake;
     }
   };
 
@@ -52,11 +53,13 @@ const BotonOperacion: React.FC<BotonOperacionProps> = ({
       <div className="doubleButtonContainer">
         <button
           className={
-            stackedByUser ? (stackedByUser > 0 ? undefined : "gris") : undefined
+            stackedByUser
+              ? stackedByUser.gt(0)
+                ? undefined
+                : "gris"
+              : undefined
           }
           onClick={() => {
-            console.log(operacionWithdrawl);
-
             operacionWithdrawl(dispatch);
           }}
         >
@@ -64,12 +67,16 @@ const BotonOperacion: React.FC<BotonOperacionProps> = ({
         </button>
         <button
           className={
-            stackedByUser ? (stackedByUser > 0 ? "gris" : undefined) : undefined
+            stackedByUser
+              ? stackedByUser.gt(0)
+                ? "gris"
+                : undefined
+              : undefined
           }
           onClick={() => {
             if (allowance) {
               let monto = ethers.utils.parseEther(input);
-              allowance > parseFloat(input)
+              allowance.gt(BigNumber.from(monto))
                 ? operacionStake(dispatch, monto)
                 : operacionAprobar(dispatch);
             }
