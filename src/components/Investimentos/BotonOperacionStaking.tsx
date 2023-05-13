@@ -1,6 +1,4 @@
-// @ts-nocheck
-
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { AppDispatch } from "../../store/store";
 import { useDispatch, useSelector } from "react-redux";
 import { ethers } from "ethers";
@@ -30,18 +28,23 @@ const BotonOperacion: React.FC<BotonOperacionProps> = ({
   const currentLanguage = useSelector(
     (state: typeof RootState) => state.session.language
   );
+
   const mesajeBoton = () => {
-    if (allowance >= 0) {
-      if (allowance < parseFloat(input)) {
-        return textosExtra[currentLanguage].aprobar;
-      }
-      if (balanceUserAmt < parseFloat(input)) {
-        return textosExtra[currentLanguage].bceInsuf;
+    if (allowance && balanceUserAmt) {
+      if (allowance >= 0) {
+        if (allowance < parseFloat(input)) {
+          return textosExtra[currentLanguage].aprobar;
+        }
+        if (balanceUserAmt < parseFloat(input)) {
+          return textosExtra[currentLanguage].bceInsuf;
+        } else {
+          return textosExtra[currentLanguage].stake;
+        }
       } else {
         return textosExtra[currentLanguage].stake;
       }
     } else {
-      return textosExtra[currentLanguage].stake;
+      return "-";
     }
   };
 
@@ -50,17 +53,21 @@ const BotonOperacion: React.FC<BotonOperacionProps> = ({
     <>
       <div className="doubleButtonContainer">
         <button
-          className={stackedByUser > 0 ? null : "gris"}
+          className={
+            stackedByUser ? (stackedByUser > 0 ? undefined : "gris") : undefined
+          }
           onClick={() => {
             console.log(operacionWithdrawl);
 
-            operacionWithdrawl();
+            operacionWithdrawl(dispatch);
           }}
         >
           {textosExtra[currentLanguage].retirar}
         </button>
         <button
-          className={stackedByUser > 0 ? "gris" : null}
+          className={
+            stackedByUser ? (stackedByUser > 0 ? "gris" : undefined) : undefined
+          }
           onClick={() => {
             if (allowance) {
               let monto = ethers.utils.parseEther(input);

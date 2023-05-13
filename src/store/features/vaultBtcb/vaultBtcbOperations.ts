@@ -26,6 +26,7 @@ function withdrawl(dispatch: AppDispatch) {
     dispatch(getBalanceUserAmt());
     dispatch(getBalanceAmt());
     dispatch(getBalanceUserBtcb());
+    dispatch(getAmtbalance());
   });
 }
 
