@@ -1,5 +1,11 @@
 import { ethers, BigNumber } from "ethers";
 
+export type ingresosType = {
+  from: any;
+  amount: BigNumber;
+  timestamp: any;
+  to: any;
+};
 export interface dataStakingValue {
   amount: string;
   snap: number;
@@ -12,12 +18,23 @@ export interface dataSwapsValue {
   tstamp: number;
 }
 
+export interface dataCobrosValue {
+  amount: string;
+  snap: number;
+  tstamp: number;
+}
+
 export type dataStakingType = {
   [key: string]: dataStakingValue;
 };
 export interface FetchVaultAmtResult {
   dataStakings: dataStakingType;
   dataSwaps: dataSwapsValue[];
+}
+
+export interface FetchVaultBtcbResult {
+  dataStakings: dataStakingType;
+  dataCobros: dataCobrosValue[];
 }
 
 export const fetchVaultAmt = async (): Promise<FetchVaultAmtResult> => {
@@ -37,7 +54,7 @@ export const fetchVaultAmt = async (): Promise<FetchVaultAmtResult> => {
   return { dataStakings, dataSwaps };
 };
 
-export const fetchVaultBctb = async () => {
+export const fetchVaultBctb = async (): Promise<FetchVaultBtcbResult> => {
   let endpointUsuarios =
     "https://amt-bucket-aws.s3.amazonaws.com/usuarios_VaultBctb.json";
 
@@ -48,13 +65,13 @@ export const fetchVaultBctb = async () => {
 
   let responses = await Promise.all(promiseList);
 
-  const dataStakings = await responses[0].json();
-  const dataCobros = await responses[1].json();
+  const dataStakings: dataStakingType = await responses[0].json();
+  const dataCobros: dataCobrosValue[] = await responses[1].json();
 
   return { dataStakings, dataCobros };
 };
 
-export const fetchBurnVaultTransfers = async () => {
+export const fetchBurnVaultTransfers = async (): Promise<ingresosType[]> => {
   let endpointIngresosBurnVault =
     "https://amt-bucket-aws.s3.amazonaws.com/ingresosBurnVault.json";
   let dataIngresosBurnVault = await (
