@@ -1,14 +1,14 @@
 import React from "react";
 import { AppDispatch } from "../../store/store";
 import { useDispatch, useSelector } from "react-redux";
-import { ethers } from "ethers";
+import { BigNumber, ethers } from "ethers";
 import { textosExtra } from "../../Utils/textos";
 import { RootState } from "../../store/store";
 
 interface BotonOperacionProps {
-  stackedByUser: number | undefined;
-  balanceUserAmt: number | undefined;
-  allowance: number | undefined;
+  stackedByUser: BigNumber | undefined;
+  balanceUserAmt: BigNumber | undefined;
+  allowance: BigNumber | undefined;
   operacionAprobar: Function;
   operacionStake: Function;
   input: string;
