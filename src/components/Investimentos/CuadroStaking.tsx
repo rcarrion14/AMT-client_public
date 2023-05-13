@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 import React, { useEffect, useRef, useState } from "react";
 import BotonOperacionStaking from "./BotonOperacionStaking";
 import { textoAtencionStaking, textosExtra } from "../../Utils/textos";
@@ -8,17 +6,17 @@ import { RootState } from "../../store/store";
 import { fetchVaultAmt } from "../../Utils/fetchBuckets";
 import { ethers, BigNumber } from "ethers";
 import { toFrontEndString } from "../../Utils/formatHelpers";
-interface BotonOperacionProps {
-  balanceUserAmt: number | undefined;
-  stackedByUser: number | undefined;
+interface CuadroStakingProps {
+  balanceUserAmt: BigNumber | undefined;
+  stackedByUser: BigNumber | undefined;
   btcACobrar: BigNumber | undefined;
-  allowance: number | undefined;
+  allowance: BigNumber | undefined;
   operacionAprobar: Function;
   operacionStake: Function;
   operacionWithdrawl: Function;
 }
 
-const CuadroStaking: React.FC<BotonOperacionProps> = ({
+const CuadroStaking: React.FC<CuadroStakingProps> = ({
   balanceUserAmt,
   stackedByUser,
   btcACobrar,
@@ -60,7 +58,9 @@ const CuadroStaking: React.FC<BotonOperacionProps> = ({
             className="inputCompra"
             type="number"
             onChange={() => {
-              setInputStakeValue(inputStake.current?.value);
+              setInputStakeValue(
+                inputStake.current?.value ? inputStake.current?.value : ""
+              );
             }}
           />
         </div>
@@ -68,8 +68,10 @@ const CuadroStaking: React.FC<BotonOperacionProps> = ({
         <div className="boton100porcent">
           <button
             onClick={() => {
-              setInputStakeValue(balanceUserAmt);
-              inputStake.current.value = balanceUserAmt;
+              if (inputStake.current && balanceUserAmt) {
+                inputStake.current.value = toFrontEndString(balanceUserAmt, 18);
+                setInputStakeValue(toFrontEndString(balanceUserAmt));
+              }
             }}
             className="btnSimulacion transparente"
           >

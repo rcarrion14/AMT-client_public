@@ -5,8 +5,6 @@ import { ethers } from "ethers";
 import { textosExtra } from "../../Utils/textos";
 import { RootState } from "../../store/store";
 
-//CUANDO TERMINA LA OPERACION NO CAMBIA AMT DEPOSITADOS
-
 interface BotonOperacionProps {
   stackedByUser: number | undefined;
   balanceUserAmt: number | undefined;
