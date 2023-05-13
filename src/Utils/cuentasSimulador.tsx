@@ -1,11 +1,11 @@
 // @ts-nocheck
 
 export const cuentasSimulador = (
-  ultimoPago: Number,
-  precioBtcb: Number,
-  precioAmt: Number,
-  totalSupply: Number,
-  cantidad: Number
+  ultimoPago: number,
+  precioBtcb: number,
+  precioAmt: number,
+  totalSupply: number,
+  cantidad: number
 ) => {
   let cobradoUnitario_btcb = ultimoPago / totalSupply;
 
