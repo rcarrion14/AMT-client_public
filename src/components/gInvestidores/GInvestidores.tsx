@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 import React, { useEffect } from "react";
 import CuadroCobro from "./CuadroCobro";
 import { useDispatch, useSelector } from "react-redux";
@@ -98,6 +96,27 @@ const GInvestidores = () => {
   const currentLanguage = useSelector(
     (state: typeof RootState) => state.session.language
   );
+  const allValuesDefined =
+    alreadyCharged1 != undefined &&
+    alreadyCharged2 != undefined &&
+    alreadyCharged3 != undefined &&
+    alreadyCharged4 != undefined &&
+    alreadyCharged5 != undefined &&
+    TotalSupplyAt1 != undefined &&
+    TotalSupplyAt2 != undefined &&
+    TotalSupplyAt3 != undefined &&
+    TotalSupplyAt4 != undefined &&
+    TotalSupplyAt5 != undefined &&
+    liqPay1 &&
+    liqPay2 &&
+    liqPay3 &&
+    liqPay4 &&
+    liqPay5 &&
+    pays1 &&
+    pays2 &&
+    pays3 &&
+    pays4 &&
+    pays5;
   return (
     <>
       <div className="containerLengueta">
@@ -186,17 +205,22 @@ const GInvestidores = () => {
           <Pagination
             itemsPerPage={5}
             totalItems={currentSnapshot}
-            paginate={(pageNumber: number) => {
-              setReadingSnapshot(currentSnapshot - 5 * (pageNumber - 1));
-              amtLoaders.loaderWithSnapshots(
-                dispatch,
-                currentSnapshot - 5 * (pageNumber - 1)
-              );
-              masterLoaders.generalLoad(
-                dispatch,
-                currentSnapshot - 5 * (pageNumber - 1)
-              );
-            }}
+            paginate={
+              currentSnapshot
+                ? (pageNumber: number) => {
+                    setReadingSnapshot(currentSnapshot - 5 * (pageNumber - 1));
+                    amtLoaders.loaderWithSnapshots(
+                      dispatch,
+                      currentSnapshot - 5 * (pageNumber - 1)
+                    );
+                    masterLoaders.generalLoad(
+                      dispatch,
+                      currentSnapshot - 5 * (pageNumber - 1)
+                    );
+                  }
+                : () => {}
+            }
+            paginationDisabled={!allValuesDefined}
           ></Pagination>
         </div>
       </div>
