@@ -496,7 +496,7 @@ const amtSlice = createSlice({
   },
 });
 
-const generalLoadAmt = (dispatch: AppDispatch) => {
+const generalLoadAmt = async (dispatch: AppDispatch) => {
   dispatch(createContract());
   dispatch(getAmtbalance());
   dispatch(getAllowanceBurnVault());
