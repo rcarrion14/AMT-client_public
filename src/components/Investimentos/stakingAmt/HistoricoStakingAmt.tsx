@@ -13,9 +13,9 @@ import { dataStakingType, dataSwapsValue } from "../../../Utils/fetchBuckets";
 
 interface HistoricoProps {
   setHistorico: React.Dispatch<React.SetStateAction<boolean>>;
-  stackedByUser: ethers.BigNumber;
+  stackedByUser: ethers.BigNumber | undefined;
   contractAmt: ethers.Contract;
-  currentSnapshot: number;
+  currentSnapshot: number | undefined;
 }
 const Historico: React.FC<HistoricoProps> = ({
   setHistorico,
@@ -38,11 +38,13 @@ const Historico: React.FC<HistoricoProps> = ({
 
   async function getAllSnapshotFrom(snapFrom: number): Promise<BigNumber[]> {
     let promiseList = [];
-
-    for (let i = snapFrom; i <= currentSnapshot; i++) {
-      const promise = contractAmt.balanceOfAt(contractAddresses.VaultAmt, i);
-      promiseList.push(promise);
+    if (currentSnapshot) {
+      for (let i = snapFrom; i <= currentSnapshot; i++) {
+        const promise = contractAmt.balanceOfAt(contractAddresses.VaultAmt, i);
+        promiseList.push(promise);
+      }
     }
+
     const balances = await Promise.all(promiseList);
 
     return balances;
@@ -137,7 +139,9 @@ const Historico: React.FC<HistoricoProps> = ({
         </div>
         <div className="celeste">
           <b>{textosExtra[currentLanguage].amtDepositados} </b>
-          {stakingIniciales ? toFrontEndString(stackedByUser) : null}
+          {stakingIniciales && stackedByUser
+            ? toFrontEndString(stackedByUser)
+            : null}
         </div>
         <div className="celeste">
           <b>{textosExtra[currentLanguage].amtDepositados}</b>{" "}
@@ -147,7 +151,7 @@ const Historico: React.FC<HistoricoProps> = ({
         </div>
         <div className="celeste">
           <b>{textosExtra[currentLanguage].amtGenerados}</b>
-          {stakingIniciales && addr
+          {stakingIniciales && addr && stackedByUser
             ? toFrontEndString(
                 stackedByUser.sub(
                   ethers.BigNumber.from(stakingIniciales[addr].amount)
@@ -156,7 +160,7 @@ const Historico: React.FC<HistoricoProps> = ({
             : "-"}
         </div>
       </div>
-      {stakingIniciales ? (
+      {stakingIniciales && stackedByUser ? (
         stackedByUser.gt(0) ? (
           containers()
         ) : null
