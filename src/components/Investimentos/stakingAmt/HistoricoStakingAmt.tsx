@@ -150,7 +150,7 @@ const Historico: React.FC<HistoricoProps> = ({
             : "-"}
         </div>
         <div className="celeste">
-          <b>{textosExtra[currentLanguage].amtGenerados}</b>
+          <b>{textosExtra[currentLanguage].amtGenerados + " "}</b>
           {stakingIniciales && addr && stackedByUser
             ? toFrontEndString(
                 stackedByUser.sub(
