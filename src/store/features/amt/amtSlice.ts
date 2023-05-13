@@ -1,7 +1,5 @@
-// @ts-nocheck
-
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { ethers } from "ethers";
+import { ethers, BigNumber } from "ethers";
 import contractAddresses from "../../../contracts/contractAddresses";
 import abiAmt from "../../../contracts/abis/amt.json";
 import { getStaticState } from "../../store";
@@ -11,37 +9,39 @@ import { getPrecioEnUsdt as getPrecioEnUsdtOfBtc } from "../btcb/btcbSlice";
 
 export interface amtState {
   contract: any | undefined;
-  balance: number | undefined;
-  allowanceMarket: number | undefined;
-  allowanceBurnVault: number | undefined;
-  allowanceVaultAmt: number | undefined;
-  allowanceVaultBtcb: number | undefined;
-  allowanceVaultBtcbLiq: number | undefined;
-  allowanceMaster: number | undefined;
+  balance: BigNumber | undefined;
+  allowanceMarket: BigNumber | undefined;
+  allowanceBurnVault: BigNumber | undefined;
+  allowanceVaultAmt: BigNumber | undefined;
+  allowanceVaultBtcb: BigNumber | undefined;
+  allowanceVaultBtcbLiq: BigNumber | undefined;
+  allowanceMaster: BigNumber | undefined;
   currentSnapshot: number | undefined;
-  balanceOfPool: number | undefined;
-  totalSupply: number | undefined;
+  balanceOfPool: BigNumber | undefined;
+  totalSupply: BigNumber | undefined;
 
-  balanceOfMarket: number | undefined;
+  balanceOfMarket: BigNumber | undefined;
 
-  balanceOfAt1: number | undefined;
-  balanceOfAt2: number | undefined;
-  balanceOfAt3: number | undefined;
-  balanceOfAt4: number | undefined;
-  balanceOfAt5: number | undefined;
+  balanceOfAt1: BigNumber | undefined;
+  balanceOfAt2: BigNumber | undefined;
+  balanceOfAt3: BigNumber | undefined;
+  balanceOfAt4: BigNumber | undefined;
+  balanceOfAt5: BigNumber | undefined;
 
-  totalSupplyAt1: number | undefined;
-  totalSupplyAt2: number | undefined;
-  totalSupplyAt3: number | undefined;
-  totalSupplyAt4: number | undefined;
-  totalSupplyAt5: number | undefined;
+  totalSupplyAt1: BigNumber | undefined;
+  totalSupplyAt2: BigNumber | undefined;
+  totalSupplyAt3: BigNumber | undefined;
+  totalSupplyAt4: BigNumber | undefined;
+  totalSupplyAt5: BigNumber | undefined;
 
-  balanceOfPoolAt1: number | undefined;
-  balanceOfPoolAt2: number | undefined;
-  balanceOfPoolAt3: number | undefined;
-  balanceOfPoolAt4: number | undefined;
-  balanceOfPoolAt5: number | undefined;
+  balanceOfPoolAt1: BigNumber | undefined;
+  balanceOfPoolAt2: BigNumber | undefined;
+  balanceOfPoolAt3: BigNumber | undefined;
+  balanceOfPoolAt4: BigNumber | undefined;
+  balanceOfPoolAt5: BigNumber | undefined;
 
+  //Actualmente no tratados como Big Number, solo para operaciones de muestra en front end
+  //No se les puede pedir presición
   precioEnBtc: number | undefined;
   precioEnUsdt: number | undefined;
 }
@@ -130,10 +130,10 @@ export const getPrecioEnBtc = createAsyncThunk(
     const contractAmt = staticState.amt.contract;
     if (contractAmt && contractBtcb) {
       const poolAddres = contractAddresses.LiqPool;
-      //Servira formatter para calcular este precio?
       const balanceBtcb = formatter(await contractBtcb.balanceOf(poolAddres));
       const balanceAmt = formatter(await contractAmt.balanceOf(poolAddres));
-      const precio = balanceBtcb / balanceAmt;
+      const precio = balanceBtcb.toNumber() / balanceAmt.toNumber();
+
       return { precio };
     }
   }

@@ -1,6 +1,5 @@
-// @ts-nocheck
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { ethers } from "ethers";
+import { ethers, BigNumber } from "ethers";
 import contractAddresses from "../../../contracts/contractAddresses";
 import abiVaultBtcb from "../../../contracts/abis/vaultBtcb.json";
 import { getStaticState } from "../../store";
@@ -9,9 +8,9 @@ import { formatter } from "../formatter";
 
 interface vaultBtcbState {
   contract: any | null;
-  balanceAmt: number | undefined;
-  balanceUserAmt: number | undefined;
-  balanceUserBtcb: number | undefined;
+  balanceAmt: BigNumber | undefined;
+  balanceUserAmt: BigNumber | undefined;
+  balanceUserBtcb: BigNumber | undefined;
 }
 
 const initialState: vaultBtcbState = {

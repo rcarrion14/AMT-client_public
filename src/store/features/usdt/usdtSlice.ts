@@ -1,7 +1,5 @@
-// @ts-nocheck
-
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { ethers } from "ethers";
+import { ethers, BigNumber } from "ethers";
 import contractAddresses from "../../../contracts/contractAddresses";
 import abiUsdt from "../../../contracts/abis/genericERC20.json";
 import { getStaticState } from "../../store";
@@ -10,12 +8,12 @@ import { formatter } from "../formatter";
 
 export interface usdtState {
   contract: any | null;
-  balance: number | undefined;
-  allowanceMarket: number | undefined;
-  allowanceVaultAmt: number | undefined;
-  allowanceVaultBtcb: number | undefined;
-  allowanceVaultBtcbLiq: number | undefined;
-  allowanceMaster: number | undefined;
+  balance: BigNumber | undefined;
+  allowanceMarket: BigNumber | undefined;
+  allowanceVaultAmt: BigNumber | undefined;
+  allowanceVaultBtcb: BigNumber | undefined;
+  allowanceVaultBtcbLiq: BigNumber | undefined;
+  allowanceMaster: BigNumber | undefined;
 }
 
 const initialState: usdtState = {

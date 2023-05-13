@@ -1,7 +1,5 @@
-// @ts-nocheck
-
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { ethers } from "ethers";
+import { ethers, BigNumber } from "ethers";
 import contractAddresses from "../../../contracts/contractAddresses";
 import abiMaster from "../../../contracts/abis/master.json";
 import { getStaticState } from "../../store";
@@ -23,17 +21,17 @@ export interface masterState {
   liqAlreadyCharged4: boolean | null | undefined;
   liqAlreadyCharged5: boolean | null | undefined;
 
-  liqPays1: undefined | number;
-  liqPays2: undefined | number;
-  liqPays3: undefined | number;
-  liqPays4: undefined | number;
-  liqPays5: undefined | number;
+  liqPays1: undefined | BigNumber;
+  liqPays2: undefined | BigNumber;
+  liqPays3: undefined | BigNumber;
+  liqPays4: undefined | BigNumber;
+  liqPays5: undefined | BigNumber;
 
-  pays1: undefined | number;
-  pays2: undefined | number;
-  pays3: undefined | number;
-  pays4: undefined | number;
-  pays5: undefined | number;
+  pays1: undefined | BigNumber;
+  pays2: undefined | BigNumber;
+  pays3: undefined | BigNumber;
+  pays4: undefined | BigNumber;
+  pays5: undefined | BigNumber;
 }
 
 const initialState: masterState = {

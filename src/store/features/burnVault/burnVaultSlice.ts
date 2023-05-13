@@ -4,7 +4,6 @@ import contractAddresses from "../../../contracts/contractAddresses";
 import abiBurnVault from "../../../contracts/abis/burnVault.json";
 import { getStaticState } from "../../store";
 import { AppDispatch } from "../../store";
-import { formatter } from "../formatter";
 
 export interface burnVaultState {
   contract: any | undefined;
@@ -35,7 +34,6 @@ export const getBackRate = createAsyncThunk(
   async () => {
     const staticState = getStaticState();
     const contract = staticState.burnVault.contract;
-    const address = staticState.wallet.address;
     if (contract) {
       const newBackRate = parseFloat(await contract.getBackRate());
 
