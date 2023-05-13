@@ -1,17 +1,19 @@
 // @ts-nocheck
+
 import React, { useState } from "react";
 import { textoLiquidez, textosExtra } from "../../../Utils/textos";
 import CuadroProveerLiquidez from "./CuadroProveerLiquidez";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
-import { current } from "@reduxjs/toolkit";
 import RetirarLiquidez from "./retirarLiquidez/RetirarLiquidez";
 import AlertaStakingLiquidez from "./AlertaStakingLiquidez";
 import { vaultBtcbLiquidityOperations } from "../../../store/features/vaultBtcbLiquidity/vaultBtcbLiquidityOperations";
 import { amtOperations } from "../../../store/features/amt/amtOperations";
 import AlertaAlDepositar from "./AlertaAlDepositar";
-
-const Liquidez: React.FC<LiquidezInterface> = ({ setActivePage }) => {
+interface LiquidezProps {
+  setActivePage: React.Dispatch<React.SetStateAction<string>>;
+}
+const Liquidez: React.FC<LiquidezProps> = ({ setActivePage }) => {
   const currentLanguage = useSelector(
     (state: typeof RootState) => state.session.language
   );
@@ -53,7 +55,7 @@ const Liquidez: React.FC<LiquidezInterface> = ({ setActivePage }) => {
         />
       ) : null}
 
-      {selectorDarLiq && balanceLiqAmt > 0 && alertaVault ? (
+      {selectorDarLiq && balanceLiqAmt && balanceLiqAmt.gt(0) && alertaVault ? (
         // Falta depositar liqAmt en baul
         <AlertaStakingLiquidez
           faltaDepEnBaul={true}
@@ -65,7 +67,7 @@ const Liquidez: React.FC<LiquidezInterface> = ({ setActivePage }) => {
         />
       ) : null}
 
-      {!selectorDarLiq && balanceUserVaultLiq && alertaVault > 0 ? (
+      {!selectorDarLiq && balanceUserVaultLiq && alertaVault ? (
         // Tiene depositados
         <AlertaStakingLiquidez
           faltaDepEnBaul={false}

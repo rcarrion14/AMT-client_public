@@ -1,12 +1,21 @@
 // @ts-nocheck
+
 import React from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../store/store";
-import { ethers } from "ethers";
+import { ethers, BigNumber } from "ethers";
+interface AlertaStakingLiquidezProps {
+  faltaDepEnBaul: boolean;
+  setAlertaVault: (value: boolean) => void;
+  operation: (value?: BigNumber) => void;
+  balanceLiqAmt: BigNumber;
+  approveVault: () => void;
+  allowanceVault: BigNumber;
+}
 
-const AlertaStakingLiquidez = ({
+const AlertaStakingLiquidez: React.FC<AlertaStakingLiquidezProps> = ({
   faltaDepEnBaul,
   setAlertaVault,
   operation,

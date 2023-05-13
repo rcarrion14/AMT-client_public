@@ -13,7 +13,6 @@ import {
   textoInvestidores,
   textosExtra,
 } from "../../Utils/textos";
-import RetirarLiquidez from "./liquidez/retirarLiquidez/RetirarLiquidez";
 
 const Investidores = () => {
   const currentLanguage = useSelector(
