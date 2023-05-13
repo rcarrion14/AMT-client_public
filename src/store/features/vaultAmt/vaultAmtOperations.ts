@@ -16,10 +16,11 @@ function stake(dispatch: AppDispatch, amount: number) {
 
 function withdrawl(dispatch: AppDispatch) {
   const contract = getStaticState().vaultAmt.contract;
-  const operationPromise = contract.withdrawl();
+  const operationPromise = contract.withdrwal();
   operationExecution(operationPromise).then(() => {
     dispatch(getBalanceUserAmt());
     dispatch(getBalanceAmt());
+    dispatch(getAmtbalance());
   });
 }
 
