@@ -1,18 +1,38 @@
-// @ts-nocheck
 import { ethers, BigNumber } from "ethers";
 
-export const fetchVaultAmt = async () => {
+interface dataStakingValue {
+  amount: string;
+  snap: number;
+  tstamp: number;
+}
+
+interface dataSwapsValue {
+  amount: string;
+  snap: number;
+  tstamp: number;
+}
+
+type dataStakingType = {
+  [key: string]: dataStakingValue;
+};
+interface FetchVaultAmtResult {
+  dataStakings: dataStakingType;
+  dataSwaps: dataSwapsValue[];
+}
+
+export const fetchVaultAmt = async (): Promise<FetchVaultAmtResult> => {
   let endpointUsuarios =
     "https://amt-bucket-aws.s3.amazonaws.com/usuarios_VaulAmt.json";
 
-  let endpointSwaps = " lista_Swaps.json";
+  let endpointSwaps =
+    "https://amt-bucket-aws.s3.amazonaws.com/lista_Cobros.json";
 
   let promiseList = [fetch(endpointUsuarios), fetch(endpointSwaps)];
 
   let responses = await Promise.all(promiseList);
 
-  const dataStakings = await responses[0].json();
-  const dataSwaps = await responses[1].json();
+  const dataStakings: dataStakingType = await responses[0].json();
+  const dataSwaps: dataSwapsValue[] = await responses[1].json();
 
   return { dataStakings, dataSwaps };
 };
@@ -54,7 +74,7 @@ export const fetchBurnVaultTransfers = async () => {
 };
 
 export const formatDate = (timestamp: number) => {
-  let date = new Date(timestamp);
-  date = date.toLocaleDateString();
-  return date;
+  const date = new Date(timestamp);
+  const dateConverted = date.toLocaleDateString();
+  return dateConverted;
 };
