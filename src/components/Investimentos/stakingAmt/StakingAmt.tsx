@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 import React, { useState } from "react";
 import CuadroStaking from "../CuadroStaking";
 import { textoStakingAmt, textosExtra } from "../../../Utils/textos";
