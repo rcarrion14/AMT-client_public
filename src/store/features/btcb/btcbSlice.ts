@@ -65,9 +65,13 @@ export const getPrecioEnUsdt = createAsyncThunk(
     const contractUsdt = staticState.usdt.contract;
     if (contractBtcb && contractUsdt) {
       const poolAddres = contractAddresses.poolUsdtBtcb;
-      const balanceBtcb = formatter(await contractBtcb.balanceOf(poolAddres));
-      const balanceUsdt = formatter(await contractUsdt.balanceOf(poolAddres));
-      const precio = balanceUsdt.toNumber() / balanceBtcb.toNumber();
+      const balanceBtcb = ethers.utils.formatEther(
+        await contractBtcb.balanceOf(poolAddres)
+      );
+      const balanceUsdt = ethers.utils.formatEther(
+        await contractUsdt.balanceOf(poolAddres)
+      );
+      const precio = parseFloat(balanceUsdt) / parseFloat(balanceBtcb);
       return { precio };
     }
   }

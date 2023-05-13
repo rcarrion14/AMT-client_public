@@ -130,9 +130,13 @@ export const getPrecioEnBtc = createAsyncThunk(
     const contractAmt = staticState.amt.contract;
     if (contractAmt && contractBtcb) {
       const poolAddres = contractAddresses.LiqPool;
-      const balanceBtcb = formatter(await contractBtcb.balanceOf(poolAddres));
-      const balanceAmt = formatter(await contractAmt.balanceOf(poolAddres));
-      const precio = balanceBtcb.toNumber() / balanceAmt.toNumber();
+      const balanceBtcb = ethers.utils.formatEther(
+        await contractBtcb.balanceOf(poolAddres)
+      );
+      const balanceAmt = ethers.utils.formatEther(
+        await contractAmt.balanceOf(poolAddres)
+      );
+      const precio = parseFloat(balanceBtcb) / parseFloat(balanceAmt);
 
       return { precio };
     }

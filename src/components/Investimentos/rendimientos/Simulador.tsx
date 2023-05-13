@@ -14,12 +14,12 @@ interface SimuladorInterface {
 }
 
 const Simulador: React.FC<SimuladorInterface> = ({ setActivePage }) => {
-  const precioBtcb = useSelector((state: typeof RootState) =>
-    state.btcb.precioEnUsdt?.toFixed(0)
+  const precioBtcb = useSelector(
+    (state: typeof RootState) => state.btcb.precioEnUsdt
   );
 
-  const precioAmt = useSelector((state: typeof RootState) =>
-    state.amt.precioEnUsdt?.toFixed(3)
+  const precioAmt = useSelector(
+    (state: typeof RootState) => state.amt.precioEnUsdt
   );
 
   const [escenarioActual, setEscenarioActual] = useState(true);
@@ -79,8 +79,8 @@ const Simulador: React.FC<SimuladorInterface> = ({ setActivePage }) => {
       autoCompra_amt_anual,
     } = cuentasSimulador(
       parseFloat(ethers.utils.formatEther(ultimoPago)),
-      parseFloat(inputPrecioBtcbValue),
-      parseFloat(inputPrecioAmtValue),
+      inputPrecioBtcbValue,
+      inputPrecioAmtValue,
       parseFloat(ethers.utils.formatEther(totalSupply)),
       cantidadAmtValue
     ));
@@ -149,9 +149,7 @@ const Simulador: React.FC<SimuladorInterface> = ({ setActivePage }) => {
               className="inputCompra"
               type="number"
               onChange={() =>
-                setInputPrecioAmtValue(
-                  Number(inputPrecioAmt.current?.value).toString()
-                )
+                setInputPrecioAmtValue(Number(inputPrecioAmt.current?.value))
               }
               value={inputPrecioAmtValue}
             />
@@ -173,9 +171,7 @@ const Simulador: React.FC<SimuladorInterface> = ({ setActivePage }) => {
               className="inputCompra"
               type="number"
               onChange={() => {
-                setInputPrecioBtcbValue(
-                  Number(inputPrecioBtcb.current?.value).toString()
-                );
+                setInputPrecioBtcbValue(Number(inputPrecioBtcb.current?.value));
               }}
               value={inputPrecioBtcbValue}
             />
@@ -185,7 +181,7 @@ const Simulador: React.FC<SimuladorInterface> = ({ setActivePage }) => {
               <button
                 className="btnSimulacion transparente"
                 onClick={() => {
-                  setInputPrecioBtcbValue("100000");
+                  setInputPrecioBtcbValue(100000);
                 }}
               >
                 $ 100k
@@ -193,7 +189,7 @@ const Simulador: React.FC<SimuladorInterface> = ({ setActivePage }) => {
               <button
                 className="btnSimulacion transparente"
                 onClick={() => {
-                  setInputPrecioBtcbValue("200000");
+                  setInputPrecioBtcbValue(200000);
                 }}
               >
                 $ 200 k
@@ -201,7 +197,7 @@ const Simulador: React.FC<SimuladorInterface> = ({ setActivePage }) => {
               <button
                 className="btnSimulacion transparente"
                 onClick={() => {
-                  setInputPrecioBtcbValue("1000000");
+                  setInputPrecioBtcbValue(1000000);
                 }}
               >
                 $ 1M
@@ -218,9 +214,7 @@ const Simulador: React.FC<SimuladorInterface> = ({ setActivePage }) => {
           <div>
             {cobradoTotal_btcb_diario} BTCB (
             {cobradoTotal_btcb_diario && precioBtcb
-              ? Number(
-                  (cobradoTotal_btcb_diario * parseFloat(precioBtcb)).toFixed(1)
-                )
+              ? Number((cobradoTotal_btcb_diario * precioBtcb).toFixed(1))
               : ""}{" "}
             USD)
           </div>
@@ -228,9 +222,7 @@ const Simulador: React.FC<SimuladorInterface> = ({ setActivePage }) => {
           <div>
             {autoCompra_amt_diario} AMT (
             {autoCompra_amt_diario && precioAmt
-              ? Number(
-                  (autoCompra_amt_diario * parseFloat(precioAmt)).toFixed(1)
-                )
+              ? Number((autoCompra_amt_diario * precioAmt).toFixed(1))
               : ""}{" "}
             USD)
           </div>
@@ -243,11 +235,7 @@ const Simulador: React.FC<SimuladorInterface> = ({ setActivePage }) => {
           <div>
             {cobradoTotal_btcb_mensual} BTCB (
             {cobradoTotal_btcb_mensual && precioBtcb
-              ? Number(
-                  (cobradoTotal_btcb_mensual * parseFloat(precioBtcb)).toFixed(
-                    0
-                  )
-                )
+              ? Number((cobradoTotal_btcb_mensual * precioBtcb).toFixed(0))
               : ""}{" "}
             USD){" "}
           </div>
@@ -255,9 +243,7 @@ const Simulador: React.FC<SimuladorInterface> = ({ setActivePage }) => {
           <div>
             {autoCompra_amt_mensual} AMT (
             {autoCompra_amt_mensual && precioAmt
-              ? Number(
-                  (autoCompra_amt_mensual * parseFloat(precioAmt)).toFixed(0)
-                )
+              ? Number((autoCompra_amt_mensual * precioAmt).toFixed(0))
               : ""}{" "}
             USD)
           </div>
@@ -270,9 +256,7 @@ const Simulador: React.FC<SimuladorInterface> = ({ setActivePage }) => {
           <div>
             {cobradoTotal_btcb_anual} BTCB (
             {cobradoTotal_btcb_anual && precioBtcb
-              ? Number(
-                  (cobradoTotal_btcb_anual * parseFloat(precioBtcb)).toFixed(0)
-                )
+              ? Number((cobradoTotal_btcb_anual * precioBtcb).toFixed(0))
               : ""}{" "}
             USD)
           </div>
@@ -280,9 +264,7 @@ const Simulador: React.FC<SimuladorInterface> = ({ setActivePage }) => {
           <div>
             {autoCompra_amt_anual} AMT (
             {autoCompra_amt_anual && precioAmt
-              ? Number(
-                  (autoCompra_amt_anual * parseFloat(precioAmt)).toFixed(0)
-                )
+              ? Number((autoCompra_amt_anual * precioAmt).toFixed(0))
               : ""}{" "}
             USD)
           </div>
