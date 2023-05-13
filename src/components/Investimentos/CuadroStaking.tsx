@@ -96,7 +96,9 @@ const CuadroStaking: React.FC<CuadroStakingProps> = ({
           src="number-one.png"
           alt=""
           className={
-            stackedByUser > 0 ? "activeIcon pasos" : "inactiveIcon pasos"
+            stackedByUser && stackedByUser.gt(0)
+              ? "activeIcon pasos"
+              : "inactiveIcon pasos"
           }
         />
         <img src="right-arrow.png" alt="" className="inactiveIcon pasos" />
@@ -104,7 +106,9 @@ const CuadroStaking: React.FC<CuadroStakingProps> = ({
           src="number-two.png"
           alt=""
           className={
-            stackedByUser > 0 ? "inactiveIcon pasos" : "activeIcon pasos"
+            stackedByUser && stackedByUser.gt(0)
+              ? "inactiveIcon pasos"
+              : "activeIcon pasos"
           }
         />
       </div>
@@ -122,7 +126,10 @@ const CuadroStaking: React.FC<CuadroStakingProps> = ({
               <div>
                 {btcACobrar != undefined && btcACobrar.gt(0)
                   ? toFrontEndString(btcACobrar)
-                  : stakingIniciales != undefined && stackedByUser.gt(0)
+                  : addr &&
+                    stackedByUser &&
+                    stakingIniciales != undefined &&
+                    stackedByUser.gt(0)
                   ? ethers.utils.formatEther(
                       stackedByUser.sub(stakingIniciales[addr].amount)
                     )
