@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 export const cuentasSimulador = (
   ultimoPago: number,
   precioBtcb: number,
