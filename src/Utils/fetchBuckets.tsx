@@ -1,21 +1,21 @@
 import { ethers, BigNumber } from "ethers";
 
-interface dataStakingValue {
+export interface dataStakingValue {
   amount: string;
   snap: number;
   tstamp: number;
 }
 
-interface dataSwapsValue {
+export interface dataSwapsValue {
   amount: string;
   snap: number;
   tstamp: number;
 }
 
-type dataStakingType = {
+export type dataStakingType = {
   [key: string]: dataStakingValue;
 };
-interface FetchVaultAmtResult {
+export interface FetchVaultAmtResult {
   dataStakings: dataStakingType;
   dataSwaps: dataSwapsValue[];
 }

@@ -6,6 +6,7 @@ import { RootState } from "../../store/store";
 import { fetchVaultAmt } from "../../Utils/fetchBuckets";
 import { ethers, BigNumber } from "ethers";
 import { toFrontEndString } from "../../Utils/formatHelpers";
+import { dataStakingType } from "../../Utils/fetchBuckets";
 interface CuadroStakingProps {
   balanceUserAmt: BigNumber | undefined;
   stackedByUser: BigNumber | undefined;
@@ -31,7 +32,9 @@ const CuadroStaking: React.FC<CuadroStakingProps> = ({
   const currentLanguage = useSelector(
     (state: typeof RootState) => state.session.language
   );
-  const [stakingIniciales, setStakingIniciales] = useState(undefined);
+  const [stakingIniciales, setStakingIniciales] = useState<
+    dataStakingType | undefined
+  >(undefined);
 
   useEffect(() => {
     fetchVaultAmt().then((result) => {
