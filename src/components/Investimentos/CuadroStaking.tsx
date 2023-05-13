@@ -133,7 +133,7 @@ const CuadroStaking: React.FC<CuadroStakingProps> = ({
                     stackedByUser &&
                     stakingIniciales != undefined &&
                     stackedByUser.gt(0)
-                  ? ethers.utils.formatEther(
+                  ? toFrontEndString(
                       stackedByUser.sub(stakingIniciales[addr].amount)
                     )
                   : "-"}

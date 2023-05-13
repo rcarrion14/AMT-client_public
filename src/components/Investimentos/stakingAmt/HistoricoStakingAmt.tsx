@@ -1,9 +1,7 @@
-// @ts-nocheck
-
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../store/store";
-import { ethers } from "ethers";
+import { BigNumber, ethers } from "ethers";
 import contractAddresses from "../../../contracts/contractAddresses";
 import { snapToDateMapp } from "../../gInvestidores/snapshotDateMapper";
 import Spinner from "../../Generales/Spinner/Spinner";
@@ -11,8 +9,15 @@ import { fetchVaultAmt } from "../../../Utils/fetchBuckets";
 import { textoBotonesBlancos, textosExtra } from "../../../Utils/textos";
 import { current } from "@reduxjs/toolkit";
 import { toFrontEndString } from "../../../Utils/formatHelpers";
+import { dataStakingType, dataSwapsValue } from "../../../Utils/fetchBuckets";
 
-const Historico = ({
+interface HistoricoProps {
+  setHistorico: React.Dispatch<React.SetStateAction<boolean>>;
+  stackedByUser: ethers.BigNumber;
+  contractAmt: ethers.Contract;
+  currentSnapshot: number;
+}
+const Historico: React.FC<HistoricoProps> = ({
   setHistorico,
   stackedByUser,
   contractAmt,
@@ -25,11 +30,13 @@ const Historico = ({
   const currentLanguage = useSelector(
     (state: typeof RootState) => state.session.language
   );
-  const [stakingIniciales, setStakingIniciales] = useState(undefined);
-  const [fechasSwaps, setFechasSwaps] = useState([]);
-  const [balancesAt, setBalancesAt] = useState([]);
+  const [stakingIniciales, setStakingIniciales] = useState<
+    dataStakingType | undefined
+  >(undefined);
+  const [fechasSwaps, setFechasSwaps] = useState<dataSwapsValue[]>([]);
+  const [balancesAt, setBalancesAt] = useState<BigNumber[]>([]);
 
-  async function getAllSnapshotFrom(snapFrom: number) {
+  async function getAllSnapshotFrom(snapFrom: number): Promise<BigNumber[]> {
     let promiseList = [];
 
     for (let i = snapFrom; i <= currentSnapshot; i++) {
@@ -41,28 +48,32 @@ const Historico = ({
     return balances;
   }
 
-  function getGanancias() {
-    let depositoInicial = ethers.BigNumber.from(stakingIniciales[addr].amount);
-    var gananciaAt_i = [];
-    var ultimaGananciaAcum = ethers.BigNumber.from(0);
-
-    for (let i = 0; i < balancesAt.length; i++) {
-      let balanceAt = balancesAt[i];
-      let swapAt = ethers.BigNumber.from(
-        fechasSwaps[fechasSwaps.length - balancesAt.length + i].amount
+  function getGanancias(): Array<[ethers.BigNumber, number]> {
+    if (stakingIniciales != undefined && addr != undefined) {
+      let depositoInicial = ethers.BigNumber.from(
+        stakingIniciales[addr].amount
       );
-      let snap = fechasSwaps[fechasSwaps.length - balancesAt.length + i].snap;
+      var gananciaAt_i: Array<[ethers.BigNumber, number]> = [];
+      var ultimaGananciaAcum = ethers.BigNumber.from(0);
 
-      let ganancia = depositoInicial
-        .add(ultimaGananciaAcum)
-        .mul(swapAt)
-        .div(balanceAt);
+      for (let i = 0; i < balancesAt.length; i++) {
+        let balanceAt = balancesAt[i];
+        let swapAt = ethers.BigNumber.from(
+          fechasSwaps[fechasSwaps.length - balancesAt.length + i].amount
+        );
+        let snap = fechasSwaps[fechasSwaps.length - balancesAt.length + i].snap;
 
-      ultimaGananciaAcum = ultimaGananciaAcum.add(ganancia);
+        let ganancia = depositoInicial
+          .add(ultimaGananciaAcum)
+          .mul(swapAt)
+          .div(balanceAt);
 
-      gananciaAt_i.push([ganancia, snap]);
-    }
-    return gananciaAt_i.reverse();
+        ultimaGananciaAcum = ultimaGananciaAcum.add(ganancia);
+
+        gananciaAt_i.push([ganancia, snap]);
+      }
+      return gananciaAt_i.reverse();
+    } else return [];
   }
 
   const containers = () => {
@@ -92,13 +103,15 @@ const Historico = ({
   };
 
   useEffect(() => {
-    fetchVaultAmt().then((result) => {
-      setStakingIniciales(result.dataStakings);
-      setFechasSwaps(result.dataSwaps);
-      getAllSnapshotFrom(result.dataStakings[addr].snap).then((result) => {
-        setBalancesAt(result);
+    if (addr) {
+      fetchVaultAmt().then((result) => {
+        setStakingIniciales(result.dataStakings);
+        setFechasSwaps(result.dataSwaps);
+        getAllSnapshotFrom(result.dataStakings[addr].snap).then((result) => {
+          setBalancesAt(result);
+        });
       });
-    });
+    }
   }, []);
 
   const formatDate = (timestamp: number) => {
@@ -127,13 +140,15 @@ const Historico = ({
           {stakingIniciales ? toFrontEndString(stackedByUser) : null}
         </div>
         <div className="celeste">
-          <b>Data do depósito: </b>{" "}
-          {stakingIniciales ? formatDate(stakingIniciales[addr].tstamp) : "-"}
+          <b>{textosExtra[currentLanguage].amtDepositados}</b>{" "}
+          {stakingIniciales && addr
+            ? formatDate(stakingIniciales[addr].tstamp)
+            : "-"}
         </div>
         <div className="celeste">
-          <b>AMT recebidos: </b>
-          {stakingIniciales
-            ? ethers.utils.formatEther(
+          <b>{textosExtra[currentLanguage].amtGenerados}</b>
+          {stakingIniciales && addr
+            ? toFrontEndString(
                 stackedByUser.sub(
                   ethers.BigNumber.from(stakingIniciales[addr].amount)
                 )
@@ -141,8 +156,13 @@ const Historico = ({
             : "-"}
         </div>
       </div>
-
-      {stackedByUser > 0 ? containers() : null}
+      {stakingIniciales ? (
+        stackedByUser.gt(0) ? (
+          containers()
+        ) : null
+      ) : (
+        <Spinner size={20} gradientColor={["#00bfdc", "#fff"]}></Spinner>
+      )}
     </div>
   );
 };
