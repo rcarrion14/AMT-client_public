@@ -32,10 +32,6 @@ const Liquidez: React.FC<LiquidezProps> = ({ setActivePage }) => {
     (state: typeof RootState) => state.liqAmt.allowanceVaultBtcbLiq
   );
 
-  const approveVault = amtOperations.approveVaultBtcbLiq;
-  const stake = vaultBtcbLiquidityOperations.stake;
-  const withdrawl = vaultBtcbLiquidityOperations.withdrawl;
-
   const [selectorDarLiq, setSelectorDarLiquidez] = useState(true);
 
   const [alertaAntes, setAlertaAntes] = useState(false);
@@ -43,7 +39,15 @@ const Liquidez: React.FC<LiquidezProps> = ({ setActivePage }) => {
   const [alertaRetire, setAlertaRetire] = useState(true);
 
   return (
-    <div className="containerSlide">
+    <div
+      className={
+        alertaAntes ||
+        (balanceLiqAmt && balanceLiqAmt.gt(0) && alertaDeposite) ||
+        (!selectorDarLiq && balanceUserVaultLiq?.gt(0) && alertaRetire)
+          ? "containerSlide deshabilitador"
+          : "containerSlide"
+      }
+    >
       <div className="navBar_top">
         <img onClick={() => setActivePage("")} src="icon_nav.png" />
         <h1>{textosExtra[currentLanguage].inversiones}</h1>

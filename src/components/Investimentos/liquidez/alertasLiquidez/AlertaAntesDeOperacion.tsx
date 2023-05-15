@@ -24,36 +24,34 @@ const AlertaStakingLiquidez = ({
   };
 
   return (
-    <>
-      <div className="cointainerAlertaVault">
-        <div className="close1Inch">
-          <h2>ALERTA!</h2>
-          <img
-            className="close"
-            onClick={() => setAlertaAntes(false)}
-            src="close.png"
-          />
-        </div>
-        <div className="container">
-          <p>PARA COBRAR POR LOS TOKENS EN LIQ DEBE DEPOSITAR EN EL BAUL</p>
-          <p>Depositelos una vez se confirme la transaccion</p>
-        </div>
-
-        {balanceLiqAmt == 0 ? (
-          <Spinner />
-        ) : (
-          <button
-            onClick={() => {
-              allowanceVault.lt(balanceLiqAmt)
-                ? amtOperations.approveVaultBtcbLiq(dispatch)
-                : vaultBtcbLiquidityOperations.stake(dispatch, balanceLiqAmt);
-            }}
-          >
-            {balanceLiqAmt ? mensajeBoton() : "Stake"}
-          </button>
-        )}
+    <div className="cointainerAlertaVault noDeshabilitar">
+      <div className="close1Inch">
+        <h2>ALERTA!</h2>
+        <img
+          className="close"
+          onClick={() => setAlertaAntes(false)}
+          src="close.png"
+        />
       </div>
-    </>
+      <div className="container">
+        <p>PARA COBRAR POR LOS TOKENS EN LIQ DEBE DEPOSITAR EN EL BAUL</p>
+        <p>Depositelos una vez se confirme la transaccion</p>
+      </div>
+
+      {balanceLiqAmt == 0 ? (
+        <Spinner />
+      ) : (
+        <button
+          onClick={() => {
+            allowanceVault.lt(balanceLiqAmt)
+              ? amtOperations.approveVaultBtcbLiq(dispatch)
+              : vaultBtcbLiquidityOperations.stake(dispatch, balanceLiqAmt);
+          }}
+        >
+          {balanceLiqAmt ? mensajeBoton() : "Stake"}
+        </button>
+      )}
+    </div>
   );
 };
 
