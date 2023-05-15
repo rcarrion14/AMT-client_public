@@ -39,7 +39,7 @@ function App() {
         classNames="fade"
         unmountOnExit
       >
-        <Marketplace setActivePage={setActivePage} />
+        <Marketplace />
       </CSSTransition>
       <CSSTransition
         in={activePage == "investidores"}

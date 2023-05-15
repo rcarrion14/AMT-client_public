@@ -14,11 +14,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import AgregarTokens from "./AgregarTokens";
 
-interface MarketplaceInterface {
-  setActivePage: React.Dispatch<React.SetStateAction<string | null>>;
-}
-
-const Marketplace: React.FC<MarketplaceInterface> = () => {
+const Marketplace = () => {
   const currentLanguage = useSelector(
     (state: typeof RootState) => state.session.language
   );
