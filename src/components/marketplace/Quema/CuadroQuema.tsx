@@ -1,19 +1,11 @@
-// @ts-nocheck
-
-import React, { useEffect, useRef, useState } from "react";
-//import SelectorMoneda from "../pancake/SelectorMonedaPancake";
-import { CSSTransition } from "react-transition-group";
+import React, { useRef, useState } from "react";
 import BotonOperacionQuema from "./BotonOperacionQuema";
-import { useDispatch, useSelector } from "react-redux";
-import store, { AppDispatch, RootState } from "../../../store/store";
-import { marketPlaceOperations } from "../../../store/features/marketplace/marketPlaceOperations";
-import { usdtOperations } from "../../../store/features/usdt/usdtOperations";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../store/store";
 import { listaMonedas } from "../../../Utils/listaMonedas";
 import { amtOperations } from "../../../store/features/amt/amtOperations";
 import { burnVaultOperations } from "../../../store/features/burnVault/burntVaultOperation";
 import { textosExtra } from "../../../Utils/textos";
-import EstadisticasQuema from "./EstadisticasQuema";
-import { ethers } from "ethers";
 import { toFrontEndString } from "../../../Utils/formatHelpers";
 
 const CuadroQuema = () => {
@@ -50,14 +42,23 @@ const CuadroQuema = () => {
   const handleInputPagarChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
+    if (backRate) {
+      setInputRecibirValue(
+        (parseFloat(event.target.value) / backRate).toString()
+      );
+    }
     setInputPagarValue(event.target.value);
-    setInputRecibirValue(event.target.value / backRate);
   };
 
   const handleInputRecibirChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    setInputRecibirValue(event.target.value * backRate);
+    if (backRate) {
+      setInputRecibirValue(
+        (parseFloat(event.target.value) * backRate).toString()
+      );
+    }
+
     setInputPagarValue(event.target.value);
   };
 
@@ -108,7 +109,9 @@ const CuadroQuema = () => {
       <div className="soloSaldo">
         <div>
           <h2>{textosExtra[currentLanguage].precioAmt}</h2>
-          <div>1 AMT = {Number((1 / backRate).toFixed(6))} BTC</div>
+          <div>
+            1 AMT = {backRate ? Number((1 / backRate).toFixed(6)) : ""} BTC
+          </div>
         </div>
       </div>
       <div>
