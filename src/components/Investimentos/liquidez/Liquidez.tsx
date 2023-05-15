@@ -4,10 +4,14 @@ import CuadroProveerLiquidez from "./CuadroProveerLiquidez";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 import RetirarLiquidez from "./retirarLiquidez/RetirarLiquidez";
-import AlertaStakingLiquidez from "./AlertaStakingLiquidez";
+
 import { vaultBtcbLiquidityOperations } from "../../../store/features/vaultBtcbLiquidity/vaultBtcbLiquidityOperations";
 import { amtOperations } from "../../../store/features/amt/amtOperations";
-import AlertaAlDepositar from "./AlertaAlDepositar";
+
+import AlertaAntesDeOperacion from "./alertasLiquidez/AlertaAntesDeOperacion";
+import AlertaDepositeTokens from "./alertasLiquidez/AlertaDepositeTokens";
+import AlertaRetireTokens from "./alertasLiquidez/AlertaRetireTokens";
+
 interface LiquidezProps {
   setActivePage: React.Dispatch<React.SetStateAction<string>>;
 }
@@ -24,7 +28,7 @@ const Liquidez: React.FC<LiquidezProps> = ({ setActivePage }) => {
   );
 
   const allowanceVault = useSelector(
-    (state: typeof RootState) => state.amt.allowanceVaultBtcbLiq
+    (state: typeof RootState) => state.liqAmt.allowanceVaultBtcbLiq
   );
 
   const approveVault = amtOperations.approveVaultBtcbLiq;
@@ -33,8 +37,9 @@ const Liquidez: React.FC<LiquidezProps> = ({ setActivePage }) => {
 
   const [selectorDarLiq, setSelectorDarLiquidez] = useState(true);
 
-  const [alertaVault, setAlertaVault] = useState(true);
-  const [alertaAlDepositar, setAlertaAlDepositar] = useState(false);
+  const [alertaAntes, setAlertaAntes] = useState(false);
+  const [alertaDeposite, setAlertaDeposite] = useState(true);
+  const [alertaRetire, setAlertaRetire] = useState(true);
 
   return (
     <div className="containerSlide">
@@ -43,42 +48,36 @@ const Liquidez: React.FC<LiquidezProps> = ({ setActivePage }) => {
         <h1>{textosExtra[currentLanguage].inversiones}</h1>
       </div>
       {textoLiquidez(currentLanguage)}
-      {alertaAlDepositar ? (
-        <AlertaAlDepositar
-          setAlertaAlDepositar={setAlertaAlDepositar}
+      {alertaAntes ? (
+        <AlertaAntesDeOperacion
+          setAlertaAntes={setAlertaAntes}
           balanceLiqAmt={balanceLiqAmt}
-          operation={stake}
-          approveVault={approveVault}
           allowanceVault={allowanceVault}
         />
       ) : null}
 
-      {selectorDarLiq && balanceLiqAmt && balanceLiqAmt.gt(0) && alertaVault ? (
+      {selectorDarLiq &&
+      balanceLiqAmt &&
+      balanceLiqAmt.gt(0) &&
+      alertaDeposite ? (
         // Falta depositar liqAmt en baul
-        <AlertaStakingLiquidez
-          faltaDepEnBaul={true}
-          setAlertaVault={setAlertaVault}
-          operation={stake}
+        <AlertaDepositeTokens
+          setAlertaDeposite={setAlertaDeposite}
           balanceLiqAmt={balanceLiqAmt}
-          approveVault={approveVault}
           allowanceVault={allowanceVault}
         />
       ) : null}
 
-      {!selectorDarLiq && balanceUserVaultLiq && alertaVault ? (
+      {!selectorDarLiq && balanceUserVaultLiq?.gt(0) && alertaRetire ? (
         // Tiene depositados
-        <AlertaStakingLiquidez
-          faltaDepEnBaul={false}
-          setAlertaVault={setAlertaVault}
-          operation={withdrawl}
-        />
+        <AlertaRetireTokens setAlertaRetire={setAlertaRetire} />
       ) : null}
 
       <div className="botonesSimuladorStaking">
         <button
           onClick={() => {
             setSelectorDarLiquidez(true);
-            setAlertaVault(true);
+            setAlertaDeposite(true);
           }}
           className={selectorDarLiq ? "active" : undefined}
         >
@@ -87,7 +86,7 @@ const Liquidez: React.FC<LiquidezProps> = ({ setActivePage }) => {
         <button
           onClick={() => {
             setSelectorDarLiquidez(false);
-            setAlertaVault(true);
+            setAlertaRetire(true);
           }}
           className={selectorDarLiq ? undefined : "active"}
         >
@@ -95,7 +94,7 @@ const Liquidez: React.FC<LiquidezProps> = ({ setActivePage }) => {
         </button>
       </div>
       {selectorDarLiq ? (
-        <CuadroProveerLiquidez setAlertaAlDepositar={setAlertaAlDepositar} />
+        <CuadroProveerLiquidez setAlertaAntes={setAlertaAntes} />
       ) : (
         <RetirarLiquidez />
       )}

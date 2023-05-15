@@ -41,7 +41,7 @@ const RetirarLiquidez: React.FC = () => {
   let btcbEnLiquidez = ethers.BigNumber.from(0);
   let poolParticipation = ethers.BigNumber.from(0);
   if (
-    balanceLiqAmt != 0 &&
+    !balanceLiqAmt?.isZero() &&
     liqAmtTotalSupply &&
     balancePoolAmt &&
     balancePoolBtc

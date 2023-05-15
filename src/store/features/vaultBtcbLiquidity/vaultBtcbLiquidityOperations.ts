@@ -7,8 +7,9 @@ import {
   getBalanceUserBtcb,
 } from "./vaultBtcbLiquiditySlice";
 import { getAmtbalance } from "../amt/amtSlice";
+import { BigNumber } from "ethers";
 
-function stake(dispatch: AppDispatch, amount: number) {
+function stake(dispatch: AppDispatch, amount: BigNumber) {
   const contract = getStaticState().vaultBtcbLiquidity.contract;
   const operationPromise = contract.stake(amount);
   operationExecution(operationPromise).then(() => {
