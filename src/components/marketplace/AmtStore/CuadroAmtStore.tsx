@@ -1,15 +1,12 @@
-import React, { useEffect, useRef, useState } from "react";
-import { CSSTransition } from "react-transition-group";
+import React, { useRef, useState } from "react";
 import BotonOperacionAmtStore from "./BotonOperacionAmtStore";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../store/store";
 import { marketPlaceOperations } from "../../../store/features/marketplace/marketPlaceOperations";
 import { usdtOperations } from "../../../store/features/usdt/usdtOperations";
 import { textosExtra } from "../../../Utils/textos";
-import { ethers } from "ethers";
 import { toFrontEndString } from "../../../Utils/formatHelpers";
 const CuadroAmtStore = () => {
-  const dispatch = useDispatch<AppDispatch>();
   const currentLanguage = useSelector(
     (state: typeof RootState) => state.session.language
   );
