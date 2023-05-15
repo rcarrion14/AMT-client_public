@@ -1,6 +1,6 @@
 interface NavBarProps {
   setActivePage: (page: string) => void;
-  activePage: string;
+  activePage: string | null;
 }
 
 const NavBar: React.FC<NavBarProps> = ({ setActivePage, activePage }) => {

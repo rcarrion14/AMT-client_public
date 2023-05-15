@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../../../store/store";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../../store/store";
-import { ethers, BigNumber } from "ethers";
+import { BigNumber } from "ethers";
 import { textosExtra } from "../../../../Utils/textos";
 import { vaultBtcbLiquidityOperations } from "../../../../store/features/vaultBtcbLiquidity/vaultBtcbLiquidityOperations";
 import { amtOperations } from "../../../../store/features/amt/amtOperations";
