@@ -33,6 +33,22 @@ export async function getDatosPoolBraiins() {
   return data[2];
 }
 
+export interface poolDataInterface {
+  fecha: string;
+  fuente: string;
+  hashrate: number;
+  profit: number;
+  tstamp: number;
+  workers: number;
+}
+export interface dataMineriaInterface {
+  thsDisponible: number;
+  btcbUltimoDia: number;
+  antPool: poolDataInterface;
+  slush: poolDataInterface;
+  viaBtc: poolDataInterface;
+}
+
 export async function getAllDataMineria() {
   const promiseList = [];
 
@@ -51,6 +67,7 @@ export async function getAllDataMineria() {
     slush: data[3],
     viaBtc: data[4],
   };
+  console.log(dataDict);
 
   return dataDict;
 }
