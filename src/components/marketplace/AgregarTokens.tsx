@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React from "react";
 import {
   agregarAmt,
@@ -6,7 +5,14 @@ import {
   agregarUsdt,
 } from "../../Utils/agreagarTokens";
 
-const AgregarTokens = ({ setAgregarTokens, agregarTokens }) => {
+interface AgregarTokensProps {
+  agregarTokens: boolean;
+  setAgregarTokens: React.Dispatch<React.SetStateAction<boolean>>;
+}
+const AgregarTokens: React.FC<AgregarTokensProps> = ({
+  setAgregarTokens,
+  agregarTokens,
+}) => {
   return (
     <div className="noDeshabilitar divContainterSelectorTokens">
       <div className="noDeshabilitar containterSelectorTokens">
