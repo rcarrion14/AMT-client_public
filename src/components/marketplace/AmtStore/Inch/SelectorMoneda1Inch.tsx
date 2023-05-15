@@ -1,14 +1,12 @@
-// @ts-nocheck
-
 import React, { useEffect, useState, useRef } from "react";
-
+import { monedaInterface } from "../../../../Utils/listaMonedas";
 const checkedIcon = (
   <img src="check.png" className="activeIcon iconChecked" alt="" />
 );
 
 interface SelectorMonedaInterface {
-  monedaActive: React.Dispatch<React.SetStateAction<string>>;
-  setmonedaActive: React.Dispatch<React.SetStateAction<string>>;
+  monedaActive: monedaInterface;
+  setmonedaActive: React.Dispatch<React.SetStateAction<monedaInterface>>;
   setSelector: React.Dispatch<React.SetStateAction<boolean>>;
   tokenList: any;
 }
@@ -21,7 +19,7 @@ const SelectorMoneda1Inch: React.FC<SelectorMonedaInterface> = ({
 }) => {
   const [buscadorValue, setBuscadorValue] = useState("");
 
-  const inputBusqueda = useRef();
+  const inputBusqueda = useRef<HTMLInputElement>(null);
 
   const htmlListGenerator = () => {
     const keys = Object.keys(tokenList);
@@ -34,7 +32,7 @@ const SelectorMoneda1Inch: React.FC<SelectorMonedaInterface> = ({
               className={
                 tokenList[addr].symbol == monedaActive.symbol
                   ? "monedaSelected"
-                  : null
+                  : undefined
               }
               onClick={() => {
                 setmonedaActive(tokenList[addr]);
@@ -73,7 +71,9 @@ const SelectorMoneda1Inch: React.FC<SelectorMonedaInterface> = ({
           type="text"
           ref={inputBusqueda}
           onChange={() => {
-            setBuscadorValue(inputBusqueda.current.value);
+            if (inputBusqueda.current) {
+              setBuscadorValue(inputBusqueda.current.value);
+            }
           }}
         />
         <img

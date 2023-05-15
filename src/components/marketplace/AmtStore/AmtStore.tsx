@@ -1,12 +1,10 @@
-// @ts-nocheck
-
 import React, { useState } from "react";
 import CuadroAmtStore from "./CuadroAmtStore";
 import { textoStore } from "../../../Utils/textos";
 import Interfaz1Inch from "./Inch/Interfaz1Inch";
 import { useSelector } from "react-redux";
 import { CSSTransition } from "react-transition-group";
-
+import { RootState } from "../../../store/store";
 interface AmtStoreInterface {
   setActivePage: React.Dispatch<React.SetStateAction<string>>;
 }

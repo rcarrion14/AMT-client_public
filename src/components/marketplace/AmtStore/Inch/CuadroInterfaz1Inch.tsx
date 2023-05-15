@@ -1,15 +1,14 @@
-// @ts-nocheck
-
 import React, { useEffect, useRef, useState } from "react";
 import SelectorMoneda1Inch from "./SelectorMoneda1Inch";
 import { CSSTransition } from "react-transition-group";
 import Boton1Inch from "./Boton1Inch";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../../store/store";
-import { ethers } from "ethers";
-import { listaMonedas } from "../../../../Utils/listaMonedas";
+import { ethers, BigNumber } from "ethers";
+import { listaMonedas, monedaInterface } from "../../../../Utils/listaMonedas";
 import contractAddresses from "../../../../contracts/contractAddresses";
 import abiErc20 from "../../../../contracts/abis/genericERC20.json";
+
 import {
   useGetQuote,
   useGetTokens,
@@ -17,6 +16,12 @@ import {
 } from "../../../../Utils/1inch";
 import { textosExtra } from "../../../../Utils/textos";
 import { toFrontEndString } from "../../../../Utils/formatHelpers";
+
+export interface TransactionDataInterface {
+  data: string;
+  from: string;
+  to: string;
+}
 const CuadroInterfaz1Inch = () => {
   const currentLanguage = useSelector(
     (state: typeof RootState) => state.session.language
@@ -28,13 +33,15 @@ const CuadroInterfaz1Inch = () => {
   const addr = useSelector((state: typeof RootState) => state.wallet.address);
 
   const [selector, setSelector] = useState(false);
-  const [monedaActive, setmonedaActive] = useState(listaMonedas.btcb);
+  const [monedaActive, setmonedaActive] = useState<monedaInterface>(
+    listaMonedas.btcb
+  );
   const [inputPagarValue, setInputPagarValue] = useState("");
   const [inputRecibirValue, setInputRecibirValue] = useState("");
-  const [balanceErc20, setBalanceErc20] = useState(0);
-  const [allowanceErc20, setAllowanceErc20] = useState(0);
+  const [balanceErc20, setBalanceErc20] = useState(BigNumber.from(0));
+  const [allowanceErc20, setAllowanceErc20] = useState(BigNumber.from(0));
   const [approveErc20, setApproveErc20] = useState<Function | null>(null);
-  const [txData, setTxData] = useState();
+  const [txData, setTxData] = useState<TransactionDataInterface>();
   const [tokenList, setTokenList] = useState({});
   const [toggler, setToggler] = useState(false);
 
@@ -63,6 +70,7 @@ const CuadroInterfaz1Inch = () => {
   // getting Tx data
   useEffect(() => {
     if (
+      addr &&
       inputPagarValue &&
       allowanceErc20.gt(ethers.utils.parseEther(inputPagarValue)) &&
       balanceErc20.gt(ethers.utils.parseEther(inputPagarValue))
@@ -81,11 +89,13 @@ const CuadroInterfaz1Inch = () => {
   // cargando ERC20 generico
 
   useEffect(() => {
-    const contractErc20 = new ethers.Contract(
-      monedaActive.address,
-      abiErc20,
-      signer
-    );
+    if (signer) {
+      var contractErc20 = new ethers.Contract(
+        monedaActive.address,
+        abiErc20,
+        signer
+      );
+    }
 
     async function fetchData() {
       setBalanceErc20(await contractErc20.balanceOf(addr));
@@ -195,7 +205,6 @@ const CuadroInterfaz1Inch = () => {
           input={inputPagarValue}
           signer={signer}
           approveErc20={approveErc20}
-          addr={addr}
           toggler={toggler}
           setToggler={setToggler}
         />

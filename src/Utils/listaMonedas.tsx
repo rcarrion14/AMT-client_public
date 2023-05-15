@@ -1,4 +1,4 @@
-interface moneda {
+export interface monedaInterface {
   symbol: string;
   address: string;
   logoURI: string;

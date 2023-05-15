@@ -1,11 +1,10 @@
-// @ts-nocheck
-
 import React, { useState } from "react";
 import { textoInterfaz1Inch, textoStore } from "../../../../Utils/textos";
 import CuadroInterfaz1Inch from "./CuadroInterfaz1Inch";
 import { useSelector } from "react-redux";
+import { RootState } from "../../../../store/store";
 interface Interfaz1InchInterface {
-  setActivePage: React.Dispatch<React.SetStateAction<string>>;
+  setInterfaz: (value: boolean) => void;
 }
 const Interfaz1Inch: React.FC<Interfaz1InchInterface> = ({ setInterfaz }) => {
   const currentLanguage = useSelector(

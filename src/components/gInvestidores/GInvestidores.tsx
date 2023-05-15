@@ -10,6 +10,7 @@ import { textoStaking } from "../../Utils/textos";
 import Pagination from "./paginationComponent/pagination";
 import { textoGInvestidores } from "../../Utils/textos";
 import { ethers } from "ethers";
+
 const GInvestidores = () => {
   const dispatch = useDispatch<AppDispatch>();
   const currentSnapshot = useSelector(
