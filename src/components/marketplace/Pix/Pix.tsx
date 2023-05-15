@@ -1,11 +1,11 @@
-// @ts-nocheck
-
 import React from "react";
 import { textoPix } from "../../../Utils/textos";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
-
-const Pix = ({ setActivePage }) => {
+interface PixProps {
+  setActivePage: React.Dispatch<React.SetStateAction<string | null>>;
+}
+const Pix: React.FC<PixProps> = ({ setActivePage }) => {
   const currentLanguage = useSelector(
     (state: typeof RootState) => state.session.language
   );
