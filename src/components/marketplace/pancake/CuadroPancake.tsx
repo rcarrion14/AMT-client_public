@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 import React, { useEffect, useRef, useState } from "react";
 import SelectorMoneda from "./SelectorMonedaPancake";
 import { CSSTransition } from "react-transition-group";
@@ -13,8 +11,15 @@ import abiErc20 from "../../../contracts/abis/genericERC20.json";
 import { useGetQuote, useGetTxData } from "../../../Utils/1inch";
 import { textosExtra } from "../../../Utils/textos";
 import { toFrontEndString } from "../../../Utils/formatHelpers";
-
-const CuadroPancake = ({ selector, setSelector }) => {
+import { TransactionDataInterface } from "../AmtStore/Inch/CuadroInterfaz1Inch";
+interface CuadroPancakeProps {
+  selector: boolean;
+  setSelector: React.Dispatch<React.SetStateAction<boolean>>;
+}
+const CuadroPancake: React.FC<CuadroPancakeProps> = ({
+  selector,
+  setSelector,
+}) => {
   const balanceAmt = useSelector(
     (state: typeof RootState) => state.amt.balance
   );
@@ -31,7 +36,7 @@ const CuadroPancake = ({ selector, setSelector }) => {
   const [balanceErc20, setBalanceErc20] = useState(BigNumber.from(0));
   const [allowanceErc20, setAllowanceErc20] = useState(BigNumber.from(0));
   const [approveErc20, setApproveErc20] = useState<Function | null>(null);
-  const [txData, setTxData] = useState();
+  const [txData, setTxData] = useState<TransactionDataInterface>();
 
   const [toggler, setToggler] = useState(false);
   const inputPagar = useRef<HTMLInputElement>(null);
@@ -52,6 +57,7 @@ const CuadroPancake = ({ selector, setSelector }) => {
 
   useEffect(() => {
     if (
+      addr &&
       inputPagarValue &&
       allowanceErc20.gt(ethers.utils.parseEther(inputPagarValue)) &&
       balanceErc20.gt(ethers.utils.parseEther(inputPagarValue))
@@ -68,11 +74,13 @@ const CuadroPancake = ({ selector, setSelector }) => {
   }, [inputPagarValue, toggler]);
 
   useEffect(() => {
-    const contractErc20 = new ethers.Contract(
-      monedaActive.address,
-      abiErc20,
-      signer
-    );
+    if (signer) {
+      var contractErc20 = new ethers.Contract(
+        monedaActive.address,
+        abiErc20,
+        signer
+      );
+    }
 
     async function fetchData() {
       setBalanceErc20(await contractErc20.balanceOf(addr));
@@ -180,14 +188,12 @@ const CuadroPancake = ({ selector, setSelector }) => {
 
       <div>
         <BotonOperacionPancake
-          balanceAmt={balanceAmt}
           balanceErc20={balanceErc20}
           allowanceErc20={allowanceErc20}
           txData={txData}
           input={inputPagarValue}
           signer={signer}
           approveErc20={approveErc20}
-          addr={addr}
           toggler={toggler}
           setToggler={setToggler}
         />

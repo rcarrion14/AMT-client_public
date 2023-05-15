@@ -1,33 +1,28 @@
-// @ts-nocheck
-
-import React, { useEffect, useState } from "react";
-import { AppDispatch } from "../../../store/store";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 import { textosExtra } from "../../../Utils/textos";
 import { BigNumber, ethers } from "ethers";
 import { operationExecution } from "../../../store/features/operationExecution";
+import { TransactionDataInterface } from "../AmtStore/Inch/CuadroInterfaz1Inch";
 
 interface BotonOperacionProps {
-  balanceAmt: BigNumber | undefined;
   balanceErc20: BigNumber | undefined;
   allowanceErc20: BigNumber | undefined;
-  txData: string;
+  txData: TransactionDataInterface | undefined;
   input: string;
   signer: any;
-  approveErc20: Function;
+  approveErc20: Function | null;
   toggler: any;
   setToggler: any;
 }
 const BotonOperacion: React.FC<BotonOperacionProps> = ({
-  balanceAmt,
   balanceErc20,
   allowanceErc20,
   txData,
   input,
   signer,
   approveErc20,
-  addr,
   toggler,
   setToggler,
 }) => {
@@ -37,10 +32,10 @@ const BotonOperacion: React.FC<BotonOperacionProps> = ({
   const mensajeBoton = () => {
     console.log({ input, allowanceErc20, balanceErc20 });
 
-    if (ethers.utils.parseEther(input).gt(allowanceErc20)) {
+    if (allowanceErc20 && ethers.utils.parseEther(input).gt(allowanceErc20)) {
       return textosExtra[currentLanguage].aprobar;
     }
-    if (balanceErc20.lt(ethers.utils.parseEther(input))) {
+    if (balanceErc20 && balanceErc20.lt(ethers.utils.parseEther(input))) {
       return textosExtra[currentLanguage].bceInsuf;
     } else {
       return textosExtra[currentLanguage].comprar;
@@ -52,7 +47,7 @@ const BotonOperacion: React.FC<BotonOperacionProps> = ({
       <button
         onClick={() => {
           if (true) {
-            Number(input) > allowanceErc20
+            approveErc20 && allowanceErc20 && allowanceErc20.lt(Number(input))
               ? operationExecution(
                   approveErc20(
                     "0x1111111254eeb25477b68fb85ed929f73a960582",

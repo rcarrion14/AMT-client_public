@@ -3,8 +3,11 @@ export interface monedaInterface {
   address: string;
   logoURI: string;
 }
+export type listaMonedasType = {
+  [key: string]: monedaInterface;
+};
 
-export const listaMonedas = {
+export const listaMonedas: listaMonedasType = {
   usdt: {
     symbol: "USDT",
     address: "0x55d398326f99059fF775485246999027B3197955",

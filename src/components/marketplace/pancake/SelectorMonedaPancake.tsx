@@ -1,14 +1,12 @@
-// @ts-nocheck
-
-import React, { useEffect, useState } from "react";
-import { listaMonedas } from "../../../Utils/listaMonedas";
+import React from "react";
+import { listaMonedas, monedaInterface } from "../../../Utils/listaMonedas";
 import { textosExtra } from "../../../Utils/textos";
 import { RootState } from "../../../store/store";
 import { useSelector } from "react-redux";
 
 interface SelectorMonedaInterface {
-  monedaActive: React.Dispatch<React.SetStateAction<string>>;
-  setmonedaActive: React.Dispatch<React.SetStateAction<string>>;
+  monedaActive: monedaInterface;
+  setmonedaActive: React.Dispatch<React.SetStateAction<monedaInterface>>;
   setSelector: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -40,7 +38,7 @@ const SelectorMoneda: React.FC<SelectorMonedaInterface> = ({
               className={
                 listaMonedas[moneda].symbol == monedaActive.symbol
                   ? "monedaSelected"
-                  : null
+                  : undefined
               }
             >
               <img className="imgDex" src={listaMonedas[moneda].logoURI} />

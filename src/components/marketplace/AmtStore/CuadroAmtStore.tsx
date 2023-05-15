@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import BotonOperacionAmtStore from "./BotonOperacionAmtStore";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../../store/store";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../store/store";
 import { marketPlaceOperations } from "../../../store/features/marketplace/marketPlaceOperations";
 import { usdtOperations } from "../../../store/features/usdt/usdtOperations";
 import { textosExtra } from "../../../Utils/textos";
