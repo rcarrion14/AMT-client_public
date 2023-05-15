@@ -1,10 +1,6 @@
 import React, { useState } from "react";
 import CuadroQuema from "./CuadroQuema";
-import {
-  textoBotonesBlancos,
-  textoQuema,
-  textosExtra,
-} from "../../../Utils/textos";
+import { textoQuema, textosExtra } from "../../../Utils/textos";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 import { CSSTransition } from "react-transition-group";

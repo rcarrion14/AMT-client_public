@@ -4,7 +4,7 @@ import { textoAtencionStaking, textosExtra } from "../../Utils/textos";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { fetchVaultAmt } from "../../Utils/fetchBuckets";
-import { ethers, BigNumber } from "ethers";
+import { BigNumber } from "ethers";
 import { toFrontEndString } from "../../Utils/formatHelpers";
 import { dataStakingType } from "../../Utils/fetchBuckets";
 interface CuadroStakingProps {

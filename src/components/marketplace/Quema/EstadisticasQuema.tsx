@@ -3,7 +3,6 @@ import { RootState } from "../../../store/store";
 import { useSelector } from "react-redux";
 import {
   textoBotonesBlancos,
-  textosExtra,
   textoEstadisticasQuema,
 } from "../../../Utils/textos";
 import LineChart from "./LineChart";

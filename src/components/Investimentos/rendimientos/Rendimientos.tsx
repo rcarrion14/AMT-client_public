@@ -3,7 +3,7 @@ import BotonBlanco from "../../Generales/BotonBlanco";
 import Simulador from "./Simulador";
 import Maquinas from "./maquinas/Maquinas";
 import Grafico from "./GraficaPrecioAmt/Grafico";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { CSSTransition } from "react-transition-group";
 import {
   textoBotonesBlancos,

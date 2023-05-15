@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { textosExtra } from "../../../../Utils/textos";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../store/store";

@@ -1342,6 +1342,7 @@ export interface interfaceTextoExtra {
   seleccioneMoneda: string;
   investimentoActual: string;
   whatsAppMessage: string;
+  buscar: string;
 }
 export type typeTextosExtra = {
   [key in languageCode]: interfaceTextoExtra;
@@ -1421,6 +1422,7 @@ export const textosExtra: typeTextosExtra = {
     seleccioneMoneda: "Seleccione moeda",
     investimentoActual: "Meu investimento atual",
     whatsAppMessage: "Gostaria+de+saber+mais+sobre+o+AutoMiningToken",
+    buscar: "Buscar",
   },
   esp: {
     bienvenido: "¡Bienvenido!",
@@ -1495,6 +1497,7 @@ export const textosExtra: typeTextosExtra = {
     seleccioneMoneda: "Seleccione moneda",
     investimentoActual: "Mi inversión ahora",
     whatsAppMessage: "Me+gustaría+saber+mas+sobre+AutoMiningToken",
+    buscar: "Buscar",
   },
   eng: {
     bienvenido: "Welcome!",
@@ -1559,6 +1562,7 @@ export const textosExtra: typeTextosExtra = {
     seleccioneMoneda: "Select coin",
     investimentoActual: "My current investment",
     whatsAppMessage: "I+would+like+to+know+more+about+AutoMiningToken",
+    buscar: "Search",
   },
 };
 

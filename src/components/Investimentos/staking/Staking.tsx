@@ -1,10 +1,6 @@
 import React, { useState } from "react";
 import CuadroStaking from "../CuadroStaking";
-import {
-  textoStaking,
-  textoInfoAllowance,
-  textosExtra,
-} from "../../../Utils/textos";
+import { textoStaking, textosExtra } from "../../../Utils/textos";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../store/store";
 import { amtOperations } from "../../../store/features/amt/amtOperations";

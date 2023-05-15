@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import CuadroCobro from "./CuadroCobro";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store/store";
@@ -6,10 +6,8 @@ import { amtLoaders } from "../../store/features/amt/amtSlice";
 import { masterLoaders } from "../../store/features/master/masterSlice";
 import { useState } from "react";
 import { masterOperations } from "../../store/features/master/masterOperations";
-import { textoStaking } from "../../Utils/textos";
 import Pagination from "./paginationComponent/pagination";
 import { textoGInvestidores } from "../../Utils/textos";
-import { ethers } from "ethers";
 
 const GInvestidores = () => {
   const dispatch = useDispatch<AppDispatch>();

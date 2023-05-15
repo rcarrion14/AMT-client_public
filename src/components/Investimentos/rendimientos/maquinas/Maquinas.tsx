@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from "react";
 import CuadroMaquinas from "./CuadroMaquinas";
 import { getAllDataMineria } from "../../../../Utils/datosMineria";
-import Spinner from "../../../Generales/Spinner/Spinner";
-import {
-  dataMineriaInterface,
-  poolDataInterface,
-} from "../../../../Utils/datosMineria";
+import { dataMineriaInterface } from "../../../../Utils/datosMineria";
 interface MaquinasInterface {
   setActivePage: React.Dispatch<React.SetStateAction<string>>;
 }

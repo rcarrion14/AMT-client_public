@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../../store/store";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../store/store";
 import { BigNumber, ethers } from "ethers";
 import contractAddresses from "../../../contracts/contractAddresses";
 import { snapToDateMapp } from "../../gInvestidores/snapshotDateMapper";
 import Spinner from "../../Generales/Spinner/Spinner";
 import { fetchVaultAmt } from "../../../Utils/fetchBuckets";
 import { textoBotonesBlancos, textosExtra } from "../../../Utils/textos";
-import { current } from "@reduxjs/toolkit";
 import { toFrontEndString } from "../../../Utils/formatHelpers";
 import { dataStakingType, dataSwapsValue } from "../../../Utils/fetchBuckets";
 

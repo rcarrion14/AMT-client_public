@@ -1,6 +1,4 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getStaticState } from "../../store";
-import { formatter } from "../formatter";
 
 export type languageCode = "por" | "esp" | "eng";
 interface sessionState {

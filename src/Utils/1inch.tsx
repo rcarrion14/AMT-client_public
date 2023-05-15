@@ -1,5 +1,4 @@
 import { ethers } from "ethers";
-import React, { useEffect } from "react";
 
 const addrRouter_1inch = "0x1111111254eeb25477b68fb85ed929f73a960582";
 const baseUrl = "https://api.1inch.io";
