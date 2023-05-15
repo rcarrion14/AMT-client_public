@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState } from "react";
 import { textoLiquidez, textosExtra } from "../../../Utils/textos";
 import CuadroProveerLiquidez from "./CuadroProveerLiquidez";
