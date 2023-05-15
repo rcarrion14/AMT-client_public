@@ -10,7 +10,7 @@ import GInvestidores from "./components/gInvestidores/GInvestidores";
 import NavBar from "./components/Generales/NavBar";
 import { ToastContainer } from "react-toastify";
 import { useSelector } from "react-redux";
-import { RootState } from "../src/store/store";
+import { RootState } from "./store/store";
 import { CSSTransition } from "react-transition-group";
 
 function App() {
