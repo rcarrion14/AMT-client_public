@@ -1341,6 +1341,7 @@ export interface interfaceTextoExtra {
   aporteDelProjectoAmt: string;
   seleccioneMoneda: string;
   investimentoActual: string;
+  whatsAppMessage: string;
 }
 export type typeTextosExtra = {
   [key in languageCode]: interfaceTextoExtra;
@@ -1419,6 +1420,7 @@ export const textosExtra: typeTextosExtra = {
     aporteDelProjectoAmt: "Aporte do Projeto AMT",
     seleccioneMoneda: "Seleccione moeda",
     investimentoActual: "Meu investimento atual",
+    whatsAppMessage: "Gostaria+de+saber+mais+sobre+o+AutoMiningToken",
   },
   esp: {
     bienvenido: "¡Bienvenido!",
@@ -1492,6 +1494,7 @@ export const textosExtra: typeTextosExtra = {
     aporteDelProjectoAmt: "Aporte del Proyecto AMT",
     seleccioneMoneda: "Seleccione moneda",
     investimentoActual: "Mi inversión ahora",
+    whatsAppMessage: "Me+gustaría+saber+mas+sobre+AutoMiningToken",
   },
   eng: {
     bienvenido: "Welcome!",
@@ -1555,6 +1558,7 @@ export const textosExtra: typeTextosExtra = {
     aporteDelProjectoAmt: "AMT Project Contribution",
     seleccioneMoneda: "Select coin",
     investimentoActual: "My current investment",
+    whatsAppMessage: "I+would+like+to+know+more+about+AutoMiningToken",
   },
 };
 
