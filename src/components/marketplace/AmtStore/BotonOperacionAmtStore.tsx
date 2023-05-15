@@ -31,7 +31,7 @@ const BotonOperacionAmtStore: React.FC<BotonOperacionProps> = ({
     if (balanceTienda?.lt(ethers.utils.parseEther(input))) {
       return textosExtra[currentLanguage].noHaytantosAmtEnVenta;
     }
-    if (ethers.utils.parseEther(input) > allowanceUsdt) {
+    if (ethers.utils.parseEther(input).gt(allowanceUsdt)) {
       return textosExtra[currentLanguage].aprobar;
     }
     if (balanceUsdt?.lt(ethers.utils.parseEther(input))) {

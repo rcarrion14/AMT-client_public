@@ -9,7 +9,7 @@ import { textosExtra } from "../../../Utils/textos";
 import { ethers } from "ethers";
 import { toFrontEndString } from "../../../Utils/formatHelpers";
 
-const CuadroProveerLiquidez = ({ setAlertaAlDepositar }) => {
+const CuadroProveerLiquidez = ({ setAlertaAntes }) => {
   const balanceAmt = useSelector(
     (state: typeof RootState) => state.amt.balance
   );
@@ -120,7 +120,7 @@ const CuadroProveerLiquidez = ({ setAlertaAlDepositar }) => {
           inputBtc={parseFloat(inputBtcbValue)}
           allowanceAmt={allowanceAmt}
           allowanceBtc={allowanceBtcb}
-          setAlertaAlDepositar={setAlertaAlDepositar}
+          setAlertaAntes={setAlertaAntes}
         ></BotonDarLiquidez>
       </div>
     </>
