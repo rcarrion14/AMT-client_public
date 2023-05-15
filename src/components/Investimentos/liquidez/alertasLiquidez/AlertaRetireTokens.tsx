@@ -19,29 +19,27 @@ const AlertaStakingLiquidez: React.FC<AlertaStakingLiquidezProps> = ({
     (state: typeof RootState) => state.session.language
   );
   return (
-    <>
-      <div className="cointainerAlertaVault">
-        <div className="close1Inch">
-          <h2>ALERTA!</h2>
-          <img
-            className="close"
-            onClick={() => setAlertaRetire(false)}
-            src="close.png"
-          />
-        </div>
-        <div className="container">
-          <p>USTED TIENE DEPOSITADOS SUS TOKENS DE LIQUIDEZ.</p>
-          <p>Retirelos del baúl y así podra dejar de proveer liquidez.</p>
-        </div>
-        <button
-          onClick={() => {
-            vaultBtcbLiquidityOperations.withdrawl(dispatch);
-          }}
-        >
-          {textosExtra[currentLanguage].retirar}
-        </button>
+    <div className="cointainerAlertaVault noDeshabilitar">
+      <div className="close1Inch">
+        <h2>ALERTA!</h2>
+        <img
+          className="close"
+          onClick={() => setAlertaRetire(false)}
+          src="close.png"
+        />
       </div>
-    </>
+      <div className="container">
+        <p>USTED TIENE DEPOSITADOS SUS TOKENS DE LIQUIDEZ.</p>
+        <p>Retirelos del baúl y así podra dejar de proveer liquidez.</p>
+      </div>
+      <button
+        onClick={() => {
+          vaultBtcbLiquidityOperations.withdrawl(dispatch);
+        }}
+      >
+        {textosExtra[currentLanguage].retirar}
+      </button>
+    </div>
   );
 };
 
