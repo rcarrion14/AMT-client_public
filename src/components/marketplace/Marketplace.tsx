@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React, { useState, ReactElement } from "react";
 import AmtStore from "./AmtStore/AmtStore";
 import { CSSTransition } from "react-transition-group";
@@ -16,7 +15,7 @@ import { RootState } from "../../store/store";
 import AgregarTokens from "./AgregarTokens";
 
 interface MarketplaceInterface {
-  setActivePage: React.Dispatch<React.SetStateAction<string>>;
+  setActivePage: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
 const Marketplace: React.FC<MarketplaceInterface> = () => {
@@ -24,7 +23,7 @@ const Marketplace: React.FC<MarketplaceInterface> = () => {
     (state: typeof RootState) => state.session.language
   );
   const pages: string[] = ["store", "pancake", "quema", "pix"];
-  const [activePage, setActivePage] = useState("marketplace");
+  const [activePage, setActivePage] = useState<string | null>("marketplace");
   const [agregarTokens, setAgregarTokens] = useState(false);
 
   interface jsxPagesInterface {

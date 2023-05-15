@@ -6,13 +6,9 @@ import {
 } from "../../Utils/agreagarTokens";
 
 interface AgregarTokensProps {
-  agregarTokens: boolean;
   setAgregarTokens: React.Dispatch<React.SetStateAction<boolean>>;
 }
-const AgregarTokens: React.FC<AgregarTokensProps> = ({
-  setAgregarTokens,
-  agregarTokens,
-}) => {
+const AgregarTokens: React.FC<AgregarTokensProps> = ({ setAgregarTokens }) => {
   return (
     <div className="noDeshabilitar divContainterSelectorTokens">
       <div className="noDeshabilitar containterSelectorTokens">

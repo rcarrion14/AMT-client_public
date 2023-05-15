@@ -10,7 +10,7 @@ import { RootState } from "../../../store/store";
 import { CSSTransition } from "react-transition-group";
 import EstadisticasQuema from "./EstadisticasQuema";
 interface quemaInterface {
-  setActivePage: (param: boolean | null) => void;
+  setActivePage: React.Dispatch<React.SetStateAction<string | null>>;
 }
 const Quema: React.FC<quemaInterface> = ({ setActivePage }) => {
   const [activarEstadisticas, setActivarEstadisticas] = useState(false);

@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { CSSTransition } from "react-transition-group";
 import { RootState } from "../../../store/store";
 interface AmtStoreInterface {
-  setActivePage: React.Dispatch<React.SetStateAction<string>>;
+  setActivePage: React.Dispatch<React.SetStateAction<string | null>>;
 }
 const AmtStore: React.FC<AmtStoreInterface> = ({ setActivePage }) => {
   const [interfaz, setInterfaz] = useState(false);

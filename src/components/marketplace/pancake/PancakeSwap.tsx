@@ -4,7 +4,7 @@ import { textoPancake } from "../../../Utils/textos";
 import { RootState } from "../../../store/store";
 import { useSelector } from "react-redux";
 interface PancakeSwapInterface {
-  setActivePage: React.Dispatch<React.SetStateAction<string>>;
+  setActivePage: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
 const PancakeSwap: React.FC<PancakeSwapInterface> = ({ setActivePage }) => {
