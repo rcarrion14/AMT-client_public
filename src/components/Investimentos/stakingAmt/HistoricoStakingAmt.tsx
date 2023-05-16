@@ -93,8 +93,19 @@ const Historico: React.FC<HistoricoProps> = ({
               <p>{snapToDateMapp(ganancia[1])}</p>
             </div>
             <div className="transparente">
-              <p>{toFrontEndString(ganancia[0])}</p>
-              <p>AMT</p>
+              <p>{toFrontEndString(ganancia[0])} AMT</p>
+              <p>
+                {precioAmtEnUsdt
+                  ? toFrontEndString(
+                      BigNumber.from(
+                        (
+                          parseFloat(ganancia[0].toString()) * precioAmtEnUsdt
+                        ).toFixed(0)
+                      )
+                    )
+                  : ""}{" "}
+                USDT
+              </p>
             </div>
           </div>
         );
