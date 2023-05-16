@@ -40,7 +40,11 @@ const Liquidez: React.FC<LiquidezProps> = ({ setActivePage }) => {
   return (
     <div
       className={
-        alertaAntes || (alertaDeposite && balanceLiqAmt && balanceLiqAmt.gt(0))
+        alertaAntes ||
+        (alertaDeposite &&
+          balanceLiqAmt &&
+          balanceLiqAmt.gt(0) &&
+          selectorDarLiq)
           ? "containerSlide deshabilitador"
           : "containerSlide"
       }
