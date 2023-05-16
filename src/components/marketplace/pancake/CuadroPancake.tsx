@@ -27,6 +27,10 @@ const CuadroPancake: React.FC<CuadroPancakeProps> = ({
   const currentLanguage = useSelector(
     (state: typeof RootState) => state.session.language
   );
+
+  const precioAmt = useSelector(
+    (state: typeof RootState) => state.amt.precioEnUsdt
+  );
   const signer = useSelector((state: typeof RootState) => state.wallet.signer);
   const addr = useSelector((state: typeof RootState) => state.wallet.address);
 
@@ -179,7 +183,7 @@ const CuadroPancake: React.FC<CuadroPancakeProps> = ({
       <div className="soloSaldo">
         <div>
           <h2>{textosExtra[currentLanguage].precioAmt}</h2>
-          <div>1 AMT = USDT</div>
+          <div>1 AMT = {precioAmt?.toFixed(3)} USDT</div>
           <div className="slippage">
             <b>Slippage Tolerance 1%</b>
           </div>
