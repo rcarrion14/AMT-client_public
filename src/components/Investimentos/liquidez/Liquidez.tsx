@@ -61,7 +61,6 @@ const Liquidez: React.FC<LiquidezProps> = ({ setActivePage }) => {
           allowanceVault={allowanceVault}
         />
       ) : null}
-
       {selectorDarLiq &&
       balanceLiqAmt &&
       balanceLiqAmt.gt(0) &&
@@ -73,7 +72,6 @@ const Liquidez: React.FC<LiquidezProps> = ({ setActivePage }) => {
           allowanceVault={allowanceVault}
         />
       ) : null}
-
       <div className="botonesSimuladorStaking">
         <button
           onClick={() => {
@@ -93,7 +91,6 @@ const Liquidez: React.FC<LiquidezProps> = ({ setActivePage }) => {
           {textosExtra[currentLanguage].tuLiquidezYRetirar}
         </button>
       </div>
-
       {selectorDarLiq ? (
         <CuadroProveerLiquidez setAlertaAntes={setAlertaAntes} />
       ) : (

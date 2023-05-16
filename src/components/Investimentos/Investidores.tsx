@@ -60,36 +60,40 @@ const Investidores = () => {
 
         {activeInfo ? textoInvestidores(currentLanguage) : saibaMais}
 
-        <BotonBlanco
-          titulo={textoBotonesBlancos[currentLanguage].staking.titulo}
-          descripcion={textoBotonesBlancos[currentLanguage].staking.descripcion}
-          activador={"staking"}
-          setActivePage={setActivePage}
-        />
-        <BotonBlanco
-          titulo={textoBotonesBlancos[currentLanguage].stakingAmt.titulo}
-          descripcion={
-            textoBotonesBlancos[currentLanguage].stakingAmt.descripcion
-          }
-          activador={"stakingAmt"}
-          setActivePage={setActivePage}
-        />
-        <BotonBlanco
-          titulo={textoBotonesBlancos[currentLanguage].liquidez.titulo}
-          descripcion={
-            textoBotonesBlancos[currentLanguage].liquidez.descripcion
-          }
-          activador={"liquidez"}
-          setActivePage={setActivePage}
-        />
-        <BotonBlanco
-          titulo={textoBotonesBlancos[currentLanguage].rendimientos.titulo}
-          descripcion={
-            textoBotonesBlancos[currentLanguage].rendimientos.descripcion
-          }
-          activador={"rendimiento"}
-          setActivePage={setActivePage}
-        />
+        <div>
+          <BotonBlanco
+            titulo={textoBotonesBlancos[currentLanguage].staking.titulo}
+            descripcion={
+              textoBotonesBlancos[currentLanguage].staking.descripcion
+            }
+            activador={"staking"}
+            setActivePage={setActivePage}
+          />
+          <BotonBlanco
+            titulo={textoBotonesBlancos[currentLanguage].stakingAmt.titulo}
+            descripcion={
+              textoBotonesBlancos[currentLanguage].stakingAmt.descripcion
+            }
+            activador={"stakingAmt"}
+            setActivePage={setActivePage}
+          />
+          <BotonBlanco
+            titulo={textoBotonesBlancos[currentLanguage].liquidez.titulo}
+            descripcion={
+              textoBotonesBlancos[currentLanguage].liquidez.descripcion
+            }
+            activador={"liquidez"}
+            setActivePage={setActivePage}
+          />
+          <BotonBlanco
+            titulo={textoBotonesBlancos[currentLanguage].rendimientos.titulo}
+            descripcion={
+              textoBotonesBlancos[currentLanguage].rendimientos.descripcion
+            }
+            activador={"rendimiento"}
+            setActivePage={setActivePage}
+          />
+        </div>
 
         {listaDePaginas}
       </div>

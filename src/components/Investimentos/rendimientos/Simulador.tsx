@@ -93,7 +93,6 @@ const Simulador: React.FC<SimuladorInterface> = ({ setActivePage }) => {
         <h1>{textosExtra[currentLanguage].inversiones}</h1>
       </div>
       {simuleRentabilidad(currentLanguage)}
-
       <div className="cuadroSimula  dor">
         <div className="seccionCantidad">
           <div className="saldo">
