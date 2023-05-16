@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, ReactElement } from "react";
+import { useState, ReactElement } from "react";
 import BotonBlanco from "../Generales/BotonBlanco";
 
 import { CSSTransition } from "react-transition-group";
@@ -13,7 +13,6 @@ import {
   textoInvestidores,
   textosExtra,
 } from "../../Utils/textos";
-import RetirarLiquidez from "./liquidez/retirarLiquidez/RetirarLiquidez";
 
 const Investidores = () => {
   const currentLanguage = useSelector(

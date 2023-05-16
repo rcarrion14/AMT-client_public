@@ -1,44 +1,89 @@
-// @ts-nocheck
 import { ethers, BigNumber } from "ethers";
 
-export const fetchVaultAmt = async () => {
+export type ingresosType = {
+  from: any;
+  amount: BigNumber;
+  timestamp: any;
+  to: any;
+};
+export interface dataStakingValue {
+  amount: string;
+  snap: number;
+  tstamp: number;
+}
+
+export interface dataSwapsValue {
+  amount: string;
+  snap: number;
+  tstamp: number;
+}
+
+export interface dataCobrosValue {
+  amount: string;
+  snap: number;
+  tstamp: number;
+}
+
+export type dataStakingType = {
+  [key: string]: dataStakingValue;
+};
+export interface FetchVaultAmtResult {
+  dataStakings: dataStakingType;
+  dataSwaps: dataSwapsValue[];
+}
+
+export interface FetchVaultBtcbResult {
+  dataStakings: dataStakingType;
+  dataCobros: dataCobrosValue[];
+}
+
+export const fetchVaultAmt = async (): Promise<FetchVaultAmtResult> => {
+  console.log("ejecucion");
+
   let endpointUsuarios =
     "https://amt-bucket-aws.s3.amazonaws.com/usuarios_VaulAmt.json";
 
-  let endpointSwaps = " lista_Swaps.json";
+  let endpointSwaps =
+    "https://amt-bucket-aws.s3.amazonaws.com/lista_Cobros.json";
 
-  let promiseList = [fetch(endpointUsuarios), fetch(endpointSwaps)];
+  let promiseList = [
+    fetch(endpointUsuarios, { cache: "no-cache" }),
+    fetch(endpointSwaps, { cache: "no-cache" }),
+  ];
 
   let responses = await Promise.all(promiseList);
 
-  const dataStakings = await responses[0].json();
-  const dataSwaps = await responses[1].json();
+  const dataStakings: dataStakingType = await responses[0].json();
+  const dataSwaps: dataSwapsValue[] = await responses[1].json();
 
   return { dataStakings, dataSwaps };
 };
 
-export const fetchVaultBctb = async () => {
+export const fetchVaultBctb = async (): Promise<FetchVaultBtcbResult> => {
   let endpointUsuarios =
     "https://amt-bucket-aws.s3.amazonaws.com/usuarios_VaultBctb.json";
 
   let endpointSwaps =
     "https://amt-bucket-aws.s3.amazonaws.com/lista_Cobros.json";
 
-  let promiseList = [fetch(endpointUsuarios), fetch(endpointSwaps)];
+  let promiseList = [
+    fetch(endpointUsuarios, { cache: "no-cache" }),
+    fetch(endpointSwaps, { cache: "no-cache" }),
+  ];
 
   let responses = await Promise.all(promiseList);
 
-  const dataStakings = await responses[0].json();
-  const dataCobros = await responses[1].json();
+  const dataStakings: dataStakingType = await responses[0].json();
+  const dataCobros: dataCobrosValue[] = await responses[1].json();
 
   return { dataStakings, dataCobros };
 };
 
-export const fetchBurnVaultTransfers = async () => {
+export const fetchBurnVaultTransfers = async (): Promise<ingresosType[]> => {
   let endpointIngresosBurnVault =
     "https://amt-bucket-aws.s3.amazonaws.com/ingresosBurnVault.json";
   let dataIngresosBurnVault = await (
-    await fetch(endpointIngresosBurnVault)
+    await fetch(endpointIngresosBurnVault, { cache: "no-cache" })
   ).json();
   let ret = [];
   for (let i = 0; i < dataIngresosBurnVault.length; i++) {
@@ -54,7 +99,7 @@ export const fetchBurnVaultTransfers = async () => {
 };
 
 export const formatDate = (timestamp: number) => {
-  let date = new Date(timestamp);
-  date = date.toLocaleDateString();
-  return date;
+  const date = new Date(timestamp);
+  const dateConverted = date.toLocaleDateString();
+  return dateConverted;
 };

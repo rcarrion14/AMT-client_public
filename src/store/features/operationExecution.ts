@@ -1,19 +1,13 @@
 import React from "react";
 import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
+import { RootState } from "../store";
 
 export async function operationExecution(operation: Promise<any>) {
   const baseUrl = "https://bscscan.com/tx/";
 
   const initialiceTransaction = toast.info(
-    "Starting operation : require wallet accept",
-    {
-      autoClose: 30000,
-      hideProgressBar: true,
-      style: {
-        background: "white",
-        color: "black",
-      },
-    }
+    "Starting operation : require wallet accept"
   );
   return operation
     .then((execution) => {

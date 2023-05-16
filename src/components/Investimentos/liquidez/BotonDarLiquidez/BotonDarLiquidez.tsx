@@ -26,7 +26,7 @@ const BotonDarLiquidez: React.FC<BotonDarLiquidezProps> = ({
   allowanceBtc,
   inputAmt,
   inputBtc,
-  setAlertaAlDepositar,
+  setAlertaAntes,
 }) => {
   const currentLanguage = useSelector(
     (state: typeof RootState) => state.session.language
@@ -73,7 +73,7 @@ const BotonDarLiquidez: React.FC<BotonDarLiquidezProps> = ({
           <button
             className="btnLarge"
             onClick={() => {
-              setAlertaAlDepositar(true);
+              setAlertaAntes(true);
               masterOperations.addLiquidity(
                 dispatch,
                 ethers.utils.parseEther(inputAmt.toFixed(15)),

@@ -1,5 +1,3 @@
-// @ts-nocheck
-import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, AppDispatch } from "../../store/store";
@@ -60,55 +58,38 @@ const Loader = () => {
   useEffect(() => {
     if (isConnected) {
       async function load() {
-        console.log("createing contracts");
+        console.log("creating contracts");
+        var contractPromises: Promise<any>[] = [];
         //Load contracts
-        dispatch(createContractAmt());
-        dispatch(createContractBtcb());
-        dispatch(createContractMarketPlace());
-        dispatch(createContractMaster());
-        dispatch(createContractUsdt());
-        dispatch(createContractVaultAmt());
-        dispatch(createContractVaultBtcb());
-        dispatch(createCotractLiqAmt());
-        dispatch(createContractBurnVault());
-        dispatch(createContractVaultBtcbLiquidity());
-        await delay(1000);
-        //Initial general loads
-        generalLoadBtcb(dispatch);
-        generalLoadUsdt(dispatch);
-        generalLoadMarketPlace(dispatch);
-        amtLoaders.generalLoadAmt(dispatch);
-        liqAmtLoaders.generalLoadLiqAmt(dispatch);
-        generalLoadVaultAmt(dispatch);
-        generalLoadVaultBtcb(dispatch);
-        burnVaultLoaders.generalLoad(dispatch);
-        generalLoadVaultBtcbLiquidity(dispatch);
-        await delay(1000);
+        contractPromises.push(dispatch(createContractAmt()));
+        contractPromises.push(dispatch(createContractBtcb()));
+        contractPromises.push(dispatch(createContractMarketPlace()));
+        contractPromises.push(dispatch(createContractMaster()));
+        contractPromises.push(dispatch(createContractUsdt()));
+        contractPromises.push(dispatch(createContractVaultAmt()));
+        contractPromises.push(dispatch(createContractVaultBtcb()));
+        contractPromises.push(dispatch(createCotractLiqAmt()));
+        contractPromises.push(dispatch(createContractBurnVault()));
+        contractPromises.push(dispatch(createContractVaultBtcbLiquidity()));
 
-        //Second general loads
-        generalLoadBtcb(dispatch);
-        generalLoadUsdt(dispatch);
-        generalLoadMarketPlace(dispatch);
-        amtLoaders.generalLoadAmt(dispatch);
-        liqAmtLoaders.generalLoadLiqAmt(dispatch);
-        generalLoadVaultAmt(dispatch);
-        generalLoadVaultBtcb(dispatch);
-        generalLoadVaultBtcbLiquidity(dispatch);
-        burnVaultLoaders.generalLoad(dispatch);
-
-        await delay(1000);
-
-        //Loads with snapshot
-        if (!!currentSnapshot) {
-          masterLoaders.generalLoad(dispatch, currentSnapshot);
-          amtLoaders.loaderWithSnapshots(dispatch, currentSnapshot);
-        }
-        await delay(1000);
-        //Loads with snapshot
-        if (!!currentSnapshot) {
-          masterLoaders.generalLoad(dispatch, currentSnapshot);
-          amtLoaders.loaderWithSnapshots(dispatch, currentSnapshot);
-        }
+        Promise.all(contractPromises).then(() => {
+          //Initial general loads
+          generalLoadBtcb(dispatch);
+          generalLoadUsdt(dispatch);
+          generalLoadMarketPlace(dispatch);
+          const amtLoadedPromise = amtLoaders.generalLoadAmt(dispatch);
+          liqAmtLoaders.generalLoadLiqAmt(dispatch);
+          generalLoadVaultAmt(dispatch);
+          generalLoadVaultBtcb(dispatch);
+          burnVaultLoaders.generalLoad(dispatch);
+          generalLoadVaultBtcbLiquidity(dispatch);
+          amtLoadedPromise.then(() => {
+            if (!!currentSnapshot) {
+              masterLoaders.generalLoad(dispatch, currentSnapshot);
+              amtLoaders.loaderWithSnapshots(dispatch, currentSnapshot);
+            }
+          });
+        });
       }
       load();
     }
@@ -117,13 +98,13 @@ const Loader = () => {
   useEffect(() => {
     try {
       //Loads with snapshot
-      masterLoaders.generalLoad(dispatch, currentSnapshot);
-      amtLoaders.loaderWithSnapshots(dispatch, currentSnapshot);
-      liqAmtLoaders.loadBalancesOfAt(dispatch, currentSnapshot);
-      liqAmtLoaders.loadTotalSupplyAt(dispatch, currentSnapshot);
-    } catch {
-      console.log("currentSnap: " + currentSnapshot);
-    }
+      if (currentSnapshot) {
+        masterLoaders.generalLoad(dispatch, currentSnapshot);
+        amtLoaders.loaderWithSnapshots(dispatch, currentSnapshot);
+        liqAmtLoaders.loadBalancesOfAt(dispatch, currentSnapshot);
+        liqAmtLoaders.loadTotalSupplyAt(dispatch, currentSnapshot);
+      }
+    } catch {}
   }, [currentSnapshot, isConnected]);
   return <></>;
 };

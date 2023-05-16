@@ -3,11 +3,9 @@ import { RootState } from "../../store/store";
 import { BotonMetamask } from "../Generales/BotonMetamask";
 import BotonBlanco from "../Generales/BotonBlanco";
 import { textosExtra, textoBotonesBlancos } from "../../Utils/textos";
-import { CSSTransition } from "react-transition-group";
-import NoMetamask from "../../NoMetamask";
 
 interface HomeProps {
-  setActivePage: React.Dispatch<React.SetStateAction<string>>;
+  setActivePage: React.Dispatch<React.SetStateAction<string | null>>;
 }
 const Home: React.FC<HomeProps> = ({ setActivePage }) => {
   const currentLanguage = useSelector(

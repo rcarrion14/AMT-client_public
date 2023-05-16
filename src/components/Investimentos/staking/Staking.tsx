@@ -1,12 +1,6 @@
-// @ts-nocheck
-
 import React, { useState } from "react";
 import CuadroStaking from "../CuadroStaking";
-import {
-  textoStaking,
-  textoInfoAllowance,
-  textosExtra,
-} from "../../../Utils/textos";
+import { textoStaking, textosExtra } from "../../../Utils/textos";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../store/store";
 import { amtOperations } from "../../../store/features/amt/amtOperations";
@@ -81,7 +75,9 @@ const Staking: React.FC<AmtStaking> = ({ setActivePage }) => {
             onClick={() => {
               operacionWithdrawl(dispatch);
             }}
-            className={stackedByUser > 0 ? null : "gris"}
+            className={
+              stackedByUser && stackedByUser.gt(0) ? undefined : "gris"
+            }
           >
             {textosExtra[currentLanguage].retirar}
           </button>

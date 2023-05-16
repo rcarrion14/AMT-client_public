@@ -1,11 +1,10 @@
-// @ts-nocheck
-
-import React, { useState } from "react";
-import { textoInterfaz1Inch, textoStore } from "../../../../Utils/textos";
+import React from "react";
 import CuadroInterfaz1Inch from "./CuadroInterfaz1Inch";
 import { useSelector } from "react-redux";
+import { RootState } from "../../../../store/store";
+import { textosExtra } from "../../../../Utils/textos";
 interface Interfaz1InchInterface {
-  setActivePage: React.Dispatch<React.SetStateAction<string>>;
+  setInterfaz: (value: boolean) => void;
 }
 const Interfaz1Inch: React.FC<Interfaz1InchInterface> = ({ setInterfaz }) => {
   const currentLanguage = useSelector(
@@ -14,7 +13,7 @@ const Interfaz1Inch: React.FC<Interfaz1InchInterface> = ({ setInterfaz }) => {
   return (
     <div className="cointainer1Inch noDeshabilitar">
       <div className="close1Inch">
-        <h2>Seleccione moneda</h2>
+        <h2>{textosExtra[currentLanguage].seleccioneMoneda}</h2>
         <img
           className="close"
           onClick={() => setInterfaz(false)}

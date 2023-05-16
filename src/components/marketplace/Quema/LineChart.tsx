@@ -5,19 +5,12 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 import { textosExtra } from "../../../Utils/textos";
 import { fetchBurnVaultTransfers } from "../../../Utils/fetchBuckets";
-import { formatter } from "../../../store/features/formatter";
-import { current } from "@reduxjs/toolkit";
+
 import contractAddresses from "../../../contracts/contractAddresses";
 import { toFrontEndString } from "../../../Utils/formatHelpers";
 import { BigNumber } from "ethers";
-import { randomBytes } from "ethers/lib/utils";
+import { ingresosType } from "../../../Utils/fetchBuckets";
 
-type ingresosType = {
-  from: any;
-  amount: BigNumber;
-  timestamp: any;
-  to: any;
-};
 function LineChart() {
   const [transferBurnVault, setTransferBurnVault] = useState<ingresosType[]>(
     []

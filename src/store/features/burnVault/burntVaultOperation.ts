@@ -1,5 +1,3 @@
-import contractAddresses from "../../../contracts/contractAddresses";
-import { ethers } from "ethers";
 import { operationExecution } from "../operationExecution";
 import { getStaticState } from "../../store";
 import { AppDispatch } from "../../store";

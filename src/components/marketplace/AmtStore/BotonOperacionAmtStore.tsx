@@ -1,9 +1,7 @@
-// @ts-nocheck
-
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { AppDispatch } from "../../../store/store";
 import { useDispatch, useSelector } from "react-redux";
-import { BigNumber, ethers, utils } from "ethers";
+import { BigNumber, ethers } from "ethers";
 import { textosExtra } from "../../../Utils/textos";
 import { RootState } from "../../../store/store";
 interface BotonOperacionProps {
@@ -31,7 +29,7 @@ const BotonOperacionAmtStore: React.FC<BotonOperacionProps> = ({
     if (balanceTienda?.lt(ethers.utils.parseEther(input))) {
       return textosExtra[currentLanguage].noHaytantosAmtEnVenta;
     }
-    if (ethers.utils.parseEther(input) > allowanceUsdt) {
+    if (allowanceUsdt && ethers.utils.parseEther(input).gt(allowanceUsdt)) {
       return textosExtra[currentLanguage].aprobar;
     }
     if (balanceUsdt?.lt(ethers.utils.parseEther(input))) {
@@ -45,7 +43,7 @@ const BotonOperacionAmtStore: React.FC<BotonOperacionProps> = ({
     <>
       <button
         onClick={() => {
-          if (allowanceUsdt >= 0) {
+          if (allowanceUsdt && allowanceUsdt.gte(0)) {
             allowanceUsdt?.gt(ethers.utils.parseEther(input))
               ? operacionBuy(dispatch, ethers.utils.parseEther(input))
               : operacionAprobar(dispatch);
@@ -53,7 +51,7 @@ const BotonOperacionAmtStore: React.FC<BotonOperacionProps> = ({
         }}
         className="btnLarge"
       >
-        {allowanceUsdt >= 0 && input != ""
+        {allowanceUsdt && allowanceUsdt.gte(0) && input != ""
           ? mensajeBoton()
           : textosExtra[currentLanguage].comprar}
       </button>

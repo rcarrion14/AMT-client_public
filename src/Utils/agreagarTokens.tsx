@@ -1,7 +1,7 @@
-// @ts-nocheck
+declare var window: any;
 
 import contractAddresses from "../contracts/contractAddresses";
-
+const ethereum = window.ethereum;
 export const agregarAmt = async () => {
   console.log("agregndo AMT");
 

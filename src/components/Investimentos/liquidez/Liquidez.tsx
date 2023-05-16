@@ -4,14 +4,19 @@ import { textoLiquidez, textosExtra } from "../../../Utils/textos";
 import CuadroProveerLiquidez from "./CuadroProveerLiquidez";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
-import { current } from "@reduxjs/toolkit";
 import RetirarLiquidez from "./retirarLiquidez/RetirarLiquidez";
-import AlertaStakingLiquidez from "./AlertaStakingLiquidez";
+
 import { vaultBtcbLiquidityOperations } from "../../../store/features/vaultBtcbLiquidity/vaultBtcbLiquidityOperations";
 import { amtOperations } from "../../../store/features/amt/amtOperations";
-import AlertaAlDepositar from "./AlertaAlDepositar";
 
-const Liquidez: React.FC<LiquidezInterface> = ({ setActivePage }) => {
+import AlertaAntesDeOperacion from "./alertasLiquidez/AlertaAntesDeOperacion";
+import AlertaDepositeTokens from "./alertasLiquidez/AlertaDepositeTokens";
+import AlertaRetireTokens from "./alertasLiquidez/AlertaRetireTokens";
+
+interface LiquidezProps {
+  setActivePage: React.Dispatch<React.SetStateAction<string>>;
+}
+const Liquidez: React.FC<LiquidezProps> = ({ setActivePage }) => {
   const currentLanguage = useSelector(
     (state: typeof RootState) => state.session.language
   );
@@ -24,53 +29,48 @@ const Liquidez: React.FC<LiquidezInterface> = ({ setActivePage }) => {
   );
 
   const allowanceVault = useSelector(
-    (state: typeof RootState) => state.amt.allowanceVaultBtcbLiq
+    (state: typeof RootState) => state.liqAmt.allowanceVaultBtcbLiq
   );
-
-  const approveVault = amtOperations.approveVaultBtcbLiq;
-  const stake = vaultBtcbLiquidityOperations.stake;
-  const withdrawl = vaultBtcbLiquidityOperations.withdrawl;
 
   const [selectorDarLiq, setSelectorDarLiquidez] = useState(true);
 
-  const [alertaVault, setAlertaVault] = useState(true);
-  const [alertaAlDepositar, setAlertaAlDepositar] = useState(false);
+  const [alertaAntes, setAlertaAntes] = useState(false);
+  const [alertaDeposite, setAlertaDeposite] = useState(true);
 
   return (
-    <div className="containerSlide">
+    <div
+      className={
+        alertaAntes ||
+        (alertaDeposite &&
+          balanceLiqAmt &&
+          balanceLiqAmt.gt(0) &&
+          selectorDarLiq)
+          ? "containerSlide deshabilitador"
+          : "containerSlide"
+      }
+    >
       <div className="navBar_top">
         <img onClick={() => setActivePage("")} src="icon_nav.png" />
         <h1>{textosExtra[currentLanguage].inversiones}</h1>
       </div>
       {textoLiquidez(currentLanguage)}
-      {alertaAlDepositar ? (
-        <AlertaAlDepositar
-          setAlertaAlDepositar={setAlertaAlDepositar}
+      {alertaAntes ? (
+        <AlertaAntesDeOperacion
+          setAlertaAntes={setAlertaAntes}
           balanceLiqAmt={balanceLiqAmt}
-          operation={stake}
-          approveVault={approveVault}
           allowanceVault={allowanceVault}
         />
       ) : null}
 
-      {selectorDarLiq && balanceLiqAmt > 0 && alertaVault ? (
+      {selectorDarLiq &&
+      balanceLiqAmt &&
+      balanceLiqAmt.gt(0) &&
+      alertaDeposite ? (
         // Falta depositar liqAmt en baul
-        <AlertaStakingLiquidez
-          faltaDepEnBaul={true}
-          setAlertaVault={setAlertaVault}
-          operation={stake}
+        <AlertaDepositeTokens
+          setAlertaDeposite={setAlertaDeposite}
           balanceLiqAmt={balanceLiqAmt}
-          approveVault={approveVault}
           allowanceVault={allowanceVault}
-        />
-      ) : null}
-
-      {!selectorDarLiq && balanceUserVaultLiq && alertaVault > 0 ? (
-        // Tiene depositados
-        <AlertaStakingLiquidez
-          faltaDepEnBaul={false}
-          setAlertaVault={setAlertaVault}
-          operation={withdrawl}
         />
       ) : null}
 
@@ -78,7 +78,7 @@ const Liquidez: React.FC<LiquidezInterface> = ({ setActivePage }) => {
         <button
           onClick={() => {
             setSelectorDarLiquidez(true);
-            setAlertaVault(true);
+            setAlertaDeposite(true);
           }}
           className={selectorDarLiq ? "active" : undefined}
         >
@@ -87,15 +87,15 @@ const Liquidez: React.FC<LiquidezInterface> = ({ setActivePage }) => {
         <button
           onClick={() => {
             setSelectorDarLiquidez(false);
-            setAlertaVault(true);
           }}
           className={selectorDarLiq ? undefined : "active"}
         >
           {textosExtra[currentLanguage].tuLiquidezYRetirar}
         </button>
       </div>
+
       {selectorDarLiq ? (
-        <CuadroProveerLiquidez setAlertaAlDepositar={setAlertaAlDepositar} />
+        <CuadroProveerLiquidez setAlertaAntes={setAlertaAntes} />
       ) : (
         <RetirarLiquidez />
       )}

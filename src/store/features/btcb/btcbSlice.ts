@@ -1,7 +1,5 @@
-// @ts-nocheck
-
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { ethers } from "ethers";
+import { ethers, BigNumber } from "ethers";
 import contractAddresses from "../../../contracts/contractAddresses";
 import abiBtcb from "../../../contracts/abis/btcb.json";
 import { getStaticState } from "../../store";
@@ -10,15 +8,16 @@ import { formatter } from "../formatter";
 
 export interface btcbState {
   contract: any | undefined;
-  balance: number | undefined;
+  balance: BigNumber | undefined;
+
+  allowanceMarketVault: BigNumber | undefined;
+  allowanceVaultAmt: BigNumber | undefined;
+  allowanceVaultBtcb: BigNumber | undefined;
+  allowanceVaultBtcbLiq: BigNumber | undefined;
+  allowanceMaster: BigNumber | undefined;
+  balanceOfPool: BigNumber | undefined;
 
   precioEnUsdt: number | undefined;
-  allowanceMarketVault: number | undefined;
-  allowanceVaultAmt: number | undefined;
-  allowanceVaultBtcb: number | undefined;
-  allowanceVaultBtcbLiq: number | undefined;
-  allowanceMaster: number | undefined;
-  balanceOfPool: number | undefined;
 }
 
 const initialState: btcbState = {
@@ -66,9 +65,13 @@ export const getPrecioEnUsdt = createAsyncThunk(
     const contractUsdt = staticState.usdt.contract;
     if (contractBtcb && contractUsdt) {
       const poolAddres = contractAddresses.poolUsdtBtcb;
-      const balanceBtcb = formatter(await contractBtcb.balanceOf(poolAddres));
-      const balanceUsdt = formatter(await contractUsdt.balanceOf(poolAddres));
-      const precio = balanceUsdt / balanceBtcb;
+      const balanceBtcb = ethers.utils.formatEther(
+        await contractBtcb.balanceOf(poolAddres)
+      );
+      const balanceUsdt = ethers.utils.formatEther(
+        await contractUsdt.balanceOf(poolAddres)
+      );
+      const precio = parseFloat(balanceUsdt) / parseFloat(balanceBtcb);
       return { precio };
     }
   }

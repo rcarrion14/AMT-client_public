@@ -1,6 +1,5 @@
-// @ts-nocheck
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { ethers } from "ethers";
+import { ethers, BigNumber } from "ethers";
 import contractAddresses from "../../../contracts/contractAddresses";
 import abivaultBtcbLiquidity from "../../../contracts/abis/vaultBtcbLiq.json";
 import { getStaticState } from "../../store";
@@ -9,9 +8,9 @@ import { formatter } from "../formatter";
 
 interface vaultBtcbLiquidityState {
   contract: any | null;
-  balanceAmt: number | undefined;
-  balanceUserAmt: number | undefined;
-  balanceUserBtcb: number | undefined;
+  balanceAmt: BigNumber | undefined;
+  balanceUserAmt: BigNumber | undefined;
+  balanceUserBtcb: BigNumber | undefined;
 }
 
 const initialState: vaultBtcbLiquidityState = {
@@ -72,7 +71,7 @@ export const getBalanceUserBtcb = createAsyncThunk(
 
       let newBalance;
       shares == 0
-        ? (newBalance = 0)
+        ? (newBalance = BigNumber.from(0))
         : (newBalance = formatter(
             await contract.btcToWithdrawl(address, shares)
           ));

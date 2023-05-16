@@ -957,7 +957,7 @@ u {
 }
 
 .cointainerAlertaVault {
-  background-color: #adceff;
+  background-color: #ffffff;
   height: 250px;
 
   border-radius: 15px;
@@ -1027,4 +1027,35 @@ u {
 .deshabilitador > :not(.noDeshabilitar) {
   pointer-events: none;
   opacity: 0.2;
+}
+
+.Toastify__toast-container {
+  width: 100%;
+  max-width: 100%;
+  background-color: transparent !important;
+}
+
+.Toastify__toast {
+  width: 100%;
+  max-width: 100%;
+}
+
+@media (min-width: 768px) {
+  .Toastify__toast-container {
+    max-width: 400px;
+  }
+
+  .Toastify__toast {
+    max-width: 400px;
+  }
+}
+.Toastify__close-button {
+  font-size: 14px;
+  padding: 1px;
+  width: 1px;
+}
+
+.Toastify__toast-body {
+  flex: 1;
+  padding-right: 1px;
 }

@@ -6,11 +6,11 @@ import { getBalance as btcbGetBalance } from "../btcb/btcbSlice";
 import { getAmtbalance } from "../amt/amtSlice";
 import { getBalance as liqAmtGetbalance } from "../liqAmt/liqAmtSlice";
 import { masterLoaders } from "./masterSlice";
-
+import { BigNumber } from "ethers";
 function addLiquidity(
   dispatch: AppDispatch,
-  amountAmt: number,
-  amountBtcb: number
+  amountAmt: BigNumber,
+  amountBtcb: BigNumber
 ) {
   const contract = getStaticState().master.contract;
   const operationPromise = contract.addLiquidity(amountAmt, amountBtcb);

@@ -1341,6 +1341,8 @@ export interface interfaceTextoExtra {
   aporteDelProjectoAmt: string;
   seleccioneMoneda: string;
   investimentoActual: string;
+  whatsAppMessage: string;
+  buscar: string;
 }
 export type typeTextosExtra = {
   [key in languageCode]: interfaceTextoExtra;
@@ -1396,8 +1398,8 @@ export const textosExtra: typeTextosExtra = {
     consultarHistorico: "Consultar histórico",
     inversiones: "Investimentos",
     retirar: "Retirar",
-    btcbAcumulados: "BTCB gerados",
-    amtGenerados: "AMT gerados",
+    btcbAcumulados: "BTCB gerados:",
+    amtGenerados: "AMT gerados:",
     participacionEnPool: "Participação total no pool:",
     tuLiquidezYRetirar: "Sua liquidez e liquidez para saque",
     cantidadAMT: "Quantidade de AMT: ",
@@ -1410,7 +1412,7 @@ export const textosExtra: typeTextosExtra = {
     rentaAnual: "Renda anual",
     autocompraDiaria: "Autocompra diária:",
     enEseEscenarioRentabilidadSeria: "Nesse cenário, rentabilidade seria:",
-    dataDeDeposito: "Data do deposito",
+    dataDeDeposito: "Data do deposito:",
     gananciasDistribuidas: "Lucros distribuidos",
     estadisticas: "Estatísticas",
     btcEnVault: "BTC no baú",
@@ -1419,6 +1421,8 @@ export const textosExtra: typeTextosExtra = {
     aporteDelProjectoAmt: "Aporte do Projeto AMT",
     seleccioneMoneda: "Seleccione moeda",
     investimentoActual: "Meu investimento atual",
+    whatsAppMessage: "Gostaria+de+saber+mais+sobre+o+AutoMiningToken",
+    buscar: "Buscar",
   },
   esp: {
     bienvenido: "¡Bienvenido!",
@@ -1492,6 +1496,8 @@ export const textosExtra: typeTextosExtra = {
     aporteDelProjectoAmt: "Aporte del Proyecto AMT",
     seleccioneMoneda: "Seleccione moneda",
     investimentoActual: "Mi inversión ahora",
+    whatsAppMessage: "Me+gustaría+saber+mas+sobre+AutoMiningToken",
+    buscar: "Buscar",
   },
   eng: {
     bienvenido: "Welcome!",
@@ -1555,6 +1561,8 @@ export const textosExtra: typeTextosExtra = {
     aporteDelProjectoAmt: "AMT Project Contribution",
     seleccioneMoneda: "Select coin",
     investimentoActual: "My current investment",
+    whatsAppMessage: "I+would+like+to+know+more+about+AutoMiningToken",
+    buscar: "Search",
   },
 };
 

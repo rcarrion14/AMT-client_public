@@ -1,16 +1,12 @@
 import React, { useState } from "react";
 import CuadroQuema from "./CuadroQuema";
-import {
-  textoBotonesBlancos,
-  textoQuema,
-  textosExtra,
-} from "../../../Utils/textos";
+import { textoQuema, textosExtra } from "../../../Utils/textos";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 import { CSSTransition } from "react-transition-group";
 import EstadisticasQuema from "./EstadisticasQuema";
 interface quemaInterface {
-  setActivePage: (param: boolean | null) => void;
+  setActivePage: React.Dispatch<React.SetStateAction<string | null>>;
 }
 const Quema: React.FC<quemaInterface> = ({ setActivePage }) => {
   const [activarEstadisticas, setActivarEstadisticas] = useState(false);
@@ -26,13 +22,15 @@ const Quema: React.FC<quemaInterface> = ({ setActivePage }) => {
 
       <div className="container">
         {textoQuema(currentLanguage)}
-        <button
-          onClick={() => {
-            setActivarEstadisticas(true);
-          }}
-        >
-          {textosExtra[currentLanguage].estadisticas}
-        </button>
+        <div className="textoConexion">
+          <button
+            onClick={() => {
+              setActivarEstadisticas(true);
+            }}
+          >
+            {textosExtra[currentLanguage].estadisticas}
+          </button>
+        </div>
         <CuadroQuema />
       </div>
       <CSSTransition

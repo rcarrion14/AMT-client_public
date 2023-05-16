@@ -1,17 +1,12 @@
-// @ts-nocheck
-
-import React, { useEffect, useRef, useState } from "react";
-import { CSSTransition } from "react-transition-group";
+import React, { useRef, useState } from "react";
 import BotonOperacionAmtStore from "./BotonOperacionAmtStore";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../../store/store";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../store/store";
 import { marketPlaceOperations } from "../../../store/features/marketplace/marketPlaceOperations";
 import { usdtOperations } from "../../../store/features/usdt/usdtOperations";
 import { textosExtra } from "../../../Utils/textos";
-import { ethers } from "ethers";
 import { toFrontEndString } from "../../../Utils/formatHelpers";
 const CuadroAmtStore = () => {
-  const dispatch = useDispatch<AppDispatch>();
   const currentLanguage = useSelector(
     (state: typeof RootState) => state.session.language
   );
@@ -60,8 +55,10 @@ const CuadroAmtStore = () => {
         <div className="saldo">
           <h2>{textosExtra[currentLanguage].ustedPaga}</h2>
           <p>
-            {textosExtra[currentLanguage].saldo}
-            {balanceUsdt >= 0 ? toFrontEndString(balanceUsdt) : "-"}
+            {textosExtra[currentLanguage].saldo}{" "}
+            {balanceUsdt && balanceUsdt.gte(0)
+              ? toFrontEndString(balanceUsdt)
+              : "-"}
           </p>
         </div>
         <div className="cuadroCompra">
@@ -82,7 +79,9 @@ const CuadroAmtStore = () => {
           <h2>{textosExtra[currentLanguage].ustedRecibe}</h2>
           <p>
             {textosExtra[currentLanguage].saldo}{" "}
-            {balanceAmt >= 0 ? toFrontEndString(balanceAmt) : "-"}
+            {balanceAmt && balanceAmt.gte(0)
+              ? toFrontEndString(balanceAmt)
+              : "-"}
           </p>
         </div>
         <div className="cuadroCompra">
@@ -102,7 +101,9 @@ const CuadroAmtStore = () => {
         <div>
           <h2>{textosExtra[currentLanguage].amtEnVenta}</h2>
           <div>
-            {balanceTienda >= 0 ? toFrontEndString(balanceTienda) : "-"}
+            {balanceTienda && balanceTienda.gte(0)
+              ? toFrontEndString(balanceTienda)
+              : "-"}
           </div>
         </div>
         <div>

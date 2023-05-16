@@ -1,4 +1,3 @@
-// @ts-nocheck
 import "./normalize.css";
 import "./styles.css";
 import "react-toastify/dist/ReactToastify.css";
@@ -11,16 +10,14 @@ import GInvestidores from "./components/gInvestidores/GInvestidores";
 import NavBar from "./components/Generales/NavBar";
 import { ToastContainer } from "react-toastify";
 import { useSelector } from "react-redux";
-import { RootState } from "../../store/store";
+import { RootState } from "./store/store";
 import { CSSTransition } from "react-transition-group";
+import { toast } from "react-toastify";
 
 function App() {
   const pages = ["home", "marketplace", "investidores", "gInvestidores"];
-  const [activePage, setActivePage] = useState("home");
-  const customToastContainerStyle = {
-    display: "flex",
-    left: 0,
-  };
+  const [activePage, setActivePage] = useState<string | null>("home");
+
   const addr = useSelector((state: typeof RootState) => state.wallet.address);
 
   return (
@@ -62,7 +59,7 @@ function App() {
       <div className={addr ? undefined : "disabledContainer"}>
         <NavBar setActivePage={setActivePage} activePage={activePage} />
       </div>
-      <ToastContainer style={customToastContainerStyle} />
+      <ToastContainer position={toast.POSITION.TOP_LEFT} />
     </>
   );
 }

@@ -1,16 +1,13 @@
-// @ts-nocheck
-
 import React, { useEffect, useState } from "react";
 import CuadroMaquinas from "./CuadroMaquinas";
 import { getAllDataMineria } from "../../../../Utils/datosMineria";
-import Spinner from "../../../Generales/Spinner/Spinner";
-
+import { dataMineriaInterface } from "../../../../Utils/datosMineria";
 interface MaquinasInterface {
   setActivePage: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const Maquinas: React.FC<MaquinasInterface> = ({ setActivePage }) => {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState<dataMineriaInterface | null>(null);
 
   useEffect(() => {
     getAllDataMineria().then((result) => setData(result));

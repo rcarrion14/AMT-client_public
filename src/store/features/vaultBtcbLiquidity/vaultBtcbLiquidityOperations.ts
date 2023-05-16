@@ -6,16 +6,18 @@ import {
   getBalanceUserAmt,
   getBalanceUserBtcb,
 } from "./vaultBtcbLiquiditySlice";
-import { getAmtbalance } from "../amt/amtSlice";
 
-function stake(dispatch: AppDispatch, amount: number) {
+import { BigNumber } from "ethers";
+import { getBalance } from "../liqAmt/liqAmtSlice";
+
+function stake(dispatch: AppDispatch, amount: BigNumber) {
   const contract = getStaticState().vaultBtcbLiquidity.contract;
   const operationPromise = contract.stake(amount);
   operationExecution(operationPromise).then(() => {
+    dispatch(getBalance());
     dispatch(getBalanceUserAmt());
-    dispatch(getBalanceAmt());
-    dispatch(getAmtbalance());
     dispatch(getBalanceUserBtcb());
+    dispatch(getBalanceAmt());
   });
 }
 
@@ -23,9 +25,10 @@ function withdrawl(dispatch: AppDispatch) {
   const contract = getStaticState().vaultBtcbLiquidity.contract;
   const operationPromise = contract.withdrwal();
   operationExecution(operationPromise).then(() => {
+    dispatch(getBalance());
     dispatch(getBalanceUserAmt());
-    dispatch(getBalanceAmt());
     dispatch(getBalanceUserBtcb());
+    dispatch(getBalanceAmt());
   });
 }
 

@@ -1,24 +1,23 @@
-// @ts-nocheck
-
 import React, { useEffect, useRef, useState } from "react";
 import BotonOperacionStaking from "./BotonOperacionStaking";
 import { textoAtencionStaking, textosExtra } from "../../Utils/textos";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { fetchVaultAmt } from "../../Utils/fetchBuckets";
-import { ethers, BigNumber } from "ethers";
+import { BigNumber, ethers } from "ethers";
 import { toFrontEndString } from "../../Utils/formatHelpers";
-interface BotonOperacionProps {
-  balanceUserAmt: number | undefined;
-  stackedByUser: number | undefined;
+import { dataStakingType } from "../../Utils/fetchBuckets";
+interface CuadroStakingProps {
+  balanceUserAmt: BigNumber | undefined;
+  stackedByUser: BigNumber | undefined;
   btcACobrar: BigNumber | undefined;
-  allowance: number | undefined;
+  allowance: BigNumber | undefined;
   operacionAprobar: Function;
   operacionStake: Function;
   operacionWithdrawl: Function;
 }
 
-const CuadroStaking: React.FC<BotonOperacionProps> = ({
+const CuadroStaking: React.FC<CuadroStakingProps> = ({
   balanceUserAmt,
   stackedByUser,
   btcACobrar,
@@ -33,7 +32,9 @@ const CuadroStaking: React.FC<BotonOperacionProps> = ({
   const currentLanguage = useSelector(
     (state: typeof RootState) => state.session.language
   );
-  const [stakingIniciales, setStakingIniciales] = useState(undefined);
+  const [stakingIniciales, setStakingIniciales] = useState<
+    dataStakingType | undefined
+  >(undefined);
 
   useEffect(() => {
     fetchVaultAmt().then((result) => {
@@ -60,7 +61,9 @@ const CuadroStaking: React.FC<BotonOperacionProps> = ({
             className="inputCompra"
             type="number"
             onChange={() => {
-              setInputStakeValue(inputStake.current?.value);
+              setInputStakeValue(
+                inputStake.current?.value ? inputStake.current?.value : ""
+              );
             }}
           />
         </div>
@@ -68,8 +71,14 @@ const CuadroStaking: React.FC<BotonOperacionProps> = ({
         <div className="boton100porcent">
           <button
             onClick={() => {
-              setInputStakeValue(balanceUserAmt);
-              inputStake.current.value = balanceUserAmt;
+              if (inputStake.current && balanceUserAmt) {
+                inputStake.current.value =
+                  ethers.utils.formatEther(balanceUserAmt);
+                setInputStakeValue(ethers.utils.formatEther(balanceUserAmt));
+
+                /* inputStake.current.value = toFrontEndString(balanceUserAmt, 15);
+                setInputStakeValue(toFrontEndString(balanceUserAmt, 15)); */
+              }
             }}
             className="btnSimulacion transparente"
           >
@@ -94,7 +103,9 @@ const CuadroStaking: React.FC<BotonOperacionProps> = ({
           src="number-one.png"
           alt=""
           className={
-            stackedByUser > 0 ? "activeIcon pasos" : "inactiveIcon pasos"
+            stackedByUser && stackedByUser.gt(0)
+              ? "activeIcon pasos"
+              : "inactiveIcon pasos"
           }
         />
         <img src="right-arrow.png" alt="" className="inactiveIcon pasos" />
@@ -102,7 +113,9 @@ const CuadroStaking: React.FC<BotonOperacionProps> = ({
           src="number-two.png"
           alt=""
           className={
-            stackedByUser > 0 ? "inactiveIcon pasos" : "activeIcon pasos"
+            stackedByUser && stackedByUser.gt(0)
+              ? "inactiveIcon pasos"
+              : "activeIcon pasos"
           }
         />
       </div>
@@ -120,8 +133,11 @@ const CuadroStaking: React.FC<BotonOperacionProps> = ({
               <div>
                 {btcACobrar != undefined && btcACobrar.gt(0)
                   ? toFrontEndString(btcACobrar)
-                  : stakingIniciales != undefined && stackedByUser.gt(0)
-                  ? ethers.utils.formatEther(
+                  : addr &&
+                    stackedByUser &&
+                    stakingIniciales != undefined &&
+                    stackedByUser.gt(0)
+                  ? toFrontEndString(
                       stackedByUser.sub(stakingIniciales[addr].amount)
                     )
                   : "-"}

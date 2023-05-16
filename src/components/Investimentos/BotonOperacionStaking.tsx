@@ -1,18 +1,14 @@
-// @ts-nocheck
-
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { AppDispatch } from "../../store/store";
 import { useDispatch, useSelector } from "react-redux";
-import { ethers } from "ethers";
+import { BigNumber, ethers } from "ethers";
 import { textosExtra } from "../../Utils/textos";
 import { RootState } from "../../store/store";
 
-//CUANDO TERMINA LA OPERACION NO CAMBIA AMT DEPOSITADOS
-
 interface BotonOperacionProps {
-  stackedByUser: number | undefined;
-  balanceUserAmt: number | undefined;
-  allowance: number | undefined;
+  stackedByUser: BigNumber | undefined;
+  balanceUserAmt: BigNumber | undefined;
+  allowance: BigNumber | undefined;
   operacionAprobar: Function;
   operacionStake: Function;
   input: string;
@@ -30,13 +26,19 @@ const BotonOperacion: React.FC<BotonOperacionProps> = ({
   const currentLanguage = useSelector(
     (state: typeof RootState) => state.session.language
   );
+
   const mesajeBoton = () => {
-    if (allowance >= 0) {
-      if (allowance < parseFloat(input)) {
-        return textosExtra[currentLanguage].aprobar;
-      }
-      if (balanceUserAmt < parseFloat(input)) {
-        return textosExtra[currentLanguage].bceInsuf;
+    if (input != "") {
+      if (allowance && balanceUserAmt) {
+        const inputParsed = ethers.utils.parseEther(input);
+        if (allowance.lt(BigNumber.from(inputParsed))) {
+          return textosExtra[currentLanguage].aprobar;
+        }
+        if (balanceUserAmt.lt(BigNumber.from(inputParsed))) {
+          return textosExtra[currentLanguage].bceInsuf;
+        } else {
+          return textosExtra[currentLanguage].stake;
+        }
       } else {
         return textosExtra[currentLanguage].stake;
       }
@@ -50,21 +52,31 @@ const BotonOperacion: React.FC<BotonOperacionProps> = ({
     <>
       <div className="doubleButtonContainer">
         <button
-          className={stackedByUser > 0 ? null : "gris"}
+          className={
+            stackedByUser
+              ? stackedByUser.gt(0)
+                ? undefined
+                : "gris"
+              : undefined
+          }
           onClick={() => {
-            console.log(operacionWithdrawl);
-
-            operacionWithdrawl();
+            operacionWithdrawl(dispatch);
           }}
         >
           {textosExtra[currentLanguage].retirar}
         </button>
         <button
-          className={stackedByUser > 0 ? "gris" : null}
+          className={
+            stackedByUser
+              ? stackedByUser.gt(0)
+                ? "gris"
+                : undefined
+              : undefined
+          }
           onClick={() => {
             if (allowance) {
               let monto = ethers.utils.parseEther(input);
-              allowance > parseFloat(input)
+              allowance.gt(BigNumber.from(monto))
                 ? operacionStake(dispatch, monto)
                 : operacionAprobar(dispatch);
             }

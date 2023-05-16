@@ -16,12 +16,11 @@ const BotonRetirarLiquidez = () => {
   );
   return (
     <button
-      className="btnLarge"
+      className=""
       onClick={() =>
-        masterOperations.removeLiquidity(
-          dispatch,
-          ethers.utils.parseEther(balanceLiqAmt?.toString())
-        )
+        balanceLiqAmt && balanceLiqAmt.gt(0)
+          ? masterOperations.removeLiquidity(dispatch, balanceLiqAmt)
+          : null
       }
     >
       Retirar liquidez

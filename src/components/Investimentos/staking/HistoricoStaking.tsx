@@ -1,15 +1,20 @@
-// @ts-nocheck
-
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 import { fetchVaultBctb, formatDate } from "../../../Utils/fetchBuckets";
 import contractAddresses from "../../../contracts/contractAddresses";
 import { snapToDateMapp } from "../../gInvestidores/snapshotDateMapper";
-import { ethers } from "ethers";
+import { ethers, BigNumber } from "ethers";
 import { textoBotonesBlancos, textosExtra } from "../../../Utils/textos";
 import { toFrontEndString } from "../../../Utils/formatHelpers";
-const Historico = ({
+import { dataStakingType, dataCobrosValue } from "../../../Utils/fetchBuckets";
+interface HistoricoProps {
+  setHistorico: React.Dispatch<React.SetStateAction<boolean>>;
+  stackedByUser: BigNumber | undefined;
+  contractAmt: ethers.Contract;
+  currentSnapshot: number | undefined;
+}
+const Historico: React.FC<HistoricoProps> = ({
   setHistorico,
   stackedByUser,
   currentSnapshot,
@@ -19,44 +24,53 @@ const Historico = ({
   const currentLanguage = useSelector(
     (state: typeof RootState) => state.session.language
   );
-  const [stakingIniciales, setStakingIniciales] = useState(undefined);
-  const [dataCobros, setDataCobros] = useState([]);
-  const [balancesAt, setBalancesAt] = useState([]);
+  const [stakingIniciales, setStakingIniciales] = useState<
+    dataStakingType | undefined
+  >(undefined);
+  const [dataCobros, setDataCobros] = useState<dataCobrosValue[]>([]);
+  const [balancesAt, setBalancesAt] = useState<number[]>([]);
 
-  async function getAllSnapshotFrom(snapFrom: number) {
+  async function getAllSnapshotFrom(snapFrom: number): Promise<number[]> {
     let promiseList = [];
-
-    for (let i = snapFrom; i <= currentSnapshot; i++) {
-      const promise = contractAmt.balanceOfAt(contractAddresses.VaultBtcb, i);
-      promiseList.push(promise);
+    if (currentSnapshot) {
+      for (let i = snapFrom; i <= currentSnapshot; i++) {
+        const promise = contractAmt.balanceOfAt(contractAddresses.VaultBtcb, i);
+        promiseList.push(promise);
+      }
     }
+
     const balances = await Promise.all(promiseList);
 
     return balances;
   }
 
-  function getGanancias() {
-    let depositoInicial = ethers.BigNumber.from(stakingIniciales[addr].amount);
-    var gananciaAt_i = [];
+  function getGanancias(): {
+    gananciaAt_i: [ethers.BigNumber, number][];
+    gananciaAcum: ethers.BigNumber;
+  } {
+    var gananciaAt_i: Array<[ethers.BigNumber, number]> = [];
     let gananciaAcum = ethers.BigNumber.from(0);
-
-    for (let i = 0; i < balancesAt.length; i++) {
-      let balanceAt = balancesAt[i];
-
-      let swapAt = ethers.BigNumber.from(
-        dataCobros[dataCobros.length - balancesAt.length + i].amount
+    if (stakingIniciales != undefined && addr != undefined) {
+      let depositoInicial = ethers.BigNumber.from(
+        stakingIniciales[addr].amount
       );
 
-      let snap = dataCobros[dataCobros.length - balancesAt.length + i].snap;
+      for (let i = 0; i < balancesAt.length; i++) {
+        let balanceAt = balancesAt[i];
 
-      console.log({ depositoInicial, balanceAt, swapAt });
+        let swapAt = ethers.BigNumber.from(
+          dataCobros[dataCobros.length - balancesAt.length + i].amount
+        );
 
-      let ganancia = depositoInicial.mul(swapAt).div(balanceAt);
+        let snap = dataCobros[dataCobros.length - balancesAt.length + i].snap;
 
-      gananciaAcum = gananciaAcum.add(ganancia);
-      gananciaAt_i.push([ganancia, snap]);
+        let ganancia = depositoInicial.mul(swapAt).div(balanceAt);
+
+        gananciaAcum = gananciaAcum.add(ganancia);
+        gananciaAt_i.push([ganancia, snap]);
+      }
+      gananciaAt_i = gananciaAt_i.reverse();
     }
-    gananciaAt_i = gananciaAt_i.reverse();
 
     return { gananciaAt_i, gananciaAcum };
   }
@@ -77,7 +91,10 @@ const Historico = ({
               <p>{snapToDateMapp(ganancia[1])}</p>
             </div>
             <div className="transparente">
-              <p>{toFrontEndString(ganancia[0])}</p>
+              {
+                //Check next line if balances are showed correctly
+              }
+              <p>{toFrontEndString(ganancia[0], 7)}</p>
               <p>BTCB</p>
             </div>
           </div>
@@ -88,13 +105,15 @@ const Historico = ({
   };
 
   useEffect(() => {
-    fetchVaultBctb().then((result) => {
-      setStakingIniciales(result.dataStakings);
-      setDataCobros(result.dataCobros);
-      getAllSnapshotFrom(result.dataStakings[addr].snap).then((result) => {
-        setBalancesAt(result);
+    if (addr) {
+      fetchVaultBctb().then((result) => {
+        setStakingIniciales(result.dataStakings);
+        setDataCobros(result.dataCobros);
+        getAllSnapshotFrom(result.dataStakings[addr].snap).then((result) => {
+          setBalancesAt(result);
+        });
       });
-    });
+    }
   }, []);
 
   return (
@@ -106,32 +125,31 @@ const Historico = ({
 
       <div className="cuadroGanaciasStaking">
         <div>AMT</div>
-        <div>{addr ? toFrontEndString(stackedByUser) : null}</div>
+        <div>{stackedByUser ? toFrontEndString(stackedByUser) : null}</div>
         <div className="celeste">
-          {addr ? toFrontEndString(stackedByUser) + " USDT" : null}
+          {stackedByUser ? toFrontEndString(stackedByUser) + " USDT" : null}
         </div>
         <div className="celeste">
-          <b>{textosExtra[currentLanguage].amtDepositados}</b>
+          <b>{textosExtra[currentLanguage].amtDepositados}</b>{" "}
           {addr && stakingIniciales
-            ? toFrontEndString(stakingIniciales[addr].amount)
+            ? toFrontEndString(BigNumber.from(stakingIniciales[addr].amount))
             : null}
         </div>
         <div className="celeste">
-          <b>{textosExtra[currentLanguage].dataDeDeposito}</b>
-          {addr && stakingIniciales && stackedByUser > 0
+          <b>{textosExtra[currentLanguage].dataDeDeposito}</b>{" "}
+          {stackedByUser && addr && stakingIniciales && stackedByUser.gt(0)
             ? formatDate(stakingIniciales[addr].tstamp)
             : null}
         </div>
         <div className="celeste">
-          <b>{textosExtra[currentLanguage].btcACobrar}</b>
-
-          {addr && stakingIniciales && stackedByUser > 0
+          <b>{textosExtra[currentLanguage].btcACobrar}</b>{" "}
+          {addr && stakingIniciales && stackedByUser?.gt(0)
             ? toFrontEndString(getGanancias().gananciaAcum)
             : "0"}
         </div>
       </div>
 
-      {stackedByUser > 0 ? containers() : null}
+      {stackedByUser?.gt(0) ? containers() : null}
     </div>
   );
 };

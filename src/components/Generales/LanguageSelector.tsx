@@ -1,4 +1,3 @@
-import React from "react";
 import "flag-icon-css/css/flag-icons.css";
 
 import {

@@ -1,7 +1,5 @@
-// @ts-nocheck
-
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { ethers } from "ethers";
+import { BigNumber, ethers } from "ethers";
 import contractAddresses from "../../../contracts/contractAddresses";
 import abiLiqAmt from "../../../contracts/abis/liquidityAmt.json";
 import { getStaticState } from "../../store";
@@ -9,26 +7,26 @@ import { AppDispatch } from "../../store";
 import { formatter } from "../formatter";
 export interface usdtState {
   contract: any | undefined;
-  balance: number | undefined;
-  totalSupply: number | undefined;
+  balance: BigNumber | undefined;
+  totalSupply: BigNumber | undefined;
 
-  allowanceMarketVault: number | undefined;
-  allowanceVaultAmt: number | undefined;
-  allowanceVaultBtcb: number | undefined;
-  allowanceVaultBtcbLiq: number | undefined;
-  allowanceMaster: number | undefined;
+  allowanceMarketVault: BigNumber | undefined;
+  allowanceVaultAmt: BigNumber | undefined;
+  allowanceVaultBtcb: BigNumber | undefined;
+  allowanceVaultBtcbLiq: BigNumber | undefined;
+  allowanceMaster: BigNumber | undefined;
 
-  balanceOfAt1: number | undefined;
-  balanceOfAt2: number | undefined;
-  balanceOfAt3: number | undefined;
-  balanceOfAt4: number | undefined;
-  balanceOfAt5: number | undefined;
+  balanceOfAt1: BigNumber | undefined;
+  balanceOfAt2: BigNumber | undefined;
+  balanceOfAt3: BigNumber | undefined;
+  balanceOfAt4: BigNumber | undefined;
+  balanceOfAt5: BigNumber | undefined;
 
-  totalSupplyAt1: number | undefined;
-  totalSupplyAt2: number | undefined;
-  totalSupplyAt3: number | undefined;
-  totalSupplyAt4: number | undefined;
-  totalSupplyAt5: number | undefined;
+  totalSupplyAt1: BigNumber | undefined;
+  totalSupplyAt2: BigNumber | undefined;
+  totalSupplyAt3: BigNumber | undefined;
+  totalSupplyAt4: BigNumber | undefined;
+  totalSupplyAt5: BigNumber | undefined;
 }
 
 const initialState: usdtState = {

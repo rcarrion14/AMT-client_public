@@ -1,7 +1,5 @@
-// @ts-nocheck
-
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { ethers } from "ethers";
+import { BigNumber, ethers } from "ethers";
 import contractAddresses from "../../../contracts/contractAddresses";
 import abiMarketplace from "../../../contracts/abis/marketplace.json";
 import { getStaticState } from "../../store";
@@ -10,7 +8,7 @@ import { formatter } from "../formatter";
 
 export interface marketPlaceState {
   contract: any | undefined;
-  amtEnVenta: number | undefined;
+  amtEnVenta: BigNumber | undefined;
   precioVenta: number | undefined; //Change to null on prod
 }
 

@@ -1,8 +1,16 @@
-// @ts-nocheck
-
 import React from "react";
-
-const CuadroMaquinas = ({ logo, maquinas, petahash, produccion }) => {
+interface CuadroMaquinasProps {
+  logo: string;
+  maquinas: number | null;
+  petahash: number | null;
+  produccion: string | null;
+}
+const CuadroMaquinas: React.FC<CuadroMaquinasProps> = ({
+  logo,
+  maquinas,
+  petahash,
+  produccion,
+}) => {
   return (
     <div className="containerMaquinas shadowBox">
       <img className="logoMaquinas" src={logo} alt="" />
