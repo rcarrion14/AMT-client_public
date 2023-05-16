@@ -36,14 +36,11 @@ const Liquidez: React.FC<LiquidezProps> = ({ setActivePage }) => {
 
   const [alertaAntes, setAlertaAntes] = useState(false);
   const [alertaDeposite, setAlertaDeposite] = useState(true);
-  const [alertaRetire, setAlertaRetire] = useState(true);
 
   return (
     <div
       className={
-        alertaAntes ||
-        (balanceLiqAmt && balanceLiqAmt.gt(0) && alertaDeposite) ||
-        (!selectorDarLiq && balanceUserVaultLiq?.gt(0) && alertaRetire)
+        alertaAntes || alertaDeposite
           ? "containerSlide deshabilitador"
           : "containerSlide"
       }
@@ -73,11 +70,6 @@ const Liquidez: React.FC<LiquidezProps> = ({ setActivePage }) => {
         />
       ) : null}
 
-      {!selectorDarLiq && balanceUserVaultLiq?.gt(0) && alertaRetire ? (
-        // Tiene depositados
-        <AlertaRetireTokens setAlertaRetire={setAlertaRetire} />
-      ) : null}
-
       <div className="botonesSimuladorStaking">
         <button
           onClick={() => {
@@ -91,13 +83,13 @@ const Liquidez: React.FC<LiquidezProps> = ({ setActivePage }) => {
         <button
           onClick={() => {
             setSelectorDarLiquidez(false);
-            setAlertaRetire(true);
           }}
           className={selectorDarLiq ? undefined : "active"}
         >
           {textosExtra[currentLanguage].tuLiquidezYRetirar}
         </button>
       </div>
+
       {selectorDarLiq ? (
         <CuadroProveerLiquidez setAlertaAntes={setAlertaAntes} />
       ) : (

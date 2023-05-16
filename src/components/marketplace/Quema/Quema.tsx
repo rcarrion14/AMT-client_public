@@ -22,13 +22,15 @@ const Quema: React.FC<quemaInterface> = ({ setActivePage }) => {
 
       <div className="container">
         {textoQuema(currentLanguage)}
-        <button
-          onClick={() => {
-            setActivarEstadisticas(true);
-          }}
-        >
-          {textosExtra[currentLanguage].estadisticas}
-        </button>
+        <div className="textoConexion">
+          <button
+            onClick={() => {
+              setActivarEstadisticas(true);
+            }}
+          >
+            {textosExtra[currentLanguage].estadisticas}
+          </button>
+        </div>
         <CuadroQuema />
       </div>
       <CSSTransition

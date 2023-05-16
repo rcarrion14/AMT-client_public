@@ -36,7 +36,7 @@ export const cuentasSimulador = (
 
   /////// --- ANUAL: ------ /////
 
-  let rentPorcent_usdt_anual = rentPorcent_usdt_diario * 365;
+  let rentPorcent_usdt_anual = (rentPorcent_usdt_diario * 365).toFixed(3);
   let cobradoTotal_btcb_anual = Number(
     (cobradoTotal_btcb_diario * 365).toFixed(3)
   );

@@ -4,7 +4,7 @@ import { textoAtencionStaking, textosExtra } from "../../Utils/textos";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { fetchVaultAmt } from "../../Utils/fetchBuckets";
-import { BigNumber } from "ethers";
+import { BigNumber, ethers } from "ethers";
 import { toFrontEndString } from "../../Utils/formatHelpers";
 import { dataStakingType } from "../../Utils/fetchBuckets";
 interface CuadroStakingProps {
@@ -72,8 +72,12 @@ const CuadroStaking: React.FC<CuadroStakingProps> = ({
           <button
             onClick={() => {
               if (inputStake.current && balanceUserAmt) {
-                inputStake.current.value = toFrontEndString(balanceUserAmt, 15);
-                setInputStakeValue(toFrontEndString(balanceUserAmt, 15));
+                inputStake.current.value =
+                  ethers.utils.formatEther(balanceUserAmt);
+                setInputStakeValue(ethers.utils.formatEther(balanceUserAmt));
+
+                /* inputStake.current.value = toFrontEndString(balanceUserAmt, 15);
+                setInputStakeValue(toFrontEndString(balanceUserAmt, 15)); */
               }
             }}
             className="btnSimulacion transparente"

@@ -130,20 +130,19 @@ const Historico: React.FC<HistoricoProps> = ({
           {stackedByUser ? toFrontEndString(stackedByUser) + " USDT" : null}
         </div>
         <div className="celeste">
-          <b>{textosExtra[currentLanguage].amtDepositados}</b>
+          <b>{textosExtra[currentLanguage].amtDepositados}</b>{" "}
           {addr && stakingIniciales
             ? toFrontEndString(BigNumber.from(stakingIniciales[addr].amount))
             : null}
         </div>
         <div className="celeste">
-          <b>{textosExtra[currentLanguage].dataDeDeposito}</b>
+          <b>{textosExtra[currentLanguage].dataDeDeposito}</b>{" "}
           {stackedByUser && addr && stakingIniciales && stackedByUser.gt(0)
             ? formatDate(stakingIniciales[addr].tstamp)
             : null}
         </div>
         <div className="celeste">
-          <b>{textosExtra[currentLanguage].btcACobrar}</b>
-
+          <b>{textosExtra[currentLanguage].btcACobrar}</b>{" "}
           {addr && stakingIniciales && stackedByUser?.gt(0)
             ? toFrontEndString(getGanancias().gananciaAcum)
             : "0"}

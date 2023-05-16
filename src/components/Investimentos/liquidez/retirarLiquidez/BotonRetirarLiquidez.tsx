@@ -16,8 +16,12 @@ const BotonRetirarLiquidez = () => {
   );
   return (
     <button
-      className="btnLarge"
-      onClick={() => masterOperations.removeLiquidity(dispatch, balanceLiqAmt)}
+      className=""
+      onClick={() =>
+        balanceLiqAmt && balanceLiqAmt.gt(0)
+          ? masterOperations.removeLiquidity(dispatch, balanceLiqAmt)
+          : null
+      }
     >
       Retirar liquidez
     </button>

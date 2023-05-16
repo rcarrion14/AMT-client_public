@@ -55,7 +55,7 @@ const CuadroAmtStore = () => {
         <div className="saldo">
           <h2>{textosExtra[currentLanguage].ustedPaga}</h2>
           <p>
-            {textosExtra[currentLanguage].saldo}
+            {textosExtra[currentLanguage].saldo}{" "}
             {balanceUsdt && balanceUsdt.gte(0)
               ? toFrontEndString(balanceUsdt)
               : "-"}

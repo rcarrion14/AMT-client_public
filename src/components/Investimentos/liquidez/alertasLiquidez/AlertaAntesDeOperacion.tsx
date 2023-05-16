@@ -8,12 +8,16 @@ import { ethers } from "ethers";
 import Spinner from "../../../Generales/Spinner/Spinner";
 import { amtOperations } from "../../../../store/features/amt/amtOperations";
 import { vaultBtcbLiquidityOperations } from "../../../../store/features/vaultBtcbLiquidity/vaultBtcbLiquidityOperations";
+import { textosExtra } from "../../../../Utils/textos";
 
 const AlertaStakingLiquidez = ({
   setAlertaAntes,
   balanceLiqAmt,
   allowanceVault,
 }) => {
+  const currentLanguage = useSelector(
+    (state: typeof RootState) => state.session.language
+  );
   const dispatch = useDispatch<AppDispatch>();
   const mensajeBoton = () => {
     if (allowanceVault.lt(balanceLiqAmt)) {

@@ -38,13 +38,18 @@ export interface FetchVaultBtcbResult {
 }
 
 export const fetchVaultAmt = async (): Promise<FetchVaultAmtResult> => {
+  console.log("ejecucion");
+
   let endpointUsuarios =
     "https://amt-bucket-aws.s3.amazonaws.com/usuarios_VaulAmt.json";
 
   let endpointSwaps =
     "https://amt-bucket-aws.s3.amazonaws.com/lista_Cobros.json";
 
-  let promiseList = [fetch(endpointUsuarios), fetch(endpointSwaps)];
+  let promiseList = [
+    fetch(endpointUsuarios, { cache: "no-cache" }),
+    fetch(endpointSwaps, { cache: "no-cache" }),
+  ];
 
   let responses = await Promise.all(promiseList);
 
@@ -61,7 +66,10 @@ export const fetchVaultBctb = async (): Promise<FetchVaultBtcbResult> => {
   let endpointSwaps =
     "https://amt-bucket-aws.s3.amazonaws.com/lista_Cobros.json";
 
-  let promiseList = [fetch(endpointUsuarios), fetch(endpointSwaps)];
+  let promiseList = [
+    fetch(endpointUsuarios, { cache: "no-cache" }),
+    fetch(endpointSwaps, { cache: "no-cache" }),
+  ];
 
   let responses = await Promise.all(promiseList);
 
@@ -75,7 +83,7 @@ export const fetchBurnVaultTransfers = async (): Promise<ingresosType[]> => {
   let endpointIngresosBurnVault =
     "https://amt-bucket-aws.s3.amazonaws.com/ingresosBurnVault.json";
   let dataIngresosBurnVault = await (
-    await fetch(endpointIngresosBurnVault)
+    await fetch(endpointIngresosBurnVault, { cache: "no-cache" })
   ).json();
   let ret = [];
   for (let i = 0; i < dataIngresosBurnVault.length; i++) {

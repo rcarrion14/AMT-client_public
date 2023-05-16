@@ -159,7 +159,7 @@ const CuadroPancake: React.FC<CuadroPancakeProps> = ({
         <div className="saldo">
           <h2>{textosExtra[currentLanguage].ustedRecibe}</h2>
           <p>
-            {textosExtra[currentLanguage].saldo}
+            {textosExtra[currentLanguage].saldo}{" "}
             {balanceAmt ? toFrontEndString(balanceAmt) : "-"}
           </p>
         </div>
