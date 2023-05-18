@@ -3,7 +3,7 @@ import { RootState } from "../../store/store";
 import { BotonMetamask } from "../Generales/BotonMetamask";
 import BotonBlanco from "../Generales/BotonBlanco";
 import { textosExtra, textoBotonesBlancos } from "../../Utils/textos";
-
+//Base desktop
 interface HomeProps {
   setActivePage: React.Dispatch<React.SetStateAction<string | null>>;
 }

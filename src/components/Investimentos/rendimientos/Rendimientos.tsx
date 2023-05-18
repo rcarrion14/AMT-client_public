@@ -62,7 +62,6 @@ const Rendimientos: React.FC<RendimientosInterface> = ({ setActivePage }) => {
         activador={"simulador"}
         setActivePage={setActivePageRendimientos}
       />
-
       <BotonBlanco
         titulo={textoBotonesBlancos[currentLanguage].maquinas.titulo}
         descripcion={textoBotonesBlancos[currentLanguage].maquinas.descripcion}
@@ -75,7 +74,6 @@ const Rendimientos: React.FC<RendimientosInterface> = ({ setActivePage }) => {
         activador={"grafico"}
         setActivePage={setActivePageRendimientos}
       />
-
       {listaDePaginas}
     </div>
   );
