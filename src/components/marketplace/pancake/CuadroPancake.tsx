@@ -74,6 +74,8 @@ const CuadroPancake: React.FC<CuadroPancakeProps> = ({
       ).then((result) => {
         setTxData(result);
       });
+    } else {
+      setTxData(undefined);
     }
   }, [inputPagarValue, toggler]);
 

@@ -7,7 +7,7 @@ export const textoMarketplace = (idioma: string) => {
         <h1>Marketplace</h1>
         <p>
           Para comprar AMT basta ter saldo na sua MetaMask, que pode estar em
-          qualquer moeda da Rede de BSC.
+          qualquer moeda da Rede BSC.
         </p>
         <p>A taxa de gás da rede, porém, é sempre cobrada em BNB.</p>
         <p>
@@ -17,7 +17,7 @@ export const textoMarketplace = (idioma: string) => {
         <p>
           Clique no botão abaixo e importe os principais tokens da Rede BSC
           (Binance Smart Chain) que são utilizados com frequência pela
-          comunidade AMT. É grátis, útil e seguro!
+          Comunidade AMT. É grátis, útil e seguro!
         </p>
       </>
     );
@@ -70,39 +70,39 @@ export const textoEstadisticasQuema = (idioma: string) => {
       <>
         <h1>Cofre de Garantia</h1>
         <p>
-          O percentual de distribução diária do Cofre de Garantia pode variar
+          O percentual de distribuição diária do Cofre de Garantia pode variar
           sempre em prol dos melhores interesses para todos os investidores da
           Comunidade AMT.
         </p>
         <p>
-          Por exemplo, quando a margem de lucro da mineraçã está mais baixa em
-          rezão do preço do bitcoin, dos altos custos ou da alta taxa de
+          Por exemplo, quando a margem de lucro da mineração está mais baixa em
+          razão do preço do bitcoin, dos altos custos ou da alta taxa de
           dificuldade da rede, o Projeto AMT irá diminuir o percentual de
-          distribução para o Cofre de Garantia, para priorizar o pagamento de
-          custos e distribução de lucros
+          distribuição para o Cofre de Garantia, para priorizar o pagamento de
+          custos e distribuição de lucros.
         </p>
         <p>
           Por outro lado, quando houver a possibilidade de abastecer o Cofre de
           Garantia, sem prejuízo do pagamento dos custos e dos lucros, isso
-          certamente será feito
+          certamente será feito.
         </p>
         <p>
           Inclusive, o Projeto AMT sempre avaliará a possibilidade de fazer
           aportes adicionais nesse Cofre de Garantia, sempre que for conveniente
-          para toda a Comunidade AMT
+          para toda a Comunidade AMT.
         </p>
         <p>
-          O objetivo do Projeto AMT é que esse Cofre possua tantos BTC a pronto
-          de establecer um piso mínimo para o preço do AMT, ou seja, que o valor
-          que o investidor recebe ao queimar AMT no Cofre possa se igualar á
-          cotação da PancakeSwap.
+          O objetivo do Projeto AMT é que esse Cofre possua tantos BTC a ponto
+          de estabelecer um piso mínimo para o preço do AMT, ou seja, que o
+          valor que o investidor recebe ao queimar AMT no Cofre possa se igualar
+          à cotação da PancakeSwap.
         </p>
         <p>
-          Isso fará com que o preço nunca regrida, mas so aumente. E, vale
+          Isso fará com que o preço nunca regrida, mas só aumente. E, vale
           lembrar, quando o usuário opta por queimar seus AMT no Cofre, toda a
-          comunidade AMT se beneficia disso, pois são menos AMT em circulação e,
-          portanto, a distribução de BTC passa a ser maior por cada token
-          (aumenta a rentabilidade)
+          Comunidade AMT se beneficia disso, pois são menos AMT em circulação e,
+          portanto, a distribuição de BTC passa a ser maior por cada token
+          (aumenta a rentabilidade).
         </p>
       </>
     );
@@ -196,12 +196,12 @@ export const textoStore = (idioma: string, func: Function) => {
         <h1>AMT Store</h1>
         <p>
           Esse é o marketplace oficial do AutoMiningToken. Aqui você pode
-          comprar seus AMTs e pagar un preço fixo por eles, independentemente da
+          comprar seus AMTs e pagar um preço fixo por eles, independentemente da
           quantidade que comprar.
         </p>
         <p>
           Recomenda-se comprar AMT por aqui sempre que o preço estiver menor ou
-          igual da PancakeSwap.
+          igual ao da PancakeSwap.
         </p>
         <p>
           A compra no AMT Store favorece o projeto como um todo, já que os
@@ -212,14 +212,14 @@ export const textoStore = (idioma: string, func: Function) => {
         <p>
           A compra de AMT no AMT Store deve ser feita usando USDT. Caso precise
           trocar outra moeda por USDT, para conseguir comprar AMT.{" "}
-          <u onClick={() => func()}>Clique aquí</u>
+          <u onClick={() => func()}>Clique aqui</u>.
         </p>
       </>
     );
   } else if (idioma == "esp") {
     return (
       <>
-        <h1>Tienda AMT</h1>
+        <h1>AMT Store</h1>
         <p>
           Esta es la tienda oficial de AutoMiningToken. Aquí puedes comprar tus
           AMTs y pagar un precio fijo por ellos, independientemente de la
@@ -338,11 +338,11 @@ export const textoQuema = (idioma: string) => {
         </p>
         <p>Por isso, o preço do AMT não cai, mas se mantém.</p>
         <p>
-          E, considerando que esse Cofre recebe mais bitcoins a cada día, isso
+          E, considerando que esse Cofre recebe mais bitcoins a cada dia, isso
           significa que a relação AMT/BTCB só irá melhorar.
         </p>
         <p>
-          Em outras palavras, esse Cofre estabelece um piso para o preco da AMT.
+          Em outras palavras, esse Cofre estabelece um piso para o preço do AMT.
         </p>
       </>
     );
@@ -398,15 +398,15 @@ export const textoPix = (idioma: string) => {
         <p>
           O nosso time está trabalhando para disponibilizar essa funcionalidade
           de forma automática aqui no site, bem como a compra recorrente com
-          carta-o de crédito.
+          cartão de crédito.
         </p>
         <p>
           Enquanto isso, você pode nos chamar no WhatsApp ou no Telegram para
           comprar ou vender criptos com PIX.
         </p>
         <p>
-          O atendimento de nosso time é em horário comercial, de segunda a
-          sexta-feira, das 9 hs. ás 18 hs.
+          O atendimento do nosso time é em horário comercial, de segunda a
+          sexta-feira, das 9 hs às 18 hs.
         </p>
       </>
     );
@@ -454,38 +454,50 @@ export const textoPix = (idioma: string) => {
   }
 };
 
+/*
+~  til
+´ acento agudo
+` crase
+^ acento circunflexo
+não 
+ç
+
+*/
+
+// Esta funcion hace esto de tal forma
+
 export const textoInvestidores = (idioma: string) => {
   if (idioma == "por") {
     return (
       <>
         <div>
           <p>
-            O Projeto AMT nao custodia o dinheiro dos investidores, dde modo que
-            e possivel receber seus rendimientos em bitcoin mesmo mantendo seus
-            AMT em sua MetaMask
+            O Projeto AMT não custodia o dinheiro dos investidores, de modo que
+            é possivel receber seus rendimentos em bitcoin mesmo mantendo seus
+            AMT em sua MetaMask.
           </p>
           <p>
-            No entanto, para enviar seus rendimientos em BTCB para a sua
-            MetaMask voce precisará pagar taza de gás e fazer isso diariamente,
-            o que afetará a sua rentabilidade.
+            No entanto, para enviar seus rendimentos em BTCB para a sua MetaMask
+            você precisará pagar taxa de gás e fazer isso diariamente, o que
+            afetará a sua rentabilidade.
           </p>
           <p>
-            Por isso, criamos a possibilidade de voce colocar o seus tokens em
+            Por isso, criamos a possibilidade de você colocar o seus tokens em
             "staking", isto é, depositalá-los em um contrato inteligente seguro
-            para acumular seus rendimientos de forma automatica e sem precisasr
-            pagar tazas diárias.
+            para acumular seus rendimentos de forma automática e sem precisar
+            pagar taxas diárias.
           </p>
           <p>
-            É preciso pagar taza apenas ao depositar e ao retirar os tokens do
-            staking, mesmo que os manthnha lá por anos.
+            É preciso pagar taxa apenas ao depositar e ao retirar os tokens do
+            staking, mesmo que os mantenha lá por anos.
           </p>
           <p>
-            Os seus rendimientos sao enviados para este "cofre" de staking e
-            voce vai recebendo passivamente, enquanto quiser. Só a carteira que
+            Os seus rendimentos são enviados para este "cofre" de staking e você
+            vai recebendo passivamente, enquanto quiser. Só a carteira que
             depositou os tokens é que poderá retirá-los de lá, mais ninguém terá
             acesso.
           </p>
-          <p>Conheca abaixo as modalidades de que dispomos</p>
+          <p>Conheça abaixo as modalidades de que dispomos:</p>
         </div>
       </>
     );
@@ -577,7 +589,7 @@ export const textoInfoAllowance = (idioma: string) => {
         <p>
           Depois você poderá clicar em "Fazer staking". Novamente, a sua
           MetaMask irá solicitar a sua confirmação para pagar a taxa de gás da
-          rede. Feito isso, o staking estará concluido.
+          rede. Feito isso, o staking estará concluído.
         </p>
       </>
     );
@@ -629,15 +641,15 @@ export const textoStaking = (idioma: string) => {
         <h1>Staking Padrão </h1>
 
         <p>
-          Esse é o "Staking Padrão" de AutoMiningToken. Aqui você pode depositar
+          Esse é o "Staking Padrão" do AutoMiningToken. Aqui você pode depositar
           seus AMTs e receber BTCB diariamente.
         </p>
         <p>
-          A quantia a ser recebida é proporcional a quantidade de tokens que
+          A quantia a ser recebida é proporcional à quantidade de tokens que
           você deposita.
         </p>
         <p>
-          Você pode simular seus recebimentos <u>clicando aquí.</u>
+          Você pode simular seus recebimentos <u>clicando aqui.</u>
         </p>
       </>
     );
@@ -757,7 +769,7 @@ export const textoGInvestidores = (idioma: string) => {
           Aos investidores que não desejam pagar a taxa diária, mas sim acumular
           rendimentos em bitcoin todos os dias, de forma automática, nós
           recomendamos que coloque seus tokens em staking. Clique aqui e veja
-          suas opções.
+          suas opções. {/* TODO LINK CLICK AQUI OPCIONES */}
         </p>
       </>
     );
@@ -830,7 +842,7 @@ export const textoLiquidez = (idioma: string) => {
         <p>
           Caso você ainda não possua BTCB, você pode trocar parte dos seus AMT
           por BTCB, dividindo em duas partes iguais o valor total de seu
-          investimento.
+          investimento. {/*TODO: LINK A PANCAKESWAP */}
         </p>
         <p>
           Cobra-se taxa de gás apenas ao depositar e ao retirar os tokens, além
@@ -929,7 +941,7 @@ export const textoRendimientos = (idioma: string) => {
             <ul>Preço pago por token (AMT)</ul>
             <ul>Preço do Bitcoin</ul>
             <ul>Taxa de dificuldade da rede de mineração</ul>
-            <ul>Custos da operação, principalmente a energia elétrica</ul>
+            <ul>Custos da operação (principalmente a energia elétrica)</ul>
             <ul>Poder computacional utilizado para minerar</ul>
           </div>
         </p>
@@ -940,7 +952,7 @@ export const textoRendimientos = (idioma: string) => {
         </p>
         <p>
           O que é possível fazer é simular a rentabilidade tomando como base os
-          parâmetros de momento atual, como se fossem constantes - mas não são
+          parâmetros do momento atual, como se fossem constantes - mas não são.
         </p>
         <p>Confira abaixo mais detalhes.</p>
       </>
@@ -1026,7 +1038,8 @@ export const textoStakingAmt = (idioma: string) => {
           que funciona como um juro composto.
         </p>
         <p>
-          Você pode simular seus recebimentos <u>clicando aqui</u>.
+          Você pode simular seus recebimentos <u>clicando aqui</u>.{" "}
+          {/* TODO LINK  */}
         </p>
       </>
     );
@@ -1083,6 +1096,7 @@ export const textoStakingAmt = (idioma: string) => {
   }
 };
 
+/* TODO: CHECK IF USED */
 export const textoInterfaz1Inch = (idioma: string) => {
   if (idioma == "por") {
     return (
@@ -1124,13 +1138,13 @@ export const simuleRentabilidad = (idioma: string) => {
       <>
         <h2>Simule a rentabilidade</h2>
         <p>
-          A rentabilidade de AMT depende de algumas variáveis e, aqui, você pode
+          A rentabilidade do AMT depende de algumas variáveis e, aqui, você pode
           alterar duas delas para verificar quanto o AMT pode render em
           diferentes cenários.
         </p>
 
         <p>
-          Essas duas variáveis são: preço de AMT ao investir e o preço de
+          Essas duas variáveis são: preço do AMT ao investir e o preço do
           Bitcoin.
         </p>
 
@@ -1195,11 +1209,11 @@ export const textoRetirarLiquidez = (idioma: string) => {
       <>
         <h1>Detalhes</h1>
         <p>
-          A quantidade de cada moeda varia para que a relação de valor investida
-          em cada token seja mantida.
+          A quantidade de cada moeda varia para que a relação de valor investido
+          em cada token seja mantido.
         </p>
         <p>
-          Portanto, quando, por exemplo, AMT se valoriza em relação a BTCB, o
+          Portanto, quando, por exemplo, o AMT se valoriza em relação ao BTCB, o
           investidor terá menos AMT e mais BTCB, e vice-versa.
         </p>
         <p>
@@ -1343,6 +1357,7 @@ export interface interfaceTextoExtra {
   investimentoActual: string;
   whatsAppMessage: string;
   buscar: string;
+  nadaACobrar: string;
 }
 export type typeTextosExtra = {
   [key in languageCode]: interfaceTextoExtra;
@@ -1352,15 +1367,15 @@ export const textosExtra: typeTextosExtra = {
   por: {
     bienvenido: "Bem-vindo!",
     textoConexion:
-      "Para navegar pelo site, conecte a sua Metamask, clickando no botao abaixo.",
+      "Para navegar pelo site, conecte a sua Metamask, clicando no botão abaixo.",
     market: "Market",
 
     conectarBilletera: "Conectar carteira",
     comprar: "Comprar",
-    aprobar: "Aprobar",
+    aprobar: "Aprovar",
     cobrar: "Cobrar",
     yaCobrado: "Já cobrado",
-    bceInsuf: "Balance insuficiente",
+    bceInsuf: "Saldo insuficiente",
 
     stake: "Stake",
 
@@ -1369,32 +1384,32 @@ export const textosExtra: typeTextosExtra = {
     saldo: "Saldo:",
 
     amtDepositados: "AMT depositados:",
-    precioAmt: "Preco do AMT:",
+    precioAmt: "Preço do AMT:",
 
     btcACobrar: "BTC a cobrar:",
-    distribucion: "Distribucion:",
+    distribucion: "Distribuição:",
 
-    sepaMas: "Saiba maís",
+    sepaMas: "Saiba mais",
 
     //Añadidos pero para ver si iria aca
-    aprobarBTCB: "Aprobar BTCB",
-    aprobarUSDT: "Aprobar USDT",
-    aprobarAMT: "Aprobar AMT",
-    aprobarLiqAmt: "Aprobar LiqAmt",
+    aprobarBTCB: "Aprovar BTCB",
+    aprobarUSDT: "Aprovar USDT",
+    aprobarAMT: "Aprovar AMT",
+    aprobarLiqAmt: "Aprovar LiqAmt",
 
-    bceAmtInsuficiente: "Balance AMT insuficiente",
-    bceBtcInsuficiente: "Balance BTC insuficiente",
-    bceUSDTInsuficiente: "Balance USDT insuficiente",
-    bceLiqAmtInsuficiente: "Balance LiqAmt insuficiente",
+    bceAmtInsuficiente: "Saldo AMT insuficiente",
+    bceBtcInsuficiente: "Saldo BTC insuficiente",
+    bceUSDTInsuficiente: "Saldo USDT insuficiente",
+    bceLiqAmtInsuficiente: "Liquidez insuficiente",
 
-    quemar: "Quemar",
+    quemar: "Queimar",
 
     proveerLiquidez: "Dar liquidez",
     importarTokens: "Importar tokens",
     noHaytantosAmtEnVenta: "Não há AMT suficientes à venda",
-    ustedPaga: "Vocé paga:",
-    ustedRecibe: "Vocé recebe:",
-    amtEnVenta: "AMT a venda:",
+    ustedPaga: "Você paga:",
+    ustedRecibe: "Você recebe:",
+    amtEnVenta: "AMT à venda:",
     consultarHistorico: "Consultar histórico",
     inversiones: "Investimentos",
     retirar: "Retirar",
@@ -1405,24 +1420,25 @@ export const textosExtra: typeTextosExtra = {
     cantidadAMT: "Quantidade de AMT: ",
     escenarioActual: "Cenário atual",
     simularEscenario: "Simular cenário",
-    valorPagoAmtDolar: "Valor pago en dólar:",
+    valorPagoAmtDolar: "Valor pago em dólar:",
     valorBtcEnDolar: "Insira valor em dólar: ",
     rentaDiaria: "Renda diária",
     rentaMensual: "Renda mensal",
     rentaAnual: "Renda anual",
     autocompraDiaria: "Autocompra diária:",
-    enEseEscenarioRentabilidadSeria: "Nesse cenário, rentabilidade seria:",
-    dataDeDeposito: "Data do deposito:",
-    gananciasDistribuidas: "Lucros distribuidos",
+    enEseEscenarioRentabilidadSeria: "Nesse cenário, a rentabilidade seria:",
+    dataDeDeposito: "Data do depósito:",
+    gananciasDistribuidas: "Lucros distribuídos",
     estadisticas: "Estatísticas",
-    btcEnVault: "BTC no baú",
+    btcEnVault: "BTC no Cofre de Garantia",
     quemaDeAmt: "Queima de AMT",
     distribucionDiaria: "Distribuição Diária",
     aporteDelProjectoAmt: "Aporte do Projeto AMT",
-    seleccioneMoneda: "Seleccione moeda",
+    seleccioneMoneda: "Selecione a moeda",
     investimentoActual: "Meu investimento atual",
     whatsAppMessage: "Gostaria+de+saber+mais+sobre+o+AutoMiningToken",
-    buscar: "Buscar",
+    buscar: "Pesquisar",
+    nadaACobrar: "Nada a cobrar",
   },
   esp: {
     bienvenido: "¡Bienvenido!",
@@ -1498,6 +1514,7 @@ export const textosExtra: typeTextosExtra = {
     investimentoActual: "Mi inversión ahora",
     whatsAppMessage: "Me+gustaría+saber+mas+sobre+AutoMiningToken",
     buscar: "Buscar",
+    nadaACobrar: "Nada a cobrar",
   },
   eng: {
     bienvenido: "Welcome!",
@@ -1563,6 +1580,7 @@ export const textosExtra: typeTextosExtra = {
     investimentoActual: "My current investment",
     whatsAppMessage: "I+would+like+to+know+more+about+AutoMiningToken",
     buscar: "Search",
+    nadaACobrar: "Nothing to charge",
   },
 };
 
@@ -1600,15 +1618,15 @@ export const textoBotonesBlancos: typeTextoBotonesBlancos = {
     },
     investimentos: {
       titulo: "Investimentos",
-      descripcion: "Faca seus AMT reinderem mais!",
+      descripcion: "Faça seus AMT renderem mais!",
     },
     gInvestidores: {
       titulo: "Grandes investidores",
-      descripcion: "Consulte a distribucao de lucros.",
+      descripcion: "Consulte a distribuição de lucros.",
     },
     store: {
       titulo: "AMT Store",
-      descripcion: "Compre AMT diretamente do nosso site.",
+      descripcion: "Compre AMT diretamente no nosso site.",
     },
     pancake: {
       titulo: "PancakeSwap",
@@ -1616,11 +1634,11 @@ export const textoBotonesBlancos: typeTextoBotonesBlancos = {
     },
     quema: {
       titulo: "Venda AMT",
-      descripcion: "Troque AMT por BTCB no Cofre de Garantía.",
+      descripcion: "Troque AMT por BTCB no Cofre de Garantia.",
     },
     pix: {
-      titulo: "Compre e venda cripto con PIX",
-      descripcion: "Disponível apenas para usuários no Brasil.",
+      titulo: "Compre e venda cripto com PIX",
+      descripcion: "Disponível apenas para usuários do Brasil.",
     },
     staking: {
       titulo: "Staking Padrão",
@@ -1632,7 +1650,7 @@ export const textoBotonesBlancos: typeTextoBotonesBlancos = {
     },
     liquidez: {
       titulo: "Liquidez",
-      descripcion: "Receba pelas transacoes no pool de liquidez.",
+      descripcion: "Receba pelas transações no pool de liquidez.",
     },
     rendimientos: {
       titulo: "Quanto rende o AMT?",
@@ -1643,21 +1661,21 @@ export const textoBotonesBlancos: typeTextoBotonesBlancos = {
       descripcion: "Confira quanto rende o AMT em diferentes cenários",
     },
     simuladorActual: {
-      titulo: "Rentabilidad de staking agora",
+      titulo: "Rentabilidade de staking agora",
       descripcion: "Confira quanto rende o AMT no cenário atual",
     },
     maquinas: {
       titulo: "Máquinas ativas no Projeto AMT",
-      descripcion: "Confira nossa producao diária de bitcoins",
+      descripcion: "Confira nossa produção diária de bitcoins",
     },
     grafico: {
-      titulo: "Gráfico de preco de AMT",
-      descripcion: "confira o valor do AMT contra o BTC e USDT",
+      titulo: "Gráfico de preço de AMT",
+      descripcion: "Confira o valor do AMT contra o BTC e USDT",
     },
   },
   esp: {
     market: {
-      titulo: "Mercado",
+      titulo: "Market",
       descripcion: "¡Compre y venda AMT!",
     },
     investimentos: {
