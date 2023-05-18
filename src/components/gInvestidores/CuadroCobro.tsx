@@ -59,7 +59,7 @@ const CuadroCobro: React.FC<cuadroCobroProps> = ({
       </div>
 
       <button
-        onClick={alreadyCharged ? charge : undefined}
+        onClick={alreadyCharged ? undefined : charge}
         className={alreadyCharged ? "inactive" : undefined}
       >
         {allValuesDefined ? (
