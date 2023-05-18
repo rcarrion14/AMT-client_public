@@ -1357,6 +1357,7 @@ export interface interfaceTextoExtra {
   investimentoActual: string;
   whatsAppMessage: string;
   buscar: string;
+  nadaACobrar: string;
 }
 export type typeTextosExtra = {
   [key in languageCode]: interfaceTextoExtra;
@@ -1437,6 +1438,7 @@ export const textosExtra: typeTextosExtra = {
     investimentoActual: "Meu investimento atual",
     whatsAppMessage: "Gostaria+de+saber+mais+sobre+o+AutoMiningToken",
     buscar: "Pesquisar",
+    nadaACobrar: "Nada a cobrar",
   },
   esp: {
     bienvenido: "¡Bienvenido!",
@@ -1512,6 +1514,7 @@ export const textosExtra: typeTextosExtra = {
     investimentoActual: "Mi inversión ahora",
     whatsAppMessage: "Me+gustaría+saber+mas+sobre+AutoMiningToken",
     buscar: "Buscar",
+    nadaACobrar: "Nada a cobrar",
   },
   eng: {
     bienvenido: "Welcome!",
@@ -1577,6 +1580,7 @@ export const textosExtra: typeTextosExtra = {
     investimentoActual: "My current investment",
     whatsAppMessage: "I+would+like+to+know+more+about+AutoMiningToken",
     buscar: "Search",
+    nadaACobrar: "Nothing to charge",
   },
 };
 

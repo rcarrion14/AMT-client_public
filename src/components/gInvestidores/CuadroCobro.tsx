@@ -33,6 +33,9 @@ const CuadroCobro: React.FC<cuadroCobroProps> = ({
   const currentLanguage = useSelector(
     (state: typeof RootState) => state.session.language
   );
+  {
+    console.log(balanceOfAt);
+  }
 
   return (
     <div className="cuadroCobro">
@@ -66,6 +69,8 @@ const CuadroCobro: React.FC<cuadroCobroProps> = ({
           <>
             {alreadyCharged
               ? textosExtra[currentLanguage].yaCobrado
+              : balanceOfAt.lte(BigNumber.from("1000000000000000"))
+              ? textosExtra[currentLanguage].nadaACobrar
               : textosExtra[currentLanguage].cobrar}
           </>
         ) : (
