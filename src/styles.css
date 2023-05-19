@@ -51,7 +51,7 @@ div {
   }
   .containerSlide {
     max-width: 600px;
-    transform: translateX(calc(50vw - 50%));
+    transform: translateX(calc(50vw - 50%)); 
   }
 
   /* -------------- */
@@ -460,24 +460,25 @@ u {
 /* ------------------- */
 /* ------------------- */
 
-
-
-.slideIzquierda-enter-active {
-  position: fixed;
-  right: -100vw;
-  left: 100vw;
-  -webkit-transform: translateX(-100%);
-  transform: translateX(-100%);
-  transition: transform 800ms linear;
+ .slideIzquierda-enter {
+  transform: translateX(100vw)
 }
+
+
+ .slideIzquierda-enter-active {
+  -webkit-transform: translateX(-100%);
+  transform: translateX(calc(50vw - 50%));
+  transition: transform 800ms linear;
+} 
+
 
 .slideIzquierda-exit-active {
   -webkit-transform: translateX(100%);
-  transform: translateX(100%);
+  transform: translateX(100vw);
   transition: transform 800ms linear;
-}
+} 
 
-/*/*/
+
 
 .fade-exit-active {
   max-width: 540px;

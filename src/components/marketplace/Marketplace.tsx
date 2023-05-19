@@ -37,7 +37,7 @@ const Marketplace = () => {
       <CSSTransition
         key={"transition" + pagina}
         in={activePage == pagina}
-        timeout={7000}
+        timeout={800}
         classNames="slideIzquierda"
         unmountOnExit
       >
