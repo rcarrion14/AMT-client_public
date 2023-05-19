@@ -7,6 +7,7 @@ import { amtOperations } from "../../../store/features/amt/amtOperations";
 import { vaultAmtOperations } from "../../../store/features/vaultAmt/vaultAmtOperations";
 import { CSSTransition } from "react-transition-group";
 import HistoricoStakingAmt from "./HistoricoStakingAmt";
+import Simulador from "../rendimientos/Simulador";
 
 interface StakingAmtInterface {
   setActivePage: React.Dispatch<React.SetStateAction<string>>;
@@ -14,6 +15,7 @@ interface StakingAmtInterface {
 
 const StakingAmt: React.FC<StakingAmtInterface> = ({ setActivePage }) => {
   const [historico, setHistorico] = useState(false);
+  const [simulador, setSimulador] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
   const currentLanguage = useSelector(
     (state: typeof RootState) => state.session.language
@@ -46,7 +48,7 @@ const StakingAmt: React.FC<StakingAmtInterface> = ({ setActivePage }) => {
           <img onClick={() => setActivePage("")} src="icon_nav.png" />
           <h1>{textosExtra[currentLanguage].inversiones}</h1>
         </div>
-        {textoStakingAmt(currentLanguage)}
+        {textoStakingAmt(currentLanguage, setSimulador)}
         <CuadroStaking
           operacionWithdrawl={operacionWithdrawl}
           balanceUserAmt={balanceAmt}
@@ -89,6 +91,15 @@ const StakingAmt: React.FC<StakingAmtInterface> = ({ setActivePage }) => {
           contractAmt={contractAmt}
           currentSnapshot={currentSnapshot}
         />
+      </CSSTransition>
+
+      <CSSTransition
+        in={simulador == true}
+        timeout={800}
+        classNames="slideIzquierda"
+        unmountOnExit
+      >
+        <Simulador setActivePage={setSimulador} />
       </CSSTransition>
     </>
   );
