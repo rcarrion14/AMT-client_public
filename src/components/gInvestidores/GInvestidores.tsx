@@ -10,6 +10,7 @@ import Pagination from "./paginationComponent/pagination";
 import { textoGInvestidores } from "../../Utils/textos";
 
 const GInvestidores = () => {
+  const [activeInfo, setActiveInfo] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
   const currentSnapshot = useSelector(
     (state: typeof RootState) => state.amt.currentSnapshot
@@ -116,6 +117,7 @@ const GInvestidores = () => {
     pays3 &&
     pays4 &&
     pays5;
+
   return (
     <>
       <div className="containerLengueta">

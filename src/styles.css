@@ -96,6 +96,10 @@ button {
   margin: 15px;
 }
 
+button:hover{
+  background-color:#98e8f5
+}
+
 u {
   color: #00bfdc;
   font-weight: bold;
@@ -177,6 +181,10 @@ u {
   background-color: white;
   border-radius: 15px;
   padding: 10px 25px 10px 25px;
+}
+
+.botonBlanco:hover{
+  background-color: #98e8f5;
 }
 
 .botonBlanco > p {
