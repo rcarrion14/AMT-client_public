@@ -10,7 +10,9 @@ import { cuentasSimulador } from "../../../Utils/cuentasSimulador";
 import { ethers } from "ethers";
 
 interface SimuladorInterface {
-  setActivePage: React.Dispatch<React.SetStateAction<string>>;
+  setActivePage:
+    | React.Dispatch<React.SetStateAction<string>>
+    | React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const Simulador: React.FC<SimuladorInterface> = ({ setActivePage }) => {

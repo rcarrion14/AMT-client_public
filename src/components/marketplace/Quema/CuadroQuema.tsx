@@ -42,24 +42,27 @@ const CuadroQuema = () => {
   const handleInputPagarChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    if (backRate) {
-      setInputRecibirValue(
-        (parseFloat(event.target.value) / backRate).toString()
-      );
+    if (parseFloat(event.target.value) >= 0) {
+      if (backRate) {
+        setInputRecibirValue(
+          (parseFloat(event.target.value) / backRate).toString()
+        );
+      }
+      setInputPagarValue(event.target.value);
     }
-    setInputPagarValue(event.target.value);
   };
 
   const handleInputRecibirChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    if (backRate) {
-      setInputRecibirValue(
-        (parseFloat(event.target.value) * backRate).toString()
-      );
+    if (parseFloat(event.target.value) >= 0) {
+      if (backRate) {
+        setInputRecibirValue(
+          (parseFloat(event.target.value) * backRate).toString()
+        );
+      }
+      setInputPagarValue(event.target.value);
     }
-
-    setInputPagarValue(event.target.value);
   };
 
   return (

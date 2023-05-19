@@ -92,7 +92,7 @@ const RetirarLiquidez: React.FC = () => {
       </div>
       <div className="containerSaldosLiquidez">
         <div className="leftSide">
-          <img src="coinAutomining.png" />
+          <img src="coinAutomining_.png" />
           <div style={{ display: "flex", flexDirection: "column" }}>
             <div>AMT</div>
             <p>{amtEnLiquidez ? toFrontEndString(amtEnLiquidez) : "0"}</p>

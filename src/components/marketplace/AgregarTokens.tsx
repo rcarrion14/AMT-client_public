@@ -26,6 +26,7 @@ const AgregarTokens: React.FC<AgregarTokensProps> = ({ setAgregarTokens }) => {
 
         <div className="listaAgregar">
           <img
+            className="amtIcon"
             onClick={() => {
               agregarAmt();
             }}

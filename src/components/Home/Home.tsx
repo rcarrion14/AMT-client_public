@@ -25,10 +25,11 @@ const Home: React.FC<HomeProps> = ({ setActivePage }) => {
         >
           <iframe
             className="video"
-            src="https://www.youtube.com/embed/rqUmSyIb4O0?start=121"
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/jPMSGfXdz90"
             title="YouTube video player"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowFullScreen
           ></iframe>
         </div>
         <p className="textoConexion">
@@ -45,6 +46,7 @@ const Home: React.FC<HomeProps> = ({ setActivePage }) => {
             activador={"marketplace"}
             setActivePage={setActivePage}
             image={"icon_marketplace.png"}
+            scroll={true}
           />
           <BotonBlanco
             titulo={textoBotonesBlancos[currentLanguage].investimentos.titulo}
@@ -54,6 +56,7 @@ const Home: React.FC<HomeProps> = ({ setActivePage }) => {
             activador={"investidores"}
             setActivePage={setActivePage}
             image={"icon_invest.png"}
+            scroll={true}
           />
           <BotonBlanco
             titulo={textoBotonesBlancos[currentLanguage].gInvestidores.titulo}
@@ -63,6 +66,7 @@ const Home: React.FC<HomeProps> = ({ setActivePage }) => {
             activador={"gInvestidores"}
             setActivePage={setActivePage}
             image={"icon_grandesInvest.png"}
+            scroll={true}
           />
         </div>
       </div>

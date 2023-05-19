@@ -56,14 +56,18 @@ const CuadroInterfaz1Inch = () => {
 
   // Pedir quote:
   useEffect(() => {
-    if (inputPagarValue) {
-      useGetQuote(
-        monedaActive.address,
-        contractAddresses.Usdt,
-        inputPagarValue
-      ).then((response) => {
-        setInputRecibirValue(toFrontEndString(response.toTokenAmount));
-      });
+    if (parseFloat(inputPagarValue) == 0) {
+      setInputRecibirValue("0");
+    } else {
+      if (inputPagarValue) {
+        useGetQuote(
+          monedaActive.address,
+          contractAddresses.Usdt,
+          inputPagarValue
+        ).then((response) => {
+          setInputRecibirValue(toFrontEndString(response.toTokenAmount));
+        });
+      }
     }
   }, [inputPagarValue, monedaActive, toggler]);
 
@@ -72,6 +76,7 @@ const CuadroInterfaz1Inch = () => {
     if (
       addr &&
       inputPagarValue &&
+      parseFloat(inputPagarValue) != 0 &&
       allowanceErc20.gt(ethers.utils.parseEther(inputPagarValue)) &&
       balanceErc20.gt(ethers.utils.parseEther(inputPagarValue))
     ) {
@@ -117,13 +122,17 @@ const CuadroInterfaz1Inch = () => {
   const handleInputPagarChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    setInputPagarValue(event.target.value);
+    if (parseFloat(event.target.value) >= 0) {
+      setInputPagarValue(event.target.value);
+    }
   };
 
   const handleInputRecibirChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    setInputRecibirValue(event.target.value);
+    if (parseFloat(event.target.value) >= 0) {
+      setInputRecibirValue(event.target.value);
+    }
   };
 
   //Esto de arriba

@@ -7,6 +7,7 @@ import { amtOperations } from "../../../store/features/amt/amtOperations";
 import { vaultBtcbOperations } from "../../../store/features/vaultBtcb/vaultBtcbOperations";
 import HistoricoStaking from "./HistoricoStaking";
 import { CSSTransition } from "react-transition-group";
+import Simulador from "../rendimientos/Simulador";
 
 interface AmtStaking {
   setActivePage: React.Dispatch<React.SetStateAction<string>>;
@@ -14,6 +15,7 @@ interface AmtStaking {
 
 const Staking: React.FC<AmtStaking> = ({ setActivePage }) => {
   const [historico, setHistorico] = useState(false);
+  const [simulador, setSimulador] = useState(false);
   const currentLanguage = useSelector(
     (state: typeof RootState) => state.session.language
   );
@@ -50,7 +52,7 @@ const Staking: React.FC<AmtStaking> = ({ setActivePage }) => {
           <h1>{textosExtra[currentLanguage].inversiones}</h1>
         </div>
 
-        {textoStaking(currentLanguage)}
+        {textoStaking(currentLanguage, setSimulador)}
 
         <CuadroStaking
           operacionWithdrawl={operacionWithdrawl}
@@ -95,6 +97,15 @@ const Staking: React.FC<AmtStaking> = ({ setActivePage }) => {
           contractAmt={contractAmt}
           currentSnapshot={currentSnapshot}
         />
+      </CSSTransition>
+
+      <CSSTransition
+        in={simulador == true}
+        timeout={800}
+        classNames="slideIzquierda"
+        unmountOnExit
+      >
+        <Simulador setActivePage={setSimulador} />
       </CSSTransition>
     </>
   );

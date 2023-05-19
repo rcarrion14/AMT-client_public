@@ -1,3 +1,16 @@
+html {
+  overflow:   scroll;
+}
+
+ ::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+    background: transparent; 
+} 
+
+/* make scrollbar transparent  */
+
+
 * {
   font-family: "Poppins";
 }
@@ -38,7 +51,7 @@ div {
   }
   .containerSlide {
     max-width: 600px;
-    transform: translateX(calc(50vw - 50%));
+    transform: translateX(calc(50vw - 50%)); 
   }
 
   /* -------------- */
@@ -81,6 +94,10 @@ button {
   box-shadow: -4px 6px 4px -1px rgba(0, 0, 0, 0.3);
   padding: 0;
   margin: 15px;
+}
+
+button:hover{
+  background-color:#98e8f5
 }
 
 u {
@@ -141,6 +158,7 @@ u {
 .container {
   display: flex;
   justify-content: center;
+  flex-direction: column;
 }
 
 .textoConexion {
@@ -163,6 +181,10 @@ u {
   background-color: white;
   border-radius: 15px;
   padding: 10px 25px 10px 25px;
+}
+
+.botonBlanco:hover{
+  background-color: #98e8f5;
 }
 
 .botonBlanco > p {
@@ -312,6 +334,11 @@ u {
   padding: 15px;
 }
 
+.containterSelector :hover{
+  font-weight: bolder;
+
+}
+
 .containterSelectorBuscador {
   overflow: scroll;
   height: 110%;
@@ -325,6 +352,10 @@ u {
   width: 100%;
   box-sizing: border-box;
   padding: 15px;
+}
+
+.containterSelectorBuscador :hover{
+  font-weight: bolder;
 }
 
 .moneda {
@@ -437,22 +468,25 @@ u {
 /* ------------------- */
 /* ------------------- */
 
-.slideIzquierda-enter-active {
-  position: fixed;
-  right: -100vw;
-  left: 100vw;
-  -webkit-transform: translateX(-100%);
-  transform: translateX(-100%);
-  transition: transform 800ms linear;
+ .slideIzquierda-enter {
+  transform: translateX(100vw)
 }
+
+
+ .slideIzquierda-enter-active {
+  -webkit-transform: translateX(-100%);
+  transform: translateX(calc(50vw - 50%));
+  transition: transform 800ms linear;
+} 
+
 
 .slideIzquierda-exit-active {
   -webkit-transform: translateX(100%);
-  transform: translateX(100%);
+  transform: translateX(100vw);
   transition: transform 800ms linear;
-}
+} 
 
-/*/*/
+
 
 .fade-exit-active {
   max-width: 540px;
@@ -927,6 +961,10 @@ u {
   align-items: center;
 }
 
+.listaAgregar :hover {
+font-weight: bolder;
+}
+
 .shadowBox {
   -webkit-box-shadow: 0px 4px 11px -8px rgba(0, 0, 0, 0.67);
   box-shadow: 0px 4px 11px -9px rgba(0, 0, 0, 0.77);
@@ -1104,4 +1142,8 @@ u {
 .Toastify__toast-body {
   flex: 1;
   padding-right: 1px;
+}
+
+.amtIcon{
+  width: 40px;
 }

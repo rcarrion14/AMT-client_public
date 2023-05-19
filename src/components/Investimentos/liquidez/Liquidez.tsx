@@ -12,6 +12,7 @@ import { amtOperations } from "../../../store/features/amt/amtOperations";
 import AlertaAntesDeOperacion from "./alertasLiquidez/AlertaAntesDeOperacion";
 import AlertaDepositeTokens from "./alertasLiquidez/AlertaDepositeTokens";
 import AlertaRetireTokens from "./alertasLiquidez/AlertaRetireTokens";
+import { toFrontEndString } from "../../../Utils/formatHelpers";
 
 interface LiquidezProps {
   setActivePage: React.Dispatch<React.SetStateAction<string>>;
@@ -31,6 +32,9 @@ const Liquidez: React.FC<LiquidezProps> = ({ setActivePage }) => {
   const allowanceVault = useSelector(
     (state: typeof RootState) => state.liqAmt.allowanceVaultBtcbLiq
   );
+  const balanceUserBtcb = useSelector(
+    (state: typeof RootState) => state.vaultBtcbLiquidity.balanceUserBtcb
+  );
 
   const [selectorDarLiq, setSelectorDarLiquidez] = useState(true);
 
@@ -45,7 +49,7 @@ const Liquidez: React.FC<LiquidezProps> = ({ setActivePage }) => {
           balanceLiqAmt &&
           balanceLiqAmt.gt(0) &&
           selectorDarLiq)
-          ? "containerSlide deshabilitador"
+          ? "containerSlide"
           : "containerSlide"
       }
     >
@@ -54,48 +58,23 @@ const Liquidez: React.FC<LiquidezProps> = ({ setActivePage }) => {
         <h1>{textosExtra[currentLanguage].inversiones}</h1>
       </div>
       {textoLiquidez(currentLanguage)}
-      {alertaAntes ? (
-        <AlertaAntesDeOperacion
-          setAlertaAntes={setAlertaAntes}
-          balanceLiqAmt={balanceLiqAmt}
-          allowanceVault={allowanceVault}
-        />
-      ) : null}
+      {alertaAntes ? <></> : null}
       {selectorDarLiq &&
       balanceLiqAmt &&
       balanceLiqAmt.gt(0) &&
       alertaDeposite ? (
         // Falta depositar liqAmt en baul
-        <AlertaDepositeTokens
-          setAlertaDeposite={setAlertaDeposite}
-          balanceLiqAmt={balanceLiqAmt}
-          allowanceVault={allowanceVault}
-        />
+        <></>
       ) : null}
-      <div className="botonesSimuladorStaking">
-        <button
-          onClick={() => {
-            setSelectorDarLiquidez(true);
-            setAlertaDeposite(true);
-          }}
-          className={selectorDarLiq ? "active" : undefined}
-        >
-          {textosExtra[currentLanguage].proveerLiquidez}
-        </button>
-        <button
-          onClick={() => {
-            setSelectorDarLiquidez(false);
-          }}
-          className={selectorDarLiq ? undefined : "active"}
-        >
-          {textosExtra[currentLanguage].tuLiquidezYRetirar}
-        </button>
+      <div className="botonesSimuladorStaking"></div>
+      <CuadroProveerLiquidez setAlertaAntes={setAlertaAntes} />
+      <div className="containerResultadosSimulacion">
+        <div style={{ alignContent: "center" }}>
+          <h2>{textosExtra[currentLanguage].btcbAcumulados}</h2>
+          <p>{balanceUserBtcb ? toFrontEndString(balanceUserBtcb) : ""} BTCB</p>
+        </div>
       </div>
-      {selectorDarLiq ? (
-        <CuadroProveerLiquidez setAlertaAntes={setAlertaAntes} />
-      ) : (
-        <RetirarLiquidez />
-      )}
+      <RetirarLiquidez />
     </div>
   );
 };
