@@ -634,12 +634,11 @@ export const textoInfoAllowance = (idioma: string) => {
   }
 };
 
-export const textoStaking = (idioma: string) => {
+export const textoStaking = (idioma: string, func: Function) => {
   if (idioma == "por") {
     return (
       <>
         <h1>Staking Padrão </h1>
-
         <p>
           Esse é o "Staking Padrão" do AutoMiningToken. Aqui você pode depositar
           seus AMTs e receber BTCB diariamente.
@@ -649,7 +648,14 @@ export const textoStaking = (idioma: string) => {
           você deposita.
         </p>
         <p>
-          Você pode simular seus recebimentos <u>clicando aqui.</u>
+          Você pode simular seus recebimentos{" "}
+          <u
+            onClick={() => {
+              func(true);
+            }}
+          >
+            clicando aquí.
+          </u>
         </p>
       </>
     );
@@ -669,7 +675,14 @@ export const textoStaking = (idioma: string) => {
           deposita.
         </p>
         <p>
-          Puede simular sus ganancias <u>haciendo clic aquí.</u>
+          Puede simular sus ganancias{" "}
+          <u
+            onClick={() => {
+              func(true);
+            }}
+          >
+            haciendo clic aquí.
+          </u>
         </p>
       </>
     );
@@ -689,7 +702,14 @@ export const textoStaking = (idioma: string) => {
           deposit.
         </p>
         <p>
-          You can simulate your earnings <u>by clicking here.</u>
+          You can simulate your earnings{" "}
+          <u
+            onClick={() => {
+              func(true);
+            }}
+          >
+            by clicking here.
+          </u>
         </p>
       </>
     );
@@ -1017,7 +1037,7 @@ export const textoRendimientos = (idioma: string) => {
   }
 };
 
-export const textoStakingAmt = (idioma: string) => {
+export const textoStakingAmt = (idioma: string, func: Function) => {
   if (idioma == "por") {
     return (
       <>
@@ -1038,8 +1058,8 @@ export const textoStakingAmt = (idioma: string) => {
           que funciona como um juro composto.
         </p>
         <p>
-          Você pode simular seus recebimentos <u>clicando aqui</u>.{" "}
-          {/* TODO LINK  */}
+          Você pode simular seus recebimentos{" "}
+          <u onClick={() => func(true)}>clicando aqui</u>.
         </p>
       </>
     );
@@ -1065,7 +1085,8 @@ export const textoStakingAmt = (idioma: string) => {
           de modo que funciona como un interés compuesto.
         </p>
         <p>
-          Puedes simular tus rendimientos <u>haciendo clic aquí</u>.
+          Puedes simular tus rendimientos{" "}
+          <u onClick={() => func(true)}>haciendo clic aquí</u>.
         </p>
       </>
     );
@@ -1089,7 +1110,8 @@ export const textoStakingAmt = (idioma: string) => {
           AMT is purchased, and so on, making it work like compound interest.
         </p>
         <p>
-          You can simulate your earnings <u>by clicking here</u>.
+          You can simulate your earnings{" "}
+          <u onClick={() => func(true)}>by clicking here</u>.
         </p>
       </>
     );
