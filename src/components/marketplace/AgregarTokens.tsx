@@ -33,6 +33,7 @@ const AgregarTokens: React.FC<AgregarTokensProps> = ({ setAgregarTokens }) => {
             alt=""
           />
           <div
+            className="agregarAMT"
             onClick={() => {
               agregarAmt();
             }}
