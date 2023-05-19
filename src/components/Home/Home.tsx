@@ -25,10 +25,11 @@ const Home: React.FC<HomeProps> = ({ setActivePage }) => {
         >
           <iframe
             className="video"
-            src="https://www.youtube.com/embed/rqUmSyIb4O0?start=121"
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/jPMSGfXdz90"
             title="YouTube video player"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowFullScreen
           ></iframe>
         </div>
         <p className="textoConexion">
