@@ -8,6 +8,7 @@ const NavBar: React.FC<NavBarProps> = ({ setActivePage, activePage }) => {
     <div className="navBar">
       <img
         onClick={() => {
+          window.scrollTo(0, 0);
           setActivePage("home");
         }}
         className={activePage == "home" ? "activeIcon" : undefined}
@@ -15,6 +16,7 @@ const NavBar: React.FC<NavBarProps> = ({ setActivePage, activePage }) => {
       />
       <img
         onClick={() => {
+          window.scrollTo(0, 0);
           setActivePage("marketplace");
         }}
         className={activePage == "marketplace" ? "activeIcon" : undefined}
@@ -22,6 +24,7 @@ const NavBar: React.FC<NavBarProps> = ({ setActivePage, activePage }) => {
       />
       <img
         onClick={() => {
+          window.scrollTo(0, 0);
           setActivePage("investidores");
         }}
         className={activePage == "investidores" ? "activeIcon" : undefined}
@@ -29,6 +32,7 @@ const NavBar: React.FC<NavBarProps> = ({ setActivePage, activePage }) => {
       />
       <img
         onClick={() => {
+          window.scrollTo(0, 0);
           setActivePage("gInvestidores");
         }}
         className={activePage == "gInvestidores" ? "activeIcon" : undefined}
