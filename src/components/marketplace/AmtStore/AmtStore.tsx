@@ -14,34 +14,27 @@ const AmtStore: React.FC<AmtStoreInterface> = ({ setActivePage }) => {
     (state: typeof RootState) => state.session.language
   );
   return (
-    <>
-      <div
-        className={
-          interfaz ? "containerSlide deshabilitador" : "containerSlide"
-        }
-      >
-        <div className="navBar_top">
-          <img
-            onClick={() => setActivePage("marketplace")}
-            src="icon_nav.png"
-          />
-          <h1>Marketplace</h1>
-        </div>
-        <div className="container">
-          {textoStore(currentLanguage, () => setInterfaz(true))}
-
-          <CuadroAmtStore />
-        </div>
-        <CSSTransition
-          in={interfaz}
-          timeout={700}
-          classNames="animacionSelector"
-          unmountOnExit
-        >
-          <Interfaz1Inch setInterfaz={setInterfaz} />
-        </CSSTransition>
+    <div
+      className={interfaz ? "containerSlide deshabilitador" : "containerSlide"}
+    >
+      <div className="navBar_top">
+        <img onClick={() => setActivePage("marketplace")} src="icon_nav.png" />
+        <h1>Marketplace</h1>
       </div>
-    </>
+
+      {textoStore(currentLanguage, () => setInterfaz(true))}
+
+      <CuadroAmtStore />
+
+      <CSSTransition
+        in={interfaz}
+        timeout={700}
+        classNames="animacionSelector"
+        unmountOnExit
+      >
+        <Interfaz1Inch setInterfaz={setInterfaz} />
+      </CSSTransition>
+    </div>
   );
 };
 

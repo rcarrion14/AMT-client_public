@@ -10,6 +10,42 @@ div {
   background-color: inherit;
 }
 
+@media (min-width: 600px) {
+  body {
+    background-color: #f6f6f6;
+    display: flex;
+    justify-content: center;
+    background-color: #34383e;
+  }
+  #root {
+    max-width: 600px;
+    min-width: 600px;
+  }
+  .navBarContainer {
+    max-width: 600px;
+    min-width: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .navBar {
+    max-width: 600px;
+  }
+  .containerLengueta {
+    background-color: #f6f6f6;
+    display: flex;
+    flex-direction: column;
+  }
+  .containerSlide {
+    max-width: 600px;
+    transform: translateX(calc(50vw - 50%));
+  }
+
+  /* -------------- */
+
+  /* --------- */
+}
+
 h1 {
   margin: 15px 20px 20px 20px;
   font-size: 1.4rem;
@@ -38,7 +74,7 @@ button {
   background-color: #00ddff;
   border: none;
   border-radius: 25px;
-  width: 40vw;
+  width: 50%;
   height: 35px;
   font-size: 75%;
   font-weight: bold;
@@ -77,6 +113,7 @@ u {
   position: relative;
   border-top-right-radius: 20px;
   border-top-left-radius: 20px;
+  min-height: calc(100vh - 354px);
 }
 
 .containerVideo {
@@ -99,6 +136,11 @@ u {
   box-sizing: border-box;
   height: 90vh;
   overflow: scroll;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
 }
 
 .textoConexion {
@@ -422,6 +464,8 @@ u {
 /*/*/
 
 .fade-exit-active {
+  max-width: 540px;
+  min-width: 540px;
   transform: translateY(100%);
   opacity: 0;
   scale: 0.7;
@@ -429,6 +473,8 @@ u {
 }
 
 .fade-enter {
+  max-width: 540px;
+  min-width: 540px;
   position: fixed;
   top: 245px;
   opacity: 0;

@@ -56,7 +56,11 @@ function App() {
         <GInvestidores />
       </CSSTransition>
 
-      <div className={addr ? undefined : "disabledContainer"}>
+      <div
+        className={
+          addr ? "navBarContainer" : "navBarContainer disabledContainer"
+        }
+      >
         <NavBar setActivePage={setActivePage} activePage={activePage} />
       </div>
       <ToastContainer position={toast.POSITION.TOP_LEFT} />

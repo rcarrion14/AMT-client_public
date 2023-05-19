@@ -106,14 +106,11 @@ const RetirarLiquidez: React.FC = () => {
           </div>
         </div>
       </div>
-
       {textoRetirarLiquidez(currentLanguage)}
-
       {balanceUserVaultLiq?.gt(0) ? (
         // Tiene depositados
         <AlertaRetireTokens />
       ) : null}
-
       <div className="doubleButtonContainer">
         <button
           onClick={() => {
@@ -129,7 +126,6 @@ const RetirarLiquidez: React.FC = () => {
         >
           {/* {textosExtra[currentLanguage].retirar} */} RETIRAR STAKING
         </button>
-
         <button
           className={
             balanceLiqAmt
