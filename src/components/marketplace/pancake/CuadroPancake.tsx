@@ -48,14 +48,18 @@ const CuadroPancake: React.FC<CuadroPancakeProps> = ({
 
   // Pedir quote:
   useEffect(() => {
-    if (inputPagarValue) {
-      useGetQuote(
-        monedaActive.address,
-        contractAddresses.Amt,
-        inputPagarValue
-      ).then((response) => {
-        setInputRecibirValue(toFrontEndString(response.toTokenAmount));
-      });
+    if (parseFloat(inputPagarValue) == 0) {
+      setInputRecibirValue("0");
+    } else {
+      if (inputPagarValue) {
+        useGetQuote(
+          monedaActive.address,
+          contractAddresses.Amt,
+          inputPagarValue
+        ).then((response) => {
+          setInputRecibirValue(toFrontEndString(response.toTokenAmount));
+        });
+      }
     }
   }, [inputPagarValue, monedaActive, toggler]);
 
@@ -63,6 +67,7 @@ const CuadroPancake: React.FC<CuadroPancakeProps> = ({
     if (
       addr &&
       inputPagarValue &&
+      parseFloat(inputPagarValue) != 0 &&
       allowanceErc20.gt(ethers.utils.parseEther(inputPagarValue)) &&
       balanceErc20.gt(ethers.utils.parseEther(inputPagarValue))
     ) {
@@ -108,13 +113,17 @@ const CuadroPancake: React.FC<CuadroPancakeProps> = ({
   const handleInputPagarChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    setInputPagarValue(event.target.value);
+    if (parseFloat(event.target.value) >= 0) {
+      setInputPagarValue(event.target.value);
+    }
   };
 
   const handleInputRecibirChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    setInputRecibirValue(event.target.value);
+    if (parseFloat(event.target.value) >= 0) {
+      setInputRecibirValue(event.target.value);
+    }
   };
 
   //Esto de arriba
