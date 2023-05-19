@@ -69,8 +69,10 @@ const Liquidez: React.FC<LiquidezProps> = ({ setActivePage }) => {
       <div className="botonesSimuladorStaking"></div>
       <CuadroProveerLiquidez setAlertaAntes={setAlertaAntes} />
       <div className="containerResultadosSimulacion">
-        <h2>{textosExtra[currentLanguage].btcbAcumulados}</h2>
-        <p> {balanceUserBtcb ? toFrontEndString(balanceUserBtcb) : ""} BTCB</p>
+        <div style={{ alignContent: "center" }}>
+          <h2>{textosExtra[currentLanguage].btcbAcumulados}</h2>
+          <p>{balanceUserBtcb ? toFrontEndString(balanceUserBtcb) : ""} BTCB</p>
+        </div>
       </div>
       <RetirarLiquidez />
     </div>
