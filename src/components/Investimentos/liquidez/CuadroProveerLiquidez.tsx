@@ -1,5 +1,4 @@
 // @ts-nocheck
-
 import React, { useRef, useState } from "react";
 
 import { useSelector } from "react-redux";
@@ -8,8 +7,11 @@ import BotonDarLiquidez from "./BotonDarLiquidez/BotonDarLiquidez";
 import { textosExtra } from "../../../Utils/textos";
 import { ethers } from "ethers";
 import { toFrontEndString } from "../../../Utils/formatHelpers";
-
+import { vaultBtcbLiquidityOperations } from "../../../store/features/vaultBtcbLiquidity/vaultBtcbLiquidityOperations";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../../store/store";
 const CuadroProveerLiquidez = ({ setAlertaAntes }) => {
+  const dispatch = useDispatch<AppDispatch>();
   const balanceAmt = useSelector(
     (state: typeof RootState) => state.amt.balance
   );
@@ -45,6 +47,20 @@ const CuadroProveerLiquidez = ({ setAlertaAntes }) => {
     (state: typeof RootState) => state.session.language
   );
 
+  const balanceLiqAmtStaked = useSelector(
+    (state: typeof RootState) => state.vaultBtcbLiquidity.balanceUserAmt
+  );
+
+  const allowanceVault = useSelector(
+    (state: typeof RootState) => state.liqAmt.allowanceVaultBtcbLiq
+  );
+  const mensajeBotonStake = () => {
+    if (allowanceVault.lt(balanceLiqAmt)) {
+      return textosExtra[currentLanguage].aprobar;
+    } else {
+      return textosExtra[currentLanguage].stake;
+    }
+  };
   const ratioAmtBtcb =
     balanceOfPoolAmt !== undefined && balanceOfPoolBtcb !== undefined
       ? balanceOfPoolAmt / balanceOfPoolBtcb
@@ -82,7 +98,7 @@ const CuadroProveerLiquidez = ({ setAlertaAntes }) => {
           </p>
         </div>
         <div className="cuadroCompra">
-          <img src="coinAutomining.png" />
+          <img src="coinAutomining_.png" />
           <div>AMT</div>
           <input
             ref={inputAmt}
@@ -113,15 +129,54 @@ const CuadroProveerLiquidez = ({ setAlertaAntes }) => {
             value={inputBtcbValue}
           />
         </div>
-        <BotonDarLiquidez
-          balanceAmt={balanceAmt}
-          balanceBtc={balanceBtcb}
-          inputAmt={parseFloat(inputAmtValue)}
-          inputBtc={parseFloat(inputBtcbValue)}
-          allowanceAmt={allowanceAmt}
-          allowanceBtc={allowanceBtcb}
-          setAlertaAntes={setAlertaAntes}
-        ></BotonDarLiquidez>
+        <div className="doubleButtonContainer">
+          <BotonDarLiquidez
+            balanceAmt={balanceAmt}
+            balanceBtc={balanceBtcb}
+            inputAmt={parseFloat(inputAmtValue)}
+            inputBtc={parseFloat(inputBtcbValue)}
+            allowanceAmt={allowanceAmt}
+            allowanceBtc={allowanceBtcb}
+            setAlertaAntes={setAlertaAntes}
+          ></BotonDarLiquidez>
+          <button
+            className={
+              balanceLiqAmt
+                ? balanceLiqAmt.gt(0)
+                  ? undefined
+                  : "gris"
+                : undefined
+            }
+            onClick={() => {
+              allowanceVault.gt(balanceLiqAmt)
+                ? vaultBtcbLiquidityOperations.stake(dispatch, balanceLiqAmt)
+                : amtOperations.approveVaultBtcbLiq(dispatch);
+            }}
+          >
+            {balanceLiqAmt ? mensajeBotonStake() : "Stake"}
+          </button>
+        </div>
+        <div className="containerPasos">
+          <img
+            className={
+              balanceLiqAmt && balanceLiqAmt.gt(0)
+                ? "inactiveIcon pasos"
+                : "activeIcon pasos"
+            }
+            src="number-one.png"
+            alt=""
+          />
+          <img src="right-arrow.png" alt="" className="inactiveIcon pasos" />
+          <img
+            src="number-two.png"
+            alt=""
+            className={
+              balanceLiqAmt && balanceLiqAmt.gt(0)
+                ? "activeIcon pasos"
+                : "inactiveIcon pasos"
+            }
+          />
+        </div>
       </div>
     </>
   );
