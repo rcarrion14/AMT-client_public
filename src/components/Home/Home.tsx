@@ -45,6 +45,7 @@ const Home: React.FC<HomeProps> = ({ setActivePage }) => {
             activador={"marketplace"}
             setActivePage={setActivePage}
             image={"icon_marketplace.png"}
+            scroll={true}
           />
           <BotonBlanco
             titulo={textoBotonesBlancos[currentLanguage].investimentos.titulo}
@@ -54,6 +55,7 @@ const Home: React.FC<HomeProps> = ({ setActivePage }) => {
             activador={"investidores"}
             setActivePage={setActivePage}
             image={"icon_invest.png"}
+            scroll={true}
           />
           <BotonBlanco
             titulo={textoBotonesBlancos[currentLanguage].gInvestidores.titulo}
@@ -63,6 +65,7 @@ const Home: React.FC<HomeProps> = ({ setActivePage }) => {
             activador={"gInvestidores"}
             setActivePage={setActivePage}
             image={"icon_grandesInvest.png"}
+            scroll={true}
           />
         </div>
       </div>

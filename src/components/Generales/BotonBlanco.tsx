@@ -5,6 +5,7 @@ interface BotonBlancoProps {
   activador: any;
   setActivePage: any;
   image?: any;
+  scroll?: boolean | undefined;
 }
 const BotonBlanco: React.FC<BotonBlancoProps> = ({
   titulo,
@@ -12,12 +13,14 @@ const BotonBlanco: React.FC<BotonBlancoProps> = ({
   activador,
   setActivePage,
   image,
+  scroll,
 }) => {
   return (
     <div
       className="botonBlanco shadowBox"
       onClick={() => {
         setActivePage(activador);
+        scroll ? window.scrollTo(0, 0) : null;
       }}
     >
       <h2>{titulo}</h2>
