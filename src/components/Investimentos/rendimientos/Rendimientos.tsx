@@ -50,32 +50,38 @@ const Rendimientos: React.FC<RendimientosInterface> = ({ setActivePage }) => {
     );
   });
   return (
-    <div className="containerSlide">
-      <div className="navBar_top">
-        <img onClick={() => setActivePage("")} src="icon_nav.png" />
-        <h1>{textosExtra[currentLanguage].inversiones}</h1>
+    <>
+      <div className="containerSlide">
+        <div className="navBar_top">
+          <img onClick={() => setActivePage("")} src="icon_nav.png" />
+          <h1>{textosExtra[currentLanguage].inversiones}</h1>
+        </div>
+        {textoRendimientos(currentLanguage)}
+        <BotonBlanco
+          titulo={textoBotonesBlancos[currentLanguage].simulador.titulo}
+          descripcion={
+            textoBotonesBlancos[currentLanguage].simulador.descripcion
+          }
+          activador={"simulador"}
+          setActivePage={setActivePageRendimientos}
+        />
+        <BotonBlanco
+          titulo={textoBotonesBlancos[currentLanguage].maquinas.titulo}
+          descripcion={
+            textoBotonesBlancos[currentLanguage].maquinas.descripcion
+          }
+          activador={"maquinas"}
+          setActivePage={setActivePageRendimientos}
+        />
+        <BotonBlanco
+          titulo={textoBotonesBlancos[currentLanguage].grafico.titulo}
+          descripcion={textoBotonesBlancos[currentLanguage].grafico.descripcion}
+          activador={"grafico"}
+          setActivePage={setActivePageRendimientos}
+        />
       </div>
-      {textoRendimientos(currentLanguage)}
-      <BotonBlanco
-        titulo={textoBotonesBlancos[currentLanguage].simulador.titulo}
-        descripcion={textoBotonesBlancos[currentLanguage].simulador.descripcion}
-        activador={"simulador"}
-        setActivePage={setActivePageRendimientos}
-      />
-      <BotonBlanco
-        titulo={textoBotonesBlancos[currentLanguage].maquinas.titulo}
-        descripcion={textoBotonesBlancos[currentLanguage].maquinas.descripcion}
-        activador={"maquinas"}
-        setActivePage={setActivePageRendimientos}
-      />
-      <BotonBlanco
-        titulo={textoBotonesBlancos[currentLanguage].grafico.titulo}
-        descripcion={textoBotonesBlancos[currentLanguage].grafico.descripcion}
-        activador={"grafico"}
-        setActivePage={setActivePageRendimientos}
-      />
       {listaDePaginas}
-    </div>
+    </>
   );
 };
 
