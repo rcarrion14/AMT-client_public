@@ -61,9 +61,16 @@ const CuadroStaking: React.FC<CuadroStakingProps> = ({
             className="inputCompra"
             type="number"
             onChange={() => {
-              setInputStakeValue(
-                inputStake.current?.value ? inputStake.current?.value : ""
-              );
+              if (
+                inputStake.current &&
+                parseFloat(inputStake.current?.value) >= 0
+              ) {
+                setInputStakeValue(
+                  inputStake.current?.value ? inputStake.current?.value : ""
+                );
+              } else if (inputStake.current) {
+                inputStake.current.value = "0";
+              }
             }}
           />
         </div>
