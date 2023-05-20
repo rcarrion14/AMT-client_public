@@ -57,11 +57,11 @@ const CuadroQuema = () => {
   ) => {
     if (parseFloat(event.target.value) >= 0) {
       if (backRate) {
-        setInputRecibirValue(
+        setInputPagarValue(
           (parseFloat(event.target.value) * backRate).toString()
         );
       }
-      setInputPagarValue(event.target.value);
+      setInputRecibirValue(event.target.value);
     }
   };
 

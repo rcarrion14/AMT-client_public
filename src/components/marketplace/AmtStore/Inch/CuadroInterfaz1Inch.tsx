@@ -54,23 +54,6 @@ const CuadroInterfaz1Inch = () => {
     });
   }, []);
 
-  // Pedir quote:
-  useEffect(() => {
-    if (parseFloat(inputPagarValue) == 0) {
-      setInputRecibirValue("0");
-    } else {
-      if (inputPagarValue) {
-        useGetQuote(
-          monedaActive.address,
-          contractAddresses.Usdt,
-          inputPagarValue
-        ).then((response) => {
-          setInputRecibirValue(toFrontEndString(response.toTokenAmount));
-        });
-      }
-    }
-  }, [inputPagarValue, monedaActive, toggler]);
-
   // getting Tx data
   useEffect(() => {
     if (
@@ -89,7 +72,7 @@ const CuadroInterfaz1Inch = () => {
         setTxData(result);
       });
     }
-  }, [inputPagarValue, toggler]);
+  }, [inputPagarValue, inputRecibirValue, monedaActive, toggler]);
 
   // cargando ERC20 generico
 
@@ -124,6 +107,16 @@ const CuadroInterfaz1Inch = () => {
   ) => {
     if (parseFloat(event.target.value) >= 0) {
       setInputPagarValue(event.target.value);
+      useGetQuote(
+        monedaActive.address,
+        contractAddresses.Usdt,
+        event.target.value
+      ).then((response) => {
+        setInputRecibirValue(toFrontEndString(response.toTokenAmount));
+      });
+    } else {
+      setInputPagarValue("");
+      setInputRecibirValue("");
     }
   };
 
@@ -132,6 +125,16 @@ const CuadroInterfaz1Inch = () => {
   ) => {
     if (parseFloat(event.target.value) >= 0) {
       setInputRecibirValue(event.target.value);
+      useGetQuote(
+        contractAddresses.Usdt,
+        monedaActive.address,
+        event.target.value
+      ).then((response) => {
+        setInputPagarValue(toFrontEndString(response.toTokenAmount));
+      });
+    } else {
+      setInputPagarValue("");
+      setInputRecibirValue("");
     }
   };
 

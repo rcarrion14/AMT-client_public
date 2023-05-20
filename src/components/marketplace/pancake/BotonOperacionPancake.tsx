@@ -5,6 +5,7 @@ import { textosExtra } from "../../../Utils/textos";
 import { BigNumber, ethers } from "ethers";
 import { operationExecution } from "../../../store/features/operationExecution";
 import { TransactionDataInterface } from "../AmtStore/Inch/CuadroInterfaz1Inch";
+import { useGetTxData } from "../../../Utils/1inch";
 
 interface BotonOperacionProps {
   balanceErc20: BigNumber | undefined;
@@ -46,20 +47,20 @@ const BotonOperacion: React.FC<BotonOperacionProps> = ({
     <>
       <button
         onClick={() => {
-          if (true) {
-            approveErc20 && allowanceErc20 && allowanceErc20.lt(Number(input))
-              ? operationExecution(
-                  approveErc20(
-                    "0x1111111254eeb25477b68fb85ed929f73a960582",
-                    ethers.utils.parseEther("99999999999")
-                  )
-                ).then(() => {
-                  setToggler(!toggler);
-                })
-              : operationExecution(signer.sendTransaction(txData)).then(() => {
-                  setToggler(!toggler);
-                });
-          }
+          approveErc20 &&
+          allowanceErc20 &&
+          allowanceErc20.lt(ethers.utils.parseEther(input))
+            ? operationExecution(
+                approveErc20(
+                  "0x1111111254eeb25477b68fb85ed929f73a960582",
+                  ethers.utils.parseEther("99999999999")
+                )
+              ).then(() => {
+                setToggler(!toggler);
+              })
+            : operationExecution(signer.sendTransaction(txData)).then(() => {
+                setToggler(!toggler);
+              });
         }}
         className="btnLarge"
       >
