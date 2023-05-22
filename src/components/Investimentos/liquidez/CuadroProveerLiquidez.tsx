@@ -10,6 +10,7 @@ import { toFrontEndString } from "../../../Utils/formatHelpers";
 import { vaultBtcbLiquidityOperations } from "../../../store/features/vaultBtcbLiquidity/vaultBtcbLiquidityOperations";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../store/store";
+import { liqAmtOperations } from "../../../store/features/liqAmt/liqAmtOperations";
 const CuadroProveerLiquidez = ({ setAlertaAntes }) => {
   const dispatch = useDispatch<AppDispatch>();
   const balanceAmt = useSelector(
@@ -150,7 +151,7 @@ const CuadroProveerLiquidez = ({ setAlertaAntes }) => {
             onClick={() => {
               allowanceVault.gt(balanceLiqAmt)
                 ? vaultBtcbLiquidityOperations.stake(dispatch, balanceLiqAmt)
-                : amtOperations.approveVaultBtcbLiq(dispatch);
+                : liqAmtOperations.approveVaultBtcbLiq(dispatch);
             }}
           >
             {balanceLiqAmt ? mensajeBotonStake() : "Stake"}

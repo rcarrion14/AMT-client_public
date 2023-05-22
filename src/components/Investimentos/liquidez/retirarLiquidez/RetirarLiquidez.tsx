@@ -11,12 +11,12 @@ import {
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../store/store";
 import BotonRetirarLiquidez from "./BotonRetirarLiquidez";
-import { ethers } from "ethers";
+import { ethers, BigNumber } from "ethers";
 import { toFrontEndString } from "../../../../Utils/formatHelpers";
 import AlertaRetireTokens from "../../liquidez/alertasLiquidez/AlertaRetireTokens";
 import { vaultBtcbLiquidityOperations } from "../../../../store/features/vaultBtcbLiquidity/vaultBtcbLiquidityOperations";
 import { masterOperations } from "../../../../store/features/master/masterOperations";
-
+import { liqAmtOperations } from "../../../../store/features/liqAmt/liqAmtOperations";
 const RetirarLiquidez: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const currentLanguage = useSelector(
@@ -45,6 +45,10 @@ const RetirarLiquidez: React.FC = () => {
     (state: typeof RootState) => state.vaultBtcbLiquidity.balanceUserAmt
   );
 
+  const allowanceLiqAmtToMaster = useSelector(
+    (state: typeof RootState) => state.liqAmt.allowanceMaster
+  );
+
   const precioBtcb = ethers.BigNumber.from(28500);
 
   let usdtEnAmt = ethers.BigNumber.from(0);
@@ -60,11 +64,14 @@ const RetirarLiquidez: React.FC = () => {
     balancePoolAmt &&
     balancePoolBtc
   ) {
-    poolParticipation = liqAmtTotalSupply.div(
-      balanceLiqAmt.add(balanceLiqAmtStaked)
-    );
-    amtEnLiquidez = balancePoolAmt.div(poolParticipation);
-    btcbEnLiquidez = balancePoolBtc.div(poolParticipation);
+    poolParticipation = (
+      parseFloat(balanceLiqAmt.toString()) /
+      parseFloat(liqAmtTotalSupply.toString())
+    ).toFixed(2);
+
+    amtEnLiquidez = balancePoolAmt.mul(balanceLiqAmt).div(liqAmtTotalSupply);
+    btcbEnLiquidez = balancePoolBtc.mul(balanceLiqAmt).div(liqAmtTotalSupply);
+
     usdtEnAmt = amtEnLiquidez.mul(
       balancePoolBtc.mul(precioBtcb).div(balanceLiqAmt.add(balanceLiqAmtStaked))
     );
@@ -85,10 +92,7 @@ const RetirarLiquidez: React.FC = () => {
       </div>
       <div className="containerParticipacionEnPool">
         <b>{textosExtra[currentLanguage].participacionEnPool} </b>
-        {ethers.utils.formatEther(
-          poolParticipation.mul(ethers.BigNumber.from(100))
-        )}
-        %
+        {poolParticipation.toString()}%
       </div>
       <div className="containerSaldosLiquidez">
         <div className="leftSide">
@@ -124,7 +128,7 @@ const RetirarLiquidez: React.FC = () => {
               : undefined
           }
         >
-          {/* {textosExtra[currentLanguage].retirar} */} RETIRAR STAKING
+          {textosExtra[currentLanguage].retirarStaking}
         </button>
         <button
           className={
@@ -135,12 +139,20 @@ const RetirarLiquidez: React.FC = () => {
               : undefined
           }
           onClick={() =>
-            balanceLiqAmt && balanceLiqAmt.gt(0)
+            balanceLiqAmt &&
+            allowanceLiqAmtToMaster &&
+            allowanceLiqAmtToMaster.lt(balanceLiqAmt)
+              ? liqAmtOperations.approveMaster(dispatch)
+              : balanceLiqAmt && balanceLiqAmt.gt(0)
               ? masterOperations.removeLiquidity(dispatch, balanceLiqAmt)
               : null
           }
         >
-          Retirar liquidez
+          {balanceLiqAmt &&
+          allowanceLiqAmtToMaster &&
+          allowanceLiqAmtToMaster.lt(balanceLiqAmt)
+            ? textosExtra[currentLanguage].aprobarLiqAmt
+            : textosExtra[currentLanguage].retirar}
         </button>
       </div>
       <div className="containerPasos">
