@@ -56,7 +56,7 @@ const CuadroProveerLiquidez = ({ setAlertaAntes }) => {
     (state: typeof RootState) => state.liqAmt.allowanceVaultBtcbLiq
   );
   const mensajeBotonStake = () => {
-    if (allowanceVault.lt(balanceLiqAmt)) {
+    if (allowanceVault && balanceLiqAmt && allowanceVault.lt(balanceLiqAmt)) {
       return textosExtra[currentLanguage].aprobar;
     } else {
       return textosExtra[currentLanguage].stake;
