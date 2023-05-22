@@ -71,7 +71,6 @@ const BotonDarLiquidez: React.FC<BotonDarLiquidezProps> = ({
           </div>
         ) : (
           <button
-            className="btnLarge"
             onClick={() => {
               setAlertaAntes(true);
               masterOperations.addLiquidity(
