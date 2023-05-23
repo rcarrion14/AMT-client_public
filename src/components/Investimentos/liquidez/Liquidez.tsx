@@ -1,17 +1,9 @@
-// @ts-nocheck
 import React, { useState } from "react";
 import { textoLiquidez, textosExtra } from "../../../Utils/textos";
 import CuadroProveerLiquidez from "./CuadroProveerLiquidez";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 import RetirarLiquidez from "./retirarLiquidez/RetirarLiquidez";
-
-import { vaultBtcbLiquidityOperations } from "../../../store/features/vaultBtcbLiquidity/vaultBtcbLiquidityOperations";
-import { amtOperations } from "../../../store/features/amt/amtOperations";
-
-import AlertaAntesDeOperacion from "./alertasLiquidez/AlertaAntesDeOperacion";
-import AlertaDepositeTokens from "./alertasLiquidez/AlertaDepositeTokens";
-import AlertaRetireTokens from "./alertasLiquidez/AlertaRetireTokens";
 import { toFrontEndString } from "../../../Utils/formatHelpers";
 
 interface LiquidezProps {
