@@ -138,8 +138,8 @@ const CuadroProveerLiquidez = () => {
           <BotonDarLiquidez
             balanceAmt={balanceAmt}
             balanceBtc={balanceBtcb}
-            inputAmt={parseFloat(inputAmtValue)}
-            inputBtc={parseFloat(inputBtcbValue)}
+            inputAmt={inputAmtValue !== "" ? parseFloat(inputAmtValue) : 0}
+            inputBtc={inputBtcbValue !== "" ? parseFloat(inputBtcbValue) : 0}
             allowanceAmt={allowanceAmt}
             allowanceBtc={allowanceBtcb}
           ></BotonDarLiquidez>

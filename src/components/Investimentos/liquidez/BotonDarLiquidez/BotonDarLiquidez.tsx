@@ -31,10 +31,15 @@ const BotonDarLiquidez: React.FC<BotonDarLiquidezProps> = ({
   const dispatch = useDispatch<AppDispatch>();
 
   const noPuedeProveerLiquidez =
-    allowanceAmt?.lt(inputAmt) ||
-    balanceAmt?.lt(inputAmt) ||
-    allowanceBtc?.lt(inputBtc) ||
-    balanceBtc?.lt(inputBtc);
+    !allowanceAmt ||
+    !balanceAmt ||
+    !allowanceBtc ||
+    !balanceBtc ||
+    allowanceAmt.lt(inputAmt) ||
+    balanceAmt.lt(inputAmt) ||
+    allowanceBtc.lt(inputBtc) ||
+    balanceBtc.lt(inputBtc);
+
   return (
     <>
       {
