@@ -15,7 +15,7 @@ interface AmtStaking {
 
 const Staking: React.FC<AmtStaking> = ({ setActivePage }) => {
   const [historico, setHistorico] = useState(false);
-  const [simulador, setSimulador] = useState(false);
+  const [simulador, setSimulador] = useState<boolean | string>(false);
   const currentLanguage = useSelector(
     (state: typeof RootState) => state.session.language
   );
