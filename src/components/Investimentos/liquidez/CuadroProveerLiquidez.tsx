@@ -75,7 +75,7 @@ const CuadroProveerLiquidez = () => {
   const handleInputAmtValueChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    if (ratioAmtBtcb) {
+    if (ratioAmtBtcb && parseFloat(event.target.value) >= 0) {
       setInputAmtValue(event.target.value);
       setInputBtcbValue(
         (parseFloat(event.target.value) / ratioAmtBtcb).toString()
@@ -86,13 +86,14 @@ const CuadroProveerLiquidez = () => {
   const handleInputBtcbValueChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    if (ratioAmtBtcb) {
+    if (ratioAmtBtcb && parseFloat(event.target.value) >= 0) {
       setInputBtcbValue(event.target.value);
       setInputAmtValue(
         (parseFloat(event.target.value) * ratioAmtBtcb).toString()
       );
     }
   };
+  console.log({ inputAmtValue, inputBtcbValue });
   return (
     <>
       <div id="primeraSeccion">
@@ -138,8 +139,16 @@ const CuadroProveerLiquidez = () => {
           <BotonDarLiquidez
             balanceAmt={balanceAmt}
             balanceBtc={balanceBtcb}
-            inputAmt={inputAmtValue !== "" ? parseFloat(inputAmtValue) : 0}
-            inputBtc={inputBtcbValue !== "" ? parseFloat(inputBtcbValue) : 0}
+            inputAmt={
+              inputAmtValue !== "" && inputAmtValue !== "NaN"
+                ? parseFloat(inputAmtValue)
+                : 0
+            }
+            inputBtc={
+              inputBtcbValue !== "" && inputBtcbValue !== "NaN"
+                ? parseFloat(inputBtcbValue)
+                : 0
+            }
             allowanceAmt={allowanceAmt}
             allowanceBtc={allowanceBtcb}
           ></BotonDarLiquidez>
