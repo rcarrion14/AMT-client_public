@@ -1,8 +1,6 @@
-// @ts-nocheck
-
 import React from "react";
 import "./BotonDarLiquidez.css";
-import { textosExtra, interfaceTextoExtra } from "../../../../Utils/textos";
+import { textosExtra } from "../../../../Utils/textos";
 import { RootState } from "../../../../store/store";
 import { useSelector } from "react-redux";
 import { amtOperations } from "../../../../store/features/amt/amtOperations";
@@ -10,12 +8,12 @@ import { btcbOperations } from "../../../../store/features/btcb/btcbOperations";
 import { masterOperations } from "../../../../store/features/master/masterOperations";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../../store/store";
-import { ethers } from "ethers";
+import { ethers, BigNumber } from "ethers";
 interface BotonDarLiquidezProps {
-  balanceAmt: number;
-  balanceBtc: number;
-  allowanceAmt: number;
-  allowanceBtc: number;
+  balanceAmt: BigNumber | undefined;
+  balanceBtc: BigNumber | undefined;
+  allowanceAmt: BigNumber | undefined;
+  allowanceBtc: BigNumber | undefined;
   inputAmt: number;
   inputBtc: number;
 }
@@ -26,7 +24,6 @@ const BotonDarLiquidez: React.FC<BotonDarLiquidezProps> = ({
   allowanceBtc,
   inputAmt,
   inputBtc,
-  setAlertaAntes,
 }) => {
   const currentLanguage = useSelector(
     (state: typeof RootState) => state.session.language
@@ -34,10 +31,10 @@ const BotonDarLiquidez: React.FC<BotonDarLiquidezProps> = ({
   const dispatch = useDispatch<AppDispatch>();
 
   const noPuedeProveerLiquidez =
-    allowanceAmt < inputAmt ||
-    inputAmt > balanceAmt ||
-    allowanceBtc < inputBtc ||
-    inputBtc > balanceBtc;
+    allowanceAmt?.lt(inputAmt) ||
+    balanceAmt?.lt(inputAmt) ||
+    allowanceBtc?.lt(inputBtc) ||
+    balanceBtc?.lt(inputBtc);
   return (
     <>
       {
@@ -45,26 +42,30 @@ const BotonDarLiquidez: React.FC<BotonDarLiquidezProps> = ({
         noPuedeProveerLiquidez ? (
           <div className="doubleButtonContainer">
             <button
-              className={allowanceAmt > inputAmt ? "inactive" : null}
+              className={
+                allowanceAmt && allowanceAmt.gt(inputAmt)
+                  ? "inactive"
+                  : undefined
+              }
               onClick={() => {
                 amtOperations.approveMaster(dispatch);
               }}
             >
-              {allowanceAmt < inputAmt
+              {allowanceAmt?.lt(inputAmt)
                 ? textosExtra[currentLanguage].aprobarAMT
-                : inputAmt > balanceAmt
+                : balanceAmt && balanceAmt.lt(inputAmt)
                 ? textosExtra[currentLanguage].bceAmtInsuficiente
                 : "AMT aprobado"}
             </button>
             <button
-              className={allowanceBtc > inputBtc ? "inactive" : null}
+              className={allowanceBtc?.gt(inputBtc) ? "inactive" : undefined}
               onClick={() => {
                 btcbOperations.approveMaster(dispatch);
               }}
             >
-              {allowanceBtc < inputBtc
+              {allowanceBtc?.lt(inputBtc)
                 ? textosExtra[currentLanguage].aprobarBTCB
-                : inputBtc > balanceBtc
+                : balanceBtc?.lt(inputBtc)
                 ? textosExtra[currentLanguage].bceBtcInsuficiente
                 : "BTCB aprobado"}
             </button>
@@ -72,7 +73,6 @@ const BotonDarLiquidez: React.FC<BotonDarLiquidezProps> = ({
         ) : (
           <button
             onClick={() => {
-              setAlertaAntes(true);
               masterOperations.addLiquidity(
                 dispatch,
                 ethers.utils.parseEther(inputAmt.toFixed(15)),

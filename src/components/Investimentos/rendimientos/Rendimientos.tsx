@@ -27,7 +27,9 @@ const Rendimientos: React.FC<RendimientosInterface> = ({ setActivePage }) => {
     (state: typeof RootState) => state.session.language
   );
 
-  const [activePageRendimientos, setActivePageRendimientos] = useState("");
+  const [activePageRendimientos, setActivePageRendimientos] = useState<
+    string | boolean
+  >("");
 
   const jsxPages: jsxPagesInterface = {
     simulador: <Simulador setActivePage={setActivePageRendimientos} />,

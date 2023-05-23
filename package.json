@@ -9,8 +9,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@reduxjs/toolkit": "^1.9.5",
     "@types/chart.js": "^2.9.37",
+    "@types/react-redux": "^7.1.25",
     "chart.js": "^4.3.0",
     "ethers": "5.4",
     "flag-icon-css": "^4.1.7",
@@ -23,6 +23,7 @@
     "redux": "^4.2.1"
   },
   "devDependencies": {
+    "@reduxjs/toolkit": "^1.9.5",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
     "@types/react-transition-group": "^4.4.5",

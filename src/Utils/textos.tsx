@@ -1426,6 +1426,7 @@ export interface interfaceTextoExtra {
   whatsAppMessage: string;
   buscar: string;
   nadaACobrar: string;
+  retirarStaking: string;
 }
 export type typeTextosExtra = {
   [key in languageCode]: interfaceTextoExtra;
@@ -1507,6 +1508,7 @@ export const textosExtra: typeTextosExtra = {
     whatsAppMessage: "Gostaria+de+saber+mais+sobre+o+AutoMiningToken",
     buscar: "Pesquisar",
     nadaACobrar: "Nada a cobrar",
+    retirarStaking: "Retirar staking",
   },
   esp: {
     bienvenido: "¡Bienvenido!",
@@ -1583,6 +1585,7 @@ export const textosExtra: typeTextosExtra = {
     whatsAppMessage: "Me+gustaría+saber+mas+sobre+AutoMiningToken",
     buscar: "Buscar",
     nadaACobrar: "Nada a cobrar",
+    retirarStaking: "Retirar staking",
   },
   eng: {
     bienvenido: "Welcome!",
@@ -1649,6 +1652,7 @@ export const textosExtra: typeTextosExtra = {
     whatsAppMessage: "I+would+like+to+know+more+about+AutoMiningToken",
     buscar: "Search",
     nadaACobrar: "Nothing to charge",
+    retirarStaking: "Staking Withdraw",
   },
 };
 
@@ -1789,19 +1793,19 @@ export const textoBotonesBlancos: typeTextoBotonesBlancos = {
     },
     simulador: {
       titulo: "Simule la rentabilidad",
-      descripcion: "Confira cuánto rinde AMT en diferentes escenarios",
+      descripcion: "Chequee cuánto rinde AMT en diferentes escenarios",
     },
     simuladorActual: {
       titulo: "Rentabilidad del staking ahora",
-      descripcion: "Confira cuánto rinde AMT en el escenario actual",
+      descripcion: "Chequee cuánto rinde AMT en el escenario actual",
     },
     maquinas: {
       titulo: "Máquinas activas en el proyecto AMT",
-      descripcion: "Confira nuestra producción diaria de bitcoins",
+      descripcion: "Chequee nuestra producción diaria de bitcoins",
     },
     grafico: {
       titulo: "Gráfico de precio de AMT",
-      descripcion: "Confira el valor de AMT contra BTC y USDT",
+      descripcion: "Chequee el valor de AMT contra BTC y USDT",
     },
   },
   eng: {

@@ -24,6 +24,10 @@ const Historico: React.FC<HistoricoProps> = ({
   const currentLanguage = useSelector(
     (state: typeof RootState) => state.session.language
   );
+
+  const precioAmtUsdt = useSelector(
+    (state: typeof RootState) => state.amt.precioEnUsdt
+  );
   const [stakingIniciales, setStakingIniciales] = useState<
     dataStakingType | undefined
   >(undefined);
@@ -127,7 +131,11 @@ const Historico: React.FC<HistoricoProps> = ({
         <div>AMT</div>
         <div>{stackedByUser ? toFrontEndString(stackedByUser) : null}</div>
         <div className="celeste">
-          {stackedByUser ? toFrontEndString(stackedByUser) + " USDT" : null}
+          {stackedByUser && precioAmtUsdt
+            ? (
+                parseFloat(toFrontEndString(stackedByUser)) * precioAmtUsdt
+              ).toFixed(4) + " USDT"
+            : null}
         </div>
         <div className="celeste">
           <b>{textosExtra[currentLanguage].amtDepositados}</b>{" "}

@@ -1,10 +1,8 @@
-// @ts-nocheck
-import React from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../store/store";
 import { masterOperations } from "../../../../store/features/master/masterOperations";
 import { useDispatch } from "react-redux";
-import { ethers } from "ethers";
+import { textosExtra } from "../../../../Utils/textos";
 
 const BotonRetirarLiquidez = () => {
   const dispatch = useDispatch();
@@ -23,7 +21,7 @@ const BotonRetirarLiquidez = () => {
           : null
       }
     >
-      Retirar liquidez
+      {textosExtra[currentLanguage].retirar}
     </button>
   );
 };

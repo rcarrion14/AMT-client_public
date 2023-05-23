@@ -3,7 +3,7 @@ import { textosExtra } from "../../../../Utils/textos";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../store/store";
 interface GraficoInterface {
-  setActivePage: React.Dispatch<React.SetStateAction<string>>;
+  setActivePage: React.Dispatch<React.SetStateAction<string | boolean>>;
 }
 const Grafico: React.FC<GraficoInterface> = ({ setActivePage }) => {
   const contariner = useRef<HTMLDivElement | null>(null);

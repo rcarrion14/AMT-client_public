@@ -3,7 +3,7 @@ import CuadroMaquinas from "./CuadroMaquinas";
 import { getAllDataMineria } from "../../../../Utils/datosMineria";
 import { dataMineriaInterface } from "../../../../Utils/datosMineria";
 interface MaquinasInterface {
-  setActivePage: React.Dispatch<React.SetStateAction<string>>;
+  setActivePage: React.Dispatch<React.SetStateAction<string | boolean>>;
 }
 
 const Maquinas: React.FC<MaquinasInterface> = ({ setActivePage }) => {

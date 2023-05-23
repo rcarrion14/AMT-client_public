@@ -138,14 +138,16 @@ const CuadroStaking: React.FC<CuadroStakingProps> = ({
                   : textosExtra[currentLanguage].amtGenerados}
               </h2>
               <div>
-                {btcACobrar != undefined && btcACobrar.gt(0)
+                {btcACobrar != undefined && btcACobrar.gte(0)
                   ? toFrontEndString(btcACobrar)
                   : addr &&
                     stackedByUser &&
                     stakingIniciales != undefined &&
                     stackedByUser.gt(0)
                   ? toFrontEndString(
-                      stackedByUser.sub(stakingIniciales[addr].amount)
+                      stackedByUser.sub(
+                        ethers.BigNumber.from(stakingIniciales[addr].amount)
+                      )
                     )
                   : "-"}
               </div>

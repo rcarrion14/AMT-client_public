@@ -65,7 +65,7 @@ function payRent(
     //Todo del master?
   });
 }
-function removeLiquidity(dispatch: AppDispatch, amount: number) {
+function removeLiquidity(dispatch: AppDispatch, amount: BigNumber) {
   const contract = getStaticState().master.contract;
   const operationPromise = contract.removeLiquidity(amount);
   operationExecution(operationPromise).then(() => {

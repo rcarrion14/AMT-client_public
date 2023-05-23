@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React, { useRef, useState } from "react";
 import {
   simuleRentabilidad,
@@ -11,9 +10,7 @@ import { cuentasSimulador } from "../../../Utils/cuentasSimulador";
 import { ethers } from "ethers";
 
 interface SimuladorInterface {
-  setActivePage:
-    | React.Dispatch<React.SetStateAction<string>>
-    | React.Dispatch<React.SetStateAction<boolean>>;
+  setActivePage: React.Dispatch<React.SetStateAction<string | boolean>>;
 }
 
 const Simulador: React.FC<SimuladorInterface> = ({ setActivePage }) => {

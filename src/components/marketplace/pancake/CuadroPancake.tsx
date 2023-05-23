@@ -46,23 +46,6 @@ const CuadroPancake: React.FC<CuadroPancakeProps> = ({
   const inputPagar = useRef<HTMLInputElement>(null);
   const inputRecibir = useRef<HTMLInputElement>(null);
 
-  // Pedir quote:
-  useEffect(() => {
-    if (parseFloat(inputPagarValue) == 0) {
-      setInputRecibirValue("0");
-    } else {
-      if (inputPagarValue) {
-        useGetQuote(
-          monedaActive.address,
-          contractAddresses.Amt,
-          inputPagarValue
-        ).then((response) => {
-          setInputRecibirValue(toFrontEndString(response.toTokenAmount));
-        });
-      }
-    }
-  }, [inputPagarValue, monedaActive, toggler]);
-
   useEffect(() => {
     if (
       addr &&
@@ -82,7 +65,7 @@ const CuadroPancake: React.FC<CuadroPancakeProps> = ({
     } else {
       setTxData(undefined);
     }
-  }, [inputPagarValue, toggler]);
+  }, [inputPagarValue, inputRecibirValue, toggler]);
 
   useEffect(() => {
     if (signer) {
@@ -115,6 +98,16 @@ const CuadroPancake: React.FC<CuadroPancakeProps> = ({
   ) => {
     if (parseFloat(event.target.value) >= 0) {
       setInputPagarValue(event.target.value);
+      useGetQuote(
+        monedaActive.address,
+        contractAddresses.Amt,
+        event.target.value
+      ).then((response) => {
+        setInputRecibirValue(toFrontEndString(response.toTokenAmount));
+      });
+    } else {
+      setInputPagarValue("");
+      setInputRecibirValue("");
     }
   };
 
@@ -123,6 +116,16 @@ const CuadroPancake: React.FC<CuadroPancakeProps> = ({
   ) => {
     if (parseFloat(event.target.value) >= 0) {
       setInputRecibirValue(event.target.value);
+      useGetQuote(
+        contractAddresses.Amt,
+        monedaActive.address,
+        event.target.value
+      ).then((response) => {
+        setInputPagarValue(toFrontEndString(response.toTokenAmount));
+      });
+    } else {
+      setInputPagarValue("");
+      setInputRecibirValue("");
     }
   };
 
