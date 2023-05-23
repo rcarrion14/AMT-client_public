@@ -1,15 +1,14 @@
 html {
-  overflow:   scroll;
+  overflow: scroll;
 }
 
- ::-webkit-scrollbar {
-    width: 0px;
-    height: 0px;
-    background: transparent; 
-} 
+::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+  background: transparent;
+}
 
 /* make scrollbar transparent  */
-
 
 * {
   font-family: "Poppins";
@@ -51,7 +50,7 @@ div {
   }
   .containerSlide {
     max-width: 600px;
-    transform: translateX(calc(50vw - 50%)); 
+    transform: translateX(calc(50vw - 50%));
   }
 
   /* -------------- */
@@ -96,8 +95,8 @@ button {
   margin: 15px;
 }
 
-button:hover{
-  background-color:#98e8f5
+button:hover {
+  background-color: #98e8f5;
 }
 
 u {
@@ -183,7 +182,7 @@ u {
   padding: 10px 25px 10px 25px;
 }
 
-.botonBlanco:hover{
+.botonBlanco:hover {
   background-color: #98e8f5;
 }
 
@@ -334,9 +333,8 @@ u {
   padding: 15px;
 }
 
-.containterSelector :hover{
+.containterSelector :hover {
   font-weight: bolder;
-
 }
 
 .containterSelectorBuscador {
@@ -354,7 +352,7 @@ u {
   padding: 15px;
 }
 
-.containterSelectorBuscador :hover{
+.containterSelectorBuscador :hover {
   font-weight: bolder;
 }
 
@@ -441,7 +439,6 @@ u {
 
 .cuadroCobro > img {
   width: 25px;
-  height: fit-content;
 }
 
 .cuadroCobro > button {
@@ -468,25 +465,21 @@ u {
 /* ------------------- */
 /* ------------------- */
 
- .slideIzquierda-enter {
-  transform: translateX(100vw)
+.slideIzquierda-enter {
+  transform: translateX(100vw);
 }
 
-
- .slideIzquierda-enter-active {
+.slideIzquierda-enter-active {
   -webkit-transform: translateX(-100%);
   transform: translateX(calc(50vw - 50%));
   transition: transform 800ms linear;
-} 
-
+}
 
 .slideIzquierda-exit-active {
   -webkit-transform: translateX(100%);
   transform: translateX(100vw);
   transition: transform 800ms linear;
-} 
-
-
+}
 
 .fade-exit-active {
   max-width: 540px;
@@ -962,7 +955,7 @@ u {
 }
 
 .listaAgregar :hover {
-font-weight: bolder;
+  font-weight: bolder;
 }
 
 .shadowBox {
@@ -1144,6 +1137,6 @@ font-weight: bolder;
   padding-right: 1px;
 }
 
-.amtIcon{
+.amtIcon {
   width: 40px;
 }
