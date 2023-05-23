@@ -29,16 +29,18 @@ const BotonDarLiquidez: React.FC<BotonDarLiquidezProps> = ({
     (state: typeof RootState) => state.session.language
   );
   const dispatch = useDispatch<AppDispatch>();
-
+  console.log({ inputAmt, inputBtc });
+  const parsedInputAmt = ethers.utils.parseEther(inputAmt.toString());
+  const parsedInputBtc = ethers.utils.parseEther(inputBtc.toFixed(18));
   const noPuedeProveerLiquidez =
     !allowanceAmt ||
     !balanceAmt ||
     !allowanceBtc ||
     !balanceBtc ||
-    allowanceAmt.lt(inputAmt) ||
-    balanceAmt.lt(inputAmt) ||
-    allowanceBtc.lt(inputBtc) ||
-    balanceBtc.lt(inputBtc);
+    allowanceAmt.lt(parsedInputAmt) ||
+    balanceAmt.lt(parsedInputAmt) ||
+    allowanceBtc.lt(parsedInputBtc) ||
+    balanceBtc.lt(parsedInputBtc);
 
   return (
     <>
@@ -48,7 +50,7 @@ const BotonDarLiquidez: React.FC<BotonDarLiquidezProps> = ({
           <div className="doubleButtonContainer">
             <button
               className={
-                allowanceAmt && allowanceAmt.gt(inputAmt)
+                allowanceAmt && allowanceAmt.gt(parsedInputAmt)
                   ? "inactive"
                   : undefined
               }
@@ -56,21 +58,23 @@ const BotonDarLiquidez: React.FC<BotonDarLiquidezProps> = ({
                 amtOperations.approveMaster(dispatch);
               }}
             >
-              {allowanceAmt?.lt(inputAmt)
+              {allowanceAmt?.lt(parsedInputAmt)
                 ? textosExtra[currentLanguage].aprobarAMT
-                : balanceAmt && balanceAmt.lt(inputAmt)
+                : balanceAmt && balanceAmt.lt(parsedInputAmt)
                 ? textosExtra[currentLanguage].bceAmtInsuficiente
                 : "AMT aprobado"}
             </button>
             <button
-              className={allowanceBtc?.gt(inputBtc) ? "inactive" : undefined}
+              className={
+                allowanceBtc?.gt(parsedInputBtc) ? "inactive" : undefined
+              }
               onClick={() => {
                 btcbOperations.approveMaster(dispatch);
               }}
             >
-              {allowanceBtc?.lt(inputBtc)
+              {allowanceBtc?.lt(parsedInputBtc)
                 ? textosExtra[currentLanguage].aprobarBTCB
-                : balanceBtc?.lt(inputBtc)
+                : balanceBtc?.lt(parsedInputBtc)
                 ? textosExtra[currentLanguage].bceBtcInsuficiente
                 : "BTCB aprobado"}
             </button>
