@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React, { useRef, useState } from "react";
 
 import { useSelector } from "react-redux";
@@ -11,7 +10,7 @@ import { vaultBtcbLiquidityOperations } from "../../../store/features/vaultBtcbL
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../store/store";
 import { liqAmtOperations } from "../../../store/features/liqAmt/liqAmtOperations";
-const CuadroProveerLiquidez = ({ setAlertaAntes }) => {
+const CuadroProveerLiquidez = () => {
   const dispatch = useDispatch<AppDispatch>();
   const balanceAmt = useSelector(
     (state: typeof RootState) => state.amt.balance
@@ -64,7 +63,8 @@ const CuadroProveerLiquidez = ({ setAlertaAntes }) => {
   };
   const ratioAmtBtcb =
     balanceOfPoolAmt !== undefined && balanceOfPoolBtcb !== undefined
-      ? balanceOfPoolAmt / balanceOfPoolBtcb
+      ? parseFloat(balanceOfPoolAmt.toString()) /
+        parseFloat(balanceOfPoolBtcb.toString())
       : undefined;
 
   //Gestion de los input
@@ -75,19 +75,23 @@ const CuadroProveerLiquidez = ({ setAlertaAntes }) => {
   const handleInputAmtValueChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    setInputAmtValue(event.target.value);
-    setInputBtcbValue(
-      (parseFloat(event.target.value) / ratioAmtBtcb).toString()
-    );
+    if (ratioAmtBtcb) {
+      setInputAmtValue(event.target.value);
+      setInputBtcbValue(
+        (parseFloat(event.target.value) / ratioAmtBtcb).toString()
+      );
+    }
   };
 
   const handleInputBtcbValueChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    setInputBtcbValue(event.target.value);
-    setInputAmtValue(
-      (parseFloat(event.target.value) * ratioAmtBtcb).toString()
-    );
+    if (ratioAmtBtcb) {
+      setInputBtcbValue(event.target.value);
+      setInputAmtValue(
+        (parseFloat(event.target.value) * ratioAmtBtcb).toString()
+      );
+    }
   };
   return (
     <>
@@ -138,7 +142,6 @@ const CuadroProveerLiquidez = ({ setAlertaAntes }) => {
             inputBtc={parseFloat(inputBtcbValue)}
             allowanceAmt={allowanceAmt}
             allowanceBtc={allowanceBtcb}
-            setAlertaAntes={setAlertaAntes}
           ></BotonDarLiquidez>
           <button
             className={
@@ -149,6 +152,8 @@ const CuadroProveerLiquidez = ({ setAlertaAntes }) => {
                 : undefined
             }
             onClick={() => {
+              allowanceVault &&
+              balanceLiqAmt &&
               allowanceVault.gt(balanceLiqAmt)
                 ? vaultBtcbLiquidityOperations.stake(dispatch, balanceLiqAmt)
                 : liqAmtOperations.approveVaultBtcbLiq(dispatch);
