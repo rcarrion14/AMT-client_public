@@ -1,19 +1,12 @@
-// @ts-nocheck
-import React, { useRef } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../../store/store";
 
-import {
-  textoLiquidez,
-  textoRetirarLiquidez,
-  textosExtra,
-} from "../../../../Utils/textos";
+import { textoRetirarLiquidez, textosExtra } from "../../../../Utils/textos";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../store/store";
-import BotonRetirarLiquidez from "./BotonRetirarLiquidez";
-import { ethers, BigNumber } from "ethers";
+import { ethers } from "ethers";
 import { toFrontEndString } from "../../../../Utils/formatHelpers";
-import AlertaRetireTokens from "../../liquidez/alertasLiquidez/AlertaRetireTokens";
 import { vaultBtcbLiquidityOperations } from "../../../../store/features/vaultBtcbLiquidity/vaultBtcbLiquidityOperations";
 import { masterOperations } from "../../../../store/features/master/masterOperations";
 import { liqAmtOperations } from "../../../../store/features/liqAmt/liqAmtOperations";
@@ -55,7 +48,7 @@ const RetirarLiquidez: React.FC = () => {
   let usdtEnBtcb = ethers.BigNumber.from(0);
   let amtEnLiquidez = ethers.BigNumber.from(0);
   let btcbEnLiquidez = ethers.BigNumber.from(0);
-  let poolParticipation = ethers.BigNumber.from(0);
+  let poolParticipation = "";
   if (
     balanceLiqAmt &&
     balanceLiqAmtStaked &&
@@ -111,10 +104,7 @@ const RetirarLiquidez: React.FC = () => {
         </div>
       </div>
       {textoRetirarLiquidez(currentLanguage)}
-      {balanceUserVaultLiq?.gt(0) ? (
-        // Tiene depositados
-        <AlertaRetireTokens />
-      ) : null}
+
       <div className="doubleButtonContainer">
         <button
           onClick={() => {
