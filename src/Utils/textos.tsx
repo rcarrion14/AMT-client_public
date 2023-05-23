@@ -1793,19 +1793,19 @@ export const textoBotonesBlancos: typeTextoBotonesBlancos = {
     },
     simulador: {
       titulo: "Simule la rentabilidad",
-      descripcion: "Confira cuánto rinde AMT en diferentes escenarios",
+      descripcion: "Chequee cuánto rinde AMT en diferentes escenarios",
     },
     simuladorActual: {
       titulo: "Rentabilidad del staking ahora",
-      descripcion: "Confira cuánto rinde AMT en el escenario actual",
+      descripcion: "Chequee cuánto rinde AMT en el escenario actual",
     },
     maquinas: {
       titulo: "Máquinas activas en el proyecto AMT",
-      descripcion: "Confira nuestra producción diaria de bitcoins",
+      descripcion: "Chequee nuestra producción diaria de bitcoins",
     },
     grafico: {
       titulo: "Gráfico de precio de AMT",
-      descripcion: "Confira el valor de AMT contra BTC y USDT",
+      descripcion: "Chequee el valor de AMT contra BTC y USDT",
     },
   },
   eng: {
