@@ -30,7 +30,7 @@ const BotonDarLiquidez: React.FC<BotonDarLiquidezProps> = ({
   );
   const dispatch = useDispatch<AppDispatch>();
   console.log({ inputAmt, inputBtc });
-  const parsedInputAmt = ethers.utils.parseEther(inputAmt.toString());
+  const parsedInputAmt = ethers.utils.parseEther(inputAmt.toFixed(18));
   const parsedInputBtc = ethers.utils.parseEther(inputBtc.toFixed(18));
   const noPuedeProveerLiquidez =
     !allowanceAmt ||
@@ -84,8 +84,8 @@ const BotonDarLiquidez: React.FC<BotonDarLiquidezProps> = ({
             onClick={() => {
               masterOperations.addLiquidity(
                 dispatch,
-                ethers.utils.parseEther(inputAmt.toFixed(15)),
-                ethers.utils.parseEther(inputBtc.toFixed(15))
+                ethers.utils.parseEther(inputAmt.toFixed(18)),
+                ethers.utils.parseEther(inputBtc.toFixed(18))
               );
             }}
           >
