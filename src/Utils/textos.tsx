@@ -69,38 +69,38 @@ export const textoEstadisticasQuema = (idioma: string) => {
   if (idioma === "por") {
     return (
       <>
-        <h1>Cofre de Garantia</h1>
+        <h1>Reserva Crescente de Liquidez</h1>
         <p>
-          O percentual de distribuição diária do Cofre de Garantia pode variar
-          sempre em prol dos melhores interesses para todos os investidores da
-          Comunidade AMT.
+          O percentual de distribuição diária da Reserva Crescente de Liquidez
+          (RCL) pode variar sempre em prol dos melhores interesses para todos os
+          investidores da Comunidade AMT.
         </p>
         <p>
           Por exemplo, quando a margem de lucro da mineração está mais baixa em
           razão do preço do bitcoin, dos altos custos ou da alta taxa de
           dificuldade da rede, o Projeto AMT irá diminuir o percentual de
-          distribuição para o Cofre de Garantia, para priorizar o pagamento de
-          custos e distribuição de lucros.
+          distribuição para a RCL, para priorizar o pagamento de custos e
+          distribuição de lucros.
         </p>
         <p>
-          Por outro lado, quando houver a possibilidade de abastecer o Cofre de
-          Garantia, sem prejuízo do pagamento dos custos e dos lucros, isso
-          certamente será feito.
+          Por outro lado, quando houver a possibilidade de abastecer a RCL, sem
+          prejuízo do pagamento dos custos e dos lucros, isso certamente será
+          feito.
         </p>
         <p>
           Inclusive, o Projeto AMT sempre avaliará a possibilidade de fazer
-          aportes adicionais nesse Cofre de Garantia, sempre que for conveniente
-          para toda a Comunidade AMT.
+          aportes adicionais na RCL, sempre que for conveniente para toda a
+          Comunidade AMT.
         </p>
         <p>
-          O objetivo do Projeto AMT é que esse Cofre possua tantos BTC a ponto
-          de estabelecer um piso mínimo para o preço do AMT, ou seja, que o
-          valor que o investidor recebe ao queimar AMT no Cofre possa se igualar
-          à cotação da PancakeSwap.
+          O objetivo do Projeto AMT é que a RCL possua tantos BTC a ponto de
+          estabelecer um piso mínimo para o preço do AMT, ou seja, que o valor
+          que o investidor recebe ao queimar AMT na RCL possa se igualar à
+          cotação da PancakeSwap.
         </p>
         <p>
           Isso fará com que o preço nunca regrida, mas só aumente. E, vale
-          lembrar, quando o usuário opta por queimar seus AMT no Cofre, toda a
+          lembrar, quando o usuário opta por queimar seus AMT na RCL, toda a
           Comunidade AMT se beneficia disso, pois são menos AMT em circulação e,
           portanto, a distribuição de BTC passa a ser maior por cada token
           (aumenta a rentabilidade).
@@ -110,39 +110,37 @@ export const textoEstadisticasQuema = (idioma: string) => {
   } else if (idioma === "esp") {
     return (
       <>
-        <h1>Cofre de Garantia</h1>
+        <h1>Reserva Creciente de Liquidez</h1>
         <p>
-          El porcentaje de distribución diaria del Cofre de Garantía puede
-          variar siempre en beneficio de los mejores intereses de todos los
-          inversores de la Comunidad AMT.
+          El porcentaje de distribución diaria de la Reserva Creciente de
+          Liquidez (RCL) puede variar siempre en beneficio de los mejores
+          intereses de todos los inversores de la Comunidad AMT.
         </p>
         <p>
           Por ejemplo, cuando el margen de ganancia de la minería es más bajo
           debido al precio de Bitcoin, altos costos o alta tasa de dificultad de
-          la red, el Proyecto AMT reducirá el porcentaje de distribución al
-          Cofre de Garantía para priorizar el pago de costos y distribución de
-          ganancias.
+          la red, el Proyecto AMT reducirá el porcentaje de distribución a la
+          RCL para priorizar el pago de costos y distribución de ganancias.
         </p>
         <p>
-          Por otro lado, cuando haya la posibilidad de abastecer el Cofre de
-          Garantía sin perjudicar el pago de costos y ganancias, seguramente se
-          hará.
+          Por otro lado, cuando haya la posibilidad de abastecer la RCL sin
+          perjudicar el pago de costos y ganancias, seguramente se hará.
         </p>
         <p>
           Además, el Proyecto AMT siempre evaluará la posibilidad de realizar
-          aportes adicionales a este Cofre de Garantía cuando sea conveniente
-          para toda la Comunidad AMT.
+          aportes adicionales a la RCL cuando sea conveniente para toda la
+          Comunidad AMT.
         </p>
         <p>
-          El objetivo del Proyecto AMT es que este Cofre tenga suficiente BTC
-          como para establecer un límite mínimo para el precio de AMT, es decir,
-          que el valor que el inversor reciba al quemar AMT en el Cofre sea
-          igual a la cotización de PancakeSwap.
+          El objetivo del Proyecto AMT es que esta RCL tenga suficiente BTC como
+          para establecer un límite mínimo para el precio de AMT, es decir, que
+          el valor que el inversor reciba al quemar AMT en la RCL sea igual a la
+          cotización de PancakeSwap.
         </p>
         <p>
           Esto hará que el precio nunca retroceda, sino que solo aumente. Y es
-          importante recordar que cuando el usuario elige quemar sus AMT en el
-          Cofre, toda la comunidad AMT se beneficia, ya que hay menos AMT en
+          importante recordar que cuando el usuario elige quemar sus AMT en la
+          RCL, toda la comunidad AMT se beneficia, ya que hay menos AMT en
           circulación y, por lo tanto, la distribución de BTC es mayor por cada
           token (aumenta la rentabilidad).
         </p>
@@ -151,39 +149,40 @@ export const textoEstadisticasQuema = (idioma: string) => {
   } else if (idioma === "eng") {
     return (
       <>
-        <h1>Guarantee Vault</h1>
+        <h1>Growing Liquidity Reserve</h1>
         <p>
-          The percentage of daily distribution from the Guarantee Vault can vary
-          in favor of the best interests of all AMT Community investors.
+          The percentage of daily distribution of the Growing Liquidity Reserve
+          GLR Vault can vary in favor of the best interests of all AMT Community
+          investors.
         </p>
         <p>
           For example, when the mining profit margin is lower due to the price
           of bitcoin, high costs, or high network difficulty, the AMT Project
-          will reduce the distribution percentage for the Guarantee Vault to
-          prioritize cost payment and profit distribution.
+          will reduce the distribution percentage for the GLR to prioritize cost
+          payment and profit distribution.
         </p>
         <p>
-          On the other hand, when there is the possibility of supplying the
-          Guarantee Vault without prejudice to the payment of costs and profits,
-          this will certainly be done.
+          On the other hand, when there is the possibility of supplying the GLR
+          without prejudice to the payment of costs and profits, this will
+          certainly be done.
         </p>
         <p>
           In fact, the AMT Project will always evaluate the possibility of
-          making additional contributions to this Guarantee Vault whenever it is
-          convenient for the entire AMT Community.
+          making additional contributions to the GLR whenever it is convenient
+          for the entire AMT Community.
         </p>
         <p>
-          The objective of the AMT Project is for this Vault to have so many BTC
+          The objective of the AMT Project is for this GLR to have so many BTC
           available to establish a minimum floor for the price of AMT, meaning
-          that the value that the investor receives when burning AMT in the
-          Vault can equal the PancakeSwap quote.
+          that the value that the investor receives when burning AMT in the GLR
+          can equal the PancakeSwap quote.
         </p>
         <p>
           This will ensure that the price never regresses but only increases.
           And it is worth remembering that when the user chooses to burn their
-          AMT in the Vault, the entire AMT community benefits from it, since
-          there are fewer AMTs in circulation and therefore the distribution of
-          BTC becomes higher per token (increases profitability).
+          AMT in the GLR, the entire AMT community benefits from it, since there
+          are fewer AMTs in circulation and therefore the distribution of BTC
+          becomes higher per token (increases profitability).
         </p>
       </>
     );
@@ -332,18 +331,20 @@ export const textoQuema = (idioma: string) => {
     return (
       <>
         <h1>Venda seus AMT</h1>
-        <p>Esse é o Cofre de Garantia do Projeto AMT.</p>
+        <p>Essa é a Reserva Crescente de Liquidez do Projeto AMT.</p>
         <p>
           Quando um usuário troca seus AMT por BTCB, os AMT são queimados, isto
           é, retirados de circulação.
         </p>
         <p>Por isso, o preço do AMT não cai, mas se mantém.</p>
         <p>
-          E, considerando que esse Cofre recebe mais bitcoins a cada dia, isso
-          significa que a relação AMT/BTCB só irá melhorar.
+          E, considerando que a Reserva Crescente de Liquidez recebe mais
+          bitcoins a cada dia, isso significa que a relação AMT/BTCB só irá
+          melhorar.
         </p>
         <p>
-          Em outras palavras, esse Cofre estabelece um piso para o preço do AMT.
+          Em outras palavras, essa Reserva Crescente de Liquidez estabelece um
+          piso para o preço do AMT.
         </p>
       </>
     );
@@ -353,19 +354,20 @@ export const textoQuema = (idioma: string) => {
     return (
       <>
         <h1>Vende tus AMT</h1>
-        <p>Este es el Cofre de Garantía del Proyecto AMT.</p>
+        <p>Esta es la Reserva Creciente de Liquidez del Proyecto AMT.</p>
         <p>
           Cuando un usuario cambia sus AMT por BTCB, los AMT son quemados, es
           decir, retirados de circulación.
         </p>
         <p>Por eso, el precio del AMT no cae, sino que se mantiene.</p>
         <p>
-          Y, considerando que este Cofre recibe más bitcoins cada día, esto
-          significa que la relación AMT/BTCB solo mejorará.
+          Y, considerando que esta Reserva Creciente de Liquidez recibe más
+          bitcoins cada día, esto significa que la relación AMT/BTCB solo
+          mejorará.
         </p>
         <p>
-          En otras palabras, este Cofre establece un piso para el precio del
-          AMT.
+          En otras palabras, esta Reserva Creciente de Liquidez establece un
+          piso para el precio del AMT.
         </p>
       </>
     );
@@ -375,17 +377,21 @@ export const textoQuema = (idioma: string) => {
     return (
       <>
         <h1>Sell your AMT</h1>
-        <p>This is the AMT Project Guarantee Safe.</p>
+        <p>This is the AMT Growing Liquidity Reserve.</p>
         <p>
           When a user trades their AMT for BTCB, the AMT is burned, that is,
           taken out of circulation.
         </p>
         <p>That's why the price of AMT doesn't fall, but stays the same.</p>
         <p>
-          And considering that this Safe receives more bitcoins every day, it
-          means that the AMT/BTCB ratio will only improve.
+          And considering that this Growing Liquidity Reserve receives more
+          bitcoins every day, it means that the AMT/BTCB ratio will only
+          improve.
         </p>
-        <p>In other words, this Safe sets a floor for the AMT price.</p>
+        <p>
+          In other words, this Growing Liquidity Reserve sets a floor for the
+          AMT price.
+        </p>
       </>
     );
   }
@@ -554,20 +560,19 @@ export const textoInvestidores = (idioma: string) => {
             que afectará tu rentabilidad.
           </p>
           <p>
-            Por eso, hemos creado la posibilidad de que apuestes tus tokens, es
+            Por eso, hemos creado la posibilidad de que deposites tus tokens, es
             decir, los deposites en un contrato inteligente seguro para acumular
             tus rendimientos de forma automática y sin necesidad de pagar
             tarifas diarias.
           </p>
           <p>
-            Solo necesitas pagar tarifas al depositar y retirar tokens de la
-            apuesta, incluso si los mantienes allí durante años.
+            Solo necesitas pagar tarifas al depositar y retirar tokens del
+            cofre, incluso si los mantienes allí durante años.
           </p>
           <p>
-            Tus rendimientos se envían a este "cofre" de apuestas, y los
-            recibirás de forma pasiva durante el tiempo que desees. Solo la
-            cartera que depositó los tokens puede retirarlos, y nadie más tendrá
-            acceso a ellos.
+            Tus rendimientos se envían a este "cofre", y los recibirás de forma
+            pasiva durante el tiempo que desees. Solo la cartera que depositó
+            los tokens puede retirarlos, y nadie más tendrá acceso a ellos.
           </p>
           <p>A continuación, se muestran las modalidades que ofrecemos:</p>
         </div>
@@ -1499,7 +1504,7 @@ export const textosExtra: typeTextosExtra = {
     dataDeDeposito: "Data do depósito:",
     gananciasDistribuidas: "Lucros distribuídos",
     estadisticas: "Estatísticas",
-    btcEnVault: "BTC no Cofre de Garantia",
+    btcEnVault: "BTC na Reserva Crescente de Liquidez",
     quemaDeAmt: "Queima de AMT",
     distribucionDiaria: "Distribuição Diária",
     aporteDelProjectoAmt: "Aporte do Projeto AMT",
@@ -1706,7 +1711,7 @@ export const textoBotonesBlancos: typeTextoBotonesBlancos = {
     },
     quema: {
       titulo: "Venda AMT",
-      descripcion: "Troque AMT por BTCB no Cofre de Garantia.",
+      descripcion: "Troque AMT por BTCB na Reserva Crescente de Liquidez.",
     },
     pix: {
       titulo: "Compre e venda cripto com PIX",
@@ -1769,7 +1774,7 @@ export const textoBotonesBlancos: typeTextoBotonesBlancos = {
     },
     quema: {
       titulo: "Venda AMT",
-      descripcion: "Cambia AMT por BTCB en el Cofre de Garantía.",
+      descripcion: "Cambia AMT por BTCB en la Reserva de Liquidez Creciente.",
     },
     pix: {
       titulo: "Compra y venta de criptomonedas con PIX",
@@ -1831,7 +1836,7 @@ export const textoBotonesBlancos: typeTextoBotonesBlancos = {
     },
     quema: {
       titulo: "Sell AMT",
-      descripcion: "Exchange AMT for BTCB in the Guarantee Chest.",
+      descripcion: "Exchange AMT for BTCB in the Growing Liquidity Reserve.",
     },
     pix: {
       titulo: "Buy and sell crypto with PIX",
