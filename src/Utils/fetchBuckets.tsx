@@ -38,13 +38,11 @@ export interface FetchVaultBtcbResult {
 }
 
 export const fetchVaultAmt = async (): Promise<FetchVaultAmtResult> => {
-  console.log("ejecucion");
-
   let endpointUsuarios =
     "https://amt-bucket-aws.s3.amazonaws.com/usuarios_VaulAmt.json";
 
   let endpointSwaps =
-    "https://amt-bucket-aws.s3.amazonaws.com/lista_Cobros.json";
+    "https://amt-bucket-aws.s3.amazonaws.com/lista_Swaps.json";
 
   let promiseList = [
     fetch(endpointUsuarios, { cache: "no-cache" }),

@@ -132,6 +132,7 @@ const Historico: React.FC<HistoricoProps> = ({
     let date = newDate.toLocaleDateString();
     return date;
   };
+  console.log({ stakingIniciales });
 
   return (
     <div className="containerSlide">
