@@ -113,9 +113,11 @@ const Historico: React.FC<HistoricoProps> = ({
       fetchVaultBctb().then((result) => {
         setStakingIniciales(result.dataStakings);
         setDataCobros(result.dataCobros);
-        getAllSnapshotFrom(result.dataStakings[addr].snap).then((result) => {
-          setBalancesAt(result);
-        });
+        getAllSnapshotFrom(result.dataStakings[addr].snap + 1).then(
+          (result) => {
+            setBalancesAt(result);
+          }
+        );
       });
     }
   }, []);
