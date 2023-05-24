@@ -120,9 +120,11 @@ const Historico: React.FC<HistoricoProps> = ({
       fetchVaultAmt().then((result) => {
         setStakingIniciales(result.dataStakings);
         setFechasSwaps(result.dataSwaps);
-        getAllSnapshotFrom(result.dataStakings[addr].snap).then((result) => {
-          setBalancesAt(result);
-        });
+        getAllSnapshotFrom(result.dataStakings[addr].snap + 1).then(
+          (result) => {
+            setBalancesAt(result);
+          }
+        );
       });
     }
   }, []);
@@ -132,6 +134,7 @@ const Historico: React.FC<HistoricoProps> = ({
     let date = newDate.toLocaleDateString();
     return date;
   };
+  console.log({ stakingIniciales });
 
   return (
     <div className="containerSlide">
