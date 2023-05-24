@@ -18,7 +18,7 @@ export const cuentasSimulador = (
   let autoCompra_amt_diario = Number(
     ((cobradoTotal_btcb_diario * precioBtcb) / precioAmt).toFixed(2)
   );
-
+  console.log("Hola");
   /////// --- MENSUAL: ------ /////
 
   let rentPorcent_usdt_mensual = Number(
