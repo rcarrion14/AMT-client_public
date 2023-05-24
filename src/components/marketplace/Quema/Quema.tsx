@@ -14,24 +14,26 @@ const Quema: React.FC<quemaInterface> = ({ setActivePage }) => {
     (state: typeof RootState) => state.session.language
   );
   return (
-    <div className="containerSlide">
-      <div className="navBar_top">
-        <img onClick={() => setActivePage(null)} src="icon_nav.png" />
-        <h1>Marketplace</h1>
-      </div>
-
-      <div className="container">
-        {textoQuema(currentLanguage)}
-        <div className="textoConexion">
-          <button
-            onClick={() => {
-              setActivarEstadisticas(true);
-            }}
-          >
-            {textosExtra[currentLanguage].estadisticas}
-          </button>
+    <>
+      <div className="containerSlide">
+        <div className="navBar_top">
+          <img onClick={() => setActivePage(null)} src="icon_nav.png" />
+          <h1>Marketplace</h1>
         </div>
-        <CuadroQuema />
+
+        <div className="container">
+          {textoQuema(currentLanguage)}
+          <div className="textoConexion">
+            <button
+              onClick={() => {
+                setActivarEstadisticas(true);
+              }}
+            >
+              {textosExtra[currentLanguage].estadisticas}
+            </button>
+          </div>
+          <CuadroQuema />
+        </div>
       </div>
       <CSSTransition
         in={activarEstadisticas == true}
@@ -41,7 +43,7 @@ const Quema: React.FC<quemaInterface> = ({ setActivePage }) => {
       >
         <EstadisticasQuema setActivarEstadisticas={setActivarEstadisticas} />
       </CSSTransition>
-    </div>
+    </>
   );
 };
 
