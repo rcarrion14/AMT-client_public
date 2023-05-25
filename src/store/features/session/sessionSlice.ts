@@ -6,7 +6,7 @@ interface sessionState {
 }
 
 const initialState: sessionState = {
-  language: "por",
+  language: "eng",
 };
 
 export const setLanguage = createAsyncThunk(
