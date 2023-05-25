@@ -1,9 +1,45 @@
+//@ts-nocheck
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import { Provider } from "react-redux";
 import store from "./store/store";
 import Loader from "./components/Generales/Loader";
+
+const expectedChainId = "0x38"; // "0x38" BSC
+
+ethereum.on("accountsChanged", () => window.location.reload());
+ethereum.on("chainChanged", (_chainId) => window.location.reload());
+
+async function changeNetwork() {
+  try {
+    await ethereum.request({
+      method: "wallet_switchEthereumChain",
+      params: [{ chainId: expectedChainId }],
+    });
+  } catch (switchError) {
+    if (switchError.code === 4902) {
+      try {
+        await ethereum.request({
+          method: "wallet_addEthereumChain",
+          params: [
+            {
+              chainId: expectedChainId,
+              chainName: "Binance Smart Chain Mainnet",
+              rpcUrls: ["https://bsc-dataseed1.binance.org"] /* ... */,
+              nativeCurrency: {
+                name: "BNB",
+                symbol: "BNB",
+                decimals: 18,
+              },
+              blockExplorerUrls: ["https://bscscan.com"],
+            },
+          ],
+        });
+      } catch (addError) {}
+    }
+  }
+}
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
@@ -13,3 +49,5 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     </Provider>
   </React.StrictMode>
 );
+
+changeNetwork();
