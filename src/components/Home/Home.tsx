@@ -27,7 +27,7 @@ const Home: React.FC<HomeProps> = ({ setActivePage }) => {
             className="video"
             width="560"
             height="200"
-            src="https://www.youtube.com/embed/jPMSGfXdz90"
+            src="https://www.youtube.com/embed/xW1Az4C6L4U"
             title="YouTube video player"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           ></iframe>

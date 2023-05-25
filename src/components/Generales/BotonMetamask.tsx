@@ -11,8 +11,22 @@ const BotonMetamask = () => {
   const address = useSelector(
     (state: typeof RootState) => state.wallet.address
   );
-  return (
-    <>
+
+  const appLink = "https://metamask.app.link/dapp/autominingtoken.com/";
+
+  if (
+    navigator.userAgent.indexOf("Mobile") != -1 && // Estoy en mobile pero NO en metamask
+    navigator.userAgent.indexOf("MetaMask") == -1
+  ) {
+    return (
+      <button style={{ zIndex: 99 }}>
+        <a href="https://metamask.app.link/dapp/app.amtest.link/">
+          {textosExtra[currentLanguage].conectarBilletera}
+        </a>
+      </button>
+    );
+  } else {
+    return (
       <button
         onClick={() => {
           dispatch(connectWallet());
@@ -23,8 +37,8 @@ const BotonMetamask = () => {
           ? address.slice(0, 6) + " .... " + address.slice(37)
           : textosExtra[currentLanguage].conectarBilletera}
       </button>
-    </>
-  );
+    );
+  }
 };
 
 export { BotonMetamask };
