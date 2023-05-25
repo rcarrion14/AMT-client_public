@@ -1,4 +1,3 @@
-//@ts-nocheck
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
@@ -8,37 +7,42 @@ import Loader from "./components/Generales/Loader";
 
 const expectedChainId = "0x38"; // "0x38" BSC
 
-ethereum.on("accountsChanged", () => window.location.reload());
-ethereum.on("chainChanged", (_chainId) => window.location.reload());
+declare var ethereum : any;
+
 
 async function changeNetwork() {
-  try {
-    await ethereum.request({
-      method: "wallet_switchEthereumChain",
-      params: [{ chainId: expectedChainId }],
-    });
-  } catch (switchError) {
-    if (switchError.code === 4902) {
-      try {
-        await ethereum.request({
-          method: "wallet_addEthereumChain",
-          params: [
-            {
-              chainId: expectedChainId,
-              chainName: "Binance Smart Chain Mainnet",
-              rpcUrls: ["https://bsc-dataseed1.binance.org"] /* ... */,
-              nativeCurrency: {
-                name: "BNB",
-                symbol: "BNB",
-                decimals: 18,
+  if(navigator.userAgent.indexOf("Mobile")!= -1){
+    ethereum.on("accountsChanged", () => window.location.reload());
+    ethereum.on("chainChanged", () => window.location.reload());
+    try {
+      await ethereum.request({
+        method: "wallet_switchEthereumChain",
+        params: [{ chainId: expectedChainId }],
+      });
+    } catch (switchError : any) {
+      if (switchError.code === 4902) {
+        try {
+          await ethereum.request({
+            method: "wallet_addEthereumChain",
+            params: [
+              {
+                chainId: expectedChainId,
+                chainName: "Binance Smart Chain Mainnet",
+                rpcUrls: ["https://bsc-dataseed1.binance.org"] /* ... */,
+                nativeCurrency: {
+                  name: "BNB",
+                  symbol: "BNB",
+                  decimals: 18,
+                },
+                blockExplorerUrls: ["https://bscscan.com"],
               },
-              blockExplorerUrls: ["https://bscscan.com"],
-            },
-          ],
-        });
-      } catch (addError) {}
+            ],
+          });
+        } catch (addError) {}
+      }
     }
   }
+  
 }
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
