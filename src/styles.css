@@ -22,6 +22,15 @@ div {
   background-color: inherit;
 }
 
+u:hover{
+  cursor: pointer;
+}
+
+a{
+  text-decoration: none;
+  color: #34383e;
+}
+
 @media (min-width: 600px) {
   body {
     background-color: #f6f6f6;
@@ -71,7 +80,7 @@ h2 {
 }
 
 p {
-  color: #a9a9a9;
+  color: #6c6c6c;
   font-size: 0.8rem;
   background-color: inherit;
 }
@@ -97,6 +106,7 @@ button {
 
 button:hover {
   background-color: #98e8f5;
+  cursor: pointer;
 }
 
 u {
@@ -184,6 +194,7 @@ u {
 
 .botonBlanco:hover {
   background-color: #98e8f5;
+  cursor: pointer;
 }
 
 .botonBlanco > p {
@@ -218,6 +229,11 @@ u {
 .navBar > img {
   width: 30px;
   background-color: rgba(255, 255, 255, 0);
+}
+
+.navBar > img:hover {
+
+  cursor: pointer;
 }
 
 .navBar > button {
@@ -335,6 +351,7 @@ u {
 
 .containterSelector :hover {
   font-weight: bolder;
+  cursor: pointer;
 }
 
 .containterSelectorBuscador {
@@ -354,6 +371,7 @@ u {
 
 .containterSelectorBuscador :hover {
   font-weight: bolder;
+  cursor: pointer;
 }
 
 .moneda {
@@ -956,6 +974,7 @@ u {
 
 .listaAgregar :hover {
   font-weight: bolder;
+  cursor: pointer;
 }
 
 .shadowBox {
