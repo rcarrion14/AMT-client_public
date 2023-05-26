@@ -777,7 +777,7 @@ export const textoAtencionStaking = (idioma: string) => {
     );
   }
 };
-export const textoGInvestidores = (idioma: string) => {
+/* export const textoGInvestidores = (idioma: string) => {
   const [activeInfo, setActiveInfo] = useState(false);
 
   if (idioma == "por") {
@@ -810,7 +810,7 @@ export const textoGInvestidores = (idioma: string) => {
               acumular rendimentos em bitcoin todos os dias, de forma
               automática, nós recomendamos que coloque seus tokens em staking.
               Clique aqui e veja suas opções.{" "}
-              {/* TODO LINK CLICK AQUI OPCIONES */}
+             
             </p>
           </>
         ) : null}
@@ -886,6 +886,80 @@ export const textoGInvestidores = (idioma: string) => {
             </p>
           </>
         ) : null}
+      </>
+    );
+  }
+}; */
+
+export const textoGInvestidores = (idioma: string) => {
+  const [activeInfo, setActiveInfo] = useState(false);
+
+  if (idioma == "por") {
+    return (
+      <>
+        <h1>Grandes Investidores</h1>
+        <p>
+          Esta página é destinada aos investidores que preferem pagar a taxa de
+          gás diariamente, mas manter os seus tokens em sua MetaMask.{" "}
+        </p>
+
+        <p>
+          Por isso, não recomendamos aos pequenos investidores, isto é, para que
+          não corram o risco de prejudicar a sua rentabilidade tendo que pagar
+          taxas.
+        </p>
+        <p>
+          Aos investidores que não desejam pagar a taxa diária, mas sim acumular
+          rendimentos em bitcoin todos os dias, de forma automática, nós
+          recomendamos que coloque seus tokens em staking. Clique aqui e veja
+          suas opções. {/* TODO LINK CLICK AQUI OPCIONES */}
+        </p>
+      </>
+    );
+  }
+
+  if (idioma == "esp") {
+    return (
+      <>
+        <h1>Grandes Inversores</h1>
+        <p>
+          Esta página está destinada a los inversores que prefieren pagar la
+          tarifa de gas diariamente, pero mantener sus tokens en su MetaMask.{" "}
+        </p>
+
+        <p>
+          Por lo tanto, no recomendamos a los pequeños inversores, es decir,
+          para que no corran el riesgo de perjudicar su rentabilidad teniendo
+          que pagar tarifas.
+        </p>
+        <p>
+          A los inversores que no desean pagar la tarifa diaria, sino acumular
+          rendimientos en bitcoin todos los días, de forma automática, les
+          recomendamos que pongan sus tokens en staking. Haga clic aquí y vea
+          sus opciones.
+        </p>
+      </>
+    );
+  }
+
+  if (idioma == "eng") {
+    return (
+      <>
+        <h1>Big Investors</h1>
+        <p>
+          This page is intended for investors who prefer to pay the daily gas
+          fee, but keep their tokens in their MetaMask wallet.{" "}
+        </p>
+
+        <p>
+          Therefore, we do not recommend this to small investors, so that they
+          do not risk harming their profitability by having to pay fees.
+        </p>
+        <p>
+          For investors who do not want to pay the daily fee, but instead
+          accumulate bitcoin returns automatically every day, we recommend
+          putting their tokens in staking. Click here to see your options.
+        </p>
       </>
     );
   }

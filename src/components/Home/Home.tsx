@@ -26,7 +26,7 @@ const Home: React.FC<HomeProps> = ({ setActivePage }) => {
           <iframe
             className="video"
             width="560"
-            height="200"
+            height="300"
             src="https://www.youtube.com/embed/xW1Az4C6L4U"
             title="YouTube video player"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
