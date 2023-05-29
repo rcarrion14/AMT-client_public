@@ -326,6 +326,45 @@ export const textoPancake = (idioma: string) => {
   }
 };
 
+export const textoPancakeSin1inch = (idioma: string) => {
+  if (idioma == "por") {
+    return (
+      <>
+        <h1>PancakeSwap</h1>
+        <p>Acesse o PancakeSwap para comprar e vender AMT por qualquer outro token.</p>
+        <p>
+        Em breve, integraremos esse serviço diretamente desta página.
+        </p>
+      </>
+    );
+  }
+
+  if (idioma == "esp") {
+    return (
+      <>
+        <h1>PancakeSwap</h1>
+        <p>Dirigase a pancakeswap para comprar y vender AMT por cualquier otro token.</p>
+        <p>
+        Proximamente integraremos este servicio directamente desde esta página
+        </p>
+
+      </>
+    );
+  }
+
+  if (idioma == "eng") {
+    return (
+      <>
+        <h1>PancakeSwap</h1>
+        <p>Go to PancakeSwap to buy and sell AMT for any other token.</p>
+        <p>
+        Soon, we will integrate this service directly from this page.
+        </p>
+      </>
+    );
+  }
+};
+
 export const textoQuema = (idioma: string) => {
   if (idioma == "por") {
     return (
