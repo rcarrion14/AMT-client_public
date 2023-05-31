@@ -33,9 +33,7 @@ const CuadroCobro: React.FC<cuadroCobroProps> = ({
   const currentLanguage = useSelector(
     (state: typeof RootState) => state.session.language
   );
-  {
-    console.log(balanceOfAt);
-  }
+
 
   return (
     <div className="cuadroCobro">

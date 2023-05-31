@@ -58,13 +58,12 @@ const RetirarLiquidez: React.FC = () => {
     balancePoolBtc
   ) {
     poolParticipation = (
-      parseFloat(balanceLiqAmt.toString()) /
+      parseFloat(balanceLiqAmtStaked.toString()) /
       parseFloat(liqAmtTotalSupply.toString())
-    ).toFixed(2);
+    ).toFixed(20);
 
-    amtEnLiquidez = balancePoolAmt.mul(balanceLiqAmt).div(liqAmtTotalSupply);
-    btcbEnLiquidez = balancePoolBtc.mul(balanceLiqAmt).div(liqAmtTotalSupply);
-
+    amtEnLiquidez = balancePoolAmt.mul(balanceLiqAmtStaked).div(liqAmtTotalSupply);
+    btcbEnLiquidez = balancePoolBtc.mul(balanceLiqAmtStaked).div(liqAmtTotalSupply);
     usdtEnAmt = amtEnLiquidez.mul(
       balancePoolBtc.mul(precioBtcb).div(balanceLiqAmt.add(balanceLiqAmtStaked))
     );

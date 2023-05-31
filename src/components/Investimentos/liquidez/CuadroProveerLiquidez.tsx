@@ -93,7 +93,6 @@ const CuadroProveerLiquidez = () => {
       );
     }
   };
-  console.log({ inputAmtValue, inputBtcbValue });
   return (
     <>
       <div id="primeraSeccion">

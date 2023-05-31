@@ -31,7 +31,6 @@ const BotonOperacion: React.FC<BotonOperacionProps> = ({
     (state: typeof RootState) => state.session.language
   );
   const mensajeBoton = () => {
-    console.log({ input, allowanceErc20, balanceErc20 });
 
     if (allowanceErc20 && ethers.utils.parseEther(input).gt(allowanceErc20)) {
       return textosExtra[currentLanguage].aprobar;
