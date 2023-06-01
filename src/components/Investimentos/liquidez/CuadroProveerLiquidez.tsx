@@ -152,9 +152,28 @@ const CuadroProveerLiquidez = () => {
             {balanceAmt ? toFrontEndString(balanceAmt) : "-"}
           </p>
         </div>
+        <div style={{marginLeft:"90%"}}>
+          <button
+            onClick={() => {
+              if (balanceAmt && ratioAmtBtcb) {
+                setInputAmtValue(ethers.utils.formatEther(balanceAmt));
+                setInputBtcbValue(
+                  (
+                    parseFloat(ethers.utils.formatEther(balanceAmt)) /
+                    ratioAmtBtcb
+                  ).toString()
+                );
+              }
+            }}
+            className="btnSimulacion transparente"
+          >
+            100%
+          </button>
+        </div>
         <div className="cuadroCompra">
           <img src="coinAutomining_.png" />
           <div>AMT</div>
+
           <input
             ref={inputAmt}
             placeholder="0"
@@ -183,6 +202,7 @@ const CuadroProveerLiquidez = () => {
             onChange={handleInputBtcbValueChange}
             value={inputBtcbValue}
           />
+          <div className="boton100porcent"></div>
         </div>
 
         <button
