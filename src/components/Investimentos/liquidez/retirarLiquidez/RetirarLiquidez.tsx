@@ -92,7 +92,7 @@ const RetirarLiquidez: React.FC = () => {
   };
 
   const operacionBotonRetirarLiquidezYStake = () => {
-    console.log("dsas")
+    console.log("dsas");
     return balanceLiqAmtStaked && balanceLiqAmtStaked.gt(0)
       ? vaultBtcbLiquidityOperations.withdrawl(dispatch)
       : allowanceLiqAmtToMaster &&
@@ -131,16 +131,19 @@ const RetirarLiquidez: React.FC = () => {
         </div>
       </div>
       {textoRetirarLiquidez(currentLanguage)}
-
-      <button
-        className={
-          balanceLiqAmt && balanceLiqAmt.gt(0) || balanceLiqAmtStaked && balanceLiqAmtStaked.gt(0) ? undefined : "gris"
-        }
-        onClick={operacionBotonRetirarLiquidezYStake}
-      >
-        {mensajeBotonRetirarLiquidezYStake()}
-      </button>
-
+      <div className="textoConexion">
+        <button
+          className={
+            (balanceLiqAmt && balanceLiqAmt.gt(0)) ||
+            (balanceLiqAmtStaked && balanceLiqAmtStaked.gt(0))
+              ? undefined
+              : "gris"
+          }
+          onClick={operacionBotonRetirarLiquidezYStake}
+        >
+          {mensajeBotonRetirarLiquidezYStake()}
+        </button>
+      </div>
       <div className="containerPasos">
         <img
           className={

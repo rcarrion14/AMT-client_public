@@ -146,13 +146,23 @@ const CuadroProveerLiquidez = () => {
   return (
     <>
       <div id="primeraSeccion">
-        <div className="saldo">
-          <p>
-            {textosExtra[currentLanguage].saldo}{" "}
-            {balanceAmt ? toFrontEndString(balanceAmt) : "-"}
-          </p>
-        </div>
-        <div style={{marginLeft:"90%"}}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignContent: "center",
+            flexWrap: "nowrap",
+            flexDirection: "row",
+            alignItems: "center",
+          }}
+        >
+          <div className="saldo">
+            <p>
+              {textosExtra[currentLanguage].saldo}{" "}
+              {balanceAmt ? toFrontEndString(balanceAmt) : "-"}
+            </p>
+          </div>
+
           <button
             onClick={() => {
               if (balanceAmt && ratioAmtBtcb) {
@@ -170,6 +180,7 @@ const CuadroProveerLiquidez = () => {
             100%
           </button>
         </div>
+
         <div className="cuadroCompra">
           <img src="coinAutomining_.png" />
           <div>AMT</div>
@@ -202,19 +213,22 @@ const CuadroProveerLiquidez = () => {
             onChange={handleInputBtcbValueChange}
             value={inputBtcbValue}
           />
-          <div className="boton100porcent"></div>
         </div>
-
-        <button
-          className={
-            balanceLiqAmtStaked && balanceLiqAmtStaked.gt(0)
-              ? "gris"
-              : undefined
-          }
-          onClick={operacionBotonDarLiquidezYStake}
-        >
-          {mensajeBotonLiquidezYStake()}
-        </button>
+        <div className="textoConexion">
+          <button
+            className={
+              inputAmtValue == "" ||
+              inputBtcbValue == "" ||
+              inputAmtValue == "0" ||
+              (balanceLiqAmtStaked && balanceLiqAmtStaked.gt(0))
+                ? "gris"
+                : undefined
+            }
+            onClick={operacionBotonDarLiquidezYStake}
+          >
+            {mensajeBotonLiquidezYStake()}
+          </button>
+        </div>
 
         <div className="containerPasos">
           <img
