@@ -57,13 +57,18 @@ const RetirarLiquidez: React.FC = () => {
     balancePoolAmt &&
     balancePoolBtc
   ) {
-    poolParticipation = ((
-      parseFloat(balanceLiqAmtStaked.toString()) /
-      parseFloat(liqAmtTotalSupply.toString())
-    )*100).toFixed(2);
+    poolParticipation = (
+      (parseFloat(balanceLiqAmtStaked.toString()) /
+        parseFloat(liqAmtTotalSupply.toString())) *
+      100
+    ).toFixed(2);
 
-    amtEnLiquidez = balancePoolAmt.mul(balanceLiqAmtStaked).div(liqAmtTotalSupply);
-    btcbEnLiquidez = balancePoolBtc.mul(balanceLiqAmtStaked).div(liqAmtTotalSupply);
+    amtEnLiquidez = balancePoolAmt
+      .mul(balanceLiqAmtStaked)
+      .div(liqAmtTotalSupply);
+    btcbEnLiquidez = balancePoolBtc
+      .mul(balanceLiqAmtStaked)
+      .div(liqAmtTotalSupply);
     usdtEnAmt = amtEnLiquidez.mul(
       balancePoolBtc.mul(precioBtcb).div(balanceLiqAmt.add(balanceLiqAmtStaked))
     );
@@ -75,6 +80,29 @@ const RetirarLiquidez: React.FC = () => {
 
     usdtEnBtcb = btcbEnLiquidez.mul(precioBtcb);
   }
+
+  const mensajeBotonRetirarLiquidezYStake = () => {
+    return balanceLiqAmtStaked && balanceLiqAmtStaked.gt(0)
+      ? textosExtra[currentLanguage].retirarStaking
+      : allowanceLiqAmtToMaster &&
+        balanceLiqAmt &&
+        allowanceLiqAmtToMaster.lt(balanceLiqAmt)
+      ? textosExtra[currentLanguage].aprobar
+      : textosExtra[currentLanguage].retirarLiquidez;
+  };
+
+  const operacionBotonRetirarLiquidezYStake = () => {
+    console.log("dsas")
+    return balanceLiqAmtStaked && balanceLiqAmtStaked.gt(0)
+      ? vaultBtcbLiquidityOperations.withdrawl(dispatch)
+      : allowanceLiqAmtToMaster &&
+        balanceLiqAmt &&
+        allowanceLiqAmtToMaster.lt(balanceLiqAmt)
+      ? liqAmtOperations.approveMaster(dispatch)
+      : balanceLiqAmt
+      ? masterOperations.removeLiquidity(dispatch, balanceLiqAmt)
+      : undefined;
+  };
 
   return (
     <div className="containerSlideRetirarLiquidez">
@@ -104,46 +132,15 @@ const RetirarLiquidez: React.FC = () => {
       </div>
       {textoRetirarLiquidez(currentLanguage)}
 
-      <div className="doubleButtonContainer">
-        <button
-          onClick={() => {
-            vaultBtcbLiquidityOperations.withdrawl(dispatch);
-          }}
-          className={
-            balanceLiqAmtStaked
-              ? balanceLiqAmtStaked.gt(0)
-                ? undefined
-                : "gris"
-              : undefined
-          }
-        >
-          {textosExtra[currentLanguage].retirarStaking}
-        </button>
-        <button
-          className={
-            balanceLiqAmt
-              ? balanceLiqAmt.gt(0)
-                ? undefined
-                : "gris"
-              : undefined
-          }
-          onClick={() =>
-            balanceLiqAmt &&
-            allowanceLiqAmtToMaster &&
-            allowanceLiqAmtToMaster.lt(balanceLiqAmt)
-              ? liqAmtOperations.approveMaster(dispatch)
-              : balanceLiqAmt && balanceLiqAmt.gt(0)
-              ? masterOperations.removeLiquidity(dispatch, balanceLiqAmt)
-              : null
-          }
-        >
-          {balanceLiqAmt &&
-          allowanceLiqAmtToMaster &&
-          allowanceLiqAmtToMaster.lt(balanceLiqAmt)
-            ? textosExtra[currentLanguage].aprobarLiqAmt
-            : textosExtra[currentLanguage].retirar}
-        </button>
-      </div>
+      <button
+        className={
+          balanceLiqAmt && balanceLiqAmt.gt(0) || balanceLiqAmtStaked && balanceLiqAmtStaked.gt(0) ? undefined : "gris"
+        }
+        onClick={operacionBotonRetirarLiquidezYStake}
+      >
+        {mensajeBotonRetirarLiquidezYStake()}
+      </button>
+
       <div className="containerPasos">
         <img
           className={

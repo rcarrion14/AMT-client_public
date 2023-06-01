@@ -1545,6 +1545,7 @@ export interface interfaceTextoExtra {
   buscar: string;
   nadaACobrar: string;
   retirarStaking: string;
+  retirarLiquidez: string;
 }
 export type typeTextosExtra = {
   [key in languageCode]: interfaceTextoExtra;
@@ -1627,6 +1628,7 @@ export const textosExtra: typeTextosExtra = {
     buscar: "Pesquisar",
     nadaACobrar: "Nada a cobrar",
     retirarStaking: "Retirar staking",
+    retirarLiquidez: "Retirar Liquidez"
   },
   esp: {
     bienvenido: "¡Bienvenido!",
@@ -1704,6 +1706,7 @@ export const textosExtra: typeTextosExtra = {
     buscar: "Buscar",
     nadaACobrar: "Nada a cobrar",
     retirarStaking: "Retirar staking",
+    retirarLiquidez: "Retirar liquidez"
   },
   eng: {
     bienvenido: "Welcome!",
@@ -1771,6 +1774,7 @@ export const textosExtra: typeTextosExtra = {
     buscar: "Search",
     nadaACobrar: "Nothing to charge",
     retirarStaking: "Staking Withdraw",
+    retirarLiquidez: "Remove liquidity"
   },
 };
 
