@@ -69,20 +69,11 @@ const Staking: React.FC<AmtStaking> = ({ setActivePage }) => {
             onClick={() => {
               setHistorico(true);
             }}
-            className="btnTransp"
+            className="btnLargeTransp"
           >
             {textosExtra[currentLanguage].consultarHistorico}
           </button>
-          <button
-            onClick={() => {
-              operacionWithdrawl(dispatch);
-            }}
-            className={
-              stackedByUser && stackedByUser.gt(0) ? undefined : "gris"
-            }
-          >
-            {textosExtra[currentLanguage].retirar}
-          </button>
+
         </div>
       </div>
       <CSSTransition
