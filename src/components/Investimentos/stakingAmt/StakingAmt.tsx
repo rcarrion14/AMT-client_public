@@ -59,24 +59,17 @@ const StakingAmt: React.FC<StakingAmtInterface> = ({ setActivePage }) => {
           operacionStake={stake}
         />
 
-        <div className="doubleButtonContainer">
+ 
           <button
             onClick={() => {
               setHistorico(true);
             }}
-            className="btnTransp"
+            className="btnLargeTransp"
           >
             {textosExtra[currentLanguage].consultarHistorico}
           </button>
-          <button
-            onClick={() => {
-              operacionWithdrawl(dispatch);
-            }}
-            className=""
-          >
-            {textosExtra[currentLanguage].retirar}
-          </button>
-        </div>
+
+
       </div>
 
       <CSSTransition
