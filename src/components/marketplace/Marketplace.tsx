@@ -13,6 +13,7 @@ import {
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import AgregarTokens from "./AgregarTokens";
+import PancakeSin1inch from "./pancake/PancakeSin1inch";
 
 const Marketplace = () => {
   const currentLanguage = useSelector(
@@ -27,7 +28,7 @@ const Marketplace = () => {
   }
   const jsxPages: jsxPagesInterface = {
     store: <AmtStore setActivePage={setActivePage} />,
-    pancake: <PancakeSwap setActivePage={setActivePage} />,
+    pancake:<PancakeSin1inch setActivePage={setActivePage}/>/*pancake: <PancakeSwap setActivePage={setActivePage} />*/,
     quema: <Quema setActivePage={setActivePage} />,
     pix: <Pix setActivePage={setActivePage} />,
   };

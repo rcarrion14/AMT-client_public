@@ -18,20 +18,7 @@ const Home: React.FC<HomeProps> = ({ setActivePage }) => {
     <>
       <div className="containerLengueta">
         <h1> {textosExtra[currentLanguage].bienvenido}</h1>
-        <div
-          className={
-            addr ? "containerVideo" : " containerVideo disabledContainer"
-          }
-        >
-          <iframe
-            className="video"
-            width="560"
-            height="200"
-            src="https://www.youtube.com/embed/xW1Az4C6L4U"
-            title="YouTube video player"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          ></iframe>
-        </div>
+
         <p className="textoConexion">
           {textosExtra[currentLanguage].textoConexion}
 

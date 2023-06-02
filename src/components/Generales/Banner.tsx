@@ -3,7 +3,11 @@ const Banner = () => {
   return (
     <>
       <div className="containerBanner">
-        <img src="auto-mining-logo.png" alt="" />
+        <img
+          onClick={() => window.location.reload()}
+          src="auto-mining-logo.png"
+          alt=""
+        />
         <div>
           <LanguageSelector></LanguageSelector>
         </div>

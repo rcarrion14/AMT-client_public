@@ -115,6 +115,7 @@ u {
 }
 
 .containerBanner {
+  
   height: 160px;
   background-color: #34383e;
   display: flex;
@@ -131,6 +132,9 @@ u {
 }
 .containerBanner > img {
   width: 250px;
+}
+.containerBanner > img:hover{
+  cursor: pointer;
 }
 
 .containerLengueta {
@@ -255,6 +259,11 @@ u {
 
 .navBar_top > img {
   width: 40px;
+}
+
+.navBar_top > img:hover {
+
+  cursor:pointer
 }
 
 .cuadroCompra {
@@ -436,6 +445,17 @@ u {
   margin: 0;
   margin: 15px 0 15px 0;
 }
+.btnLargeTransp {
+  border-width: 2px;
+  border-style: solid;
+  background-color: white;
+  border-color: #00bfdc;
+  font-size: 75%;
+  font-weight: bold;
+  width: 100%;
+  margin: 0;
+  margin: 15px 0 15px 0;
+}
 
 .btnTransp {
   background-color: white;
@@ -483,8 +503,9 @@ u {
 /* ------------------- */
 /* ------------------- */
 
-.slideIzquierda-enter {
+ .slideIzquierda-enter {
   transform: translateX(100vw);
+  
 }
 
 .slideIzquierda-enter-active {
@@ -497,7 +518,8 @@ u {
   -webkit-transform: translateX(100%);
   transform: translateX(100vw);
   transition: transform 800ms linear;
-}
+} 
+
 
 .fade-exit-active {
   max-width: 540px;

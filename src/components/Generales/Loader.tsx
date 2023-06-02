@@ -58,7 +58,6 @@ const Loader = () => {
   useEffect(() => {
     if (isConnected) {
       async function load() {
-        console.log("creating contracts");
         var contractPromises: Promise<any>[] = [];
         //Load contracts
         contractPromises.push(dispatch(createContractAmt()));

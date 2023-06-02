@@ -23,7 +23,6 @@ const initialState: vaultBtcbLiquidityState = {
 export const createContract = createAsyncThunk(
   "vaultBtcbLiquidity/createContract",
   async () => {
-    console.log("LIUIQIDEZ");
 
     const signer = getStaticState().wallet.signer;
     if (signer) {

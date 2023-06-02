@@ -29,7 +29,6 @@ const BotonDarLiquidez: React.FC<BotonDarLiquidezProps> = ({
     (state: typeof RootState) => state.session.language
   );
   const dispatch = useDispatch<AppDispatch>();
-  console.log({ inputAmt, inputBtc });
   const parsedInputAmt = ethers.utils.parseEther(inputAmt.toFixed(18));
   const parsedInputBtc = ethers.utils.parseEther(inputBtc.toFixed(18));
   const noPuedeProveerLiquidez =

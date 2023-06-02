@@ -67,7 +67,6 @@ export async function getAllDataMineria() {
     slush: data[3],
     viaBtc: data[4],
   };
-  console.log(dataDict);
 
   return dataDict;
 }

@@ -10,6 +10,9 @@ import { vaultBtcbLiquidityOperations } from "../../../store/features/vaultBtcbL
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../store/store";
 import { liqAmtOperations } from "../../../store/features/liqAmt/liqAmtOperations";
+import { amtOperations } from "../../../store/features/amt/amtOperations";
+import { btcbOperations } from "../../../store/features/btcb/btcbOperations";
+import { masterOperations } from "../../../store/features/master/masterOperations";
 const CuadroProveerLiquidez = () => {
   const dispatch = useDispatch<AppDispatch>();
   const balanceAmt = useSelector(
@@ -54,13 +57,7 @@ const CuadroProveerLiquidez = () => {
   const allowanceVault = useSelector(
     (state: typeof RootState) => state.liqAmt.allowanceVaultBtcbLiq
   );
-  const mensajeBotonStake = () => {
-    if (allowanceVault && balanceLiqAmt && allowanceVault.lt(balanceLiqAmt)) {
-      return textosExtra[currentLanguage].aprobar;
-    } else {
-      return textosExtra[currentLanguage].stake;
-    }
-  };
+
   const ratioAmtBtcb =
     balanceOfPoolAmt !== undefined && balanceOfPoolBtcb !== undefined
       ? parseFloat(balanceOfPoolAmt.toString()) /
@@ -93,19 +90,101 @@ const CuadroProveerLiquidez = () => {
       );
     }
   };
-  console.log({ inputAmtValue, inputBtcbValue });
+  const parsedInputAmt =
+    inputAmtValue !== ""
+      ? ethers.utils.parseEther(parseFloat(inputAmtValue).toFixed(18))
+      : ethers.BigNumber.from(0);
+  const parsedInputBtc =
+    inputBtcbValue !== ""
+      ? ethers.utils.parseEther(parseFloat(inputBtcbValue).toFixed(18))
+      : ethers.BigNumber.from(0);
+
+  const mensajeBotonLiquidezYStake = () => {
+    //Caso donde debe proveer liquidez
+    if (balanceLiqAmt && balanceLiqAmt.eq(0)) {
+      return allowanceAmt && allowanceAmt.lt(parsedInputAmt)
+        ? textosExtra[currentLanguage].aprobarAMT
+        : allowanceBtcb && allowanceBtcb.lt(parsedInputBtc)
+        ? textosExtra[currentLanguage].aprobarBTCB
+        : balanceAmt && balanceAmt.lt(parsedInputAmt)
+        ? textosExtra[currentLanguage].bceAmtInsuficiente
+        : balanceBtcb && balanceBtcb.lt(parsedInputBtc)
+        ? textosExtra[currentLanguage].bceBtcInsuficiente
+        : textosExtra[currentLanguage].proveerLiquidez;
+    }
+    //Caso donde debe stakear
+    else {
+      return allowanceVault && balanceLiqAmt && allowanceVault.lt(balanceLiqAmt)
+        ? textosExtra[currentLanguage].aprobar + " stake"
+        : textosExtra[currentLanguage].stake;
+    }
+  };
+
+  const operacionBotonDarLiquidezYStake = () => {
+    //Caso donde debe proveer liquidez
+    if (balanceLiqAmt && balanceLiqAmt.eq(0)) {
+      return allowanceAmt && allowanceAmt.lt(parsedInputAmt)
+        ? amtOperations.approveMaster(dispatch)
+        : allowanceBtcb && allowanceBtcb.lt(parsedInputBtc)
+        ? btcbOperations.approveMaster(dispatch)
+        : masterOperations.addLiquidity(
+            dispatch,
+            parsedInputAmt,
+            parsedInputBtc
+          );
+    }
+
+    //Caso donde debe stakear
+    else {
+      return allowanceVault && balanceLiqAmt && allowanceVault.lt(balanceLiqAmt)
+        ? liqAmtOperations.approveVaultBtcbLiq(dispatch)
+        : balanceLiqAmt
+        ? vaultBtcbLiquidityOperations.stake(dispatch, balanceLiqAmt)
+        : null;
+    }
+  };
   return (
     <>
       <div id="primeraSeccion">
-        <div className="saldo">
-          <p>
-            {textosExtra[currentLanguage].saldo}{" "}
-            {balanceAmt ? toFrontEndString(balanceAmt) : "-"}
-          </p>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignContent: "center",
+            flexWrap: "nowrap",
+            flexDirection: "row",
+            alignItems: "center",
+          }}
+        >
+          <div className="saldo">
+            <p>
+              {textosExtra[currentLanguage].saldo}{" "}
+              {balanceAmt ? toFrontEndString(balanceAmt) : "-"}
+            </p>
+          </div>
+
+          <button
+            onClick={() => {
+              if (balanceAmt && ratioAmtBtcb) {
+                setInputAmtValue(ethers.utils.formatEther(balanceAmt));
+                setInputBtcbValue(
+                  (
+                    parseFloat(ethers.utils.formatEther(balanceAmt)) /
+                    ratioAmtBtcb
+                  ).toString()
+                );
+              }
+            }}
+            className="btnSimulacion transparente"
+          >
+            100%
+          </button>
         </div>
+
         <div className="cuadroCompra">
           <img src="coinAutomining_.png" />
           <div>AMT</div>
+
           <input
             ref={inputAmt}
             placeholder="0"
@@ -135,42 +214,22 @@ const CuadroProveerLiquidez = () => {
             value={inputBtcbValue}
           />
         </div>
-        <div className="doubleButtonContainer">
-          <BotonDarLiquidez
-            balanceAmt={balanceAmt}
-            balanceBtc={balanceBtcb}
-            inputAmt={
-              inputAmtValue !== "" && inputAmtValue !== "NaN"
-                ? parseFloat(inputAmtValue)
-                : 0
-            }
-            inputBtc={
-              inputBtcbValue !== "" && inputBtcbValue !== "NaN"
-                ? parseFloat(inputBtcbValue)
-                : 0
-            }
-            allowanceAmt={allowanceAmt}
-            allowanceBtc={allowanceBtcb}
-          ></BotonDarLiquidez>
+        <div className="textoConexion">
           <button
             className={
-              balanceLiqAmt
-                ? balanceLiqAmt.gt(0)
-                  ? undefined
-                  : "gris"
+              inputAmtValue == "" ||
+              inputBtcbValue == "" ||
+              inputAmtValue == "0" ||
+              (balanceLiqAmtStaked && balanceLiqAmtStaked.gt(0))
+                ? "gris"
                 : undefined
             }
-            onClick={() => {
-              allowanceVault &&
-              balanceLiqAmt &&
-              allowanceVault.gt(balanceLiqAmt)
-                ? vaultBtcbLiquidityOperations.stake(dispatch, balanceLiqAmt)
-                : liqAmtOperations.approveVaultBtcbLiq(dispatch);
-            }}
+            onClick={operacionBotonDarLiquidezYStake}
           >
-            {balanceLiqAmt ? mensajeBotonStake() : "Stake"}
+            {mensajeBotonLiquidezYStake()}
           </button>
         </div>
+
         <div className="containerPasos">
           <img
             className={
