@@ -141,8 +141,8 @@ const Historico: React.FC<HistoricoProps> = ({
         </div>
         <div className="celeste">
           <b>{textosExtra[currentLanguage].amtDepositados}</b>{" "}
-          {addr && stakingIniciales
-            ? toFrontEndString(BigNumber.from(stakingIniciales[addr].amount))
+          {addr && stackedByUser
+            ? toFrontEndString(stackedByUser)
             : null}
         </div>
         <div className="celeste">
