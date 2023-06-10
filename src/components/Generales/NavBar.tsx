@@ -3,6 +3,17 @@ interface NavBarProps {
   activePage: string | null;
 }
 
+const hideElements = () => {
+  try {
+    (
+      document.getElementsByClassName("containerSlide")[0] as HTMLElement
+    ).hidden = true;
+    (
+      document.getElementsByClassName("containerSlide")[1] as HTMLElement
+    ).hidden = true;
+  } catch {}
+};
+
 const NavBar: React.FC<NavBarProps> = ({ setActivePage, activePage }) => {
   return (
     <div className="navBar">
@@ -10,7 +21,7 @@ const NavBar: React.FC<NavBarProps> = ({ setActivePage, activePage }) => {
         onClick={() => {
           window.scrollTo(0, 0);
           setActivePage("home");
-          (document.getElementsByClassName("containerSlide")[0] as HTMLElement).hidden = true
+          hideElements();
         }}
         className={activePage == "home" ? "activeIcon" : undefined}
         src="icon_home.png"
@@ -19,7 +30,7 @@ const NavBar: React.FC<NavBarProps> = ({ setActivePage, activePage }) => {
         onClick={() => {
           window.scrollTo(0, 0);
           setActivePage("marketplace");
-          (document.getElementsByClassName("containerSlide")[0] as HTMLElement).hidden = true
+          hideElements();
         }}
         className={activePage == "marketplace" ? "activeIcon" : undefined}
         src="icon_marketplace.png"
@@ -28,7 +39,7 @@ const NavBar: React.FC<NavBarProps> = ({ setActivePage, activePage }) => {
         onClick={() => {
           window.scrollTo(0, 0);
           setActivePage("investidores");
-          (document.getElementsByClassName("containerSlide")[0] as HTMLElement).hidden = true
+          hideElements();
         }}
         className={activePage == "investidores" ? "activeIcon" : undefined}
         src="icon_invest.png"
@@ -37,7 +48,7 @@ const NavBar: React.FC<NavBarProps> = ({ setActivePage, activePage }) => {
         onClick={() => {
           window.scrollTo(0, 0);
           setActivePage("gInvestidores");
-          (document.getElementsByClassName("containerSlide")[0] as HTMLElement).hidden = true
+          hideElements();
         }}
         className={activePage == "gInvestidores" ? "activeIcon" : undefined}
         src="icon_grandesInvest.png"
