@@ -50,14 +50,6 @@ const Liquidez: React.FC<LiquidezProps> = ({ setActivePage }) => {
         <h1>{textosExtra[currentLanguage].inversiones}</h1>
       </div>
       {textoLiquidez(currentLanguage)}
-      {alertaAntes ? <></> : null}
-      {selectorDarLiq &&
-      balanceLiqAmt &&
-      balanceLiqAmt.gt(0) &&
-      alertaDeposite ? (
-        // Falta depositar liqAmt en baul
-        <></>
-      ) : null}
       <div className="botonesSimuladorStaking"></div>
       <CuadroProveerLiquidez />
       <div className="containerResultadosSimulacion">

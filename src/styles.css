@@ -22,11 +22,11 @@ div {
   background-color: inherit;
 }
 
-u:hover{
+u:hover {
   cursor: pointer;
 }
 
-a{
+a {
   text-decoration: none;
   color: #34383e;
 }
@@ -115,7 +115,6 @@ u {
 }
 
 .containerBanner {
-  
   height: 160px;
   background-color: #34383e;
   display: flex;
@@ -133,7 +132,7 @@ u {
 .containerBanner > img {
   width: 250px;
 }
-.containerBanner > img:hover{
+.containerBanner > img:hover {
   cursor: pointer;
 }
 
@@ -236,7 +235,6 @@ u {
 }
 
 .navBar > img:hover {
-
   cursor: pointer;
 }
 
@@ -262,8 +260,7 @@ u {
 }
 
 .navBar_top > img:hover {
-
-  cursor:pointer
+  cursor: pointer;
 }
 
 .cuadroCompra {
@@ -492,9 +489,8 @@ u {
 /* ------------------- */
 /* ------------------- */
 
- .slideIzquierda-enter {
+.slideIzquierda-enter {
   transform: translateX(100vw);
-  
 }
 
 .slideIzquierda-enter-active {
@@ -507,8 +503,7 @@ u {
   -webkit-transform: translateX(100%);
   transform: translateX(100vw);
   transition: transform 800ms linear;
-} 
-
+}
 
 .fade-exit-active {
   max-width: 540px;
@@ -1169,4 +1164,9 @@ u {
 
 .amtIcon {
   width: 40px;
+}
+
+.singleButtonContainer {
+  display: flex;
+  justify-content: center;
 }
