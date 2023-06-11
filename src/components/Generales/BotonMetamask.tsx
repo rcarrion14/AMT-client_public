@@ -20,9 +20,7 @@ const BotonMetamask = () => {
   ) {
     return (
       <button style={{ zIndex: 99 }}>
-        <a href="https://metamask.app.link/dapp/app.amtest.link/">
-          {textosExtra[currentLanguage].conectarBilletera}
-        </a>
+        <a href={appLink}>{textosExtra[currentLanguage].conectarBilletera}</a>
       </button>
     );
   } else {
