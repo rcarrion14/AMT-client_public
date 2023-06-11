@@ -116,9 +116,17 @@ const CuadroProveerLiquidez = () => {
             <button
               onClick={() => {
                 if (balanceAmt && ratioAmtBtcb) {
-                  setInputAmtValue(ethers.utils.formatEther(balanceAmt));
+                  setInputAmtValue(
+                    ethers.utils.formatEther(
+                      balanceAmt.sub(ethers.BigNumber.from("1"))
+                    )
+                  );
                   setInputBtcbValue(
-                    ethers.utils.formatEther(balanceAmt.div(ratioAmtBtcb))
+                    ethers.utils.formatEther(
+                      balanceAmt
+                        .div(ratioAmtBtcb)
+                        .sub(ethers.BigNumber.from("1"))
+                    )
                   );
                 }
               }}
