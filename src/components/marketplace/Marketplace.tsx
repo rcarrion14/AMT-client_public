@@ -14,10 +14,15 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import AgregarTokens from "./AgregarTokens";
 import PancakeSin1inch from "./pancake/PancakeSin1inch";
+import { ethers } from "ethers";
 
 const Marketplace = () => {
   const currentLanguage = useSelector(
     (state: typeof RootState) => state.session.language
+  );
+
+  const amtEnVenta = useSelector(
+    (state: typeof RootState) => state.marketPlace.amtEnVenta
   );
   const pages: string[] = ["store", "pancake", "quema", "pix"];
   const [activePage, setActivePage] = useState<string | null>("marketplace");
@@ -28,7 +33,9 @@ const Marketplace = () => {
   }
   const jsxPages: jsxPagesInterface = {
     store: <AmtStore setActivePage={setActivePage} />,
-    pancake:<PancakeSin1inch setActivePage={setActivePage}/>/*pancake: <PancakeSwap setActivePage={setActivePage} />*/,
+    pancake: (
+      <PancakeSin1inch setActivePage={setActivePage} />
+    ) /*pancake: <PancakeSwap setActivePage={setActivePage} />*/,
     quema: <Quema setActivePage={setActivePage} />,
     pix: <Pix setActivePage={setActivePage} />,
   };
@@ -46,7 +53,7 @@ const Marketplace = () => {
       </CSSTransition>
     );
   });
-
+  console.log(amtEnVenta)
   return (
     <>
       <div
@@ -63,12 +70,18 @@ const Marketplace = () => {
           </button>
         </div>
         <div>
-          <BotonBlanco
-            titulo={textoBotonesBlancos[currentLanguage].store.titulo}
-            descripcion={textoBotonesBlancos[currentLanguage].store.descripcion}
-            activador={"store"}
-            setActivePage={setActivePage}
-          />
+          
+          {amtEnVenta && parseInt(ethers.utils.formatEther(amtEnVenta)) > 1 ? (
+            <BotonBlanco
+              titulo={textoBotonesBlancos[currentLanguage].store.titulo}
+              descripcion={
+                textoBotonesBlancos[currentLanguage].store.descripcion
+              }
+              activador={"store"}
+              setActivePage={setActivePage}
+            />
+          ) : null}
+
           <BotonBlanco
             titulo={textoBotonesBlancos[currentLanguage].pancake.titulo}
             descripcion={
