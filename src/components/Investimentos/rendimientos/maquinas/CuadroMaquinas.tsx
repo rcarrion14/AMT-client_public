@@ -1,4 +1,7 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../../store/store";
+import { textosExtra } from "../../../../Utils/textos";
 interface CuadroMaquinasProps {
   logo: string;
   maquinas: number | null;
@@ -11,12 +14,13 @@ const CuadroMaquinas: React.FC<CuadroMaquinasProps> = ({
   petahash,
   produccion,
 }) => {
+  const currentLanguage = useSelector((state: typeof RootState) => state.session.language)
   return (
     <div className="containerMaquinas shadowBox">
       <img className="logoMaquinas" src={logo} alt="" />
 
       <div className="maquinas shadowBox">
-        <b>Maquinas</b>
+        <b>{textosExtra[currentLanguage].maquinas}</b>
         <div>{maquinas}</div>
       </div>
       <div className="petahash shadowBox">
@@ -24,7 +28,7 @@ const CuadroMaquinas: React.FC<CuadroMaquinasProps> = ({
         <div>{petahash}</div>
       </div>
       <div className="produccion shadowBox">
-        <b>Producao nas últimas 24hs</b>
+        <b>{textosExtra[currentLanguage].prodUlt24h}</b>
         <div>{produccion}</div>
       </div>
     </div>

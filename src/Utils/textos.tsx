@@ -1437,6 +1437,14 @@ export interface interfaceTextoExtra {
   buscar: string;
   nadaACobrar: string;
   retirarStaking: string;
+
+  rendimientos: string;
+  maquinasActivas: string;
+  linkObservador: string;
+  textoMaquinas: string;
+  maquinas: string;
+  prodUlt24h: string;
+
 }
 export type typeTextosExtra = {
   [key in languageCode]: interfaceTextoExtra;
@@ -1523,6 +1531,13 @@ export const textosExtra: typeTextosExtra = {
     nadaACobrar: "Nada a cobrar",
     retirarStaking: "Retirar staking",
     retirarLiquidez: "Retirar liquidez",
+
+    rendimientos: "Rendimentos",
+    maquinasActivas: "Máquinas ativas no Projeto AMT",
+    linkObservador: "Link de observador",
+    textoMaquinas: "As máquinas do AMT estao divididas em diferentes pools, conforme vocé pode conferir abaixo",
+    maquinas: "Maquinas",
+    prodUlt24h: "Producao nas últimas 24hs",
   },
   esp: {
     bienvenido: "¡Bienvenido!",
@@ -1604,6 +1619,12 @@ export const textosExtra: typeTextosExtra = {
     nadaACobrar: "Nada a cobrar",
     retirarStaking: "Retirar staking",
     retirarLiquidez: "Retirar liquidez",
+    rendimientos: "Rendimientos",
+    maquinasActivas: "Máquinas activas en el Proyecto AMT",
+    linkObservador: "Link de observador",
+    textoMaquinas: "Las máquinas de AMT están divididas en diferentes grupos, como puedes comprobar a continuación",
+    maquinas: "Máquinas",
+    prodUlt24h: "Producción en las últimas 24 horas"
   },
   eng: {
     bienvenido: "Welcome!",
@@ -1676,6 +1697,13 @@ export const textosExtra: typeTextosExtra = {
     nadaACobrar: "Nothing to charge",
     retirarStaking: "Staking withdraw",
     retirarLiquidez: "Liquidity withdraw",
+
+    rendimientos: "Yields",
+    maquinasActivas: "Active Machines in AMT Project",
+    linkObservador: "Observer Link",
+    textoMaquinas: "The AMT machines are divided into different pools, as you can check below",
+    maquinas: "Machines",
+    prodUlt24h: "Production in the last 24 hours"
   },
 };
 

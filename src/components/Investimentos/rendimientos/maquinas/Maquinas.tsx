@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import CuadroMaquinas from "./CuadroMaquinas";
 import { getAllDataMineria } from "../../../../Utils/datosMineria";
 import { dataMineriaInterface } from "../../../../Utils/datosMineria";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../../store/store";
+import { textosExtra } from "../../../../Utils/textos";
 interface MaquinasInterface {
   setActivePage: React.Dispatch<React.SetStateAction<string | boolean>>;
 }
@@ -12,14 +15,14 @@ const Maquinas: React.FC<MaquinasInterface> = ({ setActivePage }) => {
   useEffect(() => {
     getAllDataMineria().then((result) => setData(result));
   }, []);
-
+  const currentLanguage = useSelector((state: typeof RootState) => state.session.language)
   return (
     <div className="containerSlide">
       <div className="navBar_top">
         <img onClick={() => setActivePage("")} src="icon_nav.png" />
-        <h1>Rendimentos</h1>
+        <h1>{textosExtra[currentLanguage].rendimientos}</h1>
       </div>
-      <h2>Máquinas ativas no Projeto AMT</h2>
+      <h2>{textosExtra[currentLanguage].maquinasActivas}</h2>
       <CuadroMaquinas
         maquinas={
           data
@@ -49,8 +52,7 @@ const Maquinas: React.FC<MaquinasInterface> = ({ setActivePage }) => {
         }
         logo={"coinAutomining.png"}
       />
-      As máquinas do AMT estao divididas em diferentes pools, conforme vocé pode
-      conferir abaixo
+{textosExtra[currentLanguage].textoMaquinas}
       <CuadroMaquinas
         maquinas={data ? data.antPool.workers : null}
         petahash={
@@ -61,7 +63,7 @@ const Maquinas: React.FC<MaquinasInterface> = ({ setActivePage }) => {
       />
       <div>
         <a href="https://v3.antpool.com/observer?accessKey=Bl4vdwpwVUcUoFL6fQ3s&coinType=BTC&observerUserId=autominingtoken">
-          <u>Link de observador</u>
+          <u>{textosExtra[currentLanguage].linkObservador}</u>
         </a>
       </div>
       <CuadroMaquinas
@@ -74,10 +76,10 @@ const Maquinas: React.FC<MaquinasInterface> = ({ setActivePage }) => {
       />
       <div>
         <a href="https://www.viabtc.net/observer/dashboard?access_key=6a6b97443bd15313c2a8d9c3d33c40f0">
-          <u>Link de observador (1) - </u>
+          <u>{textosExtra[currentLanguage].linkObservador}(1) - </u>
         </a>
         <a href="">
-          <u>Link de observador(2)</u>
+          <u>{textosExtra[currentLanguage].linkObservador}(2)</u>
         </a>
       </div>
       <CuadroMaquinas
