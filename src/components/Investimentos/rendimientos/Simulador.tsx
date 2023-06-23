@@ -86,6 +86,9 @@ const Simulador: React.FC<SimuladorInterface> = ({ setActivePage }) => {
     ));
   }
 
+  console.log({cobradoTotal_btcb_anual,cobradoTotal_btcb_mensual,cobradoTotal_btcb_diario})
+  console.log({autoCompra_amt_anual, autoCompra_amt_mensual, autoCompra_amt_diario})
+
   return (
     <div className="containerSlide">
       <div className="navBar_top">

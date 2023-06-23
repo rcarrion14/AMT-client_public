@@ -16,7 +16,7 @@ function addLiquidity(
   const operationPromise = contract.addLiquidity(amountAmt, amountBtcb);
   operationExecution(operationPromise).then(() => {
     dispatch(btcbGetBalance());
-    dispatch(getAmtbalance);
+    dispatch(getAmtbalance());
     dispatch(liqAmtGetbalance());
   });
 }

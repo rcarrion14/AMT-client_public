@@ -24,7 +24,7 @@ export const cuentasSimulador = (
     (rentPorcent_usdt_diario * 30).toFixed(3)
   );
   let cobradoTotal_btcb_mensual = Number(
-    (cobradoTotal_btcb_diario * 30).toFixed(3)
+    (cobradoTotal_btcb_diario * 30).toFixed(30)
   );
   let autoCompra_amt_mensual = Number(
     (
