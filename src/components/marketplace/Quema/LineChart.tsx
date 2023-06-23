@@ -69,7 +69,7 @@ function LineChart() {
         }
         const valorBtcEnUsdt = transfer.amount.mul(precioBtcEnUsdt.toFixed(0));
         return (
-          <div className="cuadritosQuema">
+          <div className="cuadroCobro">
             <img
               src={
                 esQuema
