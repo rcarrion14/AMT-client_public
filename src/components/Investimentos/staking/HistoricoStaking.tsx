@@ -6,7 +6,7 @@ import contractAddresses from "../../../contracts/contractAddresses";
 import { snapToDateMapp } from "../../gInvestidores/snapshotDateMapper";
 import { ethers, BigNumber } from "ethers";
 import { textoBotonesBlancos, textosExtra } from "../../../Utils/textos";
-import { toFrontEndString } from "../../../Utils/formatHelpers";
+import { toFrontEndString,toFrontEndStringForSmallInvestor } from "../../../Utils/formatHelpers";
 import { dataStakingType, dataCobrosValue } from "../../../Utils/fetchBuckets";
 interface HistoricoProps {
   setHistorico: React.Dispatch<React.SetStateAction<boolean>>;
@@ -98,7 +98,7 @@ const Historico: React.FC<HistoricoProps> = ({
               {
                 //Check next line if balances are showed correctly
               }
-              <p>{toFrontEndString(ganancia[0], 7)}</p>
+              <p>{toFrontEndStringForSmallInvestor(ganancia[0], precition)}</p>
               <p>BTCB</p>
             </div>
           </div>
@@ -121,7 +121,7 @@ const Historico: React.FC<HistoricoProps> = ({
       });
     }
   }, []);
-
+  const precition = stackedByUser ? stackedByUser.lt(ethers.utils.parseEther("300")) ? 10 : 5 : 5
   return (
     <div className="containerSlide">
       <div className="navBar_top">
@@ -154,7 +154,7 @@ const Historico: React.FC<HistoricoProps> = ({
         <div className="celeste">
           <b>{textosExtra[currentLanguage].btcACobrar}</b>{" "}
           {addr && stakingIniciales && stackedByUser?.gt(0)
-            ? toFrontEndString(getGanancias().gananciaAcum)
+            ? toFrontEndStringForSmallInvestor(getGanancias().gananciaAcum,precition)
             : "0"}
         </div>
       </div>
