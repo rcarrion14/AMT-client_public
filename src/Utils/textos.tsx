@@ -1437,6 +1437,7 @@ export interface interfaceTextoExtra {
   buscar: string;
   nadaACobrar: string;
   retirarStaking: string;
+  retirarLiquidez: string;
 }
 export type typeTextosExtra = {
   [key in languageCode]: interfaceTextoExtra;

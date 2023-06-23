@@ -7,7 +7,6 @@ import { ethers } from "ethers";
 import { toFrontEndString } from "../../../Utils/formatHelpers";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../store/store";
-
 const CuadroProveerLiquidez = () => {
   const dispatch = useDispatch<AppDispatch>();
   const balanceAmt = useSelector(
@@ -128,9 +127,11 @@ const CuadroProveerLiquidez = () => {
             </button>
           </div>
         </div>
+
         <div className="cuadroCompra">
           <img src="coinAutomining_.png" />
           <div>AMT</div>
+
           <input
             ref={inputAmt}
             placeholder="0"
