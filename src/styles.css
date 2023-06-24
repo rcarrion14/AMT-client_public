@@ -442,6 +442,17 @@ u {
   margin: 0;
   margin: 15px 0 15px 0;
 }
+.btnLargeTransp {
+  border-width: 2px;
+  border-style: solid;
+  background-color: white;
+  border-color: #00bfdc;
+  font-size: 75%;
+  font-weight: bold;
+  width: 100%;
+  margin: 0;
+  margin: 15px 0 15px 0;
+}
 
 .btnTransp {
   background-color: white;
@@ -912,6 +923,7 @@ u {
   padding: 10px 15px 10px 15px;
   border-radius: 15px;
   margin-top: 15px;
+  justify-content: space-between;
 }
 
 @media (max-width: 450px) {

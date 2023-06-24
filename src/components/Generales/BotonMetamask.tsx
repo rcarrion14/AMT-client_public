@@ -12,7 +12,7 @@ const BotonMetamask = () => {
     (state: typeof RootState) => state.wallet.address
   );
 
-  const appLink = "https://metamask.app.link/dapp/autominingtoken.com/";
+  const appLink = "https://metamask.app.link/dapp/app.autominingtoken.com/";
 
   if (
     navigator.userAgent.indexOf("Mobile") != -1 && // Estoy en mobile pero NO en metamask

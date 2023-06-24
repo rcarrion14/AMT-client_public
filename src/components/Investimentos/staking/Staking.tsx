@@ -69,7 +69,7 @@ const Staking: React.FC<AmtStaking> = ({ setActivePage }) => {
             onClick={() => {
               setHistorico(true);
             }}
-            className="btnTransp"
+            className="btnLargeTransp"
           >
             {textosExtra[currentLanguage].consultarHistorico}
           </button>

@@ -86,6 +86,8 @@ const Simulador: React.FC<SimuladorInterface> = ({ setActivePage }) => {
     ));
   }
 
+  const precition = cantidadAmtValue < 2500 ? 7 : 2;
+  const precitionForUsd =  cantidadAmtValue < 2500 ? 5 : 0;
   return (
     <div className="containerSlide">
       <div className="navBar_top">
@@ -211,19 +213,19 @@ const Simulador: React.FC<SimuladorInterface> = ({ setActivePage }) => {
           <div>{rentPorcent_usdt_diario} %</div>
           <h2>{textoBotonesBlancos[currentLanguage].staking.titulo}</h2>
           <div>
-            {cobradoTotal_btcb_diario} BTCB (
+            {cobradoTotal_btcb_diario?.toFixed(precition)} BTCB (
             {cobradoTotal_btcb_diario && inputPrecioBtcbValue
               ? Number(
-                  (cobradoTotal_btcb_diario * inputPrecioBtcbValue).toFixed(1)
-                )
+                  (cobradoTotal_btcb_diario * inputPrecioBtcbValue).toFixed(precitionForUsd)
+                ) 
               : ""}{" "}
             USD)
           </div>
           <h2>{textosExtra[currentLanguage].autocompraDiaria}</h2>
           <div>
-            {autoCompra_amt_diario} AMT (
+            {autoCompra_amt_diario?.toFixed(precition)} AMT (
             {autoCompra_amt_diario && inputPrecioAmtValue
-              ? Number((autoCompra_amt_diario * inputPrecioAmtValue).toFixed(1))
+              ? Number((autoCompra_amt_diario * inputPrecioAmtValue).toFixed(precitionForUsd))
               : ""}{" "}
             USD)
           </div>
@@ -234,20 +236,20 @@ const Simulador: React.FC<SimuladorInterface> = ({ setActivePage }) => {
           <div>{rentPorcent_usdt_mensual} %</div>
           <h2>{textoBotonesBlancos[currentLanguage].staking.titulo}</h2>
           <div>
-            {cobradoTotal_btcb_mensual} BTCB (
+            {cobradoTotal_btcb_mensual?.toFixed(precition)} BTCB (
             {cobradoTotal_btcb_mensual && inputPrecioBtcbValue
               ? Number(
-                  (cobradoTotal_btcb_mensual * inputPrecioBtcbValue).toFixed(0)
-                )
+                  (cobradoTotal_btcb_mensual * inputPrecioBtcbValue).toFixed(precitionForUsd)
+                ) 
               : ""}{" "}
             USD){" "}
           </div>
           <h2>{textosExtra[currentLanguage].autocompraDiaria}</h2>
           <div>
-            {autoCompra_amt_mensual} AMT (
+            {autoCompra_amt_mensual?.toFixed(precition)} AMT (
             {autoCompra_amt_mensual && inputPrecioAmtValue
               ? Number(
-                  (autoCompra_amt_mensual * inputPrecioAmtValue).toFixed(0)
+                  (autoCompra_amt_mensual * inputPrecioAmtValue).toFixed(precitionForUsd)
                 )
               : ""}{" "}
             USD)
@@ -259,19 +261,19 @@ const Simulador: React.FC<SimuladorInterface> = ({ setActivePage }) => {
           <div>{rentPorcent_usdt_anual}%</div>
           <h2>{textoBotonesBlancos[currentLanguage].staking.titulo}</h2>
           <div>
-            {cobradoTotal_btcb_anual} BTCB (
+            {cobradoTotal_btcb_anual?.toFixed(precition)} BTCB (
             {cobradoTotal_btcb_anual && inputPrecioBtcbValue
               ? Number(
-                  (cobradoTotal_btcb_anual * inputPrecioBtcbValue).toFixed(0)
+                  (cobradoTotal_btcb_anual * inputPrecioBtcbValue).toFixed(precitionForUsd)
                 )
               : ""}{" "}
             USD)
           </div>
           <h2>{textosExtra[currentLanguage].autocompraDiaria}</h2>
           <div>
-            {autoCompra_amt_anual} AMT (
+            {autoCompra_amt_anual?.toFixed(precition)} AMT (
             {autoCompra_amt_anual && inputPrecioAmtValue
-              ? Number((autoCompra_amt_anual * inputPrecioAmtValue).toFixed(0))
+              ? Number((autoCompra_amt_anual * inputPrecioAmtValue).toFixed(precitionForUsd))
               : ""}{" "}
             USD)
           </div>

@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { fetchVaultAmt } from "../../Utils/fetchBuckets";
 import { BigNumber, ethers } from "ethers";
-import { toFrontEndString } from "../../Utils/formatHelpers";
+import { toFrontEndString, toFrontEndStringForSmallInvestor } from "../../Utils/formatHelpers";
 import { dataStakingType } from "../../Utils/fetchBuckets";
 interface CuadroStakingProps {
   balanceUserAmt: BigNumber | undefined;
@@ -41,7 +41,7 @@ const CuadroStaking: React.FC<CuadroStakingProps> = ({
       setStakingIniciales(result.dataStakings);
     });
   }, []);
-
+  const precition = stackedByUser ? stackedByUser.lt(ethers.utils.parseEther("300")) ? 10 : 5 : 5
   return (
     <>
       <div id="primeraSeccion">
@@ -135,11 +135,11 @@ const CuadroStaking: React.FC<CuadroStakingProps> = ({
               <h2>
                 {btcACobrar != undefined
                   ? textosExtra[currentLanguage].btcbAcumulados
-                  : textosExtra[currentLanguage].amtGenerados}
+                  : textosExtra[currentLanguage].amtGenerados }
               </h2>
               <div>
                 {btcACobrar != undefined && btcACobrar.gte(0)
-                  ? toFrontEndString(btcACobrar)
+                  ? toFrontEndStringForSmallInvestor(btcACobrar,precition)
                   : addr &&
                     stackedByUser &&
                     stakingIniciales != undefined &&
