@@ -14,7 +14,7 @@ const PancakeSin1inch: React.FC<PancakeSwapInterface> = ({ setActivePage }) => {
   const [selector, setSelector] = useState(false);
   const handleButtonClick = () => {
     window.open(
-      "https://pancakeswap.finance/swap?outputCurrency=0x7130d2A12B9BCbFAe4f2634d864A1Ee1Ce3Ead9c&inputCurrency=0x6Ae0A238a6f51Df8eEe084B1756A54dD8a8E85d3",
+      "https://pancakeswap.finance/swap?outputCurrency=0x6Ae0A238a6f51Df8eEe084B1756A54dD8a8E85d3&inputCurrency=0x55d398326f99059fF775485246999027B3197955",
       "_blank"
     );
   };
