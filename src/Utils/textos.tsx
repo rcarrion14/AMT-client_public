@@ -1535,9 +1535,9 @@ export const textosExtra: typeTextosExtra = {
     rendimientos: "Rendimentos",
     maquinasActivas: "Máquinas ativas no Projeto AMT",
     linkObservador: "Link de observador",
-    textoMaquinas: "As máquinas do AMT estao divididas em diferentes pools, conforme vocé pode conferir abaixo",
-    maquinas: "Maquinas",
-    prodUlt24h: "Producao nas últimas 24hs",
+    textoMaquinas: "As máquinas do AMT estão divididas em diferentes pools, conforme você pode conferir abaixo",
+    maquinas: "Máquinas",
+    prodUlt24h: "Produção nas últimas 24hs",
   },
   esp: {
     bienvenido: "¡Bienvenido!",
