@@ -78,7 +78,7 @@ const Maquinas: React.FC<MaquinasInterface> = ({ setActivePage }) => {
         <a href="https://www.viabtc.net/observer/dashboard?access_key=6a6b97443bd15313c2a8d9c3d33c40f0">
           <u>{textosExtra[currentLanguage].linkObservador}(1) - </u>
         </a>
-        <a href="">
+        <a href=" https://www.viabtc.net/observer/dashboard?access_key=6a6b97443bd15313c2a8d9c3d33c40f0&user_id=1338679">
           <u>{textosExtra[currentLanguage].linkObservador}(2)</u>
         </a>
       </div>
