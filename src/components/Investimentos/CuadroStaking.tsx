@@ -135,7 +135,7 @@ const CuadroStaking: React.FC<CuadroStakingProps> = ({
               <h2>
                 {btcACobrar != undefined
                   ? textosExtra[currentLanguage].btcbAcumulados
-                  : textosExtra[currentLanguage].amtGenerados}
+                  : textosExtra[currentLanguage].amtGenerados }
               </h2>
               <div>
                 {btcACobrar != undefined && btcACobrar.gte(0)

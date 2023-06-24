@@ -12,11 +12,11 @@ export const cuentasSimulador = (
   );
 
   let cobradoTotal_btcb_diario = Number(
-    (cobradoUnitario_btcb * cantidad).toFixed(5)
+    (cobradoUnitario_btcb * cantidad).toFixed(20)
   );
 
   let autoCompra_amt_diario = Number(
-    ((cobradoTotal_btcb_diario * precioBtcb) / precioAmt).toFixed(2)
+    ((cobradoTotal_btcb_diario * precioBtcb) / precioAmt).toFixed(20)
   );
   /////// --- MENSUAL: ------ /////
 
@@ -30,20 +30,20 @@ export const cuentasSimulador = (
     (
       cantidad * (1 + (cobradoUnitario_btcb * precioBtcb) / precioAmt) ** 30 -
       cantidad
-    ).toFixed(0)
+    ).toFixed(20)
   );
 
   /////// --- ANUAL: ------ /////
 
   let rentPorcent_usdt_anual = (rentPorcent_usdt_diario * 365).toFixed(3);
   let cobradoTotal_btcb_anual = Number(
-    (cobradoTotal_btcb_diario * 365).toFixed(3)
+    (cobradoTotal_btcb_diario * 365).toFixed(30)
   );
   let autoCompra_amt_anual = Number(
     (
       cantidad * (1 + (cobradoUnitario_btcb * precioBtcb) / precioAmt) ** 365 -
       cantidad
-    ).toFixed(0)
+    ).toFixed(20)
   );
 
   return {
