@@ -2,11 +2,16 @@ import React, { useEffect, useRef, useState } from "react";
 import BotonOperacionStaking from "./BotonOperacionStaking";
 import { textoAtencionStaking, textosExtra } from "../../Utils/textos";
 import { useSelector } from "react-redux";
-import { RootState } from "../../store/store";
+import { AppDispatch, RootState } from "../../store/store";
 import { fetchVaultAmt } from "../../Utils/fetchBuckets";
 import { BigNumber, ethers } from "ethers";
-import { toFrontEndString, toFrontEndStringForSmallInvestor } from "../../Utils/formatHelpers";
+import {
+  toFrontEndString,
+  toFrontEndStringForSmallInvestor,
+} from "../../Utils/formatHelpers";
 import { dataStakingType } from "../../Utils/fetchBuckets";
+import { setGeneratedAmtWaitingForUpdate } from "../../store/features/vaultAmt/vaultAmtSlice";
+import { useDispatch } from "react-redux";
 interface CuadroStakingProps {
   balanceUserAmt: BigNumber | undefined;
   stackedByUser: BigNumber | undefined;
@@ -32,16 +37,32 @@ const CuadroStaking: React.FC<CuadroStakingProps> = ({
   const currentLanguage = useSelector(
     (state: typeof RootState) => state.session.language
   );
+
+  const dataTrigger = useSelector(
+    (state: typeof RootState) => state.vaultAmt.getNewDataTrigger
+  );
+  const amtGeneratedWaitingForUpdate = useSelector(
+    (state: typeof RootState) => state.vaultAmt.amtGeneratedWaitingForUpdate
+  );
+  const dispatch = useDispatch<AppDispatch>();
+
   const [stakingIniciales, setStakingIniciales] = useState<
     dataStakingType | undefined
   >(undefined);
 
   useEffect(() => {
+    console.log("fetching new data");
+    setStakingIniciales(undefined);
     fetchVaultAmt().then((result) => {
       setStakingIniciales(result.dataStakings);
+      dispatch(setGeneratedAmtWaitingForUpdate(false));
     });
-  }, []);
-  const precition = stackedByUser ? stackedByUser.lt(ethers.utils.parseEther("300")) ? 10 : 5 : 5
+  }, [dataTrigger]);
+  const precition = stackedByUser
+    ? stackedByUser.lt(ethers.utils.parseEther("300"))
+      ? 10
+      : 5
+    : 5;
   return (
     <>
       <div id="primeraSeccion">
@@ -135,15 +156,16 @@ const CuadroStaking: React.FC<CuadroStakingProps> = ({
               <h2>
                 {btcACobrar != undefined
                   ? textosExtra[currentLanguage].btcbAcumulados
-                  : textosExtra[currentLanguage].amtGenerados }
+                  : textosExtra[currentLanguage].amtGenerados}
               </h2>
               <div>
                 {btcACobrar != undefined && btcACobrar.gte(0)
-                  ? toFrontEndStringForSmallInvestor(btcACobrar,precition)
+                  ? toFrontEndStringForSmallInvestor(btcACobrar, precition)
                   : addr &&
                     stackedByUser &&
                     stakingIniciales != undefined &&
-                    stackedByUser.gt(0)
+                    stackedByUser.gt(0) &&
+                    !amtGeneratedWaitingForUpdate
                   ? toFrontEndString(
                       stackedByUser.sub(
                         ethers.BigNumber.from(stakingIniciales[addr].amount)

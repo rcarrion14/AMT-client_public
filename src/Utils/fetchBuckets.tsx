@@ -37,6 +37,18 @@ export interface FetchVaultBtcbResult {
   dataCobros: dataCobrosValue[];
 }
 
+export const updateBucketsData = async (): Promise<Boolean> => {
+  const updateBucketsEndPoint =
+    "https://y6lrq3pwi7.execute-api.us-east-1.amazonaws.com/default/getStakingsIniciales";
+  const response = await fetch(updateBucketsEndPoint, {
+    method: "GET",
+    headers: {'Content-Type': 'application/json'},
+    cache: "no-cache",
+  });
+  console.log(response);
+  return true;
+};
+
 export const fetchVaultAmt = async (): Promise<FetchVaultAmtResult> => {
   let endpointUsuarios =
     "https://amt-bucket-aws.s3.amazonaws.com/usuarios_VaulAmt.json";

@@ -7,6 +7,8 @@ import {
   getBalanceUserBtcb,
 } from "./vaultBtcbSlice";
 import { getAmtbalance } from "../amt/amtSlice";
+import { updateBucketsData } from "../../../Utils/fetchBuckets";
+import { setGetNewDataTrigger } from "../vaultAmt/vaultAmtSlice";
 
 function stake(dispatch: AppDispatch, amount: number) {
   const contract = getStaticState().vaultBtcb.contract;
@@ -16,6 +18,9 @@ function stake(dispatch: AppDispatch, amount: number) {
     dispatch(getBalanceAmt());
     dispatch(getAmtbalance());
     dispatch(getBalanceUserBtcb());
+    updateBucketsData().then(()=>{
+      dispatch(setGetNewDataTrigger())
+    })
   });
 }
 
