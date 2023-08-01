@@ -1445,6 +1445,8 @@ export interface interfaceTextoExtra {
   maquinas: string;
   prodUlt24h: string;
 
+  amtTotales: string;
+
 }
 export type typeTextosExtra = {
   [key in languageCode]: interfaceTextoExtra;
@@ -1538,6 +1540,7 @@ export const textosExtra: typeTextosExtra = {
     textoMaquinas: "As máquinas do AMT estão divididas em diferentes pools, conforme você pode conferir abaixo",
     maquinas: "Máquinas",
     prodUlt24h: "Produção nas últimas 24hs",
+    amtTotales: "Total de AMT"
   },
   esp: {
     bienvenido: "¡Bienvenido!",
@@ -1624,7 +1627,8 @@ export const textosExtra: typeTextosExtra = {
     linkObservador: "Link de observador",
     textoMaquinas: "Las máquinas de AMT están divididas en diferentes grupos, como puedes comprobar a continuación",
     maquinas: "Máquinas",
-    prodUlt24h: "Producción en las últimas 24 horas"
+    prodUlt24h: "Producción en las últimas 24 horas",
+    amtTotales: "AMT Totales"
   },
   eng: {
     bienvenido: "Welcome!",
@@ -1703,7 +1707,8 @@ export const textosExtra: typeTextosExtra = {
     linkObservador: "Observer Link",
     textoMaquinas: "The AMT machines are divided into different pools, as you can check below",
     maquinas: "Machines",
-    prodUlt24h: "Production in the last 24 hours"
+    prodUlt24h: "Production in the last 24 hours",
+    amtTotales: "Total AMT"
   },
 };
 
