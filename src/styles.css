@@ -654,6 +654,7 @@ u {
 
 .cuadroStakings > img {
   width: 25px;
+  max-height: 25px;
   height: fit-content;
 }
 
