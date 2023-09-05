@@ -7,10 +7,13 @@ import { textosExtra, textoBotonesBlancos } from "../../Utils/textos";
 interface HomeProps {
   setActivePage: React.Dispatch<React.SetStateAction<string | null>>;
 }
+declare var ethereum: any;
 const Home: React.FC<HomeProps> = ({ setActivePage }) => {
   const currentLanguage = useSelector(
     (state: typeof RootState) => state.session.language
   );
+
+  const chain = ethereum.networkVersion;
 
   const addr = useSelector((state: typeof RootState) => state.wallet.address);
 
@@ -24,7 +27,9 @@ const Home: React.FC<HomeProps> = ({ setActivePage }) => {
 
           <BotonMetamask />
         </p>
-        <div className={addr ? undefined : "disabledContainer"}>
+        <div
+          className={addr && chain === "56" ? undefined : "disabledContainer"}
+        >
           <BotonBlanco
             titulo={textoBotonesBlancos[currentLanguage].market.titulo}
             descripcion={
