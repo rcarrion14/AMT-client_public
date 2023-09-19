@@ -137,7 +137,7 @@ const CuadroProveerLiquidez = () => {
         </div>
 
         <div className="cuadroCompra">
-          <img src="coinAutomining_.png" />
+          <img src="coinAutomining.png" />
           <div>AMT</div>
 
           <input
