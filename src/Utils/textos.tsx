@@ -1446,7 +1446,6 @@ export interface interfaceTextoExtra {
   prodUlt24h: string;
 
   amtTotales: string;
-
 }
 export type typeTextosExtra = {
   [key in languageCode]: interfaceTextoExtra;
@@ -1456,7 +1455,7 @@ export const textosExtra: typeTextosExtra = {
   por: {
     bienvenido: "Bem-vindo!",
     textoConexion:
-      "Para navegar pelo site, conecte a sua Metamask, clicando no botão abaixo.",
+      "Para navegar no site, conecte sua Metamask usando a Rede BSC (BNB Smart Chain) clicando no botão abaixo.",
     market: "Market",
 
     conectarBilletera: "Conectar carteira",
@@ -1537,15 +1536,16 @@ export const textosExtra: typeTextosExtra = {
     rendimientos: "Rendimentos",
     maquinasActivas: "Máquinas ativas no Projeto AMT",
     linkObservador: "Link de observador",
-    textoMaquinas: "As máquinas do AMT estão divididas em diferentes pools, conforme você pode conferir abaixo",
+    textoMaquinas:
+      "As máquinas do AMT estão divididas em diferentes pools, conforme você pode conferir abaixo",
     maquinas: "Máquinas",
     prodUlt24h: "Produção nas últimas 24hs",
-    amtTotales: "Total de AMT"
+    amtTotales: "Total de AMT",
   },
   esp: {
     bienvenido: "¡Bienvenido!",
     textoConexion:
-      "Para navegar por el sitio, conecte su Metamask haciendo clic en el botón de abajo.",
+      "Para navegar por el sitio, conecte su Metamask utilizando la Red BSC (BNB Smart Chain) haciendo clic en el botón de abajo.",
     market: "Mercado",
     conectarBilletera: "Conectar billetera",
 
@@ -1625,15 +1625,16 @@ export const textosExtra: typeTextosExtra = {
     rendimientos: "Rendimientos",
     maquinasActivas: "Máquinas activas en el Proyecto AMT",
     linkObservador: "Link de observador",
-    textoMaquinas: "Las máquinas de AMT están divididas en diferentes grupos, como puedes comprobar a continuación",
+    textoMaquinas:
+      "Las máquinas de AMT están divididas en diferentes grupos, como puedes comprobar a continuación",
     maquinas: "Máquinas",
     prodUlt24h: "Producción en las últimas 24 horas",
-    amtTotales: "AMT Totales"
+    amtTotales: "AMT Totales",
   },
   eng: {
     bienvenido: "Welcome!",
     textoConexion:
-      "To browse the site, connect your Metamask by clicking the button below.",
+      "To navigate the site, connect your Metamask using the BSC Network (BNB Smart Chain) by clicking the button below.",
     market: "Market",
     conectarBilletera: "Connect wallet",
 
@@ -1705,10 +1706,11 @@ export const textosExtra: typeTextosExtra = {
     rendimientos: "Yields",
     maquinasActivas: "Active Machines in AMT Project",
     linkObservador: "Observer Link",
-    textoMaquinas: "The AMT machines are divided into different pools, as you can check below",
+    textoMaquinas:
+      "The AMT machines are divided into different pools, as you can check below",
     maquinas: "Machines",
     prodUlt24h: "Production in the last 24 hours",
-    amtTotales: "Total AMT"
+    amtTotales: "Total AMT",
   },
 };
 

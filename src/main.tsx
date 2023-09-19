@@ -7,11 +7,10 @@ import Loader from "./components/Generales/Loader";
 
 const expectedChainId = "0x38"; // "0x38" BSC
 
-declare var ethereum : any;
-
+declare var ethereum: any;
 
 async function changeNetwork() {
-  if(navigator.userAgent.indexOf("Mobile")!= -1){
+  if (true /* navigator.userAgent.indexOf("Mobile")!= -1 */) {
     ethereum.on("accountsChanged", () => window.location.reload());
     ethereum.on("chainChanged", () => window.location.reload());
     try {
@@ -19,7 +18,7 @@ async function changeNetwork() {
         method: "wallet_switchEthereumChain",
         params: [{ chainId: expectedChainId }],
       });
-    } catch (switchError : any) {
+    } catch (switchError: any) {
       if (switchError.code === 4902) {
         try {
           await ethereum.request({
@@ -42,7 +41,6 @@ async function changeNetwork() {
       }
     }
   }
-  
 }
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
