@@ -5,9 +5,10 @@ import abiMarketplace from "../../../contracts/abis/marketplace.json";
 import { getStaticState } from "../../store";
 import { AppDispatch } from "../../store";
 import { formatter } from "../formatter";
+import { Market } from "../../../contracts/Interfaces/Market";
 
 export interface marketPlaceState {
-  contract: any | undefined;
+  contract: Market | undefined;
   amtEnVenta: BigNumber | undefined;
   precioVenta: number | undefined; //Change to null on prod
 }
@@ -27,7 +28,7 @@ export const createContract = createAsyncThunk(
         contractAddresses.marketPlace,
         abiMarketplace,
         signer
-      );
+      ) as Market;
       return { newContract };
     } else return undefined;
   }
@@ -36,6 +37,7 @@ export const createContract = createAsyncThunk(
 export const getAmtEnVenta = createAsyncThunk(
   "marketPlace/getAmtEnVenta",
   async () => {
+    
     const staticState = getStaticState();
     const contract = staticState.amt.contract;
     const address = contractAddresses.marketPlace;
@@ -50,11 +52,9 @@ export const getPrecioVenta = createAsyncThunk(
   "marketplace/getPrecioVenta",
   async () => {
     const staticState = getStaticState();
-    const contract = staticState.amt.contract;
-    const address = contractAddresses.marketPlace;
+    const contract = staticState.marketPlace.contract;
     if (contract) {
-      //const newPrecioVenta = (await contract.precioVenta()).toString(); //Change when new marketplace is deployed
-      const newPrecioVenta = 1;
+      const newPrecioVenta = ((await contract.usdPer100Amt()).toNumber()/100);
       return { newPrecioVenta };
     } else return null;
   }
@@ -67,6 +67,7 @@ const marketPlaceSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(createContract.fulfilled, (state, action) => {
+        //@ts-ignore
         state.contract = action.payload?.newContract;
       })
       .addCase(getAmtEnVenta.fulfilled, (state, action) => {

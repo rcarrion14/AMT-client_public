@@ -13,7 +13,7 @@ const Home: React.FC<HomeProps> = ({ setActivePage }) => {
     (state: typeof RootState) => state.session.language
   );
 
-  const chain = ethereum.networkVersion;
+  const chain = (window as any).ethereum ? (window as any).ethereum.networkVersion : undefined
 
   const addr = useSelector((state: typeof RootState) => state.wallet.address);
 

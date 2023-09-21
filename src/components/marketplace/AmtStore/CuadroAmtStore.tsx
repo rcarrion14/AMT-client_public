@@ -41,7 +41,7 @@ const CuadroAmtStore = () => {
     if (precioTienda && parseFloat(event.target.value) >= 0) {
       setInputPagarValue(event.target.value);
       setInputRecibirValue(
-        (parseFloat(event.target.value) * precioTienda).toString()
+        (parseFloat(event.target.value) / precioTienda).toString()
       );
     }
   };
@@ -50,10 +50,11 @@ const CuadroAmtStore = () => {
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     if (precioTienda && parseFloat(event.target.value) >= 0) {
-      setInputRecibirValue(
-        (parseFloat(event.target.value) / precioTienda).toString()
+      console.log(event.target.value);
+      setInputRecibirValue(event.target.value);
+      setInputPagarValue(
+        (parseFloat(event.target.value) * precioTienda).toString()
       );
-      setInputPagarValue(event.target.value);
     }
   };
 

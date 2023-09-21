@@ -71,7 +71,7 @@ const Marketplace = () => {
         </div>
         <div>
           
-          {amtEnVenta && parseInt(ethers.utils.formatEther(amtEnVenta)) > 1 ? (
+          {amtEnVenta && parseFloat(ethers.utils.formatEther(amtEnVenta)) > 0.1 ? (
             <BotonBlanco
               titulo={textoBotonesBlancos[currentLanguage].store.titulo}
               descripcion={
