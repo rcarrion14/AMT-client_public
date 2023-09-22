@@ -65,7 +65,7 @@ const CuadroAmtStore = () => {
       setInputRecibirValue(inputValueSet);
       setInputPagarValue(
         (
-          parseFloat(parseFloat(event.target.value).toFixed(10)) * precioTienda
+          Number(Number(event.target.value).toFixed(10)) * precioTienda
         ).toFixed(10)
       );
     }
