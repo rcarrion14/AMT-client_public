@@ -42,11 +42,11 @@ const CuadroAmtStore = () => {
       const inputValueSet =
         parseFloat(event.target.value) <= 0.0000001 &&
         parseFloat(event.target.value) > 0
-          ? parseFloat(event.target.value).toFixed(18)
+          ? parseFloat(event.target.value).toFixed(10)
           : event.target.value;
       setInputPagarValue(inputValueSet);
       setInputRecibirValue(
-        (parseFloat(event.target.value) / precioTienda).toFixed(18)
+        (parseFloat(event.target.value) / precioTienda).toFixed(10)
       );
     }
   };
@@ -59,12 +59,14 @@ const CuadroAmtStore = () => {
       const inputValueSet =
         parseFloat(event.target.value) <= 0.0000001 &&
         parseFloat(event.target.value) > 0
-          ? parseFloat(event.target.value).toFixed(17)
+          ? parseFloat(event.target.value).toFixed(10)
           : event.target.value;
 
       setInputRecibirValue(inputValueSet);
       setInputPagarValue(
-        (parseFloat(event.target.value) * precioTienda).toFixed(17)
+        (
+          parseFloat(parseFloat(event.target.value).toFixed(10)) * precioTienda
+        ).toFixed(10)
       );
     }
   };
