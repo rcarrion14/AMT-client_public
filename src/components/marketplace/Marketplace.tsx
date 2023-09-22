@@ -53,7 +53,6 @@ const Marketplace = () => {
       </CSSTransition>
     );
   });
-  console.log(amtEnVenta)
   return (
     <>
       <div
@@ -71,7 +70,7 @@ const Marketplace = () => {
         </div>
         <div>
           
-          {amtEnVenta && parseFloat(ethers.utils.formatEther(amtEnVenta)) > 0.1 ? (
+          {amtEnVenta && parseFloat(ethers.utils.formatEther(amtEnVenta)) >= 0.01 ? (
             <BotonBlanco
               titulo={textoBotonesBlancos[currentLanguage].store.titulo}
               descripcion={

@@ -8,6 +8,7 @@ import { getAmtEnVenta } from "./marketPlaceSlice";
 import { Market } from "../../../contracts/Interfaces/Market";
 
 function buy(dispatch: AppDispatch, amount: number) {
+  console.log("Amount a comprar",amount)
   const contract = getStaticState().marketPlace.contract as Market;
   const operationPromise = contract.buy(amount);
   operationExecution(operationPromise).then(() => {
