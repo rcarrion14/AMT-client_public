@@ -63,4 +63,4 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   </React.StrictMode>
 );
 
-//changeNetwork();
+changeNetwork();
