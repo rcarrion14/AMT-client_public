@@ -44,9 +44,9 @@ const BotonOperacionAmtStore: React.FC<BotonOperacionProps> = ({
       <button
         onClick={() => {
           if (allowanceUsdt && allowanceUsdt.gte(0)) {
-            allowanceUsdt?.gt(ethers.utils.parseEther(input))
-              ? operacionBuy(dispatch, ethers.utils.parseEther(input))
-              : operacionAprobar(dispatch);
+            ethers.utils.parseEther(input).gt(allowanceUsdt)
+              ? operacionAprobar(dispatch) 
+              : operacionBuy(dispatch, ethers.utils.parseEther(input))
           }
         }}
         className="btnLarge"
