@@ -60,7 +60,7 @@ function App() {
 
       <div
         className={
-          addr && chain === "56"
+          addr && chain === "56" || chain === 56
             ? "navBarContainer"
             : "navBarContainer disabledContainer"
         }
