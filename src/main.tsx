@@ -12,7 +12,7 @@ declare var window: any;
 async function changeNetwork() {
   if (true /* navigator.userAgent.indexOf("Mobile")!= -1 */) {
     window.ethereum.on("accountsChanged", async () => {
-      if(!window.ethereum.isTrustWallet) {
+      if(true) {
         window.location.reload()
       }
       else{
