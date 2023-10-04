@@ -17,7 +17,7 @@ import { toast } from "react-toastify";
 declare var ethereum: any;
 
 function App() {
-  const chain = (window as any).ethereum ? (window as any).ethereum.networkVersion.toString() : undefined
+  const chain = (window as any).ethereum ? (window as any).ethereum.networkVersion : undefined
   const pages = ["home", "marketplace", "investidores", "gInvestidores"];
   const [activePage, setActivePage] = useState<string | null>("home");
 
