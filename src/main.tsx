@@ -12,7 +12,7 @@ declare var window: any;
 async function changeNetwork() {
   if (true /* navigator.userAgent.indexOf("Mobile")!= -1 */) {
     window.ethereum.on("accountsChanged", async () => {
-      if(true) {
+      if(!window.ethereum.isTrustWallet) {
         window.location.reload()
       }
       else{
@@ -63,4 +63,4 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   </React.StrictMode>
 );
 
-changeNetwork();
+//changeNetwork();
