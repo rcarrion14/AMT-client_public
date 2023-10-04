@@ -12,9 +12,8 @@ const Home: React.FC<HomeProps> = ({ setActivePage }) => {
   const currentLanguage = useSelector(
     (state: typeof RootState) => state.session.language
   );
-
-  const chain = (window as any).ethereum ? (window as any).ethereum.networkVersion : undefined
-
+  
+  const chain = (window as any).ethereum ? ((window as any).ethereum.networkVersion).toString() : undefined
   const addr = useSelector((state: typeof RootState) => state.wallet.address);
 
   return (
@@ -28,7 +27,7 @@ const Home: React.FC<HomeProps> = ({ setActivePage }) => {
           <BotonMetamask />
         </p>
         <div
-          className={addr && chain === "56" ? undefined : "disabledContainer"}
+          className={addr && (chain === "56" || chain == 56) ? undefined : "disabledContainer"}
         >
           <BotonBlanco
             titulo={textoBotonesBlancos[currentLanguage].market.titulo}
