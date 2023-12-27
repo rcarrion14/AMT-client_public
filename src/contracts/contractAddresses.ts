@@ -15,5 +15,10 @@ const contractAddresses = {
   OldVaultBtcb: "0x43C970507651512B72fB65D9242C3fe069ceCf4C",
   Router: "0x10ED43C718714eb63d5aA57B78B54704E256024E",
   Usdt: "0x55d398326f99059ff775485246999027b3197955",
+
+  //To change on prod final
+  loanProtocol: "0xec7c97fcedcd72b437041a19c72dd4507d465be8",
+  priceFeeder: "0x648ae98ce25470c6c426fd276da1ab1ac45a5e17",
+  oracle: "0x051fd4d6823678c826427256872b9dd1d2ff31fc",
 };
 export default contractAddresses;
