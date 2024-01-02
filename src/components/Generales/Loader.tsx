@@ -44,6 +44,17 @@ import {
   createContract as createContractBurnVault,
 } from "../../store/features/burnVault/burnVaultSlice";
 
+import {
+  generalLoadLoanProtocol,
+  createContract as createContractLoanProtocol,
+} from "../../store/features/loanProtocol/loanProtocolSlice";
+import {
+  priceFeederLoadres,
+  createContract as createContractPriceFeeder,
+  generalLoadPriceFeeder,
+} from "../../store/features/priceFeeder/priceFeederSlice";
+import { BigNumber } from "ethers";
+
 const Loader = () => {
   const dispatch = useDispatch<AppDispatch>();
   const isConnected = useSelector(
@@ -70,6 +81,8 @@ const Loader = () => {
         contractPromises.push(dispatch(createCotractLiqAmt()));
         contractPromises.push(dispatch(createContractBurnVault()));
         contractPromises.push(dispatch(createContractVaultBtcbLiquidity()));
+        contractPromises.push(dispatch(createContractLoanProtocol()));
+        contractPromises.push(dispatch(createContractPriceFeeder()));
 
         Promise.all(contractPromises).then(() => {
           //Initial general loads
@@ -82,6 +95,12 @@ const Loader = () => {
           generalLoadVaultBtcb(dispatch);
           burnVaultLoaders.generalLoad(dispatch);
           generalLoadVaultBtcbLiquidity(dispatch);
+          generalLoadLoanProtocol(dispatch);
+          generalLoadPriceFeeder(dispatch);
+          priceFeederLoadres.loadQuotedAmt(
+            dispatch,
+            BigNumber.from("100000000000000000000000")
+          );
           amtLoadedPromise.then(() => {
             if (!!currentSnapshot) {
               masterLoaders.generalLoad(dispatch, currentSnapshot);

@@ -12,6 +12,8 @@ import vaultBtcbReducer from "./features/vaultBtcb/vaultBtcbSlice";
 import vaultBtcbLiquidityReducer from "./features/vaultBtcbLiquidity/vaultBtcbLiquiditySlice";
 import burnVaultReducer from "./features/burnVault/burnVaultSlice";
 import sessionSliceReducer from "./features/session/sessionSlice";
+import loanProtocolSlice from "./features/loanProtocol/loanProtocolSlice";
+import priceFeederSlice from "./features/priceFeeder/priceFeederSlice";
 const store = configureStore({
   reducer: {
     wallet: walletReducer,
@@ -26,6 +28,8 @@ const store = configureStore({
     btcb: btcbReducer,
     burnVault: burnVaultReducer,
     session: sessionSliceReducer,
+    loanProtocol: loanProtocolSlice,
+    priceFeeder: priceFeederSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }),
