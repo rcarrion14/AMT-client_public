@@ -1668,7 +1668,7 @@ export const textosExtra: typeTextosExtra = {
     importarTokens: "Import tokens",
     noHaytantosAmtEnVenta: "There are not enough AMT for sale",
     ustedPaga: "You pay:",
-    ustedRecibe: "You recive:",
+    ustedRecibe: "You receive:",
     amtEnVenta: "Amt for sale:",
     consultarHistorico: "Check history",
     inversiones: "Investments",
