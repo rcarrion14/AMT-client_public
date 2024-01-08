@@ -6,6 +6,7 @@ import Staking from "./staking/Staking";
 import StakingAmt from "./stakingAmt/StakingAmt";
 import Liquidez from "./liquidez/Liquidez";
 import Rendimientos from "./rendimientos/Rendimientos";
+import LoanProtocol from "./loanProtocol/LoanProtocol";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import {
@@ -21,7 +22,13 @@ const Investidores = () => {
   interface jsxPagesInterface {
     [key: string]: ReactElement<any, any>;
   }
-  const pages = ["staking", "stakingAmt", "liquidez", "rendimiento"];
+  const pages = [
+    "staking",
+    "stakingAmt",
+    "liquidez",
+    "rendimiento",
+    "loanProtocol",
+  ];
 
   const [activePage, setActivePage] = useState("");
   const [activeInfo, setActiveInfo] = useState(false);
@@ -37,6 +44,7 @@ const Investidores = () => {
     stakingAmt: <StakingAmt setActivePage={setActivePage} />,
     liquidez: <Liquidez setActivePage={setActivePage} />,
     rendimiento: <Rendimientos setActivePage={setActivePage} />,
+    loanProtocol: <LoanProtocol setActivePage={setActivePage} />,
   };
 
   const listaDePaginas = pages.map((pagina) => {
@@ -91,6 +99,15 @@ const Investidores = () => {
               textoBotonesBlancos[currentLanguage].rendimientos.descripcion
             }
             activador={"rendimiento"}
+            setActivePage={setActivePage}
+          />
+
+          <BotonBlanco
+            titulo={textoBotonesBlancos[currentLanguage].loanProtocol.titulo}
+            descripcion={
+              textoBotonesBlancos[currentLanguage].loanProtocol.descripcion
+            }
+            activador={"loanProtocol"}
             setActivePage={setActivePage}
           />
         </div>

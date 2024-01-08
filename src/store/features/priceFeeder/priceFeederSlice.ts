@@ -10,6 +10,7 @@ export interface LoanProtocolState {
   contract: PriceFeeder | undefined;
   latestBtcbPrice: BigNumber | undefined;
   priceQuotedAmt: BigNumber | undefined;
+  pendingQuote: boolean;
   price1Amt: BigNumber | undefined;
 }
 
@@ -17,6 +18,7 @@ const initialState: LoanProtocolState = {
   contract: undefined,
   latestBtcbPrice: undefined,
   priceQuotedAmt: undefined,
+  pendingQuote: false,
   price1Amt: undefined,
 };
 
@@ -92,6 +94,10 @@ const priceFeederSlice = createSlice({
       })
       .addCase(getNewPriceQuotedAmt.fulfilled, (state, action) => {
         state.priceQuotedAmt = action.payload?.newPrice;
+        state.pendingQuote = false;
+      })
+      .addCase(getNewPriceQuotedAmt.pending, (state) => {
+        state.pendingQuote = true;
       });
   },
 });

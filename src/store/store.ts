@@ -50,6 +50,8 @@ const {
   vaultBtcbLiquidity,
   burnVault,
   session,
+  priceFeeder,
+  loanProtocol,
 } = store.getState();
 export const RootState = {
   wallet,
@@ -64,6 +66,8 @@ export const RootState = {
   vaultBtcb,
   burnVault,
   session,
+  priceFeeder,
+  loanProtocol,
 };
 
 export const getStaticState = store.getState;

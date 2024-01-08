@@ -142,9 +142,12 @@ const loanProtocolSlice = createSlice({
 });
 
 export const generalLoadLoanProtocol = (dispatch: AppDispatch) => {
+  dispatch(getAllowanceAmtToLoanProtocol());
+  dispatch(getAllowanceUsdtToLoanProtocol());
   dispatch(createContract());
   dispatch(getUserLoans());
   dispatch(getLoanRatio());
+  dispatch(getUsdtAvailable());
 };
 export const loanProtocolActions = loanProtocolSlice.actions;
 export default loanProtocolSlice.reducer;

@@ -41,6 +41,7 @@ function createLoan(dispatcher: AppDispatch, amtAmount: BigNumber) {
     const operationPromise = contract?.createLoan(amtAmount);
     operationExecution(operationPromise).then(() => {
       dispatcher(getAllowanceUsdtToLoanProtocol());
+      dispatcher(getUserLoans());
     });
   }
 }
@@ -62,4 +63,6 @@ function closeLoan(
 export const loanProtocolOperations = {
   approveAmtToLoanProtocol,
   approveUsdtToLoanProtocol,
+  createLoan,
+  closeLoan,
 };
