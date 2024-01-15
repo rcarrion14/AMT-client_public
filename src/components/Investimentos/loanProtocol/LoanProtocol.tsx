@@ -3,11 +3,13 @@ import { textoLoanProtocol, textosExtra } from "../../../Utils/textos";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../store/store";
 import { CSSTransition } from "react-transition-group";
-import { ethers } from "ethers";
+import { BigNumber, ethers } from "ethers";
 import { toFrontEndString } from "../../../Utils/formatHelpers";
-import BotonCrearLoan from "./botonCrearLoan";
+import BotonCrearLoan from "./BotonCrearLoan";
 import { loanProtocolOperations } from "../../../store/features/loanProtocol/loanProtocolOperations";
 import { getNewPriceQuotedAmt } from "../../../store/features/priceFeeder/priceFeederSlice";
+import LoanCreationModal from "./LoanCreationModal";
+import UserLoanList from "./UserLoanList";
 
 interface AmtStaking {
   setActivePage: React.Dispatch<React.SetStateAction<string>>;
@@ -20,6 +22,14 @@ const LoanProtocol: React.FC<AmtStaking> = ({ setActivePage }) => {
   const dispatch = useDispatch<AppDispatch>();
   const inputAmountAmt = useRef<HTMLInputElement>(null);
   const [inputAmountAmtValue, setInputAmountAmtValue] = useState("");
+  const [estimatedValueToRecive, setEstimatedvalueToRecive] = useState(
+    BigNumber.from(0)
+  );
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
   const balanceAmt = useSelector(
     (state: typeof RootState) => state.amt.balance
   );
@@ -92,10 +102,12 @@ const LoanProtocol: React.FC<AmtStaking> = ({ setActivePage }) => {
       }`
     : "Loading...";
   const handleInputAmountAmt = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (!pendingQuote) {
+    if (!pendingQuote && parseFloat(event.target.value) >= 0) {
       setInputAmountAmtValue(event.target.value);
-      dispatch(
-        getNewPriceQuotedAmt(ethers.utils.parseEther(inputAmountAmtValue))
+      setEstimatedvalueToRecive(
+        loanRatio && priceAmt
+          ? BigNumber.from(event.target.value).mul(priceAmt).div(loanRatio)
+          : BigNumber.from(0)
       );
     }
   };
@@ -126,21 +138,35 @@ const LoanProtocol: React.FC<AmtStaking> = ({ setActivePage }) => {
             onChange={handleInputAmountAmt}
             value={inputAmountAmtValue}
           />
+          <button
+            onClick={() => {
+              openModal();
+              console.log("dsa");
+            }}
+          >
+            Aplicar para op
+          </button>
+        </div>
+        {priceAmt && loanRatio
+          ? "You will recive: " +
+            toFrontEndString(estimatedValueToRecive) +
+            "USDT " +
+            "\n (This is an estimative value. Before confirming the operation a most exact value will be shown)"
+          : "dsadsa"}
 
-          <BotonCrearLoan
+        {isModalOpen && (
+          <LoanCreationModal
+            inputAmount={inputAmountAmtValue}
+            closeModal={closeModal}
             balanceUsdtLoanProtocol={usdtAvailable}
             balanceUserAmt={balanceAmt}
             allowanceAmt={allowanceAmtToLoanProtocol}
-            input={inputAmountAmtValue}
             operacionAprobar={loanProtocolOperations.approveAmtToLoanProtocol}
             operacionCrearLoan={loanProtocolOperations.createLoan}
-          ></BotonCrearLoan>
-        </div>
-        {priceQuotedAmt && loanRatio
-          ? "You will recive: " +
-            toFrontEndString(priceQuotedAmt.mul(loanRatio)) +
-            "USDT"
-          : "dsadsa"}
+            // ... other necessary props
+          />
+        )}
+        <UserLoanList></UserLoanList>
       </div>
     </>
   );

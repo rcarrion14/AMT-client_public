@@ -70,7 +70,13 @@ export const getNewPriceQuotedAmt = createAsyncThunk(
     const staticState = getStaticState();
     const priceFeeder = staticState.priceFeeder.contract;
     if (priceFeeder) {
-      const newPrice = await priceFeeder.getPrice(amtAmountToQuote);
+      var newPrice;
+      if (amtAmountToQuote.lte(0)) {
+        newPrice = BigNumber.from(0);
+      } else {
+        newPrice = await priceFeeder.getPrice(amtAmountToQuote);
+      }
+
       return { newPrice };
     } else return undefined;
   }

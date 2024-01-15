@@ -1201,3 +1201,112 @@ u {
   text-align: center;
   font-weight: bold;
 }
+
+/* Reset any margin or padding that might affect the table width */
+#root {
+  padding: 0;
+  margin: 0;
+}
+
+/* Ensure the table layout is set to auto to prevent overflow */
+.loan-table {
+  table-layout: auto; /* Was fixed, now auto to accommodate content */
+  width: 100%; /* Adjust if necessary to account for any padding or borders */
+  max-width: 600px; /* Ensure the table does not exceed the #root width */
+  margin-top: 20px;
+  border-collapse: collapse;
+  overflow-x: auto; /* Allows table to scroll horizontally if needed */
+}
+
+/* Style for the table cells */
+.loan-table td,
+.loan-table th {
+  word-wrap: break-word; /* Ensures text breaks to prevent overflow */
+  max-width: 120px; /* Adjust as needed, or use percentages */
+}
+
+/* Additional styling for responsiveness */
+@media (max-width: 600px) {
+  .loan-table,
+  .loan-table-header,
+  .loan-item-row {
+    width: 100%;
+    display: block;
+  }
+
+  .loan-table-header th {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .loan-item-row td {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px; /* Adjust padding as needed */
+  }
+}
+
+/* Center align the text in each cell and header */
+.loan-table th,
+.loan-table td {
+  text-align: center;
+  padding: 12px;
+}
+
+/* Add border between rows */
+.loan-item-row {
+  border-bottom: 2px solid #eaeaea;
+}
+
+/* If you want the last row to not have a border */
+.loan-item-row:last-child {
+  border-bottom: none;
+}
+
+/* Style for the header to distinguish it from the rows */
+.loan-table-header th {
+  background-color: #f4f4f4; /* or any color that suits your design */
+  color: #333;
+  font-weight: bold;
+  border-bottom: 2px solid #333; /* darker border for header */
+}
+
+/* Adjust button styling for consistency */
+.close-loan-button {
+  width: calc(100% - 0.12px); /* 100% of the cell width minus some padding */
+  padding: 4px 0; /* More vertical padding */
+  border: none;
+  border-radius: 20px; /* circular edges */
+  font-size: 0.5em; /* adjust as needed */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin: auto; /* center in the cell */
+  display: block; /* allows margin auto to center the button */
+}
+
+/* Ensures that the table does not exceed the width of its container */
+.loan-table-container {
+  overflow-x: auto; /* Allows horizontal scrolling on smaller screens */
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 600px) {
+  .loan-table th,
+  .loan-table td {
+    padding: 8px; /* smaller padding on small screens */
+    display: block; /* stack cells vertically */
+  }
+
+  .loan-table td::before {
+    content: attr(
+      data-label
+    ); /* adds a label before each cell in responsive mode */
+    float: left;
+    font-weight: bold;
+  }
+
+  .loan-item-row {
+    display: flex;
+    flex-direction: column; /* stack cells vertically */
+  }
+}

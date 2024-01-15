@@ -53,8 +53,14 @@ const CuadroStaking: React.FC<CuadroStakingProps> = ({
   useEffect(() => {
     console.log("fetching new data");
     setStakingIniciales(undefined);
-    fetchVaultAmt().then((result) => {
+    fetchVaultAmt().then((result: any) => {
+      console.log({ result });
+      if (addr) {
+        console.log(result.dataStakings[addr]);
+      }
       setStakingIniciales(result.dataStakings);
+
+      console.log({ stakingIniciales });
       dispatch(setGeneratedAmtWaitingForUpdate(false));
     });
   }, [dataTrigger]);

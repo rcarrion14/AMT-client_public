@@ -17,8 +17,8 @@ const contractAddresses = {
   Usdt: "0x55d398326f99059ff775485246999027b3197955",
 
   //To change on prod final
-  loanProtocol: "0xec7c97fcedcd72b437041a19c72dd4507d465be8",
-  priceFeeder: "0x648ae98ce25470c6c426fd276da1ab1ac45a5e17",
-  oracle: "0x051fd4d6823678c826427256872b9dd1d2ff31fc",
+  loanProtocol: "0x941EAa4D56415EA5EBA49ff117b387F2892eD06F",
+  priceFeeder: "0x85a329bb796a5F5C8563845352ba73b91B6c74b4",
+  oracle: "0xF89ea5AD30149F7950a0028Ab9C03Cc9b6bDEb67",
 };
 export default contractAddresses;
