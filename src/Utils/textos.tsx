@@ -1350,6 +1350,37 @@ export const textoRetirarLiquidez = (idioma: string) => {
   }
 };
 
+export const textoLoanProtocol = (idioma: string) => {
+  if (idioma == "por") {
+    return (
+      <>
+        {" "}
+        <h1>Titulo por</h1>
+        <p>descripcion por</p>{" "}
+      </>
+    );
+  }
+
+  if (idioma == "esp") {
+    return (
+      <>
+        {" "}
+        <h1>Titulo esp</h1>
+        <p>descripcion esp</p>{" "}
+      </>
+    );
+  }
+
+  if (idioma == "eng") {
+    return (
+      <>
+        {" "}
+        <h1>Titulo eng</h1>
+        <p>descripcion eng</p>{" "}
+      </>
+    );
+  }
+};
 /******************/
 /******************/
 
@@ -1445,6 +1476,12 @@ export interface interfaceTextoExtra {
   maquinas: string;
   prodUlt24h: string;
 
+  amtTotales: string;
+  usdtDisponibles: string;
+  loanRatio: string;
+  precioBtcb: string;
+  noHaySuficientesUsdtEnElContrato: string;
+  crearLoan: string;
 }
 export type typeTextosExtra = {
   [key in languageCode]: interfaceTextoExtra;
@@ -1454,7 +1491,7 @@ export const textosExtra: typeTextosExtra = {
   por: {
     bienvenido: "Bem-vindo!",
     textoConexion:
-      "Para navegar pelo site, conecte a sua Metamask, clicando no botão abaixo.",
+      "Para navegar no site, conecte sua Metamask usando a Rede BSC (BNB Smart Chain) clicando no botão abaixo.",
     market: "Market",
 
     conectarBilletera: "Conectar carteira",
@@ -1535,14 +1572,21 @@ export const textosExtra: typeTextosExtra = {
     rendimientos: "Rendimentos",
     maquinasActivas: "Máquinas ativas no Projeto AMT",
     linkObservador: "Link de observador",
-    textoMaquinas: "As máquinas do AMT estão divididas em diferentes pools, conforme você pode conferir abaixo",
+    textoMaquinas:
+      "As máquinas do AMT estão divididas em diferentes pools, conforme você pode conferir abaixo",
     maquinas: "Máquinas",
     prodUlt24h: "Produção nas últimas 24hs",
+    amtTotales: "Total de AMT",
+    usdtDisponibles: "USDT disponibles",
+    loanRatio: "Loan ratio",
+    precioBtcb: "Precio BTCB",
+    crearLoan: "Borrow USDT",
+    noHaySuficientesUsdtEnElContrato: "Too much USDT to borrow",
   },
   esp: {
     bienvenido: "¡Bienvenido!",
     textoConexion:
-      "Para navegar por el sitio, conecte su Metamask haciendo clic en el botón de abajo.",
+      "Para navegar por el sitio, conecte su Metamask utilizando la Red BSC (BNB Smart Chain) haciendo clic en el botón de abajo.",
     market: "Mercado",
     conectarBilletera: "Conectar billetera",
 
@@ -1622,14 +1666,21 @@ export const textosExtra: typeTextosExtra = {
     rendimientos: "Rendimientos",
     maquinasActivas: "Máquinas activas en el Proyecto AMT",
     linkObservador: "Link de observador",
-    textoMaquinas: "Las máquinas de AMT están divididas en diferentes grupos, como puedes comprobar a continuación",
+    textoMaquinas:
+      "Las máquinas de AMT están divididas en diferentes grupos, como puedes comprobar a continuación",
     maquinas: "Máquinas",
-    prodUlt24h: "Producción en las últimas 24 horas"
+    prodUlt24h: "Producción en las últimas 24 horas",
+    amtTotales: "AMT Totales",
+    usdtDisponibles: "USDT Disponibles",
+    loanRatio: "Loan ratio",
+    precioBtcb: "Precio BTCB",
+    crearLoan: "Borrow USDT",
+    noHaySuficientesUsdtEnElContrato: "Too much USDT to borrow",
   },
   eng: {
     bienvenido: "Welcome!",
     textoConexion:
-      "To browse the site, connect your Metamask by clicking the button below.",
+      "To navigate the site, connect your Metamask using the BSC Network (BNB Smart Chain) by clicking the button below.",
     market: "Market",
     conectarBilletera: "Connect wallet",
 
@@ -1663,7 +1714,7 @@ export const textosExtra: typeTextosExtra = {
     importarTokens: "Import tokens",
     noHaytantosAmtEnVenta: "There are not enough AMT for sale",
     ustedPaga: "You pay:",
-    ustedRecibe: "You recive:",
+    ustedRecibe: "You receive:",
     amtEnVenta: "Amt for sale:",
     consultarHistorico: "Check history",
     inversiones: "Investments",
@@ -1701,9 +1752,16 @@ export const textosExtra: typeTextosExtra = {
     rendimientos: "Yields",
     maquinasActivas: "Active Machines in AMT Project",
     linkObservador: "Observer Link",
-    textoMaquinas: "The AMT machines are divided into different pools, as you can check below",
+    textoMaquinas:
+      "The AMT machines are divided into different pools, as you can check below",
     maquinas: "Machines",
-    prodUlt24h: "Production in the last 24 hours"
+    prodUlt24h: "Production in the last 24 hours",
+    amtTotales: "Total AMT",
+    usdtDisponibles: "Available USDT",
+    loanRatio: "Loan ratio",
+    precioBtcb: "BTCB Price",
+    crearLoan: "Borrow USDT",
+    noHaySuficientesUsdtEnElContrato: "Too much USDT to borrow",
   },
 };
 
@@ -1728,6 +1786,7 @@ export interface interfaceBotonesBlancos {
   simuladorActual: interfaceBotonBlancoIndividual;
   maquinas: interfaceBotonBlancoIndividual;
   grafico: interfaceBotonBlancoIndividual;
+  loanProtocol: interfaceBotonBlancoIndividual;
 }
 
 export type typeTextoBotonesBlancos = {
@@ -1795,6 +1854,10 @@ export const textoBotonesBlancos: typeTextoBotonesBlancos = {
       titulo: "Gráfico de preço de AMT",
       descripcion: "Confira o valor do AMT contra o BTC e USDT",
     },
+    loanProtocol: {
+      titulo: "titulo loan protocol por",
+      descripcion: "descripcion loan protocol por",
+    },
   },
   esp: {
     market: {
@@ -1858,6 +1921,10 @@ export const textoBotonesBlancos: typeTextoBotonesBlancos = {
       titulo: "Gráfico de precio de AMT",
       descripcion: "Chequee el valor de AMT contra BTC y USDT",
     },
+    loanProtocol: {
+      titulo: "titulo loan protocol esp",
+      descripcion: "descripcion loan protocol esp",
+    },
   },
   eng: {
     market: {
@@ -1919,6 +1986,10 @@ export const textoBotonesBlancos: typeTextoBotonesBlancos = {
     grafico: {
       titulo: "AMT price chart",
       descripcion: "check the value of AMT against BTC and USDT",
+    },
+    loanProtocol: {
+      titulo: "titulo loan protocol eng",
+      descripcion: "descripcion loan protocol eng",
     },
   },
 };

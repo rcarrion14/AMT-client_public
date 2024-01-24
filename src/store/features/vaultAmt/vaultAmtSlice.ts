@@ -5,7 +5,11 @@ import abiVaultAmt from "../../../contracts/abis/vaultAmt.json";
 import { getStaticState } from "../../store";
 import { AppDispatch } from "../../store";
 import { formatter } from "../formatter";
-
+function delay(t: any, v: any) {
+  return new Promise(function (resolve) {
+    setTimeout(resolve.bind(null, v), t);
+  });
+}
 interface vaultAmtState {
   contract: any | undefined;
   balanceAmt: BigNumber | undefined;
@@ -15,6 +19,8 @@ interface vaultAmtState {
   balanceAmt3: BigNumber | undefined;
   balanceAmt4: BigNumber | undefined;
   balanceAmt5: BigNumber | undefined;
+  getNewDataTrigger: Boolean;
+  amtGeneratedWaitingForUpdate: Boolean;
 }
 
 const initialState: vaultAmtState = {
@@ -26,6 +32,8 @@ const initialState: vaultAmtState = {
   balanceAmt3: undefined,
   balanceAmt4: undefined,
   balanceAmt5: undefined,
+  getNewDataTrigger: false,
+  amtGeneratedWaitingForUpdate: false,
 };
 
 export const createContract = createAsyncThunk(
@@ -40,6 +48,27 @@ export const createContract = createAsyncThunk(
       );
       return { newContract };
     }
+  }
+);
+
+export const setGetNewDataTrigger = createAsyncThunk(
+  "vaultAmt/setGetNewDataTrigger",
+  async () => {
+    const actualTrigger = getStaticState().vaultAmt.getNewDataTrigger;
+    console.log("pre wait");
+    await delay(8000, 0);
+    console.log("post wait");
+    const newGetNewDataTrigger = !actualTrigger;
+    console.log(newGetNewDataTrigger);
+    return { newGetNewDataTrigger };
+  }
+);
+
+export const setGeneratedAmtWaitingForUpdate = createAsyncThunk(
+  "vaultAmt/setGeneratedAmtWaitingForUpdate",
+  async (value: Boolean) => {
+    const newValue = value;
+    return { value };
   }
 );
 
@@ -134,6 +163,12 @@ const vaultAmtSlice = createSlice({
         state.balanceAmt3 = undefined;
         state.balanceAmt4 = undefined;
         state.balanceAmt5 = undefined;
+      })
+      .addCase(setGetNewDataTrigger.fulfilled, (state, action) => {
+        state.getNewDataTrigger = action.payload.newGetNewDataTrigger;
+      })
+      .addCase(setGeneratedAmtWaitingForUpdate.fulfilled, (state, action) => {
+        state.amtGeneratedWaitingForUpdate = action.payload.value;
       });
   },
 });

@@ -14,12 +14,14 @@ import { RootState } from "./store/store";
 import { CSSTransition } from "react-transition-group";
 import { toast } from "react-toastify";
 
+declare var ethereum: any;
+
 function App() {
+  const chain = (window as any).ethereum ? (window as any).ethereum.networkVersion : undefined
   const pages = ["home", "marketplace", "investidores", "gInvestidores"];
   const [activePage, setActivePage] = useState<string | null>("home");
 
   const addr = useSelector((state: typeof RootState) => state.wallet.address);
-
   return (
     <>
       <Banner />
@@ -58,7 +60,9 @@ function App() {
 
       <div
         className={
-          addr ? "navBarContainer" : "navBarContainer disabledContainer"
+          addr && chain === "56" || chain === 56
+            ? "navBarContainer"
+            : "navBarContainer disabledContainer"
         }
       >
         <NavBar setActivePage={setActivePage} activePage={activePage} />

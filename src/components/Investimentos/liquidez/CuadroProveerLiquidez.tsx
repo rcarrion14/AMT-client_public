@@ -115,9 +115,17 @@ const CuadroProveerLiquidez = () => {
             <button
               onClick={() => {
                 if (balanceAmt && ratioAmtBtcb) {
-                  setInputAmtValue(ethers.utils.formatEther(balanceAmt));
+                  setInputAmtValue(
+                    ethers.utils.formatEther(
+                      balanceAmt.sub(ethers.BigNumber.from("1"))
+                    )
+                  );
                   setInputBtcbValue(
-                    ethers.utils.formatEther(balanceAmt.div(ratioAmtBtcb))
+                    ethers.utils.formatEther(
+                      balanceAmt
+                        .div(ratioAmtBtcb)
+                        .sub(ethers.BigNumber.from("1"))
+                    )
                   );
                 }
               }}
@@ -129,7 +137,7 @@ const CuadroProveerLiquidez = () => {
         </div>
 
         <div className="cuadroCompra">
-          <img src="coinAutomining_.png" />
+          <img src="coinAutomining.png" />
           <div>AMT</div>
 
           <input

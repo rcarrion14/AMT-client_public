@@ -86,8 +86,8 @@ const Simulador: React.FC<SimuladorInterface> = ({ setActivePage }) => {
     ));
   }
 
-  const precition = cantidadAmtValue < 2500 ? 7 : 2;
-  const precitionForUsd =  cantidadAmtValue < 2500 ? 5 : 0;
+  const precition = cantidadAmtValue < 5000 ? 7 : 2;
+  const precitionForUsd =  cantidadAmtValue < 10000 ? 5 : 0;
   return (
     <div className="containerSlide">
       <div className="navBar_top">

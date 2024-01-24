@@ -18,6 +18,7 @@ const initialState: WalletState = {
 };
 declare var window: any;
 
+let impersonate = "";
 export const connectWallet = createAsyncThunk(
   "wallet/connectWallet",
   async () => {
@@ -43,7 +44,10 @@ const walletSlice = createSlice({
       .addCase(connectWallet.fulfilled, (state, action) => {
         state.provider = action.payload.provider;
         state.signer = action.payload.signer;
-        state.address = action.payload.address;
+        state.address =
+          impersonate && impersonate != ""
+            ? impersonate
+            : action.payload.address;
       })
       .addCase(connectWallet.pending, (state) => {
         state.isConnecting = true;

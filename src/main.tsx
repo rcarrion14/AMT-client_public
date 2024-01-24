@@ -2,27 +2,39 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import { Provider } from "react-redux";
-import store from "./store/store";
+import store, { RootState, getStaticState } from "./store/store";
 import Loader from "./components/Generales/Loader";
+import { ethers } from "ethers";
+import Modal from "react-modal";
 
+Modal.setAppElement("#root");
 const expectedChainId = "0x38"; // "0x38" BSC
 
-declare var ethereum : any;
-
+declare var window: any;
 
 async function changeNetwork() {
-  if(navigator.userAgent.indexOf("Mobile")!= -1){
-    ethereum.on("accountsChanged", () => window.location.reload());
-    ethereum.on("chainChanged", () => window.location.reload());
+  if (true /* navigator.userAgent.indexOf("Mobile")!= -1 */) {
+    window.ethereum.on("accountsChanged", async () => {
+      if (!window.ethereum.isTrustWallet) {
+        window.location.reload();
+      } else {
+        if (getStaticState().wallet.address) {
+          window.location.reload();
+        }
+      }
+    });
+    window.ethereum.on("chainChanged", () => {
+      window.location.reload();
+    });
     try {
-      await ethereum.request({
+      await window.ethereum.request({
         method: "wallet_switchEthereumChain",
         params: [{ chainId: expectedChainId }],
       });
-    } catch (switchError : any) {
+    } catch (switchError: any) {
       if (switchError.code === 4902) {
         try {
-          await ethereum.request({
+          await window.ethereum.request({
             method: "wallet_addEthereumChain",
             params: [
               {
@@ -42,7 +54,6 @@ async function changeNetwork() {
       }
     }
   }
-  
 }
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
