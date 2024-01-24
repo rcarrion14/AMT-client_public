@@ -26,10 +26,10 @@ const LoanProtocol: React.FC<AmtStaking> = ({ setActivePage }) => {
     BigNumber.from(0)
   );
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isCreateLoanModalOpen, setIsCreateLoanModalOpen] = useState(false);
 
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
+  const openCreateLoanModal = () => setIsCreateLoanModalOpen(true);
+  const closeCreateLoanModal = () => setIsCreateLoanModalOpen(false);
   const balanceAmt = useSelector(
     (state: typeof RootState) => state.amt.balance
   );
@@ -103,10 +103,16 @@ const LoanProtocol: React.FC<AmtStaking> = ({ setActivePage }) => {
     : "Loading...";
   const handleInputAmountAmt = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (!pendingQuote && parseFloat(event.target.value) >= 0) {
-      setInputAmountAmtValue(event.target.value);
+      setInputAmountAmtValue(
+        parseFloat(event.target.value) >= 0 ? event.target.value : "0"
+      );
       setEstimatedvalueToRecive(
         loanRatio && priceAmt
-          ? BigNumber.from(event.target.value).mul(priceAmt).div(loanRatio)
+          ? ethers.utils
+              .parseEther(event.target.value)
+              .mul(priceAmt)
+              .div(loanRatio)
+              .div((10 ** 18).toString())
           : BigNumber.from(0)
       );
     }
@@ -140,8 +146,7 @@ const LoanProtocol: React.FC<AmtStaking> = ({ setActivePage }) => {
           />
           <button
             onClick={() => {
-              openModal();
-              console.log("dsa");
+              openCreateLoanModal();
             }}
           >
             Aplicar para op
@@ -154,10 +159,11 @@ const LoanProtocol: React.FC<AmtStaking> = ({ setActivePage }) => {
             "\n (This is an estimative value. Before confirming the operation a most exact value will be shown)"
           : "dsadsa"}
 
-        {isModalOpen && (
+        {
           <LoanCreationModal
+            isOpen={isCreateLoanModalOpen}
             inputAmount={inputAmountAmtValue}
-            closeModal={closeModal}
+            closeModal={closeCreateLoanModal}
             balanceUsdtLoanProtocol={usdtAvailable}
             balanceUserAmt={balanceAmt}
             allowanceAmt={allowanceAmtToLoanProtocol}
@@ -165,7 +171,7 @@ const LoanProtocol: React.FC<AmtStaking> = ({ setActivePage }) => {
             operacionCrearLoan={loanProtocolOperations.createLoan}
             // ... other necessary props
           />
-        )}
+        }
         <UserLoanList></UserLoanList>
       </div>
     </>

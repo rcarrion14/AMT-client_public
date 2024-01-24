@@ -12,6 +12,8 @@ import { BigNumber } from "ethers";
 import contractAddresses from "../../../contracts/contractAddresses";
 import { ethers } from "ethers";
 import { operationExecution } from "../operationExecution";
+import { getBalance as getBalanceUsdt } from "../usdt/usdtSlice";
+import { getBalanceAmt } from "../vaultAmt/vaultAmtSlice";
 
 function approveAmtToLoanProtocol(dispatcher: AppDispatch) {
   const contract = getStaticState().amt.contract;
@@ -41,7 +43,10 @@ function createLoan(dispatcher: AppDispatch, amtAmount: BigNumber) {
     const operationPromise = contract?.createLoan(amtAmount);
     operationExecution(operationPromise).then(() => {
       dispatcher(getAllowanceUsdtToLoanProtocol());
+      dispatcher(getAllowanceAmtToLoanProtocol());
       dispatcher(getUserLoans());
+      dispatcher(getBalanceAmt());
+      dispatcher(getBalanceUsdt());
     });
   }
 }
@@ -56,6 +61,9 @@ function closeLoan(
     const operationPromise = contract.closeLoan(loanIndex, usdtAmount);
     operationExecution(operationPromise).then(() => {
       dispatcher(getAllowanceUsdtToLoanProtocol());
+      dispatcher(getUserLoans());
+      dispatcher(getBalanceUsdt());
+      dispatcher(getBalanceAmt());
     });
   }
 }

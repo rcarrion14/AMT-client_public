@@ -6,10 +6,11 @@ import { AppDispatch, RootState } from "../../../store/store";
 import { getNewPriceQuotedAmt } from "../../../store/features/priceFeeder/priceFeederSlice";
 import { useDispatch } from "react-redux";
 import { toFrontEndString } from "../../../Utils/formatHelpers";
-
+import Modal from "react-modal";
 interface LoanCreationModalProps {
+  isOpen: boolean;
   inputAmount: string;
-  closeModal: Function;
+  closeModal: () => void;
   balanceUsdtLoanProtocol: BigNumber | undefined;
   balanceUserAmt: BigNumber | undefined;
   allowanceAmt: BigNumber | undefined;
@@ -17,6 +18,7 @@ interface LoanCreationModalProps {
   operacionCrearLoan: Function;
 }
 const LoanCreationModal: React.FC<LoanCreationModalProps> = ({
+  isOpen,
   inputAmount,
   closeModal,
   balanceUsdtLoanProtocol,
@@ -24,7 +26,6 @@ const LoanCreationModal: React.FC<LoanCreationModalProps> = ({
   allowanceAmt,
   operacionAprobar,
   operacionCrearLoan,
-  // ... other props
 }) => {
   const dispatch = useDispatch<AppDispatch>();
   const [loading, setLoading] = useState(true);
@@ -62,32 +63,34 @@ const LoanCreationModal: React.FC<LoanCreationModalProps> = ({
       ? priceQuotedAmt.div(loanRatio)
       : BigNumber.from(0);
   return (
-    <div className="modal">
-      {pendingQuote ? (
-        <div>Loading...</div>
-      ) : (
-        <>
-          You will recive: {toFrontEndString(showUsdtAmount)}
-          <div></div>
-          "dsadsa"
-          <BotonCrearLoan
-            balanceUsdtLoanProtocol={balanceUsdtLoanProtocol}
-            balanceUserAmt={balanceUserAmt}
-            allowanceAmt={allowanceAmt}
-            input={inputAmount}
-            operacionAprobar={operacionAprobar}
-            operacionCrearLoan={operacionCrearLoan}
-          ></BotonCrearLoan>
-          <button
-            onClick={() => {
-              closeModal();
-            }}
-          >
-            Close
-          </button>
-        </>
-      )}
-    </div>
+    <Modal
+      isOpen={isOpen}
+      onRequestClose={closeModal}
+      className={"customModal"}
+      overlayClassName={"customModalOverlay"}
+    >
+      <div className="modal">
+        {pendingQuote ? (
+          <div>Loading...</div>
+        ) : (
+          <>
+            <button className="modalCloseButton" onClick={closeModal}>
+              &times;
+            </button>
+            You will recive: {toFrontEndString(showUsdtAmount)}
+            <div></div>
+            <BotonCrearLoan
+              balanceUsdtLoanProtocol={balanceUsdtLoanProtocol}
+              balanceUserAmt={balanceUserAmt}
+              allowanceAmt={allowanceAmt}
+              input={inputAmount}
+              operacionAprobar={operacionAprobar}
+              operacionCrearLoan={operacionCrearLoan}
+            ></BotonCrearLoan>
+          </>
+        )}
+      </div>
+    </Modal>
   );
 };
 

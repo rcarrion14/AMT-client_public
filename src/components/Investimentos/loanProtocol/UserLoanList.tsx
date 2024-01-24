@@ -25,7 +25,7 @@ const UserLoanList: React.FC = () => {
       </thead>
       <tbody className="loan-table-body">
         {userLoans?.map((loan, index) => (
-          <LoanItem key={index} loan={loan} />
+          <LoanItem key={index} loan={loan} loanIndex={index} />
         ))}
       </tbody>
     </table>

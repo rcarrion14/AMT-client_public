@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { ethers } from "ethers";
 import moment from "moment";
 import { toFrontEndString } from "../../../Utils/formatHelpers";
-
+import CloseLoanModal from "./CloseLoanModal";
 // Define the type for the loan prop based on your LoanStructOutput type
 type LoanProps = {
   loan: {
@@ -11,11 +11,12 @@ type LoanProps = {
     loanTimestamp: ethers.BigNumber;
     loanPrice: ethers.BigNumber;
     loanRatio: ethers.BigNumber;
+
     // Add any other properties from LoanStructOutput that you need
   };
+  loanIndex: number;
 };
-
-const LoanItem: React.FC<LoanProps> = ({ loan }) => {
+const LoanItem: React.FC<LoanProps> = ({ loan, loanIndex }) => {
   const formatDate = (timestamp: ethers.BigNumber) => {
     // This will format the timestamp according to the user's local timezone
     return moment
@@ -23,8 +24,12 @@ const LoanItem: React.FC<LoanProps> = ({ loan }) => {
       .local()
       .format("MMM D, YYYY HH:mm");
   };
-  console.log("collateral locked: " + loan.collateralLocked);
-  console.log("loan.loanPrice: " + loan.loanPrice);
+
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  const openModal = () => setModalIsOpen(true);
+  const closeModal = () => setModalIsOpen(false);
+
   const estimatedLiquidationPrice =
     parseFloat(loan.loanPrice.toString()) /
     parseFloat(loan.collateralLocked.toString()) /
@@ -47,12 +52,18 @@ const LoanItem: React.FC<LoanProps> = ({ loan }) => {
         <button
           className="close-loan-button"
           onClick={() => {
-            /* logic to close loan */
+            openModal();
           }}
         >
           Close Loan
         </button>
       </td>
+      <CloseLoanModal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        loanIndex={loanIndex}
+        totalLoanAmount={loan.amountBorrowed}
+      ></CloseLoanModal>
     </tr>
   );
 };
