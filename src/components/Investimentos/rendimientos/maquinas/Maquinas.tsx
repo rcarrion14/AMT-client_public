@@ -15,7 +15,9 @@ const Maquinas: React.FC<MaquinasInterface> = ({ setActivePage }) => {
   useEffect(() => {
     getAllDataMineria().then((result) => setData(result));
   }, []);
-  const currentLanguage = useSelector((state: typeof RootState) => state.session.language)
+  const currentLanguage = useSelector(
+    (state: typeof RootState) => state.session.language
+  );
   return (
     <div className="containerSlide">
       <div className="navBar_top">
@@ -24,35 +26,23 @@ const Maquinas: React.FC<MaquinasInterface> = ({ setActivePage }) => {
       </div>
       <h2>{textosExtra[currentLanguage].maquinasActivas}</h2>
       <CuadroMaquinas
-        maquinas={
-          data
-            ? data.antPool.workers + data.viaBtc.workers + data.slush.workers
-            : null
-        }
+        maquinas={data ? data.antPool.workers + data.viaBtc.workers : null}
         petahash={
           data
             ? Number(
                 (
-                  (data.antPool.hashrate +
-                    data.viaBtc.hashrate +
-                    data.slush.hashrate) /
+                  (data.antPool.hashrate + data.viaBtc.hashrate) /
                   10 ** 15
                 ).toFixed(1)
               )
             : null
         }
         produccion={
-          data
-            ? (
-                data.antPool.profit +
-                data.viaBtc.profit +
-                data.slush.profit
-              ).toFixed(5)
-            : null
+          data ? (data.antPool.profit + data.viaBtc.profit).toFixed(5) : null
         }
         logo={"coinAutomining.png"}
       />
-{textosExtra[currentLanguage].textoMaquinas}
+      {textosExtra[currentLanguage].textoMaquinas}
       <CuadroMaquinas
         maquinas={data ? data.antPool.workers : null}
         petahash={
@@ -82,14 +72,6 @@ const Maquinas: React.FC<MaquinasInterface> = ({ setActivePage }) => {
           <u>{textosExtra[currentLanguage].linkObservador}(2)</u>
         </a>
       </div>
-      <CuadroMaquinas
-        maquinas={data ? data.slush.workers : null}
-        petahash={
-          data ? Number((data.slush.hashrate / 10 ** 15).toFixed(1)) : null
-        }
-        produccion={data ? data.slush.profit.toFixed(5) : null}
-        logo={"slushPool_logo.png"}
-      />
     </div>
   );
 };
