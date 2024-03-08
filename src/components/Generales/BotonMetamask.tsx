@@ -3,12 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store/store";
 import { textosExtra } from "../../Utils/textos";
 // You can also use ESM `import * as Sentry from "@sentry/node"` instead of `require`
-import * as Sentry from "@sentry/node";
-import { ProfilingIntegration } from "@sentry/profiling-node";
-
+import * as Sentry from "@sentry/react";
+import { Integrations } from "@sentry/tracing";
 Sentry.init({
   dsn: "https://a8413093a0da8b9700f3aac115302c60@o4506875984936960.ingest.us.sentry.io/4506875987558400",
-  integrations: [new ProfilingIntegration()],
+  integrations: [new Integrations.BrowserTracing()],
   // Performance Monitoring
   tracesSampleRate: 1.0, //  Capture 100% of the transactions
   // Set sampling rate for profiling - this is relative to tracesSampleRate
