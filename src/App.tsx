@@ -14,10 +14,29 @@ import { RootState } from "./store/store";
 import { CSSTransition } from "react-transition-group";
 import { toast } from "react-toastify";
 
+import * as Sentry from "@sentry/react";
+import { Integrations } from "@sentry/tracing";
+
+Sentry.init({
+  dsn: "https://a8413093a0da8b9700f3aac115302c60@o4506875984936960.ingest.us.sentry.io/4506875987558400", // Ensure you replace "YOUR_SENTRY_DSN" with your actual DSN
+  integrations: [new Integrations.BrowserTracing()],
+  tracesSampleRate: 1.0,
+  beforeSend(event) {
+    // Add the userAgent as a tag
+    event.tags = event.tags || {};
+    event.tags.userAgent = navigator.userAgent;
+    return event;
+  },
+});
+
+// This is just for testing; remove it in production or adjust as needed
+Sentry.captureMessage("Testing navigator.userAgent capture");
 declare var ethereum: any;
 
 function App() {
-  const chain = (window as any).ethereum ? (window as any).ethereum.networkVersion : undefined
+  const chain = (window as any).ethereum
+    ? (window as any).ethereum.networkVersion
+    : undefined;
   const pages = ["home", "marketplace", "investidores", "gInvestidores"];
   const [activePage, setActivePage] = useState<string | null>("home");
 
@@ -60,7 +79,7 @@ function App() {
 
       <div
         className={
-          addr && chain === "56" || chain === 56
+          (addr && chain === "56") || chain === 56
             ? "navBarContainer"
             : "navBarContainer disabledContainer"
         }
