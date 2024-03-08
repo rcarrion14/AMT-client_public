@@ -9,6 +9,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@sentry/node": "^7.106.0",
+    "@sentry/profiling-node": "^7.106.0",
+    "@sentry/vite-plugin": "^2.14.3",
     "@types/chart.js": "^2.9.37",
     "@types/react-redux": "^7.1.25",
     "chart.js": "^4.3.0",
