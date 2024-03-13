@@ -9,6 +9,7 @@ import {
 import { getAmtbalance } from "../amt/amtSlice";
 import { updateBucketsData } from "../../../Utils/fetchBuckets";
 import { setGetNewDataTrigger } from "../vaultAmt/vaultAmtSlice";
+import { storeInCookies } from "../../../Utils/cookies";
 
 function stake(dispatch: AppDispatch, amount: number) {
   const contract = getStaticState().vaultBtcb.contract;
@@ -18,9 +19,10 @@ function stake(dispatch: AppDispatch, amount: number) {
     dispatch(getBalanceAmt());
     dispatch(getAmtbalance());
     dispatch(getBalanceUserBtcb());
-    updateBucketsData().then(()=>{
-      dispatch(setGetNewDataTrigger())
-    })
+    storeInCookies(amount);
+    updateBucketsData().then(() => {
+      dispatch(setGetNewDataTrigger());
+    });
   });
 }
 

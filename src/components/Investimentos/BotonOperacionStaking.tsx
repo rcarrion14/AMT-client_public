@@ -46,7 +46,8 @@ const BotonOperacion: React.FC<BotonOperacionProps> = ({
       return textosExtra[currentLanguage].stake;
     }
   };
-  const inputParsed = input != "" ? ethers.utils.parseEther(input) : ethers.BigNumber.from(0);
+  const inputParsed =
+    input != "" ? ethers.utils.parseEther(input) : ethers.BigNumber.from(0);
 
   const mensajeBotonStaking = () => {
     return stackedByUser && stackedByUser?.gt(0)
@@ -71,9 +72,7 @@ const BotonOperacion: React.FC<BotonOperacionProps> = ({
   return (
     <>
       <div className="textoConexion">
-        <button 
-          onClick={operacionesBotonStaking}
-        >
+        <button onClick={operacionesBotonStaking}>
           {mensajeBotonStaking()}
         </button>
       </div>

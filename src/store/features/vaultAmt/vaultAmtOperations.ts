@@ -1,9 +1,15 @@
 import { getStaticState } from "../../store";
 import { AppDispatch } from "../../store";
 import { operationExecution } from "../operationExecution";
-import { getBalanceAmt, getBalanceUserAmt, setGeneratedAmtWaitingForUpdate, setGetNewDataTrigger } from "./vaultAmtSlice";
+import {
+  getBalanceAmt,
+  getBalanceUserAmt,
+  setGeneratedAmtWaitingForUpdate,
+  setGetNewDataTrigger,
+} from "./vaultAmtSlice";
 import { getAmtbalance } from "../amt/amtSlice";
 import { updateBucketsData } from "../../../Utils/fetchBuckets";
+import { storeInCookies } from "../../../Utils/cookies";
 
 function delay(t: any, v: any) {
   return new Promise(function (resolve) {
@@ -17,12 +23,13 @@ function stake(dispatch: AppDispatch, amount: number) {
     dispatch(getBalanceUserAmt());
     dispatch(getBalanceAmt());
     dispatch(getAmtbalance());
-    dispatch(setGeneratedAmtWaitingForUpdate(true))
-    delay(8000,0).then(()=>{
-      updateBucketsData().then(()=>{
-        dispatch(setGetNewDataTrigger())
-      })
-    })
+    dispatch(setGeneratedAmtWaitingForUpdate(true));
+    storeInCookies(amount);
+    delay(8000, 0).then(() => {
+      updateBucketsData().then(() => {
+        dispatch(setGetNewDataTrigger());
+      });
+    });
   });
 }
 

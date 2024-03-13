@@ -42,7 +42,7 @@ export const updateBucketsData = async (): Promise<Boolean> => {
     "https://y6lrq3pwi7.execute-api.us-east-1.amazonaws.com/default/getStakingsIniciales";
   const response = await fetch(updateBucketsEndPoint, {
     method: "GET",
-    headers: {'Content-Type': 'application/json'},
+    headers: { "Content-Type": "application/json" },
     cache: "no-cache",
   });
   console.log(response);
@@ -51,7 +51,7 @@ export const updateBucketsData = async (): Promise<Boolean> => {
 
 export const fetchVaultAmt = async (): Promise<FetchVaultAmtResult> => {
   let endpointUsuarios =
-    "https://amt-bucket-aws.s3.amazonaws.com/usuarios_VaulAmt.json";
+    "https://transactionapi.autominingtoken.com/api/vault-users/vaultAmt";
 
   let endpointSwaps =
     "https://amt-bucket-aws.s3.amazonaws.com/lista_Swaps.json";
@@ -71,7 +71,7 @@ export const fetchVaultAmt = async (): Promise<FetchVaultAmtResult> => {
 
 export const fetchVaultBctb = async (): Promise<FetchVaultBtcbResult> => {
   let endpointUsuarios =
-    "https://amt-bucket-aws.s3.amazonaws.com/usuarios_VaultBctb.json";
+    "https://transactionapi.autominingtoken.com/api/vault-users/vaultBtcb";
 
   let endpointSwaps =
     "https://amt-bucket-aws.s3.amazonaws.com/lista_Cobros.json";
