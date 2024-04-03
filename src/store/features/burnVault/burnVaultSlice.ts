@@ -41,7 +41,6 @@ export const getBackRate = createAsyncThunk(
       const balanceOfBurnVault = await contractBtcb.balanceOf(
         contractAddresses.burnVault
       );
-      console.log({ totalSupplyAmt, balanceOfBurnVault });
       const newBackRate = totalSupplyAmt.div(balanceOfBurnVault);
 
       return { newBackRate };
