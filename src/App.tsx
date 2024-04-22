@@ -78,9 +78,9 @@ function App() {
       <div
         className={
           (addr && chainId === "56") ||
-          chainId === 56 ||
-          chainId === "0x38" ||
-          chainId === 0x38
+          (addr && chainId === 56) ||
+          (addr && chainId === "0x38") ||
+          (addr && chainId === 0x38)
             ? "navBarContainer"
             : "navBarContainer disabledContainer"
         }
