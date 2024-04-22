@@ -15,40 +15,29 @@ import { CSSTransition } from "react-transition-group";
 import { toast } from "react-toastify";
 
 function App() {
-  const chain = (window as any).ethereum
-    ? (window as any).ethereum.networkVersion
-    : undefined;
-
-  const provider = useSelector(
-    (state: typeof RootState) => state.wallet.address
-  );
-  let chain2;
   const pages = ["home", "marketplace", "investidores", "gInvestidores"];
   const [activePage, setActivePage] = useState<string | null>("home");
 
+  const [chainId, setChainId] = useState<string | number | undefined>(
+    undefined
+  );
   const addr = useSelector((state: typeof RootState) => state.wallet.address);
-
+  const provider = useSelector(
+    (state: typeof RootState) => state.wallet.provider
+  );
   // Function to show a toast notification
-  const showWelcomeToast = async () => {
-    //@ts-ignore
-    chain2 = await window.ethereum.request({ method: "eth_chainId" });
-    toast(
-      "Welcome to our website!" +
-        "address: " +
-        addr +
-        "chain id: " +
-        chain +
-        "otro chainId: " +
-        chain2,
-      {
-        position: toast.POSITION.TOP_LEFT,
-      }
-    );
+  const checkChainId = async () => {
+    if ((window as any).ethereum) {
+      setChainId(
+        await (window as any).ethereum.request({ method: "eth_chainId" })
+      );
+      console.log(chainId);
+    }
   };
 
   // Using useEffect to show the toast on component mount
   useEffect(() => {
-    showWelcomeToast();
+    checkChainId();
   }, [provider]);
   return (
     <>
@@ -86,7 +75,16 @@ function App() {
         <GInvestidores />
       </CSSTransition>
 
-      <div className={"navBarContainer"}>
+      <div
+        className={
+          (addr && chainId === "56") ||
+          chainId === 56 ||
+          chainId === "0x38" ||
+          chainId === 0x38
+            ? "navBarContainer"
+            : "navBarContainer disabledContainer"
+        }
+      >
         <NavBar setActivePage={setActivePage} activePage={activePage} />
       </div>
       <ToastContainer position={toast.POSITION.TOP_LEFT} />
