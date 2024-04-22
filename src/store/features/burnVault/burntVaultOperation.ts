@@ -6,7 +6,7 @@ import { getBalance as getBalanceBtcb } from "../btcb/btcbSlice";
 
 function backingWithdrawl(dispatch: AppDispatch, amountToBurn: number) {
   const contract = getStaticState().burnVault.contract;
-  const operationPromise = contract.backingWithdrawl(amountToBurn);
+  const operationPromise = contract.backingWithdraw(amountToBurn);
   operationExecution(operationPromise).then(() => {
     dispatch(getAllowanceBurnVault());
     dispatch(getAmtbalance());

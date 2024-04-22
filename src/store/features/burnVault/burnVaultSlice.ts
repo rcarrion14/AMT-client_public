@@ -33,9 +33,15 @@ export const getBackRate = createAsyncThunk(
   "burnVault/getBackRate",
   async () => {
     const staticState = getStaticState();
-    const contract = staticState.burnVault.contract;
-    if (contract) {
-      const newBackRate = parseFloat(await contract.getBackRate());
+    const contractAmt = staticState.amt.contract;
+    const contractBtcb = staticState.btcb.contract;
+
+    if (contractAmt && contractBtcb) {
+      const totalSupplyAmt = await contractAmt.totalSupply();
+      const balanceOfBurnVault = await contractBtcb.balanceOf(
+        contractAddresses.burnVault
+      );
+      const newBackRate = totalSupplyAmt.div(balanceOfBurnVault);
 
       return { newBackRate };
     } else return undefined;

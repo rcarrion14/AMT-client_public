@@ -38,15 +38,24 @@ const CuadroQuema = () => {
   const inputRecibir = useRef<HTMLInputElement>(null);
   const [inputPagarValue, setInputPagarValue] = useState("");
   const [inputRecibirValue, setInputRecibirValue] = useState("");
-
+  let amtValue = backRate ? (1 / backRate).toFixed(8) : "";
+  amtValue =
+    amtValue.indexOf("e") >= 0
+      ? amtValue.split("e")[0].replace(".", "")
+      : amtValue;
   const handleInputPagarChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     if (parseFloat(event.target.value) >= 0) {
       if (backRate) {
-        setInputRecibirValue(
-          (parseFloat(event.target.value) / backRate).toString()
-        );
+        let newInputRecibirValue = (
+          parseFloat(event.target.value) * parseFloat(amtValue)
+        ).toFixed(8);
+        newInputRecibirValue =
+          newInputRecibirValue.indexOf("e") >= 0
+            ? newInputRecibirValue.split("e")[0].replace(".", "")
+            : newInputRecibirValue;
+        setInputRecibirValue(newInputRecibirValue);
       }
       setInputPagarValue(event.target.value);
     }
@@ -112,9 +121,7 @@ const CuadroQuema = () => {
       <div className="soloSaldo">
         <div>
           <h2>{textosExtra[currentLanguage].precioAmt}</h2>
-          <div>
-            1 AMT = {backRate ? Number((1 / backRate).toFixed(6)) : ""} BTC
-          </div>
+          <div>1 AMT = {amtValue} BTC</div>
         </div>
       </div>
       <div>

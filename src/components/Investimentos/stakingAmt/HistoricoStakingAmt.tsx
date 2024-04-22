@@ -57,7 +57,6 @@ const Historico: React.FC<HistoricoProps> = ({
       );
       var gananciaAt_i: Array<[ethers.BigNumber, number]> = [];
       var ultimaGananciaAcum = ethers.BigNumber.from(0);
-
       for (let i = 0; i < balancesAt.length; i++) {
         let balanceAt = balancesAt[i];
         let swapAt = ethers.BigNumber.from(
@@ -154,7 +153,10 @@ const Historico: React.FC<HistoricoProps> = ({
         </div>
         <div className="celeste">
           <b>{textosExtra[currentLanguage].amtTotales} </b>
-          {stakingIniciales && stackedByUser && addr && stakingIniciales[addr].amount
+          {stakingIniciales &&
+          stackedByUser &&
+          addr &&
+          stakingIniciales[addr].amount
             ? toFrontEndString(
                 ethers.BigNumber.from(stakingIniciales[addr].amount)
               )
