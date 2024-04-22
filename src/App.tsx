@@ -31,7 +31,7 @@ function App() {
   // Function to show a toast notification
   const showWelcomeToast = async () => {
     //@ts-ignore
-    chain2 = await provider.request({ method: "eth_chainId" });
+    chain2 = await window.ethereum.request({ method: "eth_chainId" });
     toast(
       "Welcome to our website!" +
         "address: " +
@@ -49,7 +49,7 @@ function App() {
   // Using useEffect to show the toast on component mount
   useEffect(() => {
     showWelcomeToast();
-  }, []);
+  }, [provider]);
   return (
     <>
       <Banner />
