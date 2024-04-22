@@ -1,7 +1,7 @@
 import "./normalize.css";
 import "./styles.css";
 import "react-toastify/dist/ReactToastify.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Banner from "./components/Generales/Banner";
 import Home from "./components/Home/Home";
 import Marketplace from "./components/marketplace/Marketplace";
@@ -22,8 +22,24 @@ function App() {
   const [activePage, setActivePage] = useState<string | null>("home");
 
   const addr = useSelector((state: typeof RootState) => state.wallet.address);
+
+  // Function to show a toast notification
+  const showWelcomeToast = () => {
+    toast(
+      "Welcome to our website!" + "address: " + addr + "chain id: " + chain,
+      {
+        position: toast.POSITION.TOP_LEFT,
+      }
+    );
+  };
+
+  // Using useEffect to show the toast on component mount
+  useEffect(() => {
+    showWelcomeToast();
+  }, []);
   return (
     <>
+      <script>window.alert("message")</script>
       <Banner />
       <CSSTransition
         in={activePage == "home"}
