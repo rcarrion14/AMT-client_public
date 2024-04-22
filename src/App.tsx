@@ -18,15 +18,28 @@ function App() {
   const chain = (window as any).ethereum
     ? (window as any).ethereum.networkVersion
     : undefined;
+
+  const provider = useSelector(
+    (state: typeof RootState) => state.wallet.address
+  );
+  let chain2;
   const pages = ["home", "marketplace", "investidores", "gInvestidores"];
   const [activePage, setActivePage] = useState<string | null>("home");
 
   const addr = useSelector((state: typeof RootState) => state.wallet.address);
 
   // Function to show a toast notification
-  const showWelcomeToast = () => {
+  const showWelcomeToast = async () => {
+    //@ts-ignore
+    chain2 = await provider.request({ method: "eth_chainId" });
     toast(
-      "Welcome to our website!" + "address: " + addr + "chain id: " + chain,
+      "Welcome to our website!" +
+        "address: " +
+        addr +
+        "chain id: " +
+        chain +
+        "otro chainId: " +
+        chain2,
       {
         position: toast.POSITION.TOP_LEFT,
       }
@@ -39,7 +52,6 @@ function App() {
   }, []);
   return (
     <>
-      <script>window.alert("message")</script>
       <Banner />
       <CSSTransition
         in={activePage == "home"}
@@ -74,13 +86,7 @@ function App() {
         <GInvestidores />
       </CSSTransition>
 
-      <div
-        className={
-          (addr && chain === "56") || chain === 56 || true
-            ? "navBarContainer"
-            : "navBarContainer disabledContainer"
-        }
-      >
+      <div className={"navBarContainer"}>
         <NavBar setActivePage={setActivePage} activePage={activePage} />
       </div>
       <ToastContainer position={toast.POSITION.TOP_LEFT} />
