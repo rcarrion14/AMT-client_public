@@ -1350,6 +1350,37 @@ export const textoRetirarLiquidez = (idioma: string) => {
   }
 };
 
+export const textoLoanProtocol = (idioma: string) => {
+  if (idioma == "por") {
+    return (
+      <>
+        {" "}
+        <h1>Titulo por</h1>
+        <p>descripcion por</p>{" "}
+      </>
+    );
+  }
+
+  if (idioma == "esp") {
+    return (
+      <>
+        {" "}
+        <h1>Titulo esp</h1>
+        <p>descripcion esp</p>{" "}
+      </>
+    );
+  }
+
+  if (idioma == "eng") {
+    return (
+      <>
+        {" "}
+        <h1>Titulo eng</h1>
+        <p>descripcion eng</p>{" "}
+      </>
+    );
+  }
+};
 /******************/
 /******************/
 
@@ -1446,6 +1477,11 @@ export interface interfaceTextoExtra {
   prodUlt24h: string;
 
   amtTotales: string;
+  usdtDisponibles: string;
+  loanRatio: string;
+  precioBtcb: string;
+  noHaySuficientesUsdtEnElContrato: string;
+  crearLoan: string;
 }
 export type typeTextosExtra = {
   [key in languageCode]: interfaceTextoExtra;
@@ -1541,6 +1577,11 @@ export const textosExtra: typeTextosExtra = {
     maquinas: "Máquinas",
     prodUlt24h: "Produção nas últimas 24hs",
     amtTotales: "Total de AMT",
+    usdtDisponibles: "USDT disponibles",
+    loanRatio: "Loan ratio",
+    precioBtcb: "Precio BTCB",
+    crearLoan: "Borrow USDT",
+    noHaySuficientesUsdtEnElContrato: "Too much USDT to borrow",
   },
   esp: {
     bienvenido: "¡Bienvenido!",
@@ -1630,6 +1671,11 @@ export const textosExtra: typeTextosExtra = {
     maquinas: "Máquinas",
     prodUlt24h: "Producción en las últimas 24 horas",
     amtTotales: "AMT Totales",
+    usdtDisponibles: "USDT Disponibles",
+    loanRatio: "Loan ratio",
+    precioBtcb: "Precio BTCB",
+    crearLoan: "Borrow USDT",
+    noHaySuficientesUsdtEnElContrato: "Too much USDT to borrow",
   },
   eng: {
     bienvenido: "Welcome!",
@@ -1711,6 +1757,11 @@ export const textosExtra: typeTextosExtra = {
     maquinas: "Machines",
     prodUlt24h: "Production in the last 24 hours",
     amtTotales: "Total AMT",
+    usdtDisponibles: "Available USDT",
+    loanRatio: "Loan ratio",
+    precioBtcb: "BTCB Price",
+    crearLoan: "Borrow USDT",
+    noHaySuficientesUsdtEnElContrato: "Too much USDT to borrow",
   },
 };
 
@@ -1735,6 +1786,7 @@ export interface interfaceBotonesBlancos {
   simuladorActual: interfaceBotonBlancoIndividual;
   maquinas: interfaceBotonBlancoIndividual;
   grafico: interfaceBotonBlancoIndividual;
+  loanProtocol: interfaceBotonBlancoIndividual;
 }
 
 export type typeTextoBotonesBlancos = {
@@ -1802,6 +1854,10 @@ export const textoBotonesBlancos: typeTextoBotonesBlancos = {
       titulo: "Gráfico de preço de AMT",
       descripcion: "Confira o valor do AMT contra o BTC e USDT",
     },
+    loanProtocol: {
+      titulo: "titulo loan protocol por",
+      descripcion: "descripcion loan protocol por",
+    },
   },
   esp: {
     market: {
@@ -1865,6 +1921,10 @@ export const textoBotonesBlancos: typeTextoBotonesBlancos = {
       titulo: "Gráfico de precio de AMT",
       descripcion: "Chequee el valor de AMT contra BTC y USDT",
     },
+    loanProtocol: {
+      titulo: "titulo loan protocol esp",
+      descripcion: "descripcion loan protocol esp",
+    },
   },
   eng: {
     market: {
@@ -1926,6 +1986,10 @@ export const textoBotonesBlancos: typeTextoBotonesBlancos = {
     grafico: {
       titulo: "AMT price chart",
       descripcion: "check the value of AMT against BTC and USDT",
+    },
+    loanProtocol: {
+      titulo: "titulo loan protocol eng",
+      descripcion: "descripcion loan protocol eng",
     },
   },
 };

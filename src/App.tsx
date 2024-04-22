@@ -1,7 +1,7 @@
 import "./normalize.css";
 import "./styles.css";
 import "react-toastify/dist/ReactToastify.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Banner from "./components/Generales/Banner";
 import Home from "./components/Home/Home";
 import Marketplace from "./components/marketplace/Marketplace";
@@ -14,14 +14,31 @@ import { RootState } from "./store/store";
 import { CSSTransition } from "react-transition-group";
 import { toast } from "react-toastify";
 
-declare var ethereum: any;
-
 function App() {
-  const chain = (window as any).ethereum ? (window as any).ethereum.networkVersion : undefined
   const pages = ["home", "marketplace", "investidores", "gInvestidores"];
   const [activePage, setActivePage] = useState<string | null>("home");
 
+  const [chainId, setChainId] = useState<string | number | undefined>(
+    undefined
+  );
   const addr = useSelector((state: typeof RootState) => state.wallet.address);
+  const provider = useSelector(
+    (state: typeof RootState) => state.wallet.provider
+  );
+  // Function to show a toast notification
+  const checkChainId = async () => {
+    if ((window as any).ethereum) {
+      setChainId(
+        await (window as any).ethereum.request({ method: "eth_chainId" })
+      );
+      console.log(chainId);
+    }
+  };
+
+  // Using useEffect to show the toast on component mount
+  useEffect(() => {
+    checkChainId();
+  }, [provider]);
   return (
     <>
       <Banner />
@@ -60,7 +77,10 @@ function App() {
 
       <div
         className={
-          addr && chain === "56" || chain === 56
+          (addr && chainId === "56") ||
+          (addr && chainId === 56) ||
+          (addr && chainId === "0x38") ||
+          (addr && chainId === 0x38)
             ? "navBarContainer"
             : "navBarContainer disabledContainer"
         }

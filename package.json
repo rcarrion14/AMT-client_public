@@ -9,6 +9,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@sentry/node": "^7.106.0",
+    "@sentry/vite-plugin": "^2.14.3",
     "@types/chart.js": "^2.9.37",
     "@types/react-redux": "^7.1.25",
     "chart.js": "^4.3.0",
@@ -17,6 +19,7 @@
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
+    "react-modal": "^3.16.1",
     "react-redux": "^8.0.5",
     "react-toastify": "^9.1.2",
     "react-transition-group": "^4.4.5",
@@ -26,6 +29,7 @@
     "@reduxjs/toolkit": "^1.9.5",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
+    "@types/react-modal": "^3.16.3",
     "@types/react-transition-group": "^4.4.5",
     "@vitejs/plugin-react": "^3.1.0",
     "typescript": "^4.9.3",

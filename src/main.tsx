@@ -5,6 +5,9 @@ import { Provider } from "react-redux";
 import store, { RootState, getStaticState } from "./store/store";
 import Loader from "./components/Generales/Loader";
 import { ethers } from "ethers";
+import Modal from "react-modal";
+
+Modal.setAppElement("#root");
 const expectedChainId = "0x38"; // "0x38" BSC
 
 declare var window: any;
@@ -12,17 +15,16 @@ declare var window: any;
 async function changeNetwork() {
   if (true /* navigator.userAgent.indexOf("Mobile")!= -1 */) {
     window.ethereum.on("accountsChanged", async () => {
-      if(!window.ethereum.isTrustWallet) {
-        window.location.reload()
-      }
-      else{
-        if(getStaticState().wallet.address){
-          window.location.reload()
+      if (!window.ethereum.isTrustWallet) {
+        window.location.reload();
+      } else {
+        if (getStaticState().wallet.address) {
+          window.location.reload();
         }
       }
     });
     window.ethereum.on("chainChanged", () => {
-      window.location.reload()
+      window.location.reload();
     });
     try {
       await window.ethereum.request({
