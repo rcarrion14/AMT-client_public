@@ -38,7 +38,7 @@ const CuadroQuema = () => {
   const inputRecibir = useRef<HTMLInputElement>(null);
   const [inputPagarValue, setInputPagarValue] = useState("");
   const [inputRecibirValue, setInputRecibirValue] = useState("");
-  let amtValue = backRate ? (1 / backRate).toFixed(8) : "";
+  let amtValue = backRate ? (1 / backRate).toFixed(18) : "";
   amtValue =
     amtValue.indexOf("e") >= 0
       ? amtValue.split("e")[0].replace(".", "")
@@ -50,7 +50,7 @@ const CuadroQuema = () => {
       if (backRate) {
         let newInputRecibirValue = (
           parseFloat(event.target.value) * parseFloat(amtValue)
-        ).toFixed(8);
+        ).toFixed(18);
         newInputRecibirValue =
           newInputRecibirValue.indexOf("e") >= 0
             ? newInputRecibirValue.split("e")[0].replace(".", "")
@@ -121,7 +121,7 @@ const CuadroQuema = () => {
       <div className="soloSaldo">
         <div>
           <h2>{textosExtra[currentLanguage].precioAmt}</h2>
-          <div>1 AMT = {amtValue} BTC</div>
+          <div>1 AMT = {parseFloat(amtValue).toFixed(8)} BTC</div>
         </div>
       </div>
       <div>
