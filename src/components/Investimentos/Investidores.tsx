@@ -27,7 +27,7 @@ const Investidores = () => {
     "stakingAmt",
     "liquidez",
     "rendimiento",
-    "loanProtocol",
+    //"loanProtocol",
   ];
 
   const [activePage, setActivePage] = useState("");
@@ -101,7 +101,7 @@ const Investidores = () => {
             activador={"rendimiento"}
             setActivePage={setActivePage}
           />
-
+          {/*
           <BotonBlanco
             titulo={textoBotonesBlancos[currentLanguage].loanProtocol.titulo}
             descripcion={
@@ -110,6 +110,7 @@ const Investidores = () => {
             activador={"loanProtocol"}
             setActivePage={setActivePage}
           />
+      */}
         </div>
 
         {listaDePaginas}
