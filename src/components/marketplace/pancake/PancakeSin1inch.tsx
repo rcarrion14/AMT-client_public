@@ -21,21 +21,22 @@ const PancakeSin1inch: React.FC<PancakeSwapInterface> = ({ setActivePage }) => {
         <h1>Marketplace</h1>
       </div>
       {textoPancakeSin1inch(currentLanguage)}
-      {/*
+      {
+        <div className="singleButtonContainer">
+          <iframe
+            src="https://pancakeswap.finance/swap?outputCurrency=0x6Ae0A238a6f51Df8eEe084B1756A54dD8a8E85d3&inputCurrency=0x55d398326f99059fF775485246999027B3197955"
+            width="420"
+            height="630"
+          ></iframe>
+        </div>
+      }
+
       <div className="singleButtonContainer">
-        <iframe
-          src="https://pancakeswap.finance/swap?outputCurrency=0x6Ae0A238a6f51Df8eEe084B1756A54dD8a8E85d3&inputCurrency=0x55d398326f99059fF775485246999027B3197955"
-          width="420"
-          height="630"
-        ></iframe>
-      </div>*/}
-      dsadsadas
-      <div className="singleButtonContainer">
-        <iframe
+        {/*        <iframe
           src="https://poocoin.app/embed-swap?inputCurrency=0x55d398326f99059fF775485246999027B3197955&outputCurrency=0x6Ae0A238a6f51Df8eEe084B1756A54dD8a8E85d3"
           width="420"
           height="630"
-        ></iframe>
+        ></iframe>*/}
       </div>
     </div>
   );

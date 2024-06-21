@@ -335,7 +335,6 @@ export const textoPancakeSin1inch = (idioma: string) => {
           Acesse o PancakeSwap para comprar e vender AMT por qualquer outro
           token.
         </p>
-        <p>Em breve, integraremos esse serviço diretamente desta página.</p>
       </>
     );
   }
@@ -348,9 +347,6 @@ export const textoPancakeSin1inch = (idioma: string) => {
           Dirigase a pancakeswap para comprar y vender AMT por cualquier otro
           token.
         </p>
-        <p>
-          Proximamente integraremos este servicio directamente desde esta página
-        </p>
       </>
     );
   }
@@ -360,7 +356,6 @@ export const textoPancakeSin1inch = (idioma: string) => {
       <>
         <h1>PancakeSwap</h1>
         <p>Go to PancakeSwap to buy and sell AMT for any other token.</p>
-        <p>Soon, we will integrate this service directly from this page.</p>
       </>
     );
   }
