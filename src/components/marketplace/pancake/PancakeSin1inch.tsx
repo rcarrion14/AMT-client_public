@@ -31,13 +31,13 @@ const PancakeSin1inch: React.FC<PancakeSwapInterface> = ({ setActivePage }) => {
         </div>
       }
 
-      <div className="singleButtonContainer">
-        {/*        <iframe
+      {/*       <div className="singleButtonContainer">
+        <iframe
           src="https://poocoin.app/embed-swap?inputCurrency=0x55d398326f99059fF775485246999027B3197955&outputCurrency=0x6Ae0A238a6f51Df8eEe084B1756A54dD8a8E85d3"
           width="420"
           height="630"
-        ></iframe>*/}
-      </div>
+        ></iframe>
+      </div> */}
     </div>
   );
 };
