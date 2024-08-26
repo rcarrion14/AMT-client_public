@@ -16,7 +16,7 @@ async function changeNetwork() {
   if (true /* navigator.userAgent.indexOf("Mobile")!= -1 */) {
     window.ethereum.on("accountsChanged", async () => {
       if (!window.ethereum.isTrustWallet) {
-        window.location.reload();
+        //window.location.reload();
       } else {
         if (getStaticState().wallet.address) {
           window.location.reload();
